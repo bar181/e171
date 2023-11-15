@@ -1,8 +1,11 @@
+
+
 /*
     INSTRUCTIONS
     ------------
-    1. html pages in the pages diretory, js files/class in js directory
-    3. Be aware any changes to this page will affect all other coders.  You should mainly be working on your individual html/js pages and have minimal changes to this page.
+    1. add your html pages in pageNames (the pageLoader will load these pages for your)
+    2. Add your js files/class in js directory
+    3. For a vis: create your initialize function and add the name to loadData()
     4. Remember to always get the latest version and commit when you are done!
  */
 
@@ -10,42 +13,78 @@
 
 /*
     GLOBAL VARIABLES
- */
+*/
 
+let vis1Data = null;
+let vis2Data = null;
+let vis3Data = null;
+let vis4Data = null;
+let vis5Data = null;
 
+let userAge = 30; // default age
 
 /*
     PAGE LOADING - this area will load all the individual pages and scripts
  */
 
-// Define a function to load and insert pages
-// Define a function to load and insert pages
-function loadPage(pageName) {
-    fetch(`pages/${pageName}.html`)
-        .then(response => response.text())
-        .then(content => {
-            // Append the content to #pages-div
-            document.querySelector('#pages-div').insertAdjacentHTML('beforeend', content);
+// Array of page names in the desired order
+const pageNames = [
+    'get_started',
+    'p1_title',
+    'p2_ask_age',
+    'p3_vis1_header',
+    'p3_vis1_text',
+    'p3_vis1_main',
+
+    // Add more page names here
+    // make sure your page includes the id for your visualization !
+
+];
+
+
+// Add the name of the initialize function for each visualization here
+function loadData() {
+    initializeVis1();
+}
+
+
+// Create your own visualizations including data loading
+function initializeVis1() {
+    // d3.csv("data/vis1.csv")
+    //     .then(data => {
+    //         vis1Data = data;
+    //         let myVis1 = new Vis1('vis1');
+    //         console.log("vis1", myVis1, vis1Data)
+    //     }).catch(function(err) {
+    //     console.log(err)
+    // });
+    // let myVis1 = new Vis1('vis1');
+    console.log("vis1", vis1Data)
+
+}
+
+
+// Load pages and scripts in order using pageLoader.js
+window.addEventListener('load', () => {
+
+    // Load JavaScript files and HTML pages
+    loadPagesAndScripts(pageNames)
+        .then(() => {
+
+            new fullpage('#fullpage', {
+                anchors: pageNames,
+                navigationTooltips: pageNames,
+                css3: true,
+                scrollingSpeed: 1000,
+                navigation: true,
+                slidesNavigation: true,
+                controlArrows: false
+            });
+
+            // Now that the pages are loaded, loadData can be called to load data and initialize visualizations
+            loadData();
         })
         .catch(error => {
-            console.error(`Error loading ${pageName}:`, error);
+            console.error(error);
         });
-}
-
-// Define a function to load JavaScript files dynamically
-function loadScript(scriptName) {
-    const script = document.createElement('script');
-    script.src = `js/${scriptName}.js`;
-    script.async = true;
-    document.body.appendChild(script);
-}
-
-// Load an initial page (e.g., p1_title.html) when the page loads
-window.addEventListener('load', () => {
-    // load html files
-    loadPage('p1_title');
-    loadPage('p2_ask_age');
-
-    // load classes and visualizations
-    loadScript('vis1');
 });

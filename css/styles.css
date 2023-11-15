@@ -1,9 +1,15 @@
 body{
-    background-color: #eaeaea;
+    background-color: #E8F5E9;
     font-size: 16px;
 }
 
 .card-title{
     font-size: 2rem;
     font-weight: bold;
+}
+
+.card-area{
+    min-height: 400px;
+    height: 50vh;
+    background-color: white;
 }
