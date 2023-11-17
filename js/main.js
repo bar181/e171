@@ -32,9 +32,31 @@ const pageNames = [
     'get_started',
     'p1_title',
     'p2_ask_age',
-    'p3_vis1_header',
-    'p3_vis1_text',
-    'p3_vis1_main',
+
+    // brad
+    'vis1_header',
+    'vis1_main',
+    'vis1_text',
+
+    // jess
+    'vis2_header',
+    'vis2_main',
+    'vis2_text',
+
+    // filip
+    'vis3_header',
+    'vis3_main',
+    'vis3_text',
+
+    // to do
+    'vis4_header',
+    'vis4_main',
+    'vis4_text',
+
+    // close
+    'closing',
+    'next_steps',
+    'authors',
 
     // Add more page names here
     // make sure your page includes the id for your visualization !
