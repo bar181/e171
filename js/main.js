@@ -48,10 +48,14 @@ const pageNames = [
     'vis3_main',
     'vis3_text',
 
-    // to do
+    // to do - simple line chart
     'vis4_header',
     'vis4_main',
     'vis4_text',
+
+    // to do - show what people can do (game or animation to show specific initiative
+    'vis5_header',
+    'vis5_main',
 
     // close
     'closing',
@@ -72,7 +76,7 @@ function loadData() {
 
 // Create your own visualizations including data loading
 function initializeVis1() {
-    // d3.csv("data/vis1.csv")
+    // d3.csv("data/vis1_google_trends_relative_by_year.csv")
     //     .then(data => {
     //         vis1Data = data;
     //         let myVis1 = new Vis1('vis1');
@@ -99,8 +103,9 @@ window.addEventListener('load', () => {
                 css3: true,
                 scrollingSpeed: 1000,
                 navigation: true,
-                slidesNavigation: true,
-                controlArrows: false
+                slidesNavigation: false,
+                controlArrows: false,
+
             });
 
             // Now that the pages are loaded, loadData can be called to load data and initialize visualizations

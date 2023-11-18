@@ -26,3 +26,7 @@ body{
 .text-darkgreen {
     color: darkgreen;
 }
+
+.section{
+    margin-bottom: 50px;
+}
