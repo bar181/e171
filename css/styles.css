@@ -3,16 +3,30 @@ body{
     font-size: 16px;
 }
 
+.card-title-huge{
+    font-size: 4rem;
+    font-weight: bold;
+}
+
 .card-title{
     font-size: 3rem;
     font-weight: bold;
 }
 
+.card-title-small{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 .card-area{
     min-height: 400px;
-    height: 50vh;
     background-color: white;
 }
+.card-area-transparent{
+    min-height: 400px;
+    background-color: transparent;
+}
+
 
 .card-center-body{
     display: flex;
@@ -30,3 +44,111 @@ body{
 .section{
     margin-bottom: 50px;
 }
+
+
+/* Custom CSS for the Email Template */
+
+.email-section{
+    display: block;
+}
+.vis1-fb-top{
+    padding: 20px;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+}
+
+.vis1-email-top{
+    padding: 20px;
+    background-color: steelblue;
+    color: #fff;
+    text-align: center;
+}
+
+/* Email Sidebar with Year Buttons */
+.vis1-email-sidebar {
+    padding: 20px;
+    /*background-color: #f4f4f4;*/
+    border-right: 1px solid #ddd;
+    text-align: center;
+}
+
+.vis1-fb-sidebar {
+    padding-top: 30px;
+    /*background-color: #f4f4f4;*/
+    border-right: 1px solid #ddd;
+    text-align: center;
+}
+
+.vis1-year-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 2px;
+    padding-left: 5px;
+    margin-bottom: 5px;
+    border: none;
+    background-color: green;
+    color:white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.vis1-year-button:hover {
+    background-color: #e1e1e1;
+}
+
+.vis1_fb_images{
+    background-size: cover;
+    height: 100px;
+    width: 100px;
+    margin-top:2px;
+    font-size: 24px;
+    font-weight: bold;
+}
+/* Email Header */
+.vis1-email-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.vis1-email-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Email Message */
+.vis1-email-message {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Visualization Mockup */
+.vis1-visualization {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.vis1-list-item {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+/* Email Footer */
+.vis1-email-footer {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.vis1-email-footer p {
+    margin: 0;
+}
+

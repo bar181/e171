@@ -14,18 +14,33 @@
 /*
     GLOBAL VARIABLES
 */
+// Common variables used by all Visualizations
+let userAge = 30; // default age
 
+
+// Visualization Level Variables
 let vis1Data = null;
+let vis1Google = null;
+
 let vis2Data = null;
 let vis3Data = null;
 let vis4Data = null;
 let vis5Data = null;
 
-let userAge = 30; // default age
+
+
 
 /*
     PAGE LOADING - this area will load all the individual pages and scripts
  */
+
+// Array of script names in the desired order
+const scriptNames = [
+    'Vis1Service',
+    'Vis1Google',
+
+    ];
+
 
 // Array of page names in the desired order
 const pageNames = [
@@ -74,18 +89,29 @@ function loadData() {
 }
 
 
+
+
 // Create your own visualizations including data loading
 function initializeVis1() {
-    // d3.csv("data/vis1_google_trends_relative_by_year.csv")
-    //     .then(data => {
-    //         vis1Data = data;
-    //         let myVis1 = new Vis1('vis1');
-    //         console.log("vis1", myVis1, vis1Data)
-    //     }).catch(function(err) {
-    //     console.log(err)
-    // });
-    // let myVis1 = new Vis1('vis1');
-    console.log("vis1", vis1Data)
+    d3.csv("data/google_trends_relative_by_year.csv")
+        .then(data => {
+            data.forEach(d => {
+                // Convert year columns to numbers
+                for (const key in d) {
+                    if (key !== "Topic") {
+                        d[key] = parseFloat(d[key]);
+                    }
+                }
+            });
+            vis1Data = data;
+            // clean data
+            console.log("initializeVis1 vis1Google", vis1Data)
+            vis1Google = new Vis1Google('vis1Google');
+
+        }).catch(function(err) {
+        console.log(err)
+    });
+    // let vis1Google = new GoogleVis('vis1Google');
 
 }
 

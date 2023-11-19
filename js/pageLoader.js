@@ -31,6 +31,10 @@ async function loadPagesAndScripts(pageNames) {
             document.querySelector('#fullpage').insertAdjacentHTML('beforeend', pageContent);
         }
 
+        for (const scriptName of scriptNames) {
+            loadScript(scriptName);
+        }
+
         // Add more script loading here if needed
     } catch (error) {
         console.error(error);

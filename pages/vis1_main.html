@@ -1,24 +1,128 @@
-<div class="section">
+<div class="section" xmlns="http://www.w3.org/1999/html">
     <div class="container">
-        <div class="card card-area shadow">
-
-            <div class="card-body card-center-body">
-                <h5 class="card-text">Visualization showing google trends</h5>
-                <p class="card-text">Interactive: Scroll timeline (or animated)</p>
-                <p class="card-text">Data: Top 20 related search terms</p>
-                <p class="card-text">Vis formats:<br>
-                    years 2004-2009 - Email<br>
-                    years 2009-2014 - Facebook<br>
-                    years 2014-2019 - What's App<br>
-                    years 2019-2023 - GPT<br>
-
-                </p>
+        <div class="card mb-2 py-3">
+            <div class="d-flex justify-content-around">
+                <button id="vis1-back-button" class="btn btn-outline-primary btn-sm">Back</button>
+                <h4 id="vis1-title" class="text-center card-text-small">
+                    What was the World like in the <span id="vis1-year"></span>?
+                </h4>
+                <button id="vis1-next-button" class="btn btn-outline-primary btn-sm">Next</button>
             </div>
+        </div>
 
-            <!-- Notes - end enter stuff -->
-            <p class="text-info">Notes<br>
-                Page: vis1_main
-            </p>
+        <div class="card card-area shadow">
+            <div class="card-body card-center-body">
+                <div id="vis-email" class="row">
+                    <div class="col-md-12 ">
+                        <div class="vis1-email-top email-section">
+                            <h1 class="card-title-huge ">EMAIL</h1>
+                        </div>
+                        <div class="vis1-fb-top fb-section" style="background-image: url('images/vis1_fb.png'); background-size: cover; min-height: 200px; position: relative;">
+                            <h1 class="card-title-huge">FACEBOOK</h1>
+                            <!-- Add the image element here with the specified styles -->
+                            <img src="images/vis1_fb6.webp" alt="Image" style="position: absolute; bottom: -30px;
+                            left: 30px;
+                             width: 120px; height: 120px;">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3 ">
+                        <!-- Email Sidebar with Year Buttons -->
+                        <div class="vis1-email-sidebar email-section">
+                            <ul class="nav flex-column">
+                                <li class="text-start py-2">
+                                    Check Email
+                                </li>
+                                <li class="text-start pt-2 mb-3">
+                                    Inbox +
+                                </li>
+                                <div id="emailYearButtons"></div>
+                            </ul>
+                        </div>
+
+                        <!-- FB Left -->
+                        <div class="vis1-fb-sidebar fb-section">
+                            <div class="flex-column">
+                                <div class="text-center py-2">
+                                    My Social Media Page
+                                </div>
+
+                                <div class="d-flex flex-wrap pt-5">
+                                    <div class="vis1-fb-top fb-section vis1_fb_images" style="background-image:
+                                    url('images/vis1_fb5.webp');"
+                                         onclick="vis1YearChange(2009)">
+                                        <div class="">2009</div>
+                                    </div>
+                                    <div class="vis1-fb-top fb-section vis1_fb_images" style="background-image:
+                                    url('images/vis1_fb1.webp');"
+                                         onclick="vis1YearChange(2010)">
+                                        <div class="">2010</div>
+                                    </div>
+                                    <div class="vis1-fb-top fb-section vis1_fb_images" style="background-image:
+                                    url('images/vis1_fb2.webp');"
+                                         onclick="vis1YearChange(2011)">
+                                        <div class="">2011</div>
+                                    </div>
+                                    <div class="vis1-fb-top fb-section vis1_fb_images" style="background-image:
+                                    url('images/vis1_fb3.webp');"
+                                         onclick="vis1YearChange(2012)">
+                                        <div class="">2012</div>
+                                    </div>
+                                    <div class="vis1-fb-top fb-section vis1_fb_images" style="background-image:
+                                    url('images/vis1_fb4.webp');"
+                                         onclick="vis1YearChange(2013)">
+                                        <div class="">2013</div>
+                                    </div>
+                                </div>
+                                <div class="text-center py-2">
+                                    Click on the years to see what was trending
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email Content -->
+                    <div class="col-md-9 ">
+                        <!-- Email Header -->
+                        <div class="vis1-email-header text-start p-2 mt-3 email-section " style="background-color:
+                        #eaeaea">
+                            <div>To: reader@sample.com</div>
+                            <div>From: Jess, Filip, Bradley</div>
+                            <div id="vis1Google-email-year"></div>
+                            <div id="vis1Google-email-title" class="vis1-email-title"></div>
+
+                        </div>
+                        <div class="py-3 email-section">
+                            tldr/; Thought you would enjoy seeing the top 10 list. This is when these topics
+                            peaked.
+                        </div>
+
+                            <!-- FB Header -->
+                        <div class="vis1-email-header text-start p-2 mt-3 fb-section " style="background-color:
+                        #eaeaea">
+                            <div>POST</div>
+
+
+
+                        </div>
+                        <div id="" class="py-3 fb-section">
+                            tldr/; Thought you would enjoy seeing the top 10 list. This is when these topics
+                            peaked.
+                        </div>
+
+                        <!-- Visualization -->
+                        <div id="vis1Google" class="vis1-visualization"></div>
+
+                        <!-- Email Footer -->
+                        <footer class="vis1-email-footer">
+                            <p>&copy; Google Trends Worldwide data showing climate keywords popularity.  Normalized
+                                from
+                                0-100 for each keyword</p>
+                        </footer>
+                    </div>
+                </div>
+
         </div>
     </div>
 </div>
