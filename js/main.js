@@ -38,7 +38,8 @@ let vis5Data = null;
 const scriptNames = [
     'Vis1Service',
     'Vis1Google',
-
+    'Vis2bubblechart',
+    'Vis2doughnutchart'
     ];
 
 
@@ -86,9 +87,8 @@ const pageNames = [
 // Add the name of the initialize function for each visualization here
 function loadData() {
     initializeVis1();
+    initializeVis2();
 }
-
-
 
 
 // Create your own visualizations including data loading
@@ -113,6 +113,28 @@ function initializeVis1() {
     });
     // let vis1Google = new GoogleVis('vis1Google');
 
+}
+
+function initializeVis2() {
+    d3.csv("data/twitter_topic_counts.csv").then(function(data) {
+        data.forEach(function(d) {
+            d.Topic = d.Topic,
+                d.Count = +d.Count; // Convert Count from string to number
+        });
+
+        const myBubbleChart = new Vis2bubblechart('bubbleChartContainer', data);
+        const myDoughnutChart = new Vis2doughnutchart('doughnutChartContainer', data);
+
+        // Event listener for the topic dropdown
+        document.getElementById('topic-dropdown').addEventListener('change', function() {
+            // Get the selected topic from the dropdown
+            const selectedTopic = this.value;
+
+            // Update both charts based on the selected topic
+            myBubbleChart.updateTopicHighlight(selectedTopic);
+            myDoughnutChart.updateTopicHighlight(selectedTopic);
+        });
+    });
 }
 
 
