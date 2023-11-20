@@ -4,7 +4,8 @@ class Vis1Google  {
         this.parentElement = _parentElement;
         this.data = vis1Data;
         this.userAge = userAge;
-        this.year = 2010;
+        this.year = 2012;
+        this.fbyear = 2012;
 
         this.initVis();
     }
@@ -178,6 +179,14 @@ class Vis1Google  {
         let vis = this;
         const vis1Year = document.getElementById("vis1-year");
         vis1Year.innerHTML = vis.year;
+        const yearLessUserAge = document.getElementById("vis1-yearLessUserAge");
+        let tempAge = vis.userAge - (2023 - vis.year);
+        let tempAgetext = "when you were " + tempAge + " years old";
+        if(tempAge < 0){
+            tempAgetext = "Before you Were Born" ;
+        }
+
+        yearLessUserAge.innerHTML =  tempAgetext;
 
         // top back and next page
         if(vis.year <2005){
@@ -192,7 +201,7 @@ class Vis1Google  {
         }
 
         // email - years 2004 to 2008
-        if(vis.year <2009){
+        if(vis.year <vis.fbyear){
             vis.updateEmailLabels(vis.year);
             emailSections.forEach(section => {
                 section.style.display = 'block';
@@ -202,7 +211,7 @@ class Vis1Google  {
                 section.style.display = 'none';
             });
         }
-        if(vis.year >=2009 && vis.year <=2013){
+        if(vis.year >=vis.fbyear && vis.year <=2023){
             vis.updateFbLabels(vis.year);
             fbSections.forEach(section => {
                 section.style.display = 'block';

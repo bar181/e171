@@ -45,7 +45,7 @@ const scriptNames = [
 
 // Array of page names in the desired order
 const pageNames = [
-    'get_started',
+
     'p1_title',
     'p2_ask_age',
 

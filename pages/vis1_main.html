@@ -3,9 +3,16 @@
         <div class="card mb-2 py-3">
             <div class="d-flex justify-content-around">
                 <button id="vis1-back-button" class="btn btn-outline-primary btn-sm">Back</button>
-                <h4 id="vis1-title" class="text-center card-text-small">
-                    What was the World like in the <span id="vis1-year"></span>?
-                </h4>
+                <div>
+                    <h4  class="text-center card-text-small">
+                        Climate Trends Through the Ages
+                    </h4>
+                    <h4 id="vis1-title" class="text-center card-text-small">
+                        A Look at Online Popularity from <span id="vis1-year"></span>,  <span
+                            id="vis1-yearLessUserAge"></span>
+                    </h4>
+                </div>
+
                 <button id="vis1-next-button" class="btn btn-outline-primary btn-sm">Next</button>
             </div>
         </div>
@@ -17,7 +24,8 @@
                         <div class="vis1-email-top email-section">
                             <h1 class="card-title-huge ">EMAIL</h1>
                         </div>
-                        <div class="vis1-fb-top fb-section" style="background-image: url('images/vis1_fb.png'); background-size: cover; min-height: 200px; position: relative;">
+                        <div class="vis1-fb-top fb-section" style="background-image: url('images/vis1_fb.png');
+                        background-size: cover; min-height: 320px; position: relative;">
                             <h1 class="card-title-huge">FACEBOOK</h1>
                             <!-- Add the image element here with the specified styles -->
                             <img src="images/vis1_fb6.webp" alt="Image" style="position: absolute; bottom: -30px;
@@ -48,34 +56,21 @@
                                     My Social Media Page
                                 </div>
 
-                                <div class="d-flex flex-wrap pt-5">
-                                    <div class="vis1-fb-top fb-section vis1_fb_images" style="background-image:
-                                    url('images/vis1_fb5.webp');"
-                                         onclick="vis1YearChange(2009)">
-                                        <div class="">2009</div>
+<!--                                links to other pages-->
+
+                                <div class="">
+                                    <div class="col-md-12 p-2" onclick="vis1YearChange(2011)">
+                                        <div class="card vis1-fb-top fb-section vis1_fb_images"
+                                             style="background-image:
+                                        url('images/vis1.png');">
+                                            <div class="">OLD EMAILS</div>
+                                            <button class="btn btn-sm btn-primary">View Post</button>
+                                        </div>
                                     </div>
-                                    <div class="vis1-fb-top fb-section vis1_fb_images" style="background-image:
-                                    url('images/vis1_fb1.webp');"
-                                         onclick="vis1YearChange(2010)">
-                                        <div class="">2010</div>
-                                    </div>
-                                    <div class="vis1-fb-top fb-section vis1_fb_images" style="background-image:
-                                    url('images/vis1_fb2.webp');"
-                                         onclick="vis1YearChange(2011)">
-                                        <div class="">2011</div>
-                                    </div>
-                                    <div class="vis1-fb-top fb-section vis1_fb_images" style="background-image:
-                                    url('images/vis1_fb3.webp');"
-                                         onclick="vis1YearChange(2012)">
-                                        <div class="">2012</div>
-                                    </div>
-                                    <div class="vis1-fb-top fb-section vis1_fb_images" style="background-image:
-                                    url('images/vis1_fb4.webp');"
-                                         onclick="vis1YearChange(2013)">
-                                        <div class="">2013</div>
-                                    </div>
+
+<!--                                    <div id="fb-posts" class="row"></div>-->
                                 </div>
-                                <div class="text-center py-2">
+                                <div class="text-start py-2">
                                     Click on the years to see what was trending
                                 </div>
                             </div>
@@ -103,16 +98,20 @@
                         #eaeaea">
                             <div>POST</div>
 
-
-
                         </div>
-                        <div id="" class="py-3 fb-section">
+                        <div class="py-3 fb-section">
+
                             tldr/; Thought you would enjoy seeing the top 10 list. This is when these topics
                             peaked.
                         </div>
 
                         <!-- Visualization -->
                         <div id="vis1Google" class="vis1-visualization"></div>
+
+                        <div class="py-3 fb-section">
+                            <div class="py-3 fb-section">Here are some other Posts for other years </div>
+                            <div id="fb-posts" class="row"></div>
+                        </div>
 
                         <!-- Email Footer -->
                         <footer class="vis1-email-footer">
