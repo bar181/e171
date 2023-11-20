@@ -1,10 +1,15 @@
 class Vis2bubblechart {
-    constructor(containerId, data) {
+    constructor(containerId, tweets_per_topic, tweets_per_topic_per_year) {
         this.containerId = containerId;
-        this.data = data;
+        this.tweets_per_topic = tweets_per_topic;
+        this.tweets_per_topic_per_year = tweets_per_topic_per_year;
         this.initVis();
 
+        // Initialize the color map
+        // this.colorMap = this.initializeColorMap();
+
     }
+
 
     initVis() {
         let vis = this;
@@ -39,8 +44,21 @@ class Vis2bubblechart {
             vis.updateTopicHighlight();
         });
 
+        // Add an event listener to the year dropdown
+        const yearSelect = document.getElementById("year-dropdown");
+        yearSelect.addEventListener("change", function() {
+            vis.updateChartForYear(yearSelect.value);
+        });
+
+
         vis.createChart();
     }
+
+
+
+
+
+
 
     // Add this function to update the bubble chart
     updateTopicHighlight() {
@@ -67,6 +85,59 @@ class Vis2bubblechart {
         })
     }
 
+    updateChartForYear(selectedYear) {
+        let vis = this;
+
+        selectedYear = parseInt(selectedYear);
+        console.log("Selected Year:", selectedYear);
+
+        let filteredData = vis.tweets_per_topic_per_year.filter(d => d.Year === selectedYear);
+        console.log("Filtered Data for Year", selectedYear, ":", filteredData);
+
+        // if (!filteredData.length) {
+        //     console.warn("No data available for the selected year:", selectedYear);
+        //     return; // Exit if no data is available
+        // }
+
+        // Re-calculate the layout with the new data
+        let pack = d3.pack()
+            .size([vis.width, vis.height])
+            .padding(1.5);
+
+        let root = d3.hierarchy({ children: filteredData })
+            .sum(d => d.Count);
+
+        let nodes = pack(root).leaves();
+
+        // Use d3.forceSimulation for collision detection
+        let simulation = d3.forceSimulation(nodes)
+            .force("x", d3.forceX(d => d.x).strength(0.5))
+            .force("y", d3.forceY(d => d.y).strength(0.5))
+            .force("collide", d3.forceCollide(d => d.r + 1)) // add padding between bubbles
+            .alphaDecay(0.02)
+            .alpha(1)
+            .on("tick", ticked);
+
+        function ticked() {
+            vis.svg.selectAll('circle')
+                .data(nodes, d => d.data.Topic)
+                .join('circle') // Handles the enter, update, and exit
+                .transition(1000)
+                .attr('r', d => d.r)
+                .attr('cx', d => d.x)
+                .attr('cy', d => d.y)
+                .style('fill', (d, i) => vis.getColor(i));
+        }
+        // Update the bubbles
+        // vis.svg.selectAll('circle')
+        //     .data(nodes, d => d.data.Topic)
+        //     .transition()
+        //     .duration(1000)
+        //     .attr('r', d => d.r)
+        //     .attr('cx', d => d.x)
+        //     .attr('cy', d => d.y);
+    }
+
     createChart() {
         let vis = this;
 
@@ -77,7 +148,7 @@ class Vis2bubblechart {
             .padding(1.5);
 
         //constructs a root node from the hierarchical data with the count determining bubble size
-        let root = d3.hierarchy({ children: vis.data })
+        let root = d3.hierarchy({ children: vis.tweets_per_topic })
             .sum(d => d.Count);
 
         //calculates the layout of the bubbles
@@ -108,8 +179,19 @@ class Vis2bubblechart {
     }
 
     getColor(index) {
-        const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
+        // const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
+        // return colors[index % colors.length];
+
+        // Define an array of 10 distinct colors
+        const colors = [
+            '#f01703', '#d3830c', '#574739', '#750a47',
+            '#033f46', '#be82bf', '#859a59', '#16ea08',
+            '#f4f4a1', '#1d739e'
+        ];
+
+        // Return the color corresponding to the given index
         return colors[index % colors.length];
     }
 
 }
+

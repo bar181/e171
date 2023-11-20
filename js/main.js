@@ -116,24 +116,43 @@ function initializeVis1() {
 }
 
 function initializeVis2() {
-    d3.csv("data/twitter_topic_counts.csv").then(function(data) {
-        data.forEach(function(d) {
-            d.Topic = d.Topic,
-                d.Count = +d.Count; // Convert Count from string to number
+    // main.js
+// Load both CSV files concurrently using Promise.all
+    Promise.all([
+        d3.csv("data/tweets_per_topic.csv"),
+        d3.csv("data/tweets_per_topic_per_year.csv")  // Assuming this is your second CSV file
+    ]).then(function([tweets_per_topic, tweets_per_topic_per_year]) {
+        // Process the first dataset (tweets_per_topic.csv)
+        tweets_per_topic.forEach(function(d) {
+            d.Topic = d.Topic;
+            d.Count = +d.Count; // Convert Count from string to number
         });
 
-        const myBubbleChart = new Vis2bubblechart('bubbleChartContainer', data);
-        const myDoughnutChart = new Vis2doughnutchart('doughnutChartContainer', data);
+        // Process the second dataset (tweets_per_topic_per_year.csv)
+        tweets_per_topic_per_year.forEach(function(d) {
+            d.Topic = d.Topic;
+            d.Year = +d.Year; //convert year to number
+            d.Count = +d.Count; //convert count from string to number
+        });
+
+        // Initialize your charts with the processed data
+        const myBubbleChart = new Vis2bubblechart('bubbleChartContainer', tweets_per_topic, tweets_per_topic_per_year);
+        const myDoughnutChart = new Vis2doughnutchart('doughnutChartContainer', tweets_per_topic, tweets_per_topic_per_year);
 
         // Event listener for the topic dropdown
         document.getElementById('topic-dropdown').addEventListener('change', function() {
-            // Get the selected topic from the dropdown
             const selectedTopic = this.value;
-
-            // Update both charts based on the selected topic
             myBubbleChart.updateTopicHighlight(selectedTopic);
             myDoughnutChart.updateTopicHighlight(selectedTopic);
         });
+
+        // Event listener for the topic dropdown
+        document.getElementById('year-dropdown').addEventListener('change', function() {
+            const selectedYear = this.value;
+            myBubbleChart.updateChartForYear(selectedYear);
+            myDoughnutChart.updateChartForYear(selectedYear);
+        });
+
     });
 }
 
