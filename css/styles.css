@@ -154,13 +154,19 @@ body{
 
 
 /* Jess's CSS*/
+/*For the visualizations */
 #doughnutChartContainer, #bubbleChartContainer {
     position: absolute;
+    object-position: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    margin-top: 50px;
 }
+
+/*area of the container holding the visualizations */
 .vis2-card-area{
-    height: 1200px;
+    height: 1100px;
     background-color: white;
 }
+

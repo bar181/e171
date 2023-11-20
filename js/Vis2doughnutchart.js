@@ -1,10 +1,17 @@
 class Vis2doughnutchart {
-    constructor(containerId, data) {
+    constructor(containerId, tweets_per_topic, tweets_per_topic_per_year) {
         this.containerId = containerId;
-        this.data = data;
+        this.tweets_per_topic = tweets_per_topic;
+        this.tweets_per_topic_per_year = tweets_per_topic_per_year;
         this.initVis();
 
+
+        // Initialize the color map
+        // this.colorMap = this.initializeColorMap();
+
     }
+
+
 
     initVis() {
         let vis = this;
@@ -56,8 +63,19 @@ class Vis2doughnutchart {
             vis.updateTopicHighlight();
         });
 
+
+        // Add an event listener to the year dropdown
+        const yearSelect = document.getElementById("year-dropdown");
+        yearSelect.addEventListener("change", function() {
+            // console.log("Year dropdown changed");
+            vis.updateChartForYear(yearSelect.value);
+        });
+
+
         vis.createChart();
     }
+
+
 
 
     // Add this function to update the doughnut chart
@@ -71,6 +89,8 @@ class Vis2doughnutchart {
         // Update the doughnut chart based on the filtered data
         vis.updateDoughnut();
     }
+
+
 
     updateDoughnut() {
         let vis= this;
@@ -86,11 +106,73 @@ class Vis2doughnutchart {
     }
 
 
+
+
+    // Add a method to update the chart based on the selected year
+    updateChartForYear(selectedYear) {
+        let vis = this;
+
+        console.log("Complete data:", vis.tweets_per_topic);
+        console.log("Data sample:", vis.tweets_per_topic.slice(0, 5));
+
+        // Ensure the year is correctly formatted (number or string)
+        // selectedYear =  vis.data.filter(d => d.Year === selectedYear);
+
+        // Correctly parse the selected year
+        selectedYear = parseInt(selectedYear);
+        console.log("Selected Year:", selectedYear, "Type:", typeof selectedYear);
+
+        // Filter data based on the selected year
+        let filteredData = vis.tweets_per_topic_per_year.filter(d => d.Year === selectedYear);
+        console.log("Filtered Data for Year", selectedYear, ":", filteredData);
+
+        // console.log("Filtered Data for Year", selectedYear, ":", filteredData);
+        //
+        // console.log("Year values in data:", vis.data.map(d => d.Year));
+        // console.log(filteredData);
+        // console.log("Selected Year:", selectedYear, "Type:", typeof selectedYear);
+        // console.log("Data sample:", vis.data.slice(0, 5));
+
+
+        // Check if filteredData is empty or invalid
+        if (!filteredData.length) {
+            console.warn("No data available for the selected year:", selectedYear);
+            return; // Exit the function if no data is available
+        }
+
+
+
+        // Update the pie data
+        vis.pieData = vis.pie(filteredData);
+        console.log("Pie Data:", vis.pieData);
+
+        // Handle the data join in D3
+        let paths = vis.svg.selectAll('path')
+            .data(vis.pieData, d => d.data.Topic); // Use a key function for proper binding
+
+        // Exit selection: Remove old elements
+        paths.exit().remove();
+
+        // Enter selection: Add new elements
+        paths.enter()
+            .append('path')
+            .merge(paths) // Merge enter and update selections
+            .transition()
+            .duration(1000)// Add a transition
+            .attr('d', vis.arc)
+            .attr('fill', (d, i) => vis.getColor(i));
+
+    }
+
+
+
+
+
     createChart() {
         let vis = this;
 
         // Prepare the data for the pie layout
-        vis.pieData = vis.pie(vis.data);
+        vis.pieData = vis.pie(vis.tweets_per_topic);
 
         // Define the outer radius and the inner radius for the doughnut chart
         vis.outerRadius = 450; // This controls the overall size of the doughnut chart
@@ -129,10 +211,40 @@ class Vis2doughnutchart {
 
     }
 
+
+
+
+
     getColor(index) {
-        const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
+        // const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
+        // return colors[index % colors.length];
+
+
+        // Define an array of 10 distinct colors
+        const colors = [
+            '#f01703', '#d3830c', '#574739', '#750a47',
+            '#033f46', '#be82bf', '#859a59', '#16ea08',
+            '#f4f4a1', '#1d739e'
+        ];
+
+        // Return the color corresponding to the given index
         return colors[index % colors.length];
     }
 
+    // initializeColorMap() {
+    //     return {
+    //         'Global stance': '#f01703',
+    //         'Importance of Human Intervention': '#d3830c',
+    //         'Weather Extremes': '#574739',
+    //         'Politics': '#750a47',
+    //         'Undefined / One Word Hashtags': '#033f46',
+    //         'Donald Trump versus Science': '#be82bf',
+    //         'Seriousness of Gas Emissions': '#859a59',
+    //         'Ideological Positions on Global Warming': '#16ea08',
+    //         'Impact of Resource Overconsumption': '#f4f4a1',
+    //         'Significance of Pollution Awareness Events': '#1d739e'
+    //     };
+    // }
 
 }
+
