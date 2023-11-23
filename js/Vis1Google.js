@@ -4,7 +4,8 @@ class Vis1Google  {
         this.parentElement = _parentElement;
         this.data = vis1Data;
         this.userAge = userAge;
-        this.year = 2012;
+        this.year = 2004;
+        this.itemsToShow = 15;
         this.fbyear = 2012;
 
         this.initVis();
@@ -14,7 +15,7 @@ class Vis1Google  {
         let vis = this;
 
         // Calculate the height of the y-axis based on the number of items in vis.data
-        const yHeight = 10 * 30; // Adjust the multiplier as needed for spacing
+        const yHeight = vis.itemsToShow * 29; // Adjust the multiplier as needed for spacing
 
         // Define margins and dimensions
         vis.margin = { top: 20, right: 60, bottom: 40, left: 160 };
@@ -52,6 +53,8 @@ class Vis1Google  {
     }
     wrangleData() {
         let vis = this;
+
+
         vis.data = vis1Data;
         // Filter the data for the selected year (vis.year)
         vis.yearData = vis.data.filter(d => d[vis.year]);
@@ -60,12 +63,17 @@ class Vis1Google  {
         vis.yearData.sort((a, b) => b[vis.year] - a[vis.year]);
 
         // Select the top 10 topics for the year (or all topics if there are fewer than 10)
-        vis.topTopics = vis.yearData.slice(0, Math.min(10, vis.yearData.length))
-            .map((d, i) => ({ rank: i + 1, topic: d.Topic, value: parseInt(d[vis.year]) })); // Add rank starting at 1
+        vis.topTopics = vis.yearData.slice(0, Math.min(vis.itemsToShow, vis.yearData.length))
+            .map((d, i) => ({
+                rank: i + 1,
+                topic: d.Topic,
+                image: 'images/vis1top/' + d.Image,
+                value: parseInt(d[vis.year]) })); // Add
+        // rank starting at 1
 
         // Update vis.data with the sorted and filtered data
         vis.data = vis.topTopics;
-
+console.log("topTopics", vis.topTopics)
         // Update the visualization
         vis.updateVis();
 
@@ -81,7 +89,6 @@ class Vis1Google  {
         vis.svg.selectAll(".bar").remove();
         vis.svg.selectAll(".value-label").remove();
         vis.svg.selectAll(".rank-label").remove();
-
 
         // Update the xScale domain to always have a minimum of 0 and a maximum of 100
         vis.xScale.domain([0, 100]);
@@ -152,10 +159,16 @@ class Vis1Google  {
             .duration(transitionDuration)
             .call(vis.yAxis);
 
+        // update labels (beck/next buttons, age and dynamic text)
         vis.hideOrShow();
+
+        // update images
+        vis.setVis1Images();
         console.log("vis1Google", vis.year, vis)
 
     }
+
+
 
     onYearChange(year) {
         // this updates the year, and calls the wrangleData for re-sorting
@@ -164,6 +177,60 @@ class Vis1Google  {
         vis.year = year;
         vis.wrangleData();
         console.log("vis1Google onYearChange", year)
+    }
+
+    setVis1Images() {
+        let vis = this;
+        let numberOfImages = 6;
+
+        // add year (e.g. 2012)
+        const vis1ImageElement = document.getElementById("vis1-images");
+        vis1ImageElement.innerHTML = '';
+
+        // loop through each let vis.topTopics in order to get the top 3
+        // add wrapper for each image using class "card" and "col-md-4"
+        // Add title on the top - topic
+        // add image src - image
+
+        // Select the top 3 topics and images
+        const topTopics = vis.topTopics.slice(0, numberOfImages);
+
+        // Create a Bootstrap row to hold the cards
+        const row = document.createElement("div");
+        row.classList.add("row");
+
+        // Loop through the top 3 topics and create a card for each
+        topTopics.forEach(topicData => {
+            const cardCol = document.createElement("div");
+            cardCol.classList.add("col-md-4");
+            cardCol.classList.add("pb-3");
+
+            const card = document.createElement("div");
+            card.classList.add("card");
+
+            // Add the topic as the card title
+            const cardTitle = document.createElement("div");
+            cardTitle.classList.add("vis1-image-title");
+            cardTitle.textContent = topicData.topic;
+
+            // Add the image as the card content
+            const cardImage = document.createElement("img");
+            cardImage.classList.add("card-img-top");
+            cardImage.src = topicData.image;
+            cardImage.alt = topicData.topic; // You can set an alt attribute for accessibility
+
+            // Append the card title and image to the card
+            card.appendChild(cardImage);
+            card.appendChild(cardTitle);
+
+            // Append the card to the column and the column to the row
+            cardCol.appendChild(card);
+            row.appendChild(cardCol);
+        });
+
+        // Append the row to the container
+        vis1ImageElement.appendChild(row);
+
     }
 
     vis1NextButton(){
@@ -177,16 +244,26 @@ class Vis1Google  {
 
     hideOrShow(){
         let vis = this;
-        const vis1Year = document.getElementById("vis1-year");
-        vis1Year.innerHTML = vis.year;
-        const yearLessUserAge = document.getElementById("vis1-yearLessUserAge");
-        let tempAge = vis.userAge - (2023 - vis.year);
-        let tempAgetext = "when you were " + tempAge + " years old";
-        if(tempAge < 0){
-            tempAgetext = "Before you Were Born" ;
+
+        // add year (e.g. 2012)
+        const vis1YearElements = document.getElementsByClassName("vis1-year");
+        for (let i = 0; i < vis1YearElements.length; i++) {
+            vis1YearElements[i].innerHTML = vis.year;
         }
 
-        yearLessUserAge.innerHTML =  tempAgetext;
+        // reader's age
+        let tempAge = vis.userAge - (2023 - vis.year);
+        let tempAgetext = "when you were " + tempAge + " years old";
+        let tempAgeYears = tempAge + " years old";
+        if(tempAge < 0){
+            tempAgetext = "Before you Were Born" ;
+            tempAgeYears = "Before you Were Born" ;
+        }
+
+        const yearLessUserAge = document.getElementsByClassName("vis1-yearLessUserAge");
+        for (let i = 0; i < yearLessUserAge.length; i++) {
+            yearLessUserAge[i].innerHTML = tempAgetext;
+        }
 
         // top back and next page
         if(vis.year <2005){
@@ -200,51 +277,6 @@ class Vis1Google  {
             nextButtonsContainer.style.visibility = "visible";
         }
 
-        // email - years 2004 to 2008
-        if(vis.year <vis.fbyear){
-            vis.updateEmailLabels(vis.year);
-            emailSections.forEach(section => {
-                section.style.display = 'block';
-            });
-        } else {
-            emailSections.forEach(section => {
-                section.style.display = 'none';
-            });
-        }
-        if(vis.year >=vis.fbyear && vis.year <=2023){
-            vis.updateFbLabels(vis.year);
-            fbSections.forEach(section => {
-                section.style.display = 'block';
-            });
-        } else {
-            fbSections.forEach(section => {
-                section.style.display = 'none';
-            });
-        }
-
     }
 
-    updateEmailLabels(year) {
-        console.log("vis1Google updateEmailLabels", year)
-        const emailTitle = document.getElementById("vis1Google-email-title");
-        emailTitle.innerHTML ="Topic: Check out the Climate keywords that peaked in " + year + "!";
-
-        const emailYear = document.getElementById("vis1Google-email-year");
-        emailYear.innerHTML ="Date: From " + year;
-
-        const vis1Year = document.getElementById("vis1-year");
-        vis1Year.innerHTML = year;
-    }
-
-    updateFbLabels(year) {
-        console.log("vis1Google updateFbLabels", year)
-        // const emailTitle = document.getElementById("vis1Google-email-title");
-        // emailTitle.innerHTML ="Topic: Check out the Climate keywords that peaked in " + year + "!";
-        //
-        // const emailYear = document.getElementById("vis1Google-email-year");
-        // emailYear.innerHTML ="Date: From " + year;
-        //
-        // const vis1Year = document.getElementById("vis1-year");
-        // vis1Year.innerHTML = year;
-    }
 }

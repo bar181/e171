@@ -2,126 +2,69 @@
     <div class="container">
         <div class="card mb-2 py-3">
             <div class="d-flex justify-content-around">
-                <button id="vis1-back-button" class="btn btn-outline-primary btn-sm">Back</button>
                 <div>
-                    <h4  class="text-center card-text-small">
+                    <button id="vis1-back-button" class="btn btn-primary ">Back</button>
+                </div>
+                <div class="col-md-8">
+                    <h2  class="text-center card-text-small">
                         Climate Trends Through the Ages
-                    </h4>
-                    <h4 id="vis1-title" class="text-center card-text-small">
-                        A Look at Online Popularity from <span id="vis1-year"></span>,  <span
-                            id="vis1-yearLessUserAge"></span>
-                    </h4>
+                    </h2>
+<!--                    <h4 id="vis1-title" class="text-center card-text-small">-->
+<!--                        A Look at Online Popularity-->
+<!--                        <span class="vis1-yearLessUserAge"></span>-->
+<!--                    </h4>-->
+                    <div id="slider-container" class="w-100">
+                        <input
+                                type="range"
+                                min="2004"
+                                max="2023"
+                                step="1"
+                                value="2004"
+                                id="year-slider"
+                                class="vis1-year-range vis1-slider"
+                        />
+                        <span id="current-year">2004</span>
+                    </div>
+                </div>
+                <div>
+                    <button id="vis1-next-button" class="btn btn-primary">Next</button>
                 </div>
 
-                <button id="vis1-next-button" class="btn btn-outline-primary btn-sm">Next</button>
+
             </div>
         </div>
 
         <div class="card card-area shadow">
-            <div class="card-body card-center-body">
-                <div id="vis-email" class="row">
-                    <div class="col-md-12 ">
-                        <div class="vis1-email-top email-section">
-                            <h1 class="card-title-huge ">EMAIL</h1>
+            <div class="card-body card-center-body p-0">
+                <div class="row w-100">
+
+
+                    <div class="col-md-6">
+                        <div class="w-100 text-center card-title-small">
+                            <h1 class=" font_massive"><span class="vis1-year"></span></h1>
+                            <div class=" ">Top News Stories</div>
+                            <div class="vis1-yearLessUserAge"></div>
                         </div>
-                        <div class="vis1-fb-top fb-section" style="background-image: url('images/vis1_fb.png');
-                        background-size: cover; min-height: 320px; position: relative;">
-                            <h1 class="card-title-huge">FACEBOOK</h1>
-                            <!-- Add the image element here with the specified styles -->
-                            <img src="images/vis1_fb6.webp" alt="Image" style="position: absolute; bottom: -30px;
-                            left: 30px;
-                             width: 120px; height: 120px;">
-                        </div>
+
                     </div>
-
-
-                    <div class="col-md-3 ">
-                        <!-- Email Sidebar with Year Buttons -->
-                        <div class="vis1-email-sidebar email-section">
-                            <ul class="nav flex-column">
-                                <li class="text-start py-2">
-                                    Check Email
-                                </li>
-                                <li class="text-start pt-2 mb-3">
-                                    Inbox +
-                                </li>
-                                <div id="emailYearButtons"></div>
-                            </ul>
+                    <div class="col-md-6 bg-info py-3">
+                        <div>
+                            <h3 class="text-center pb-3">WHAT CLIMATE RELATED TOPICS PEAKED IN POPULARITY IN <span
+                                    class="vis1-year"></span>?</h3>
+                        </div>
+                        <div>
+                            <div id="vis1-images"></div>
+                        </div>
+                        <div class="text-center pt-3">
+                            <div id="vis1Google" class="vis1-visualization pt-2"></div>
                         </div>
 
-                        <!-- FB Left -->
-                        <div class="vis1-fb-sidebar fb-section">
-                            <div class="flex-column">
-                                <div class="text-center py-2">
-                                    My Social Media Page
-                                </div>
 
-<!--                                links to other pages-->
-
-                                <div class="">
-                                    <div class="col-md-12 p-2" onclick="vis1YearChange(2011)">
-                                        <div class="card vis1-fb-top fb-section vis1_fb_images"
-                                             style="background-image:
-                                        url('images/vis1.png');">
-                                            <div class="">OLD EMAILS</div>
-                                            <button class="btn btn-sm btn-primary">View Post</button>
-                                        </div>
-                                    </div>
-
-<!--                                    <div id="fb-posts" class="row"></div>-->
-                                </div>
-                                <div class="text-start py-2">
-                                    Click on the years to see what was trending
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Email Content -->
-                    <div class="col-md-9 ">
-                        <!-- Email Header -->
-                        <div class="vis1-email-header text-start p-2 mt-3 email-section " style="background-color:
-                        #eaeaea">
-                            <div>To: reader@sample.com</div>
-                            <div>From: Jess, Filip, Bradley</div>
-                            <div id="vis1Google-email-year"></div>
-                            <div id="vis1Google-email-title" class="vis1-email-title"></div>
-
-                        </div>
-                        <div class="py-3 email-section">
-                            tldr/; Thought you would enjoy seeing the top 10 list. This is when these topics
-                            peaked.
-                        </div>
-
-                            <!-- FB Header -->
-                        <div class="vis1-email-header text-start p-2 mt-3 fb-section " style="background-color:
-                        #eaeaea">
-                            <div>POST</div>
-
-                        </div>
-                        <div class="py-3 fb-section">
-
-                            tldr/; Thought you would enjoy seeing the top 10 list. This is when these topics
-                            peaked.
-                        </div>
-
-                        <!-- Visualization -->
-                        <div id="vis1Google" class="vis1-visualization"></div>
-
-                        <div class="py-3 fb-section">
-                            <div class="py-3 fb-section">Here are some other Posts for other years </div>
-                            <div id="fb-posts" class="row"></div>
-                        </div>
-
-                        <!-- Email Footer -->
-                        <footer class="vis1-email-footer">
-                            <p>&copy; Google Trends Worldwide data showing climate keywords popularity.  Normalized
-                                from
-                                0-100 for each keyword</p>
-                        </footer>
+                        <div class="text-center px-2 ">Relative searches on Google compared to
+                            searches in other years for the same topic(2004-2023)</div>
                     </div>
                 </div>
-
+            </div>
         </div>
     </div>
 </div>

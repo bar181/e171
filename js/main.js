@@ -93,12 +93,12 @@ function loadData() {
 
 // Create your own visualizations including data loading
 function initializeVis1() {
-    d3.csv("data/google_trends_relative_by_year.csv")
+    d3.csv("data/google_trends_with_images.csv")
         .then(data => {
             data.forEach(d => {
                 // Convert year columns to numbers
                 for (const key in d) {
-                    if (key !== "Topic") {
+                    if (key !== "Topic" && key !== "Image") {
                         d[key] = parseFloat(d[key]);
                     }
                 }

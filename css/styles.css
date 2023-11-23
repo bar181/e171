@@ -2,7 +2,9 @@ body{
     background-color: #E8F5E9;
     font-size: 16px;
 }
-
+.font_massive{
+    font-size: 8rem;
+}
 .card-title-huge{
     font-size: 4rem;
     font-weight: bold;
@@ -16,6 +18,13 @@ body{
 .card-title-small{
     font-size: 2rem;
     font-weight: bold;
+}
+
+.vis1-image-title{
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 4px;
 }
 
 .card-area{
@@ -47,7 +56,29 @@ body{
 
 
 /* Custom CSS for the Email Template */
+/* Set the range input width to 100% of the container */
+.vis1-slider {
+    width: 90%;
+}
 
+/* Increase the size of the thumb (slider handle) to 20px */
+.vis1-slider::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #007bff; /* You can change the color if desired */
+    border: 2px solid #007bff; /* Add a border to the thumb */
+    border-radius: 50%; /* Make it a circle */
+    cursor: pointer;
+}
+
+.vis1-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+}
 .email-section{
     display: block;
 }
