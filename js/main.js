@@ -21,6 +21,7 @@ let userAge = 30; // default age
 // Visualization Level Variables
 let vis1Data = null;
 let vis1Google = null;
+let vis1News = null;
 
 let vis2Data = null;
 let vis3Data = null;
@@ -93,6 +94,21 @@ function loadData() {
 
 // Create your own visualizations including data loading
 function initializeVis1() {
+    // save News events first;
+    d3.json("data/vis1_news.json")
+        .then(data => {
+            // Your data is now loaded as JSON, and you don't need to worry about single quotes
+            vis1News = data;
+            initializeVis1Main();
+            console.log("initializeVis1 vis1News", vis1News);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+
+}
+
+function initializeVis1Main() {
     d3.csv("data/google_trends_with_images.csv")
         .then(data => {
             data.forEach(d => {
@@ -111,8 +127,6 @@ function initializeVis1() {
         }).catch(function(err) {
         console.log(err)
     });
-    // let vis1Google = new GoogleVis('vis1Google');
-
 }
 
 function initializeVis2() {

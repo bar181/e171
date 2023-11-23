@@ -21,10 +21,11 @@ body{
 }
 
 .vis1-image-title{
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     text-align: center;
     padding-bottom: 4px;
+    min-height: 55px
 }
 
 .card-area{
@@ -79,6 +80,46 @@ body{
     border-radius: 50%;
     cursor: pointer;
 }
+
+.vis1-news-lead{
+    font-size: 3em;
+    font-weight: bold;
+    padding-bottom: 12px;
+}
+.vis1-news-second{
+    font-size: 2em;
+    font-style: italic;
+    text-align: center;
+    padding-bottom: 6px;
+}
+
+.vis1-news-social{
+    font-size: 2em;
+    font-weight: bold;
+    text-align: left;
+    color: purple;
+    padding-bottom: 6px;
+}
+
+.vis1-news-item3{
+    font-size: 1.5em;
+    letter-spacing: 2px;
+    text-align: left;
+    padding-bottom: 4px;
+}
+.vis1-news-item4{
+    font-size: 1.5em;
+    letter-spacing: 2px;
+    text-align: left;
+    padding-bottom: 4px;
+}
+.vis1-news-item5{
+    font-size: 1.5em;
+    letter-spacing: 2px;
+    text-align: left;
+    padding-bottom: 4px;
+}
+
 .email-section{
     display: block;
 }

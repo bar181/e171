@@ -6,7 +6,7 @@ class Vis1Google  {
         this.userAge = userAge;
         this.year = 2004;
         this.itemsToShow = 15;
-        this.fbyear = 2012;
+        this.news = vis1News;
 
         this.initVis();
     }
@@ -164,6 +164,10 @@ console.log("topTopics", vis.topTopics)
 
         // update images
         vis.setVis1Images();
+
+        // update news
+        vis.setVis1News()
+
         console.log("vis1Google", vis.year, vis)
 
     }
@@ -181,7 +185,7 @@ console.log("topTopics", vis.topTopics)
 
     setVis1Images() {
         let vis = this;
-        let numberOfImages = 6;
+        let numberOfImages = 4;
 
         // add year (e.g. 2012)
         const vis1ImageElement = document.getElementById("vis1-images");
@@ -202,8 +206,9 @@ console.log("topTopics", vis.topTopics)
         // Loop through the top 3 topics and create a card for each
         topTopics.forEach(topicData => {
             const cardCol = document.createElement("div");
-            cardCol.classList.add("col-md-4");
+            cardCol.classList.add("col-md-3");
             cardCol.classList.add("pb-3");
+            cardCol.classList.add("col-6");
 
             const card = document.createElement("div");
             card.classList.add("card");
@@ -232,6 +237,78 @@ console.log("topTopics", vis.topTopics)
         vis1ImageElement.appendChild(row);
 
     }
+
+
+    setVis1News() {
+        let vis = this;
+        const filteredNews = vis.news.find(item => item.Year === vis.year);
+
+        if (!filteredNews) {
+            console.log("No news found for the selected year.");
+            return;
+        }
+
+        console.log("filteredNews", filteredNews);
+
+        const vis1NewsElement = d3.select("#vis1-news");
+        vis1NewsElement.html(''); // Clear existing content
+
+        if (filteredNews.Lead.length > 2) {
+            const row = vis1NewsElement.append("div").classed("vis1-news-lead", true);
+            row.text(filteredNews.Lead);
+        }
+        if (filteredNews.Second.length > 2) {
+            const row = vis1NewsElement.append("div").classed("vis1-news-second", true);
+            row.text(filteredNews.Second);
+        }
+        if (filteredNews.Social.length > 2) {
+            const row = vis1NewsElement.append("div").classed("vis1-news-social", true);
+            row.text(filteredNews.Social);
+        }
+        if (filteredNews.Item3.length > 2) {
+            const row = vis1NewsElement.append("div").classed("vis1-news-Item3", true);
+            row.text(filteredNews.Item3);
+        }
+        if (filteredNews.Item4.length > 2) {
+            const row = vis1NewsElement.append("div").classed("vis1-news-item4", true);
+            row.text(filteredNews.Item4);
+        }
+        if (filteredNews.Item5.length > 2) {
+            const row = vis1NewsElement.append("div").classed("vis1-news-item5", true);
+            row.text(filteredNews.Item5);
+        }
+    }
+
+    // setVis1News() {
+    //     let vis = this;
+    //     const filteredNews = vis.news.filter(item => item.Year === vis.year);
+    //
+    //     const vis1NewsElement = document.getElementById("vis1-news");
+    //     vis1NewsElement.innerHTML = '';
+    //
+    //     // Create a Bootstrap row to hold the cards
+    //     const row = document.createElement("div");
+    //     row.classList.add("row");
+    //
+    //     // Loop through the top 3 topics and create a card for each
+    //     filteredNews.forEach(newsItem => {
+    //         const div = vis1ImageElement.append("div").classed("w-100", true);
+    //
+    //         // Loop through the item's properties
+    //         for (const key in item) {
+    //             if (item[key].length > 2) {
+    //                 // Append a class based on the field name (key)
+    //                 div.classed(`custom-class-${key}`, true);
+    //                 div.textContent = item.Lead;
+    //             }
+    //         }
+    //         console.log("row", row,"div", div)
+    //         row.appendChild(div);
+    //     });
+    //
+    //     vis1NewsElement.appendChild(row);
+    //
+    // }
 
     vis1NextButton(){
         let vis = this;
