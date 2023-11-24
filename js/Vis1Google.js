@@ -279,7 +279,7 @@ class Vis1Google  {
             createRowWithTransition(".vis1-news-social", filteredNews.Social, "vis1-news-social");
         }
         if (filteredNews.Item3.length > 2) {
-            createRowWithTransition(".vis1-news-Item3", filteredNews.Item3, "vis1-news-Item3");
+            createRowWithTransition(".vis1-news-item3", filteredNews.Item3, "vis1-news-item3");
         }
         if (filteredNews.Item4.length > 2) {
             createRowWithTransition(".vis1-news-item4", filteredNews.Item4, "vis1-news-item4");

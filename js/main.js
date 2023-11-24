@@ -1,4 +1,7 @@
-
+/*
+    Coding sources: chatGpt, co-pilot
+    Licenses: This project uses FullPage.js and is in a public repository
+ */
 
 /*
     INSTRUCTIONS
@@ -39,6 +42,8 @@ const userAgeInput = document.getElementById("userAgeInput");
 const scriptNames = [
     'Vis1Service',
     'Vis1Google',
+    'Vis4Service',
+    'Vis4Race',
     'Vis2bubblechart',
     'Vis2doughnutchart'
     ];
@@ -50,10 +55,15 @@ const pageNames = [
     'p1_title',
     'p2_ask_age',
 
-    // brad
+    // brad - vis4 Race Bar Chart fits better here for the story
+    'vis4_header',
+    'vis4_main',
+    // 'vis4_text',
+
+    // brad - Year by Year Google Trends and News Topics
     'vis1_header',
     'vis1_main',
-    'vis1_text',
+    // 'vis1_text',
 
     // jess
     'vis2_header',
@@ -65,10 +75,10 @@ const pageNames = [
     'vis3_main',
     'vis3_text',
 
-    // to do - simple line chart
-    'vis4_header',
-    'vis4_main',
-    'vis4_text',
+    // to do - closing vis?
+
+
+
 
     // to do - show what people can do (game or animation to show specific initiative
     'vis5_header',
@@ -87,8 +97,9 @@ const pageNames = [
 
 // Add the name of the initialize function for each visualization here
 function loadData() {
-    initializeVis1();
+
     initializeVis2();
+    initializeVis1();
 }
 
 // add any functions that need to be called when the user changes their age
@@ -130,6 +141,11 @@ function initializeVis1Main() {
             // clean data
             console.log("initializeVis1 vis1Google", vis1Data)
             vis1Google = new Vis1Google('vis1Google');
+
+            vis4Data = data;
+            vis4Race = new Vis4Race('vis4Race');
+            console.log("vis4Race", vis4Race);
+            vis4Race.startAnimation();
 
         }).catch(function(err) {
         console.log(err)

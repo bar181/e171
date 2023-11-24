@@ -82,7 +82,7 @@ body{
 }
 
 .vis1-news-lead{
-    font-size: 3em;
+    font-size: 2.2em;
     font-weight: bold;
     padding-bottom: 12px;
 }
@@ -94,7 +94,7 @@ body{
 }
 
 .vis1-news-social{
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: bold;
     text-align: left;
     color: purple;
@@ -102,20 +102,20 @@ body{
 }
 
 .vis1-news-item3{
-    font-size: 1.5em;
-    letter-spacing: 2px;
-    text-align: left;
+    font-size: 1.2em;
+    letter-spacing: 5px;
+    text-align: right;
     padding-bottom: 4px;
 }
 .vis1-news-item4{
-    font-size: 1.5em;
+    font-size: 1.4em;
     letter-spacing: 2px;
     text-align: left;
     padding-bottom: 4px;
 }
 .vis1-news-item5{
-    font-size: 1.5em;
-    letter-spacing: 2px;
+    font-size: 1.3em;
+    font-weight: bold;
     text-align: left;
     padding-bottom: 4px;
 }
@@ -241,5 +241,24 @@ body{
 .vis2-card-area{
     height: 1100px;
     background-color: white;
+}
+
+/*VIS 4 Race Bar Chart */
+#vis4-year-display{
+    text-align: end;
+    position: absolute;
+    color: #666;
+    right: 0;
+    bottom: 20px;
+}
+
+#vis1-redo-button{
+    background-color: steelblue;
+    border-color: #666666;
+}
+
+#vis1-redo-button:disabled{
+    background-color: darkgrey;
+    border-color: #666666;
 }
 

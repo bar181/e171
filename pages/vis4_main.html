@@ -2,27 +2,43 @@
     <div class="section">
         <div class="container">
 
-            <div class=" shadow card card-area shadow" style="min-height:70vh">
-                <div class="card-body card-center-body" >
-                    <h5 class="card-text">Visualization 4: Challenge perception: "Are social trends a reliable indicator of climate change progress?" </h5>
-                    <p class="card-text">Interactive: Reader compares social pressure with results on a line chart</p>
-                    <p class="card-text">Data: Social Trends, IMF </p>
-                    <p class="card-text">Options: filter by social action and also a government/climate
-                        measurement</p>
-                    <p class="card-text">Display: 2 menus (prompt wrangle), d3 line chart with labels, call out
-                        explaining findings</p>
-                    <div class="text-center text-white">
-                        <h2 class="card-title-huge">Your Journey Through Climate Change</h2>
-                        <h2 class="card-text-normal py-5">How your generation's interests and
-                            actions have shaped the course of climate change</h2>
-                        <div class="card vis1-fb-top fb-section vis1_fb_images"
-                             style="background-image:
-                                        url('images/vis4_sketch.png'); height:700px; width: 800px;">
+            <div class=" shadow card card-area shadow" style="min-height:70vh; position: relative;">
+                <div class="d-flex justify-content-between p-2">
+<!--                    <h2  class=" card-title-huge">-->
+<!--                        Race Chart-->
+<!--                    </h2>-->
+                    <h2  class="text-center card-title" style="color:steelblue">
+                        Google Climate Trends
+                    </h2>
 
-                        </div>
+                    <div class="pt-2 pe-2">
+                        <button id="vis1-redo-button" class="btn btn-primary">Start Again</button>
+                    </div>
+
+                </div>
+                <div class="p-2 " >
+                    How has the popularity of climate change topics changed over time according to Google search?<br>
+                    Need more? We will provide more detail for each year on the next page.
+                </div>
+
+                    <div class="p-2 " style="color:red">
+                        This is temporary -
+                        change to Tweets?  change to other data?
+                        Show monthly data?
 
                     </div>
+
+                <div id="vis4Race">
+                    <g class="chart-container">
+                        <text class="vis4-chart-title"></text>
+                        <g class="vis4-x-axis"></g>
+                        <g class="vis4-y-axis"></g>
+                        <g class="vis4-columns"></g>
+                        <text class="vis4-current-date"></text>
+                    </g>
+
                 </div>
+                <div id="vis4-year-display" class="font_massive" ></div>
             </div>
         </div>
     </div>
