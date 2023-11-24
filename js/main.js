@@ -29,7 +29,7 @@ let vis4Data = null;
 let vis5Data = null;
 
 
-
+const userAgeInput = document.getElementById("userAgeInput");
 
 /*
     PAGE LOADING - this area will load all the individual pages and scripts
@@ -91,6 +91,13 @@ function loadData() {
     initializeVis2();
 }
 
+// add any functions that need to be called when the user changes their age
+function userAgeButton(age) {
+    userAge = age;
+    console.log("User changed their age: ", userAge);
+    vis1Google.onAgeChange(age);
+
+}
 
 // Create your own visualizations including data loading
 function initializeVis1() {

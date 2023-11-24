@@ -4,7 +4,7 @@
     "Lead": "Boxing Data Indian Ocean Tsunami",
     "Second": "Boston Wins World Series",
     "Social": "Facebook Founded",
-    "Item3": "",
+    "Item3": "Northern Hemisphere temperature was near record levels 1.19°F above the long-term average",
     "Item4": "funeral of Ronald Reagan.",
     "Item5": ""
   },
@@ -31,9 +31,9 @@
     "Lead": "Spike in food prices",
     "Second": "Subprime crisis help trigger global recession",
     "Social": "iPhone Introduced",
-    "Item3": "",
-    "Item4": "",
-    "Item5": ""
+    "Item3": "hottest year on record in the Northern Hemisphere",
+    "Item4": "8,000 heat records in August",
+    "Item5": "tornado struck New York City"
   },
   {
     "Year": 2008,
@@ -50,7 +50,7 @@
     "Second": "Miracle on the Hudson",
     "Social": "Bitcoin is launched",
     "Item3": "Avatar released and becomes the highest-grossing film of all time",
-    "Item4": "",
+    "Item4": "Warmest Decade on Record",
     "Item5": ""
   },
   {
@@ -64,7 +64,7 @@
   },
   {
     "Year": 2011,
-    "Lead": "9.1 earthquake in Japan triggers a tsunami and the meltdown of the Fukushima Nuclear Power Plant",
+    "Lead": "Earthquake in Japan triggers a tsunami and Nuclear Power Plant Meltdown",
     "Second": "World population reaches 7 billion",
     "Social": " Mojang release Minecraft.  Snapchat launched",
     "Item3": "Floods in Pakistan, Thailand and the Philippines kill roughly 2,500 people",
@@ -100,7 +100,7 @@
   },
   {
     "Year": 2015,
-    "Lead": "195 nations agree to lower carbon emissions by negotiating the Paris agreement.",
+    "Lead": "195 nations agree to lower carbon emissions with Paris agreement",
     "Second": "earthquakes in the Himalayas ",
     "Social": "",
     "Item3": "Volkswagen emissions scandal.",
@@ -109,7 +109,7 @@
   },
   {
     "Year": 2016,
-    "Lead": "Paris Agreement, signed by 195 nations to fight global warming, formally goes into effect",
+    "Lead": "Paris Agreement to fight global warming, goes into effect",
     "Second": "Southern Taiwan earthquake.",
     "Social": "TikTok is launched",
     "Item3": "A third set of locks in the Panama Canal opens for commercial traffic.",
@@ -118,20 +118,20 @@
   },
   {
     "Year": 2017,
-    "Lead": "Hurricane Harvey hurricane, also Hurricane Irma,  and Hurricane Maria",
+    "Lead": "Hurricane Harvey, Hurricane Irma, Hurricane Maria",
     "Second": "Two earthquakes strike Mexico ",
     "Social": "",
     "Item3": "A solar eclipse in United States",
     "Item4": "",
-    "Item5": ""
+    "Item5": "A Crack in an Antarctic Ice Shelf Grew 17 Miles"
   },
   {
     "Year": 2018,
-    "Lead": "first monkeys are cloned, and first genetically modified humans reported",
-    "Second": " Sunda strait tsunami",
-    "Social": "",
+    "Lead": "mass loss from the Greenland and Antarctic ice sheets",
+    "Second": "Sunda strait tsunami",
+    "Social": "monkeys are cloned, and first genetically modified humans reported ",
     "Item3": "first monkeys are cloned, and first genetically modified humans reported",
-    "Item4": "",
+    "Item4": "fourth warmest annual global temperature since records began",
     "Item5": ""
   },
   {
@@ -147,14 +147,14 @@
     "Year": 2020,
     "Lead": " COVID-19 pandemic",
     "Second": " Africa is declared free of wild polio",
-    "Social": "",
+    "Social": "Greenhouse gases were the highest on record",
     "Item3": "Cyclone Amphan",
     "Item4": "Joe Biden wins US Election",
     "Item5": ""
   },
   {
     "Year": 2021,
-    "Lead": "Winter Storm Uri becomes the costliest winter storm in North American history, costing $200 billion",
+    "Lead": "Winter Storm Uri - costliest winter storm in North American history",
     "Second": " 2021 Texas power crisis",
     "Social": " Wikipedia's 20th anniversary",
     "Item3": " COVID-19 pandemic",
@@ -172,7 +172,7 @@
   },
   {
     "Year": 2023,
-    "Lead": "July is also the hottest month on record for globally averaged surface air temperatures",
+    "Lead": "July is also the hottest month on record for globally air temperatures",
     "Second": "Canada Wirefires",
     "Social": "OpenAI launches GPT-4",
     "Item3": "Ban sale of new petrol and diesel vehicles in the European Union from 2035",

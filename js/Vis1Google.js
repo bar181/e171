@@ -73,7 +73,7 @@ class Vis1Google  {
 
         // Update vis.data with the sorted and filtered data
         vis.data = vis.topTopics;
-console.log("topTopics", vis.topTopics)
+        // console.log("topTopics", vis.topTopics)
         // Update the visualization
         vis.updateVis();
 
@@ -168,7 +168,7 @@ console.log("topTopics", vis.topTopics)
         // update news
         vis.setVis1News()
 
-        console.log("vis1Google", vis.year, vis)
+        // console.log("vis1Google", vis.year, vis)
 
     }
 
@@ -180,7 +180,15 @@ console.log("topTopics", vis.topTopics)
 
         vis.year = year;
         vis.wrangleData();
-        console.log("vis1Google onYearChange", year)
+        // console.log("vis1Google onYearChange", year)
+    }
+
+    onAgeChange(age) {
+        // this updates the year, and calls the wrangleData for re-sorting
+        let vis = this;
+
+        vis.userAge = age;
+        vis.wrangleData();
     }
 
     setVis1Images() {
@@ -190,11 +198,6 @@ console.log("topTopics", vis.topTopics)
         // add year (e.g. 2012)
         const vis1ImageElement = document.getElementById("vis1-images");
         vis1ImageElement.innerHTML = '';
-
-        // loop through each let vis.topTopics in order to get the top 3
-        // add wrapper for each image using class "card" and "col-md-4"
-        // Add title on the top - topic
-        // add image src - image
 
         // Select the top 3 topics and images
         const topTopics = vis.topTopics.slice(0, numberOfImages);
@@ -238,7 +241,6 @@ console.log("topTopics", vis.topTopics)
 
     }
 
-
     setVis1News() {
         let vis = this;
         const filteredNews = vis.news.find(item => item.Year === vis.year);
@@ -248,67 +250,45 @@ console.log("topTopics", vis.topTopics)
             return;
         }
 
-        console.log("filteredNews", filteredNews);
+        // console.log("filteredNews", filteredNews);
 
         const vis1NewsElement = d3.select("#vis1-news");
         vis1NewsElement.html(''); // Clear existing content
 
+        // Function to create a row with transition
+        function createRowWithTransition(selector, text, className) {
+            const randomDuration = Math.floor(Math.random() * (2000 - 500 + 1)) + 500; // Random between 500 and 2000 ms
+
+            vis1NewsElement
+                .append("div")
+                .classed(className, true)
+                .style("opacity", 0) // Set initial opacity to 0
+                .text(text)
+                .transition() // Apply transition
+                .duration(randomDuration) // Transition duration in milliseconds (adjust as needed)
+                .style("opacity", 1); // Transition to opacity 1
+        }
+
         if (filteredNews.Lead.length > 2) {
-            const row = vis1NewsElement.append("div").classed("vis1-news-lead", true);
-            row.text(filteredNews.Lead);
+            createRowWithTransition(".vis1-news-lead", filteredNews.Lead, "vis1-news-lead");
         }
         if (filteredNews.Second.length > 2) {
-            const row = vis1NewsElement.append("div").classed("vis1-news-second", true);
-            row.text(filteredNews.Second);
+            createRowWithTransition(".vis1-news-second", filteredNews.Second, "vis1-news-second");
         }
         if (filteredNews.Social.length > 2) {
-            const row = vis1NewsElement.append("div").classed("vis1-news-social", true);
-            row.text(filteredNews.Social);
+            createRowWithTransition(".vis1-news-social", filteredNews.Social, "vis1-news-social");
         }
         if (filteredNews.Item3.length > 2) {
-            const row = vis1NewsElement.append("div").classed("vis1-news-Item3", true);
-            row.text(filteredNews.Item3);
+            createRowWithTransition(".vis1-news-Item3", filteredNews.Item3, "vis1-news-Item3");
         }
         if (filteredNews.Item4.length > 2) {
-            const row = vis1NewsElement.append("div").classed("vis1-news-item4", true);
-            row.text(filteredNews.Item4);
+            createRowWithTransition(".vis1-news-item4", filteredNews.Item4, "vis1-news-item4");
         }
         if (filteredNews.Item5.length > 2) {
-            const row = vis1NewsElement.append("div").classed("vis1-news-item5", true);
-            row.text(filteredNews.Item5);
+            createRowWithTransition(".vis1-news-item5", filteredNews.Item5, "vis1-news-item5");
         }
     }
 
-    // setVis1News() {
-    //     let vis = this;
-    //     const filteredNews = vis.news.filter(item => item.Year === vis.year);
-    //
-    //     const vis1NewsElement = document.getElementById("vis1-news");
-    //     vis1NewsElement.innerHTML = '';
-    //
-    //     // Create a Bootstrap row to hold the cards
-    //     const row = document.createElement("div");
-    //     row.classList.add("row");
-    //
-    //     // Loop through the top 3 topics and create a card for each
-    //     filteredNews.forEach(newsItem => {
-    //         const div = vis1ImageElement.append("div").classed("w-100", true);
-    //
-    //         // Loop through the item's properties
-    //         for (const key in item) {
-    //             if (item[key].length > 2) {
-    //                 // Append a class based on the field name (key)
-    //                 div.classed(`custom-class-${key}`, true);
-    //                 div.textContent = item.Lead;
-    //             }
-    //         }
-    //         console.log("row", row,"div", div)
-    //         row.appendChild(div);
-    //     });
-    //
-    //     vis1NewsElement.appendChild(row);
-    //
-    // }
 
     vis1NextButton(){
         let vis = this;
