@@ -45,7 +45,8 @@ const scriptNames = [
     'Vis4Service',
     'Vis4Race',
     'Vis2bubblechart',
-    'Vis2doughnutchart'
+    'Vis2doughnutchart',
+    'Vis3map',
     ];
 
 
@@ -100,6 +101,7 @@ function loadData() {
 
     initializeVis2();
     initializeVis1();
+    initializeVis3();
 }
 
 // add any functions that need to be called when the user changes their age
@@ -191,6 +193,21 @@ function initializeVis2() {
         });
 
     });
+}
+
+function initializeVis3() {
+    Promise.all([
+        d3.json("data/vis3/airports.json"),
+        d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json")
+        ])
+        .then(function([airports, world]) {
+            console.log("world", world);
+            console.log("airports", airports);
+            const vis3map = new Vis3Map('mapContainer', airports, world);
+        })
+        .catch(function(err) {
+            console.log(err)
+        });
 }
 
 
