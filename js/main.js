@@ -145,7 +145,7 @@ function initializeVis1Main() {
             vis4Data = data;
             vis4Race = new Vis4Race('vis4Race');
             console.log("vis4Race", vis4Race);
-            vis4Race.startAnimation();
+            // vis4Race.startAnimation();
 
         }).catch(function(err) {
         console.log(err)

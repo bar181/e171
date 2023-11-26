@@ -6,20 +6,20 @@ class Vis4Race  {
         this.data = vis1Data;
         this.userAge = userAge;
         this.year = 2004;
-        this.itemsToShow = 15;
-        this.animationDuration = 1200;
+        this.itemsToShow = 12;
+        this.animationDuration = 800;
 
+        this.barsHeight = 50;
+        this.barsPadding = 4;
         this.initVis();
     }
 
     initVis() {
         let vis = this;
 
-        // Calculate the height of the y-axis based on the number of items in vis.data
-        const yHeight = vis.itemsToShow * 29; // Adjust the multiplier as needed for spacing
-
         // Define margins and dimensions
-        vis.margin = { top: 20, right: 60, bottom: 40, left: 160 };
+        vis.margin = { top: 20, right: 80, bottom: 10, left: 20 };
+        const yHeight = vis.itemsToShow * ( vis.barsHeight + vis.barsPadding) +vis.barsHeight; //
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = yHeight - vis.margin.top - vis.margin.bottom; // Use the calculated yHeight
 
@@ -77,6 +77,9 @@ class Vis4Race  {
         vis.data = vis.topTopics;
         // console.log("topTopics", vis.topTopics)
         // Update the visualization
+
+        // Update the yScale domain with the new topics
+        vis.yScale.domain(vis.data.map(d => d.topic));
         vis.updateVis();
 
     }
@@ -86,6 +89,9 @@ class Vis4Race  {
 
         // Update the xScale domain to always have a minimum of 0 and a maximum of 100
         vis.xScale.domain([0, 100]);
+
+        // Adjust the yScale range to accommodate fixed bar height
+        vis.yScale.range([0, vis.data.length * (vis.barsHeight + vis.barsPadding)]);
 
         // Select and bind data to bars
         const bars = vis.svg.selectAll(".bar")
@@ -102,37 +108,97 @@ class Vis4Race  {
         const enterBars = bars.enter()
             .append("rect")
             .attr("class", "bar")
-            .attr("x", 0) // Starting position for animation
+            .attr("x", 60) // Starting position for animation
             .attr("y", d => vis.yScale(d.topic))
             .attr("width", 0) // Starting width for animation
-            .attr("height", vis.yScale.bandwidth()) // Height of the bars
+            // .attr("height", vis.yScale.bandwidth()) // Height of the bars
+            .attr("height", vis.barsHeight) // Height of the bars
             .style("fill", "steelblue");
 
-        // UPDATE phase: Update properties of existing bars (including animations)
         bars.merge(enterBars)
             .transition()
             .duration(vis.animationDuration)
-            .attr("x", 0) // Starting position for animation
-            .attr("y", (d, i) => i * 25) // Vertical position for each bar
-            .attr("width", d => vis.xScale(d.value)) // Bar width based on value
-            .attr("height", 20) // Height of the bars
-            .style("fill", "steelblue");
+            .attr("x", (vis.barsHeight + vis.barsPadding *2 ) )
+            .attr("y", d => vis.yScale(d.topic))
+            .attr("width", d => vis.xScale(d.value))
+            .attr("height", vis.barsHeight)
+            .style("fill", "steelblue")
+            .on("start", (d, i) => {
+                // Start the image transition at the same time as the bar transition
+                updateAxisLabel(d, i);
+            });
 
-        vis.svg.selectAll(".rank-label").remove();
 
-        const rankLabels = vis.svg.selectAll(".rank-label")
+        function updateAxisLabel(data, index) {
+            // Select the corresponding y-axis label
+            let axisLabel = vis.svg.select(".y-axis")
+                .selectAll(".axis-label")
+                .filter((d, i) => i === index);
+
+            // If the label does not exist, create it
+            if (axisLabel.empty()) {
+                axisLabel = vis.svg.select(".y-axis")
+                    .append("image")
+                    .attr("class", "axis-label")
+                    .attr("xlink:href", data.image)
+                    // .attr("x", -60)
+                    .attr("x", 0)
+                    .attr("y", vis.yScale(data.topic) - (vis.barsHeight / 2))
+                    .attr("width", 50)
+                    .attr("height", 50)
+                    .attr("preserveAspectRatio", "xMidYMid meet")
+                    .style("opacity", 0); // Start with opacity 0
+            }
+
+            // Transition the label
+            axisLabel.transition()
+                .duration(vis.animationDuration)
+                .style("opacity", 1); // Transition to full opacity
+
+            vis.svg.select(".y-axis").selectAll(".axis-label").remove();
+
+            // Create or update y-axis labels with images
+            const yAxisLabels = vis.svg.select(".y-axis")
+                .selectAll(".axis-label")
+                .data(vis.data, d => d.topic);
+
+            yAxisLabels.enter()
+                .append("image")
+                .attr("class", "axis-label")
+                .attr("xlink:href", d => d.image) // Set the image source
+                // .attr("x", -60) // Adjust x position as needed
+                .attr("x", 0) // Adjust x position as needed
+                .attr("y", d => vis.yScale(d.topic)) // Center the image in the band
+                // .attr("y", d => vis.yScale(d.topic) - (vis.barsHeight / 2) + 20)
+                .attr("width", vis.barsHeight) // Set image width
+                .attr("height", vis.barsHeight) // Set image height
+                .attr("preserveAspectRatio", "xMidYMid meet");
+
+            // Optionally, you can update the y-axis with no text labels
+            vis.svg.select(".y-axis").call(vis.yAxis)
+                .selectAll("text").remove(); // Remove text labels, as we are using images
+        }
+
+        // Add or update labels within bars
+        vis.svg.selectAll(".bar-label").remove();
+
+        const barLabels = vis.svg.selectAll(".bar-label")
             .data(vis.data, d => d.topic);
 
-        // rankLabels.exit().remove();
-
-        rankLabels.enter()
+        barLabels.enter()
             .append("text")
-            .attr("class", "rank-label")
-            .attr("x", -5) // Adjust the position for the label
-            .attr("y", (d, i) => i * 25 + 15) // Adjust the vertical position for the label
-            .text(d => `${d.rank}. ${d.topic}`)
+            .attr("class", "bar-label")
+            .attr("x", d => 60)
+            .attr("y", d => vis.yScale(d.topic) + vis.yScale.bandwidth() / 2 + 2)
+            .text(d => d.topic)
             .style("font-size", "12px")
-            .style("text-anchor", "end");
+            .style("fill", "white")
+            .style("opacity", 0) // Start with opacity 0
+            .merge(barLabels)
+            .transition() // Start a transition
+            .duration(vis.animationDuration + 500) // Duration of 100 milliseconds
+            .style("opacity", 1); // Transition to full opacity
+
 
         // update year
         d3.select("#vis4-year-display")
@@ -158,8 +224,10 @@ class Vis4Race  {
             if (currentYear <= 2023) {
                 vis.updateChartForYear(currentYear);
                 currentYear++;
-                d3.select("#vis4-year-display").text(currentYear);
-                setTimeout(animate, vis.animationDuration); // Delay between years
+                setTimeout(() => {
+                    d3.select("#vis4-year-display").text(currentYear - 1);
+                    setTimeout(animate, vis.animationDuration); // Additional pause after year change
+                }, 500); // Pause after year changes
             } else {
                 // Enable the "Start Again" button when the animation is complete
                 startAgainButton.disabled = false;
