@@ -1,8 +1,10 @@
 body{
-    background-color: #E8F5E9;
+    background-color: #333;
     font-size: 16px;
 }
-
+.font_massive{
+    font-size: 8rem;
+}
 .card-title-huge{
     font-size: 4rem;
     font-weight: bold;
@@ -16,6 +18,14 @@ body{
 .card-title-small{
     font-size: 2rem;
     font-weight: bold;
+}
+
+.vis1-image-title{
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 4px;
+    min-height: 55px
 }
 
 .card-area{
@@ -47,6 +57,68 @@ body{
 
 
 /* Custom CSS for the Email Template */
+/* Set the range input width to 100% of the container */
+.vis1-slider {
+    width: 90%;
+}
+
+/* Increase the size of the thumb (slider handle) to 20px */
+.vis1-slider::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #007bff; /* You can change the color if desired */
+    border: 2px solid #007bff; /* Add a border to the thumb */
+    border-radius: 50%; /* Make it a circle */
+    cursor: pointer;
+}
+
+.vis1-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.vis1-news-lead{
+    font-size: 2.2em;
+    font-weight: bold;
+    padding-bottom: 12px;
+}
+.vis1-news-second{
+    font-size: 2em;
+    font-style: italic;
+    text-align: center;
+    padding-bottom: 6px;
+}
+
+.vis1-news-social{
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: left;
+    color: purple;
+    padding-bottom: 6px;
+}
+
+.vis1-news-item3{
+    font-size: 1.2em;
+    letter-spacing: 5px;
+    text-align: right;
+    padding-bottom: 4px;
+}
+.vis1-news-item4{
+    font-size: 1.4em;
+    letter-spacing: 2px;
+    text-align: left;
+    padding-bottom: 4px;
+}
+.vis1-news-item5{
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: left;
+    padding-bottom: 4px;
+}
 
 .email-section{
     display: block;
@@ -171,6 +243,7 @@ body{
     background-color: white;
 }
 
+/* <<<<<<< HEAD */
 .top-bar {
     display: flex;
     justify-content: space-between;
@@ -189,3 +262,49 @@ body{
 
 
 
+/*=======*/
+/*VIS 4 Race Bar Chart */
+#vis4-year-display{
+    text-align: end;
+    position: absolute;
+    color: #666;
+    right: 0;
+    bottom: 20px;
+}
+
+#vis1-redo-button{
+    background-color: steelblue;
+    border-color: #666666;
+}
+
+#vis1-redo-button:disabled{
+    background-color: darkgrey;
+    border-color: #666666;
+}
+
+/* Vis 3 */
+#mapContainer{
+    height: 71vh;
+    width: 100%;
+}
+
+.tooltip {
+    position: absolute;
+    text-align: center;
+    font: 12px sans-serif;
+    /*  pointer-events: none;	This line needs to be removed */
+}
+.tooltip h3,h4 {
+    text-align: left;
+}
+.tooltip h4 {
+    font: 14px sans-serif;
+}
+
+.connection {
+    stroke: black;
+    stroke-dasharray: 5;
+    stroke-width: 3px;
+    opacity: 0.7;
+}
+>>>>>>> e81d6562ce1f38cdd52c317b51288a8ec0c98265

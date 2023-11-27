@@ -1,4 +1,7 @@
-
+/*
+    Coding sources: chatGpt, co-pilot
+    Licenses: This project uses FullPage.js and is in a public repository
+ */
 
 /*
     INSTRUCTIONS
@@ -21,6 +24,7 @@ let userAge = 30; // default age
 // Visualization Level Variables
 let vis1Data = null;
 let vis1Google = null;
+let vis1News = null;
 
 let vis2BubbleChart = null;
 let vis2DoughnutChart = null;
@@ -30,6 +34,11 @@ let vis4Data = null;
 let vis5Data = null;
 
 
+// <<<<<<< HEAD
+// =======
+const userAgeInput = document.getElementById("userAgeInput");
+
+// >>>>>>> e81d6562ce1f38cdd52c317b51288a8ec0c98265
 /*
     PAGE LOADING - this area will load all the individual pages and scripts
  */
@@ -38,9 +47,18 @@ let vis5Data = null;
 const scriptNames = [
     'Vis1Service',
     'Vis1Google',
+// <<<<<<< HEAD
     'Vis2Service',
     'Vis2BubbleChart',
-    'Vis2DoughnutChart'
+    'Vis2DoughnutChart',
+// =======
+    'Vis4Service',
+    'Vis4Race',
+    'Vis5Line',
+    'Vis2bubblechart',
+    'Vis2doughnutchart',
+    'Vis3map',
+// >>>>>>> e81d6562ce1f38cdd52c317b51288a8ec0c98265
     ];
 
 
@@ -50,33 +68,37 @@ const pageNames = [
     'p1_title',
     'p2_ask_age',
 
-    // brad
+    // brad - vis4 Race Bar Chart fits better here for the story
+    'vis4_header',
+    'vis4_main',
+    // 'vis4_text',
+
+    // brad - Year by Year Google Trends and News Topics
     'vis1_header',
     'vis1_main',
-    'vis1_text',
+    // 'vis1_text',
+
+    // brad - vis4 line chart with descriptions
+    'vis5_header',
+    'vis5_main',
 
     // jess
     'vis2_header',
     'vis2_main',
-    'vis2_text',
+    // 'vis2_text',
 
     // filip
     'vis3_header',
     'vis3_main',
     'vis3_text',
 
-    // to do - simple line chart
-    'vis4_header',
-    'vis4_main',
-    'vis4_text',
-
-    // to do - show what people can do (game or animation to show specific initiative
-    'vis5_header',
-    'vis5_main',
-
-    // close
-    'closing',
+    // brad - next steps reader can take
+    // 'next_steps_header',
     'next_steps',
+
+    // wrap up  - to be updated with a game
+    'closing',
+
     'authors',
 
     // Add more page names here
@@ -87,19 +109,43 @@ const pageNames = [
 
 // Add the name of the initialize function for each visualization here
 function loadData() {
-    initializeVis1();
+
     initializeVis2();
+    initializeVis1();
+    initializeVis3();
 }
 
+// add any functions that need to be called when the user changes their age
+function userAgeButton(age) {
+    userAge = age;
+    console.log("User changed their age: ", userAge);
+    vis1Google.onAgeChange(age);
+
+}
 
 // Create your own visualizations including data loading
 function initializeVis1() {
-    d3.csv("data/google_trends_relative_by_year.csv")
+    // save News events first;
+    d3.json("data/vis1_news.json")
+        .then(data => {
+            // Your data is now loaded as JSON, and you don't need to worry about single quotes
+            vis1News = data;
+            initializeVis1Main();
+            console.log("initializeVis1 vis1News", vis1News);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+
+}
+
+function initializeVis1Main() {
+    d3.csv("data/google_trends_with_images.csv")
         .then(data => {
             data.forEach(d => {
                 // Convert year columns to numbers
                 for (const key in d) {
-                    if (key !== "Topic") {
+                    if (key !== "Topic" && key !== "Image") {
                         d[key] = parseFloat(d[key]);
                     }
                 }
@@ -107,6 +153,14 @@ function initializeVis1() {
             vis1Data = data;
             //console.log("initializeVis1 vis1Google", vis1Data)
             vis1Google = new Vis1Google('vis1Google');
+
+            vis4Data = data;
+            vis4Race = new Vis4Race('vis4Race');
+            console.log("vis4Race", vis4Race);
+
+            vis5Data = data;
+            vis5Line = new Vis5Line('vis5Line');
+            // vis4Race.startAnimation();
 
         }).catch(function(err) {
         console.log(err)
@@ -207,6 +261,19 @@ function initializeVis2() {
             stance_per_topic_per_year
         );
     });
+}
+
+function initializeVis3() {
+    Promise.all([
+        d3.csv("data/vis3/vis3_net_zero_targets.csv"),
+        d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json")
+        ])
+        .then(function([targets, world]) {
+            const vis3map = new Vis3Map('mapContainer', targets, world);
+        })
+        .catch(function(err) {
+            console.log(err)
+        });
 }
 
 

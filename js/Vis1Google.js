@@ -4,8 +4,9 @@ class Vis1Google  {
         this.parentElement = _parentElement;
         this.data = vis1Data;
         this.userAge = userAge;
-        this.year = 2012;
-        this.fbyear = 2012;
+        this.year = 2004;
+        this.itemsToShow = 15;
+        this.news = vis1News;
 
         this.initVis();
     }
@@ -14,7 +15,7 @@ class Vis1Google  {
         let vis = this;
 
         // Calculate the height of the y-axis based on the number of items in vis.data
-        const yHeight = 10 * 30; // Adjust the multiplier as needed for spacing
+        const yHeight = vis.itemsToShow * 29; // Adjust the multiplier as needed for spacing
 
         // Define margins and dimensions
         vis.margin = { top: 20, right: 60, bottom: 40, left: 160 };
@@ -52,6 +53,8 @@ class Vis1Google  {
     }
     wrangleData() {
         let vis = this;
+
+
         vis.data = vis1Data;
         // Filter the data for the selected year (vis.year)
         vis.yearData = vis.data.filter(d => d[vis.year]);
@@ -60,12 +63,17 @@ class Vis1Google  {
         vis.yearData.sort((a, b) => b[vis.year] - a[vis.year]);
 
         // Select the top 10 topics for the year (or all topics if there are fewer than 10)
-        vis.topTopics = vis.yearData.slice(0, Math.min(10, vis.yearData.length))
-            .map((d, i) => ({ rank: i + 1, topic: d.Topic, value: parseInt(d[vis.year]) })); // Add rank starting at 1
+        vis.topTopics = vis.yearData.slice(0, Math.min(vis.itemsToShow, vis.yearData.length))
+            .map((d, i) => ({
+                rank: i + 1,
+                topic: d.Topic,
+                image: 'images/vis1top/' + d.Image,
+                value: parseInt(d[vis.year]) })); // Add
+        // rank starting at 1
 
         // Update vis.data with the sorted and filtered data
         vis.data = vis.topTopics;
-
+        // console.log("topTopics", vis.topTopics)
         // Update the visualization
         vis.updateVis();
 
@@ -81,7 +89,6 @@ class Vis1Google  {
         vis.svg.selectAll(".bar").remove();
         vis.svg.selectAll(".value-label").remove();
         vis.svg.selectAll(".rank-label").remove();
-
 
         // Update the xScale domain to always have a minimum of 0 and a maximum of 100
         vis.xScale.domain([0, 100]);
@@ -152,10 +159,23 @@ class Vis1Google  {
             .duration(transitionDuration)
             .call(vis.yAxis);
 
+        // update labels (beck/next buttons, age and dynamic text)
         vis.hideOrShow();
+<<<<<<< HEAD
+=======
+
+        // update images
+        vis.setVis1Images();
+
+        // update news
+        vis.setVis1News()
+
+>>>>>>> e81d6562ce1f38cdd52c317b51288a8ec0c98265
         // console.log("vis1Google", vis.year, vis)
 
     }
+
+
 
     onYearChange(year) {
         // this updates the year, and calls the wrangleData for re-sorting
@@ -163,8 +183,115 @@ class Vis1Google  {
 
         vis.year = year;
         vis.wrangleData();
-        console.log("vis1Google onYearChange", year)
+        // console.log("vis1Google onYearChange", year)
     }
+
+    onAgeChange(age) {
+        // this updates the year, and calls the wrangleData for re-sorting
+        let vis = this;
+
+        vis.userAge = age;
+        vis.wrangleData();
+    }
+
+    setVis1Images() {
+        let vis = this;
+        let numberOfImages = 4;
+
+        // add year (e.g. 2012)
+        const vis1ImageElement = document.getElementById("vis1-images");
+        vis1ImageElement.innerHTML = '';
+
+        // Select the top 3 topics and images
+        const topTopics = vis.topTopics.slice(0, numberOfImages);
+
+        // Create a Bootstrap row to hold the cards
+        const row = document.createElement("div");
+        row.classList.add("row");
+
+        // Loop through the top 3 topics and create a card for each
+        topTopics.forEach(topicData => {
+            const cardCol = document.createElement("div");
+            cardCol.classList.add("col-md-3");
+            cardCol.classList.add("pb-3");
+            cardCol.classList.add("col-6");
+
+            const card = document.createElement("div");
+            card.classList.add("card");
+
+            // Add the topic as the card title
+            const cardTitle = document.createElement("div");
+            cardTitle.classList.add("vis1-image-title");
+            cardTitle.textContent = topicData.topic;
+
+            // Add the image as the card content
+            const cardImage = document.createElement("img");
+            cardImage.classList.add("card-img-top");
+            cardImage.src = topicData.image;
+            cardImage.alt = topicData.topic; // You can set an alt attribute for accessibility
+
+            // Append the card title and image to the card
+            card.appendChild(cardImage);
+            card.appendChild(cardTitle);
+
+            // Append the card to the column and the column to the row
+            cardCol.appendChild(card);
+            row.appendChild(cardCol);
+        });
+
+        // Append the row to the container
+        vis1ImageElement.appendChild(row);
+
+    }
+
+    setVis1News() {
+        let vis = this;
+        const filteredNews = vis.news.find(item => item.Year === vis.year);
+
+        if (!filteredNews) {
+            console.log("No news found for the selected year.");
+            return;
+        }
+
+        // console.log("filteredNews", filteredNews);
+
+        const vis1NewsElement = d3.select("#vis1-news");
+        vis1NewsElement.html(''); // Clear existing content
+
+        // Function to create a row with transition
+        function createRowWithTransition(selector, text, className) {
+            const randomDuration = Math.floor(Math.random() * (2000 - 500 + 1)) + 500; // Random between 500 and 2000 ms
+
+            vis1NewsElement
+                .append("div")
+                .classed(className, true)
+                .style("opacity", 0) // Set initial opacity to 0
+                .text(text)
+                .transition() // Apply transition
+                .duration(randomDuration) // Transition duration in milliseconds (adjust as needed)
+                .style("opacity", 1); // Transition to opacity 1
+        }
+
+        if (filteredNews.Lead.length > 2) {
+            createRowWithTransition(".vis1-news-lead", filteredNews.Lead, "vis1-news-lead");
+        }
+        if (filteredNews.Second.length > 2) {
+            createRowWithTransition(".vis1-news-second", filteredNews.Second, "vis1-news-second");
+        }
+        if (filteredNews.Social.length > 2) {
+            createRowWithTransition(".vis1-news-social", filteredNews.Social, "vis1-news-social");
+        }
+        if (filteredNews.Item3.length > 2) {
+            createRowWithTransition(".vis1-news-item3", filteredNews.Item3, "vis1-news-item3");
+        }
+        if (filteredNews.Item4.length > 2) {
+            createRowWithTransition(".vis1-news-item4", filteredNews.Item4, "vis1-news-item4");
+        }
+        if (filteredNews.Item5.length > 2) {
+            createRowWithTransition(".vis1-news-item5", filteredNews.Item5, "vis1-news-item5");
+        }
+    }
+
 
     vis1NextButton(){
         let vis = this;
@@ -177,16 +304,26 @@ class Vis1Google  {
 
     hideOrShow(){
         let vis = this;
-        const vis1Year = document.getElementById("vis1-year");
-        vis1Year.innerHTML = vis.year;
-        const yearLessUserAge = document.getElementById("vis1-yearLessUserAge");
-        let tempAge = vis.userAge - (2023 - vis.year);
-        let tempAgetext = "when you were " + tempAge + " years old";
-        if(tempAge < 0){
-            tempAgetext = "Before you Were Born" ;
+
+        // add year (e.g. 2012)
+        const vis1YearElements = document.getElementsByClassName("vis1-year");
+        for (let i = 0; i < vis1YearElements.length; i++) {
+            vis1YearElements[i].innerHTML = vis.year;
         }
 
-        yearLessUserAge.innerHTML =  tempAgetext;
+        // reader's age
+        let tempAge = vis.userAge - (2023 - vis.year);
+        let tempAgetext = "when you were " + tempAge + " years old";
+        let tempAgeYears = tempAge + " years old";
+        if(tempAge < 0){
+            tempAgetext = "Before you Were Born" ;
+            tempAgeYears = "Before you Were Born" ;
+        }
+
+        const yearLessUserAge = document.getElementsByClassName("vis1-yearLessUserAge");
+        for (let i = 0; i < yearLessUserAge.length; i++) {
+            yearLessUserAge[i].innerHTML = tempAgetext;
+        }
 
         // top back and next page
         if(vis.year <2005){
@@ -200,30 +337,9 @@ class Vis1Google  {
             nextButtonsContainer.style.visibility = "visible";
         }
 
-        // email - years 2004 to 2008
-        if(vis.year <vis.fbyear){
-            vis.updateEmailLabels(vis.year);
-            emailSections.forEach(section => {
-                section.style.display = 'block';
-            });
-        } else {
-            emailSections.forEach(section => {
-                section.style.display = 'none';
-            });
-        }
-        if(vis.year >=vis.fbyear && vis.year <=2023){
-            vis.updateFbLabels(vis.year);
-            fbSections.forEach(section => {
-                section.style.display = 'block';
-            });
-        } else {
-            fbSections.forEach(section => {
-                section.style.display = 'none';
-            });
-        }
-
     }
 
+<<<<<<< HEAD
     updateEmailLabels(year) {
         console.log("vis1Google updateEmailLabels", year)
         const emailTitle = document.getElementById("vis1Google-email-title");
@@ -247,4 +363,6 @@ class Vis1Google  {
         // const vis1Year = document.getElementById("vis1-year");
         // vis1Year.innerHTML = year;
     }
+=======
+>>>>>>> e81d6562ce1f38cdd52c317b51288a8ec0c98265
 }
