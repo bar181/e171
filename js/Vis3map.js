@@ -4,10 +4,11 @@
 
 class Vis3Map {
 
-    constructor(parentElement, governmentData, geoData) {
+    constructor(parentElement, geoData, governmentData, emissionsData) {
         this.parentElement = parentElement;
         this.governmentData = governmentData;
         this.geoData = geoData;
+        this.emissionsData = emissionsData;
 
         // define colors
         this.colors = ['#fddbc7', '#f4a582', '#d6604d', '#b2182b']
@@ -25,14 +26,24 @@ class Vis3Map {
         vis.geoDataJson = topojson.feature(vis.geoData, vis.geoData.objects.countries).features
 
         vis.geoDataJson.forEach(d => {
-            let net_2050_law = "No data";
             let countryData = vis.governmentData.find(e => e.Entity === d.properties.name);
+
+            let net_2050_law = "No data";
             try {
                 net_2050_law = countryData.by_2050_law;
             } catch {
                 // console.log("no data for", d.properties.name)
             }
             d.properties["net_2050_law"] = net_2050_law;
+
+            let countryEmissionsData = vis.emissionsData.find(e => e.Entity === d.properties.name);
+            let have_reduced = "No data";
+            try {
+                have_reduced = countryEmissionsData.have_reduced;
+            } catch {
+                // console.log("no data for", d.properties.name)
+            }
+            d.properties["have_reduced"] = have_reduced;
         });
 
 
@@ -95,6 +106,7 @@ class Vis3Map {
                     .html(`<div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
                         <h3>${d.properties.name}</h3>
                         <h4>Net Zero Law: ${d.properties.net_2050_law}</h4>
+                        <h4>Have Reduced Emissions (2015-2021): ${d.properties.have_reduced}</h4>
                      </div>`);
 
             })

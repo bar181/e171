@@ -257,11 +257,12 @@ function initializeVis2() {
 
 function initializeVis3() {
     Promise.all([
+        d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json"),
         d3.csv("data/vis3/vis3_net_zero_targets.csv"),
-        d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json")
+        d3.csv("data/vis3/vis3-total-ghg-emissions-final.csv")
         ])
-        .then(function([targets, world]) {
-            const vis3map = new Vis3Map('mapContainer', targets, world);
+        .then(function([world, targets, reduced]) {
+            const vis3map = new Vis3Map('mapContainer', world, targets, reduced);
         })
         .catch(function(err) {
             console.log(err)
