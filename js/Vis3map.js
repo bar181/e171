@@ -41,7 +41,7 @@ class Vis3Map {
             try {
                 have_reduced = countryEmissionsData.have_reduced;
             } catch {
-                // console.log("no data for", d.properties.name)
+                console.log("no data for", d.properties.name)
             }
             d.properties["have_reduced"] = have_reduced;
         });
@@ -116,6 +116,8 @@ class Vis3Map {
                     .attr('fill', d => {
                         if (d.properties.net_2050_law === "TRUE") {
                             return "green"
+                        } if (d.properties.net_2050_law === "No data") {
+                            return "gray"
                         } else {
                             return "red"
                         }
@@ -222,6 +224,8 @@ class Vis3Map {
         vis.countries.attr('fill', d => {
             if (d.properties.net_2050_law === "TRUE") {
                 return "green"
+            } if (d.properties.net_2050_law === "No data") {
+                return "gray"
             } else {
                 return "red"
             }

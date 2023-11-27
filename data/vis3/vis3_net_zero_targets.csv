@@ -20,7 +20,7 @@ Belize,BLZ,2050,In policy document,FALSE,TRUE
 Benin,BEN,2000,Achieved (self-declared),FALSE,TRUE
 Bermuda,BMU,2035,In policy document,FALSE,TRUE
 Bhutan,BTN,2030,Achieved (self-declared),FALSE,TRUE
-Bosnia and Herzegovina,BIH,2050,Declaration / pledge,FALSE,TRUE
+Bosnia and Herz.,BIH,2050,Declaration / pledge,FALSE,TRUE
 Botswana,BWA,2030,In policy document,FALSE,TRUE
 Brazil,BRA,2050,In policy document,FALSE,TRUE
 Brunei,BRN,2030,In policy document,FALSE,TRUE
@@ -31,7 +31,7 @@ Cambodia,KHM,2050,In policy document,FALSE,TRUE
 Cameroon,CMR,2030,In policy document,FALSE,TRUE
 Canada,CAN,2050,In law,TRUE,TRUE
 Cape Verde,CPV,2050,In policy document,FALSE,TRUE
-Central African Republic,CAF,2050,Proposed / in discussion,FALSE,TRUE
+Central African Rep.,CAF,2050,Proposed / in discussion,FALSE,TRUE
 Chad,TCD,2050,Proposed / in discussion,FALSE,TRUE
 Chile,CHL,2050,In law,TRUE,TRUE
 China,CHN,2060,In policy document,FALSE,TRUE
@@ -39,24 +39,24 @@ Colombia,COL,2050,In law,TRUE,TRUE
 Comoros,COM,2050,Achieved (self-declared),FALSE,TRUE
 Congo,COG,2030,Declaration / pledge,FALSE,TRUE
 Costa Rica,CRI,2050,In policy document,FALSE,TRUE
-Cote d'Ivoire,CIV,2030,Declaration / pledge,FALSE,TRUE
+Côte d'Ivoire,CIV,2030,Declaration / pledge,FALSE,TRUE
 Croatia,HRV,2050,In policy document,FALSE,TRUE
 Cuba,CUB,2030,In policy document,FALSE,TRUE
 Cyprus,CYP,2050,In policy document,FALSE,TRUE
 Czechia,CZE,2050,Proposed / in discussion,FALSE,TRUE
-Democratic Republic of Congo,COD,2050,Proposed / in discussion,FALSE,TRUE
+Dem. Rep. Congo,COD,2050,Proposed / in discussion,FALSE,TRUE
 Denmark,DNK,2050,In law,TRUE,TRUE
 Djibouti,DJI,2050,Proposed / in discussion,FALSE,TRUE
 Dominica,DMA,2030,In policy document,FALSE,TRUE
-Dominican Republic,DOM,2050,Proposed / in discussion,FALSE,TRUE
+Dominican Rep.,DOM,2050,Proposed / in discussion,FALSE,TRUE
 East Timor,TLS,2050,Proposed / in discussion,FALSE,TRUE
 Ecuador,ECU,2050,In policy document,FALSE,TRUE
 Egypt,EGY,2030,In policy document,FALSE,TRUE
 El Salvador,SLV,2030,In policy document,FALSE,TRUE
-Equatorial Guinea,GNQ,2050,In policy document,FALSE,TRUE
+Eq. Guinea,GNQ,2050,In policy document,FALSE,TRUE
 Eritrea,ERI,2050,Proposed / in discussion,FALSE,TRUE
 Estonia,EST,2050,Declaration / pledge,FALSE,TRUE
-Eswatini,SWZ,2030,In policy document,FALSE,TRUE
+eSwatini,SWZ,2030,In policy document,FALSE,TRUE
 Ethiopia,ETH,2050,In policy document,FALSE,TRUE
 European Union (27),,2050,In law,TRUE,TRUE
 Fiji,FJI,2050,In law,TRUE,TRUE
@@ -163,7 +163,7 @@ Solomon Islands,SLB,2050,Proposed / in discussion,FALSE,TRUE
 Somalia,SOM,2050,Proposed / in discussion,FALSE,TRUE
 South Africa,ZAF,2050,Declaration / pledge,FALSE,TRUE
 South Korea,KOR,2050,In law,TRUE,TRUE
-South Sudan,SSD,2050,Proposed / in discussion,FALSE,TRUE
+S. Sudan,SSD,2050,Proposed / in discussion,FALSE,TRUE
 Spain,ESP,2050,In law,TRUE,TRUE
 Sri Lanka,LKA,2050,Declaration / pledge,FALSE,TRUE
 Sudan,SDN,2050,Proposed / in discussion,FALSE,TRUE
