@@ -161,8 +161,6 @@ class Vis1Google  {
 
         // update labels (beck/next buttons, age and dynamic text)
         vis.hideOrShow();
-<<<<<<< HEAD
-=======
 
         // update images
         vis.setVis1Images();
@@ -170,7 +168,6 @@ class Vis1Google  {
         // update news
         vis.setVis1News()
 
->>>>>>> e81d6562ce1f38cdd52c317b51288a8ec0c98265
         // console.log("vis1Google", vis.year, vis)
 
     }
@@ -339,30 +336,4 @@ class Vis1Google  {
 
     }
 
-<<<<<<< HEAD
-    updateEmailLabels(year) {
-        console.log("vis1Google updateEmailLabels", year)
-        const emailTitle = document.getElementById("vis1Google-email-title");
-        emailTitle.innerHTML ="Topic: Check out the Climate keywords that peaked in " + year + "!";
-
-        const emailYear = document.getElementById("vis1Google-email-year");
-        emailYear.innerHTML ="Date: From " + year;
-
-        const vis1Year = document.getElementById("vis1-year");
-        vis1Year.innerHTML = year;
-    }
-
-    updateFbLabels(year) {
-        // console.log("vis1Google updateFbLabels", year)
-        // const emailTitle = document.getElementById("vis1Google-email-title");
-        // emailTitle.innerHTML ="Topic: Check out the Climate keywords that peaked in " + year + "!";
-        //
-        // const emailYear = document.getElementById("vis1Google-email-year");
-        // emailYear.innerHTML ="Date: From " + year;
-        //
-        // const vis1Year = document.getElementById("vis1-year");
-        // vis1Year.innerHTML = year;
-    }
-=======
->>>>>>> e81d6562ce1f38cdd52c317b51288a8ec0c98265
 }

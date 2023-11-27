@@ -22,7 +22,7 @@ const currentYearLabel = document.getElementById("current-year");
 // Add an event listener to the slider
 slider.addEventListener("input", function () {
     const selectedYear = parseInt(slider.value);
-    console.log("selectedYear", selectedYear);
+    // console.log("selectedYear", selectedYear);
     currentYearLabel.textContent = selectedYear;
     vis1YearChange(selectedYear); // Call your function with the selected year
 });

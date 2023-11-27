@@ -1,5 +1,5 @@
 body{
-    background-color: #333;
+    background-color: #666;
     font-size: 16px;
 }
 .font_massive{
@@ -243,7 +243,6 @@ body{
     background-color: white;
 }
 
-/* <<<<<<< HEAD */
 .top-bar {
     display: flex;
     justify-content: space-between;
@@ -260,9 +259,6 @@ body{
 }
 
 
-
-
-/*=======*/
 /*VIS 4 Race Bar Chart */
 #vis4-year-display{
     text-align: end;
@@ -307,4 +303,4 @@ body{
     stroke-width: 3px;
     opacity: 0.7;
 }
->>>>>>> e81d6562ce1f38cdd52c317b51288a8ec0c98265
+

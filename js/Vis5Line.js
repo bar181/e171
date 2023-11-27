@@ -17,7 +17,29 @@ class Vis5Line  {
         // default topic
         this.selectedTopic = this.topicList[0];
 
-        console.log("this.topicList", this.topicList, this.data);
+        // Step 1: Group your data by Topic
+        const dataByTopic = d3.group(this.data, d => d.Topic);
+
+        // Step 2 and 3: Find the year with the maximum value for each Topic and create a new array
+        this.topicWithMaxYear = Array.from(dataByTopic, ([topic, topicData]) => {
+            let maxYear = null;
+            let maxValue = -Infinity;
+
+            for (const entry of topicData) {
+                for (const year in entry) {
+                    if (year !== 'Image' && year !== 'Topic') {
+                        const value = entry[year];
+                        if (value > maxValue) {
+                            maxValue = value;
+                            maxYear = year;
+                        }
+                    }
+                }
+            }
+
+            return { topic, year: maxYear };
+        });
+
         this.initVis();
     }
 
@@ -207,7 +229,20 @@ class Vis5Line  {
             d3.select("#vis5-image").html("No image available for " + selectedTopic);
         }
 
-        console.log("selectedTopicData", selectedTopicData);
+        // this.topicWithMaxYear
+        // Find the entry in vis.topicWithMaxYear for the selected topic
+        const selectedEntry = vis.topicWithMaxYear.find(entry => entry.topic === selectedTopic);
+
+        // Update the HTML <span> element with the year
+        const spanElement = document.getElementById("vis5-topicUserAge");
+        if (spanElement && selectedEntry) {
+            let peakYear = selectedEntry.year;
+            let peakPhrase = "Peaked when you were " + (peakYear - 2023 + vis.userAge ) + " years old";
+            spanElement.textContent = peakPhrase;
+        } else {
+            spanElement.textContent = "";
+        }
+        // console.log("selectedTopicData", selectedTopicData);
 
     }
 

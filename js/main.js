@@ -34,11 +34,8 @@ let vis4Data = null;
 let vis5Data = null;
 
 
-// <<<<<<< HEAD
-// =======
 const userAgeInput = document.getElementById("userAgeInput");
 
-// >>>>>>> e81d6562ce1f38cdd52c317b51288a8ec0c98265
 /*
     PAGE LOADING - this area will load all the individual pages and scripts
  */
@@ -47,18 +44,13 @@ const userAgeInput = document.getElementById("userAgeInput");
 const scriptNames = [
     'Vis1Service',
     'Vis1Google',
-// <<<<<<< HEAD
     'Vis2Service',
-    'Vis2BubbleChart',
-    'Vis2DoughnutChart',
-// =======
     'Vis4Service',
     'Vis4Race',
     'Vis5Line',
     'Vis2bubblechart',
     'Vis2doughnutchart',
     'Vis3map',
-// >>>>>>> e81d6562ce1f38cdd52c317b51288a8ec0c98265
     ];
 
 
