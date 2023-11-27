@@ -153,7 +153,7 @@ class Vis1Google  {
             .call(vis.yAxis);
 
         vis.hideOrShow();
-        console.log("vis1Google", vis.year, vis)
+        // console.log("vis1Google", vis.year, vis)
 
     }
 
@@ -237,7 +237,7 @@ class Vis1Google  {
     }
 
     updateFbLabels(year) {
-        console.log("vis1Google updateFbLabels", year)
+        // console.log("vis1Google updateFbLabels", year)
         // const emailTitle = document.getElementById("vis1Google-email-title");
         // emailTitle.innerHTML ="Topic: Check out the Climate keywords that peaked in " + year + "!";
         //

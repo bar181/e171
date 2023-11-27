@@ -22,12 +22,12 @@ let userAge = 30; // default age
 let vis1Data = null;
 let vis1Google = null;
 
-let vis2Data = null;
+let vis2BubbleChart = null;
+let vis2DoughnutChart = null;
+
 let vis3Data = null;
 let vis4Data = null;
 let vis5Data = null;
-
-
 
 
 /*
@@ -38,8 +38,9 @@ let vis5Data = null;
 const scriptNames = [
     'Vis1Service',
     'Vis1Google',
-    'Vis2bubblechart',
-    'Vis2doughnutchart'
+    'Vis2Service',
+    'Vis2BubbleChart',
+    'Vis2DoughnutChart'
     ];
 
 
@@ -104,55 +105,107 @@ function initializeVis1() {
                 }
             });
             vis1Data = data;
-            // clean data
-            console.log("initializeVis1 vis1Google", vis1Data)
+            //console.log("initializeVis1 vis1Google", vis1Data)
             vis1Google = new Vis1Google('vis1Google');
 
         }).catch(function(err) {
         console.log(err)
     });
-    // let vis1Google = new GoogleVis('vis1Google');
-
 }
 
 function initializeVis2() {
-    // main.js
-// Load both CSV files concurrently using Promise.all
+    // Load all CSV files concurrently using Promise.all
     Promise.all([
         d3.csv("data/tweets_per_topic.csv"),
-        d3.csv("data/tweets_per_topic_per_year.csv")  // Assuming this is your second CSV file
-    ]).then(function([tweets_per_topic, tweets_per_topic_per_year]) {
-        // Process the first dataset (tweets_per_topic.csv)
+        d3.csv("data/tweets_per_topic_per_year.csv"),
+        d3.csv("data/aggressiveness_per_topic.csv"),
+        d3.csv("data/aggressiveness_per_topic_per_year.csv"),
+        d3.csv("data/sentiment_per_topic.csv"),
+        d3.csv("data/sentiment_per_topic_per_year.csv"),
+        d3.csv("data/stance_per_topic.csv"),
+        d3.csv("data/stance_per_topic_per_year.csv")
+    ]).then(function([
+            tweets_per_topic,
+            tweets_per_topic_per_year,
+            aggressiveness_per_topic,
+            aggressiveness_per_topic_per_year,
+            sentiment_per_topic,
+            sentiment_per_topic_per_year,
+            stance_per_topic,
+            stance_per_topic_per_year
+        ]) {
+
+        // For all datasets containing numerical columns (integers or floats)
+        // loop through each row and convert strings to int/floats
         tweets_per_topic.forEach(function(d) {
             d.Topic = d.Topic;
             d.Count = +d.Count; // Convert Count from string to number
         });
-
-        // Process the second dataset (tweets_per_topic_per_year.csv)
         tweets_per_topic_per_year.forEach(function(d) {
             d.Topic = d.Topic;
             d.Year = +d.Year; //convert year to number
             d.Count = +d.Count; //convert count from string to number
         });
+        aggressiveness_per_topic.forEach(function(d){
+            d.Topic = d.Topic;
+            d.Year = +d.Year;
+            d.Aggressiveness = +d.Aggressiveness;
+            d.Count = +d.Count;
+
+        });
+        aggressiveness_per_topic_per_year.forEach(function(d){
+            d.Topic = d.Topic;
+            d.Aggressiveness = +d.Aggressiveness;
+            d.Count = +d.Count;
+        });
+        sentiment_per_topic.forEach(function(d){
+            d.Topic = d.Topic;
+            d.Sentiment = +d.Sentiment;
+            d.Count = +d.Count;
+        });
+        sentiment_per_topic_per_year.forEach(function(d){
+            d.Topic = d.Topic;
+            d.Year = +d.Year;
+            d.Sentiment = +d.Sentiment;
+            d.Count = +d.Count;
+        });
+        stance_per_topic.forEach(function(d){
+            d.Topic = d.Topic;
+            d.most_popular_stance = d.most_popular_stance;
+            d.Count = +d.Count;
+        });
+        stance_per_topic_per_year.forEach(function(d){
+            d.Topic = d.Topic;
+            d.Year = +d.Year;
+            d.most_popular_stance = d.most_popular_stance;
+            d.Count = +d.Count;
+        });
+        // No need to do this ^^ for stance_per_topic and stance_per_topic_per_year
+        // because there are no numerical columns in these csv files.
 
         // Initialize your charts with the processed data
-        const myBubbleChart = new Vis2bubblechart('bubbleChartContainer', tweets_per_topic, tweets_per_topic_per_year);
-        const myDoughnutChart = new Vis2doughnutchart('doughnutChartContainer', tweets_per_topic, tweets_per_topic_per_year);
-
-        // Event listener for the topic dropdown
-        document.getElementById('topic-dropdown').addEventListener('change', function() {
-            const selectedTopic = this.value;
-            myBubbleChart.updateTopicHighlight(selectedTopic);
-            myDoughnutChart.updateTopicHighlight(selectedTopic);
-        });
-
-        // Event listener for the topic dropdown
-        document.getElementById('year-dropdown').addEventListener('change', function() {
-            const selectedYear = this.value;
-            myBubbleChart.updateChartForYear(selectedYear);
-            myDoughnutChart.updateChartForYear(selectedYear);
-        });
-
+        vis2BubbleChart = new Vis2BubbleChart(
+            'bubbleChartContainer',
+            tweets_per_topic,
+            tweets_per_topic_per_year,
+            aggressiveness_per_topic,
+            aggressiveness_per_topic_per_year,
+            sentiment_per_topic,
+            sentiment_per_topic_per_year,
+            stance_per_topic,
+            stance_per_topic_per_year
+        );
+        vis2DoughnutChart = new Vis2DoughnutChart(
+            'doughnutChartContainer',
+            tweets_per_topic,
+            tweets_per_topic_per_year,
+            aggressiveness_per_topic,
+            aggressiveness_per_topic_per_year,
+            sentiment_per_topic,
+            sentiment_per_topic_per_year,
+            stance_per_topic,
+            stance_per_topic_per_year
+        );
     });
 }
 
@@ -172,7 +225,6 @@ window.addEventListener('load', () => {
                 navigation: true,
                 slidesNavigation: false,
                 controlArrows: false,
-
             });
 
             // Now that the pages are loaded, loadData can be called to load data and initialize visualizations
