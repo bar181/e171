@@ -57,7 +57,6 @@ class Vis4Race  {
 
         vis.data = vis4Data;
 
-        vis.data = vis1Data;
         // Filter the data for the selected year (vis.year)
         vis.yearData = vis.data.filter(d => d[vis.year]);
 

@@ -1,5 +1,5 @@
 body{
-    background-color: #333;
+    background-color: #666;
     font-size: 16px;
 }
 .font_massive{
@@ -260,5 +260,16 @@ body{
 #vis1-redo-button:disabled{
     background-color: darkgrey;
     border-color: #666666;
+}
+
+.vis5-tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 8px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
 }
 

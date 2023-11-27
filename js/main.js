@@ -44,6 +44,7 @@ const scriptNames = [
     'Vis1Google',
     'Vis4Service',
     'Vis4Race',
+    'Vis5Line',
     'Vis2bubblechart',
     'Vis2doughnutchart'
     ];
@@ -65,28 +66,27 @@ const pageNames = [
     'vis1_main',
     // 'vis1_text',
 
+    // brad - vis4 line chart with descriptions
+    'vis5_header',
+    'vis5_main',
+
     // jess
     'vis2_header',
     'vis2_main',
-    'vis2_text',
+    // 'vis2_text',
 
     // filip
     'vis3_header',
     'vis3_main',
     'vis3_text',
 
-    // to do - closing vis?
-
-
-
-
-    // to do - show what people can do (game or animation to show specific initiative
-    'vis5_header',
-    'vis5_main',
-
-    // close
-    'closing',
+    // brad - next steps reader can take
+    // 'next_steps_header',
     'next_steps',
+
+    // wrap up  - to be updated with a game
+    'closing',
+
     'authors',
 
     // Add more page names here
@@ -145,6 +145,9 @@ function initializeVis1Main() {
             vis4Data = data;
             vis4Race = new Vis4Race('vis4Race');
             console.log("vis4Race", vis4Race);
+
+            vis5Data = data;
+            vis5Line = new Vis5Line('vis5Line');
             // vis4Race.startAnimation();
 
         }).catch(function(err) {
