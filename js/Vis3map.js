@@ -2,6 +2,8 @@
 *          MapVis          *
 * * * * * * * * * * * * * */
 
+let vis3SelectedCategory = "net_2050_law";
+
 class Vis3Map {
 
     constructor(parentElement, geoData, governmentData, emissionsData) {
@@ -41,7 +43,7 @@ class Vis3Map {
             try {
                 have_reduced = countryEmissionsData.have_reduced;
             } catch {
-                console.log("no data for", d.properties.name)
+                // console.log("no data for", d.properties.name)
             }
             d.properties["have_reduced"] = have_reduced;
         });
@@ -114,9 +116,9 @@ class Vis3Map {
                 d3.select(this)
                     .attr('stroke-width', '0px')
                     .attr('fill', d => {
-                        if (d.properties.net_2050_law === "TRUE") {
+                        if (d.properties[vis3SelectedCategory] === "TRUE") {
                             return "green"
-                        } if (d.properties.net_2050_law === "No data") {
+                        } if (d.properties[vis3SelectedCategory] === "No data") {
                             return "gray"
                         } else {
                             return "red"
@@ -222,9 +224,9 @@ class Vis3Map {
 
         // Update country fill
         vis.countries.attr('fill', d => {
-            if (d.properties.net_2050_law === "TRUE") {
+            if (d.properties[vis3SelectedCategory] === "TRUE") {
                 return "green"
-            } if (d.properties.net_2050_law === "No data") {
+            } if (d.properties[vis3SelectedCategory] === "No data") {
                 return "gray"
             } else {
                 return "red"
@@ -233,4 +235,10 @@ class Vis3Map {
 
 
     }
+}
+
+function vis3CategoryChange() {
+    vis3SelectedCategory = document.getElementById('mapSelector').value;
+    console.log(vis3SelectedCategory)
+    vis3map.wrangleData();
 }

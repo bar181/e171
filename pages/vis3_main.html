@@ -6,6 +6,15 @@
                 <h5 class="card-text">Climate Action Around the World</h5>
             </div>
 
+            <div class="row">
+                <div class="row justify-content-center" style="height: 100%">
+                    <select id='mapSelector' class="custom-select align-self-center" style="width: 40%" onchange="vis3CategoryChange()">
+                        <option value="net_2050_law">Net Zero law</option>
+                        <option value="have_reduced">Has cut emissions</option>
+                    </select>
+                </div>
+            </div>
+
             <div id="mapContainer"></div>
 
             <!-- Notes - end enter stuff -->

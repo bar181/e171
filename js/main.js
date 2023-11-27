@@ -33,6 +33,7 @@ let vis3Data = null;
 let vis4Data = null;
 let vis5Data = null;
 
+let vis3map = null;
 
 const userAgeInput = document.getElementById("userAgeInput");
 
@@ -262,7 +263,7 @@ function initializeVis3() {
         d3.csv("data/vis3/vis3-total-ghg-emissions-final.csv")
         ])
         .then(function([world, targets, reduced]) {
-            const vis3map = new Vis3Map('mapContainer', world, targets, reduced);
+            vis3map = new Vis3Map('mapContainer', world, targets, reduced);
         })
         .catch(function(err) {
             console.log(err)
