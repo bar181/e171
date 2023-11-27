@@ -20,6 +20,7 @@ class Vis2BubbleChart {
         this.stance_per_topic = stance_per_topic;
         this.stance_per_topic_per_year = stance_per_topic_per_year;
 
+        console.log("Vis2BubbleChart constructor called!");
         this.initVis();
     }
 
