@@ -2,15 +2,16 @@
 *          MapVis          *
 * * * * * * * * * * * * * */
 
-let vis3SelectedCategory = "net_2050_law";
+let vis3SelectedCategory = "Signed";
 
 class Vis3Map {
 
-    constructor(parentElement, geoData, governmentData, emissionsData) {
+    constructor(parentElement, geoData, governmentData, emissionsData, parisData) {
         this.parentElement = parentElement;
         this.governmentData = governmentData;
         this.geoData = geoData;
         this.emissionsData = emissionsData;
+        this.parisData = parisData;
 
         // define colors
         this.colors = ['#fddbc7', '#f4a582', '#d6604d', '#b2182b']
@@ -46,6 +47,15 @@ class Vis3Map {
                 // console.log("no data for", d.properties.name)
             }
             d.properties["have_reduced"] = have_reduced;
+
+            let parisData = vis.parisData.find(e => e.Entity === d.properties.name);
+            let signed = "No data";
+            try {
+                signed = parisData["Signed"];
+            } catch {
+                // console.log("no data for", d.properties.name)
+            }
+            d.properties["Signed"] = signed;
         });
 
 
@@ -107,6 +117,7 @@ class Vis3Map {
                     .style("top", event.pageY + "px")
                     .html(`<div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
                         <h3>${d.properties.name}</h3>
+                        <h4>Signed 2015 Paris Agreement: ${d.properties.Signed}</h4>
                         <h4>Net Zero Law: ${d.properties.net_2050_law}</h4>
                         <h4>Have Reduced Emissions (2015-2021): ${d.properties.have_reduced}</h4>
                      </div>`);
@@ -200,12 +211,7 @@ class Vis3Map {
                     // Update the map
                     vis.path = d3.geoPath().projection(vis.projection);
                     d3.selectAll(".country").attr("d", vis.path)
-                    d3.selectAll(".graticule").attr("d", vis.path)
-                    d3.selectAll(".airport")
-                        .attr("cx", d => vis.projection([d.longitude, d.latitude])[0])
-                        .attr("cy", d => vis.projection([d.longitude, d.latitude])[1])
-                        .attr('visibility', getVisibility);
-                    d3.selectAll(".route").attr("d", vis.path);
+                    d3.selectAll(".graticule").attr("d", vis.path);
                 })
         )
 

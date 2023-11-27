@@ -1,0 +1,201 @@
+Entity,Signed,NDC
+Afghanistan,TRUE,0.05
+Albania,TRUE,0.02
+Algeria,TRUE,0.30
+Andorra,TRUE,0.00
+Angola,TRUE,0.17
+Antigua and Barbuda,TRUE,0.00
+Argentina,TRUE,0.89
+Armenia,TRUE,0.02
+Aruba,No data,No data
+Australia,TRUE,1.46
+Austria,TRUE,0.21
+Azerbaijan,TRUE,0.13
+Bahamas,TRUE,0.00
+Bahrain,TRUE,0.06
+Bangladesh,TRUE,0.27
+Barbados,TRUE,0.01
+Belarus,TRUE,0.24
+Belgium,TRUE,0.32
+Belize,TRUE,0.00
+Benin,TRUE,0.02
+Bhutan,TRUE,0.00
+Bolivia,TRUE,0.12
+Bosnia and Herz.,TRUE,0.08
+Botswana,TRUE,0.02
+Brazil,TRUE,2.48
+British Virgin Islands,No data,No data
+Brunei,TRUE,No data
+Bulgaria,TRUE,0.15
+Burkina Faso,TRUE,0.06
+Burundi,TRUE,0.07
+Cambodia,TRUE,0.03
+Cameroon,TRUE,0.45
+Canada,TRUE,1.95
+Cape Verde,TRUE,0.00
+Central African Rep.,TRUE,0.01
+Chad,TRUE,0.06
+Chile,TRUE,0.25
+China,TRUE,20.09
+Colombia,TRUE,0.41
+Comoros,TRUE,0.00
+Congo,TRUE,0.06
+Cook Islands,TRUE,0.00
+Costa Rica,TRUE,0.03
+Côte d'Ivoire,TRUE,0.73
+Croatia,TRUE,0.07
+Cuba,TRUE,0.10
+Cyprus,TRUE,0.02
+Czechia,TRUE,0.34
+Dem. Rep. Congo,TRUE,0.01
+Denmark,TRUE,0.15
+Djibouti,TRUE,0.00
+Dominica,TRUE,0.00
+Dominican Rep.,TRUE,0.07
+East Timor,TRUE,0.00
+Ecuador,TRUE,0.67
+Egypt,TRUE,0.52
+El Salvador,TRUE,0.03
+Eq. Guinea,TRUE,No data
+Eritrea,TRUE,0.01
+Estonia,TRUE,0.06
+eSwatini,TRUE,0.05
+Ethiopia,TRUE,0.13
+Fiji,TRUE,0.01
+Finland,TRUE,0.17
+France,TRUE,1.34
+Gabon,TRUE,0.02
+Gambia,TRUE,0.05
+Georgia,TRUE,0.03
+Germany,TRUE,2.56
+Ghana,TRUE,0.09
+Greece,TRUE,0.28
+Grenada,TRUE,0.00
+Guatemala,TRUE,0.04
+Guinea,TRUE,0.01
+Guinea-Bissau,TRUE,0.02
+Guyana,TRUE,0.01
+Haiti,TRUE,0.02
+Honduras,TRUE,0.03
+Hong Kong,No data,No data
+Hungary,TRUE,0.15
+Iceland,TRUE,0.01
+India,TRUE,4.10
+Indonesia,TRUE,1.49
+Iran,FALSE,No data
+Iraq,TRUE,0.20
+Ireland,TRUE,0.16
+Israel,TRUE,0.20
+Italy,TRUE,1.18
+Jamaica,TRUE,0.04
+Japan,TRUE,3.79
+Jordan,TRUE,0.07
+Kazakhstan,TRUE,0.84
+Kenya,TRUE,0.06
+Kiribati,TRUE,0.00
+Kuwait,TRUE,0.09
+Kyrgyzstan,TRUE,0.03
+Laos,TRUE,0.02
+Latvia,TRUE,0.03
+Lebanon,TRUE,0.07
+Lesotho,TRUE,0.01
+Liberia,TRUE,0.02
+Libya,FALSE,No data
+Liechtenstein,TRUE,0.00
+Lithuania,TRUE,0.05
+Luxembourg,TRUE,0.03
+Macao,No data,No data
+Madagascar,TRUE,0.08
+Malawi,TRUE,0.07
+Malaysia,TRUE,0.52
+Maldives,TRUE,0.00
+Mali,TRUE,0.03
+Malta,TRUE,0.01
+Marshall Islands,TRUE,0.00
+Mauritania,TRUE,0.02
+Mauritius,TRUE,0.01
+Mexico,TRUE,1.70
+Micronesia (country),TRUE,0.00
+Moldova,TRUE,0.04
+Mongolia,TRUE,0.05
+Montenegro,TRUE,0.01
+Morocco,TRUE,0.16
+Mozambique,TRUE,0.02
+Myanmar,TRUE,0.10
+Namibia,TRUE,0.01
+Nauru,TRUE,0.00
+Nepal,TRUE,0.07
+Netherlands,TRUE,0.53
+New Zealand,TRUE,0.22
+Nicaragua,TRUE,0.03
+Niger,TRUE,0.04
+Nigeria,TRUE,0.57
+Niue,TRUE,0.01
+North Korea,TRUE,0.23
+Macedonia,TRUE,0.03
+Norway,TRUE,0.14
+Oman,TRUE,0.06
+Pakistan,TRUE,0.43
+Palau,TRUE,0.00
+Panama,TRUE,0.03
+Papua New Guinea,TRUE,0.01
+Paraguay,TRUE,0.06
+Peru,TRUE,0.22
+Philippines,TRUE,0.34
+Poland,TRUE,1.06
+Portugal,TRUE,0.18
+Qatar,TRUE,0.17
+Romania,TRUE,0.30
+Russia,TRUE,7.53
+Rwanda,TRUE,0.02
+Saint Helena,TRUE,No data
+Saint Kitts and Nevis,TRUE,0.00
+Saint Lucia,TRUE,0.00
+Saint Vincent and the Grenadines,TRUE,0.00
+Samoa,TRUE,0.00
+Sao Tome and Principe,TRUE,0.00
+Saudi Arabia,TRUE,0.80
+Senegal,TRUE,0.05
+Serbia,TRUE,0.18
+Seychelles,TRUE,0.00
+Sierra Leone,TRUE,0.98
+Singapore,TRUE,0.13
+Slovakia,TRUE,0.12
+Slovenia,TRUE,0.05
+Solomon Islands,TRUE,0.00
+Somalia,TRUE,No data
+South Africa,TRUE,1.46
+South Korea,TRUE,1.85
+S. Sudan,TRUE,No data
+Spain,TRUE,0.87
+Sri Lanka,TRUE,0.05
+Sudan,TRUE,0.18
+Suriname,TRUE,0.01
+Sweden,TRUE,0.15
+Switzerland,TRUE,0.14
+Syria,TRUE,0.21
+Taiwan,TRUE,No data
+Tajikistan,TRUE,0.02
+Tanzania,TRUE,0.11
+Thailand,TRUE,0.64
+Togo,TRUE,0.02
+Tonga,TRUE,0.00
+Trinidad and Tobago,TRUE,0.04
+Tunisia,TRUE,0.11
+Turkey,TRUE,1.24
+Turkmenistan,TRUE,0.20
+Turks and Caicos Islands,No data,No data
+Tuvalu,TRUE,0.00
+Uganda,TRUE,0.07
+Ukraine,TRUE,1.04
+United Arab Emirates,TRUE,0.53
+United Kingdom,TRUE,1.55
+United States of America,TRUE,17.89
+Uruguay,TRUE,0.05
+Uzbekistan,TRUE,0.54
+Vanuatu,TRUE,0.00
+Venezuela,TRUE,0.52
+Vietnam,TRUE,0.72
+Yemen,FALSE,No data
+Zambia,TRUE,0.04
+Zimbabwe,TRUE,0.18
