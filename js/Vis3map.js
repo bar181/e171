@@ -46,14 +46,14 @@ class Vis3Map {
             .attr("height", vis.height)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
-        // add title
-        vis.svg.append('g')
-            .attr('class', 'title')
-            .attr('id', 'map-title')
-            .append('text')
-            .text('Title for Map')
-            .attr('transform', `translate(${vis.width / 2}, 20)`)
-            .attr('text-anchor', 'middle');
+        // // add title
+        // vis.svg.append('g')
+        //     .attr('class', 'title')
+        //     .attr('id', 'map-title')
+        //     .append('text')
+        //     .text('Title for Map')
+        //     .attr('transform', `translate(${vis.width / 2}, 20)`)
+        //     .attr('text-anchor', 'middle');
 
         // Create projection
         vis.projection = d3.geoOrthographic()
