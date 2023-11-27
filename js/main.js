@@ -197,13 +197,11 @@ function initializeVis2() {
 
 function initializeVis3() {
     Promise.all([
-        d3.json("data/vis3/airports.json"),
+        d3.csv("data/vis3/vis3_net_zero_targets.csv"),
         d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json")
         ])
-        .then(function([airports, world]) {
-            console.log("world", world);
-            console.log("airports", airports);
-            const vis3map = new Vis3Map('mapContainer', airports, world);
+        .then(function([targets, world]) {
+            const vis3map = new Vis3Map('mapContainer', targets, world);
         })
         .catch(function(err) {
             console.log(err)

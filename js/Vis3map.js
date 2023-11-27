@@ -2,7 +2,6 @@
 *          MapVis          *
 * * * * * * * * * * * * * */
 
-
 class Vis3Map {
 
     constructor(parentElement, governmentData, geoData) {
@@ -19,7 +18,22 @@ class Vis3Map {
     initVis() {
         let vis = this;
 
-        console.log("Vis 3 init vis")
+        // console.log("Vis 3 init vis")
+
+
+        // convert TopoJSON to GeoJSON
+        vis.geoDataJson = topojson.feature(vis.geoData, vis.geoData.objects.countries).features
+
+        vis.geoDataJson.forEach(d => {
+            let net_2050_law = "No data";
+            let countryData = vis.governmentData.find(e => e.Entity === d.properties.name);
+            try {
+                net_2050_law = countryData.by_2050_law;
+            } catch {
+                // console.log("no data for", d.properties.name)
+            }
+            d.properties["net_2050_law"] = net_2050_law;
+        });
 
 
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
@@ -68,7 +82,7 @@ class Vis3Map {
             .attr("class", "country")
             .attr("d", vis.path)
             .on("mouseover", function(event, d){
-                console.log(event);
+                // console.log(event);
                 d3.select(this)
                     .attr('stroke-width', '2px')
                     .attr('stroke', 'black')
@@ -80,17 +94,20 @@ class Vis3Map {
                     .style("top", event.pageY + "px")
                     .html(`<div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
                         <h3>${d.properties.name}</h3>
-                        <h4>Category: ${vis.countryInfo[d.properties.name].category}</h4>
-                        <h4>Value: ${vis.countryInfo[d.properties.name].value}</h4>
-                        <h4>Color: ${vis.countryInfo[d.properties.name].color}</h4>
-                        <h4>data: ${JSON.stringify(vis.countryInfo[d.properties.name])}</h4>
+                        <h4>Net Zero Law: ${d.properties.net_2050_law}</h4>
                      </div>`);
 
             })
             .on("mouseout", function(d){
                 d3.select(this)
                     .attr('stroke-width', '0px')
-                    .attr('fill', d => vis.countryInfo[d.properties.name].color)
+                    .attr('fill', d => {
+                        if (d.properties.net_2050_law === "TRUE") {
+                            return "green"
+                        } else {
+                            return "red"
+                        }
+                    })
 
                 vis.tooltip
                     .style("opacity", 0)
@@ -144,57 +161,6 @@ class Vis3Map {
         vis.legendAxisGroup.attr("transform", `translate(0, ${legendSquareSize})`);
 
         /* * * * * * * * * * * * * *
-        *       DRAW AIRPORTS      *
-        * * * * * * * * * * * * * */
-
-        // Code below adapted from https://stackoverflow.com/questions/22366749/how-can-i-determine-if-a-point-is-hidden-on-a-projection
-        function getVisibility(d) {
-            const visible = vis.path(
-                {type: 'Point', coordinates: [d.longitude, d.latitude]});
-
-            return visible ? 'visible' : 'hidden';
-        }
-
-        vis.svg.selectAll(".airport")
-            .data(vis.governmentData.nodes)
-            .enter()
-            .append("circle")
-            .attr("class", "airport")
-            .attr("cx", d => vis.projection([d.longitude, d.latitude])[0])
-            .attr("cy", d => vis.projection([d.longitude, d.latitude])[1])
-            .attr("r", 3)
-            .attr("fill", "black")
-            .attr('visibility', getVisibility);
-
-        /* * * * * * * * * * * * * *
-        *        DRAW ROUTES       *
-        * * * * * * * * * * * * * */
-
-        // Create a GeoJSON FeatureCollection for nodes
-        const routeFeatures = vis.governmentData.links.map((d) => {
-            return {
-                type: "Feature",
-                geometry: {
-                    type: "LineString",
-                    coordinates: [
-                        [vis.governmentData.nodes[d.source].longitude, vis.governmentData.nodes[d.source].latitude],
-                        [vis.governmentData.nodes[d.target].longitude, vis.governmentData.nodes[d.target].latitude],
-                    ],
-                },
-            };
-        });
-        console.log(routeFeatures);
-
-        vis.svg.selectAll(".route")
-            .data(routeFeatures)
-            .enter().append("path")
-            .attr("class", "route")
-            .attr("d", vis.path)
-            .attr('stroke-width', '2px')
-            .attr('stroke', 'black')
-            .attr('fill', "none");
-
-        /* * * * * * * * * * * * * *
         *    Make map draggable    *
         * * * * * * * * * * * * * */
         let m0,
@@ -234,28 +200,20 @@ class Vis3Map {
     wrangleData() {
         let vis = this;
 
-        // create random data structure with information for each land
-        vis.countryInfo = {};
-        vis.geoData.objects.countries.geometries.forEach(d => {
-            let randomCountryValue = Math.random() * 4
-            vis.countryInfo[d.properties.name] = {
-                name: d.properties.name,
-                category: 'category_' + Math.floor(randomCountryValue),
-                color: vis.colors[Math.floor(randomCountryValue)],
-                value: randomCountryValue / 4 * 100
-            }
-        })
-
         vis.updateVis()
     }
 
     updateVis() {
         let vis = this;
 
-        console.log(vis.countryInfo)
-
         // Update country fill
-        vis.countries.attr("fill", d => vis.countryInfo[d.properties.name].color);
+        vis.countries.attr('fill', d => {
+            if (d.properties.net_2050_law === "TRUE") {
+                return "green"
+            } else {
+                return "red"
+            }
+        });
 
 
     }
