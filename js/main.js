@@ -268,7 +268,6 @@ function initializeVis3() {
         });
 }
 
-
 // Load pages and scripts in order using pageLoader.js
 window.addEventListener('load', () => {
 
