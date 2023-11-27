@@ -48,8 +48,8 @@ const scriptNames = [
     'Vis4Service',
     'Vis4Race',
     'Vis5Line',
-    'Vis2bubblechart',
-    'Vis2doughnutchart',
+    'Vis2BubbleChart',
+    'Vis2DoughnutChart',
     'Vis3map',
     ];
 
