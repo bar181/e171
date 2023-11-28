@@ -342,7 +342,6 @@ class Vis2DoughnutChart {
                     .duration(500)
                     .style('opacity', 0);
             });
-
     }
 
     getColor(index) {

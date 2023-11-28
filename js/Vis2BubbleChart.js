@@ -28,8 +28,8 @@ class Vis2BubbleChart {
         let vis = this;
 
         vis.margin = { top: 40, right: 40, bottom: 40, left: 40 };
-        vis.width = 940 - vis.margin.left - vis.margin.right;
-        vis.height = 450 - vis.margin.top - vis.margin.bottom;
+        vis.width = 520 - vis.margin.left - vis.margin.right;
+        vis.height = 520 - vis.margin.top - vis.margin.bottom;
 
         vis.svg = d3.select('#' + vis.containerId).append('svg')
             .attr('width', vis.width + vis.margin.left + vis.margin.right)
@@ -85,40 +85,33 @@ class Vis2BubbleChart {
             vis.displayDefaultSubjectSingleyear(selectedYear, selectedTopic)
 
         }
-
-
-        // This should be last, because it doesn't add anything, it only makes some stuff gray.
-        if (selectedTopic != 'All Topics' && selectedYear != 'All Years') {
-            // make all bubbles / pie sections that != selectedTopic gray
-            // do not change the color of the bubble / pie section whose topic is currently selected
-        }
     }
 
     displayAggressivenessAllYears(selectedTopic) {
         let vis = this;
+
+        // Update the pie layout with the filtered data
+        let pack = d3.pack().size([vis.width, vis.height]).padding(1.5);
+        let root = d3.hierarchy({ children: vis.aggressiveness_per_topic}).sum(d => d.Count);
+        let nodes = pack(root).leaves();
 
         // Define a scale for aggressiveness to color mapping
         let aggressivenessScale = d3.scaleLinear()
             .domain([d3.min(vis.aggressiveness_per_topic, d => d.Aggressiveness), d3.max(vis.aggressiveness_per_topic, d => d.Aggressiveness)])
             .range(['#FFB6C1', '#880469']);
 
-        let circles = vis.svg.selectAll('circle').data(vis.aggressiveness_per_topic); // Bind the filtered data to the circles
-
-        // Remove unneeded circles
+        // enter / update / exit paths
+        let circles = vis.svg.selectAll('circle').data(nodes);
         circles.exit().remove();
-
-        circles.enter().append('circle') // Handle new data points
-            // .merge(circles) // Merge new and existing circles
-            // .transition().duration(1000)
+        circles.enter().append('circle')
+            .merge(circles)
+            .transition().duration(1000)
+            .attr('r', d => d.r)
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
-            .attr('r', d => d.r);
-
-        // Update existing circles
-        circles.transition().duration(1000)
-            .style('fill', function(d) {
-                if ((selectedTopic === 'All Topics') || (selectedTopic === d.Topic)) {
-                    return aggressivenessScale(d.Aggressiveness);
+            .attr('fill', function(d, i) {
+                if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
+                    return aggressivenessScale(d.data.Aggressiveness);
                 } else {
                     return 'lightgray';
                 }
@@ -128,28 +121,28 @@ class Vis2BubbleChart {
     displaySentimentAllYears(selectedTopic) {
         let vis = this;
 
+        // Update the pie layout with the filtered data
+        let pack = d3.pack().size([vis.width, vis.height]).padding(1.5);
+        let root = d3.hierarchy({ children: vis.sentiment_per_topic}).sum(d => d.Count);
+        let nodes = pack(root).leaves();
+
         // Define a scale for sentiment to color mapping
         let sentimentScale = d3.scaleLinear()
             .domain([d3.min(vis.sentiment_per_topic, d => d.Sentiment), d3.max(vis.sentiment_per_topic, d => d.Sentiment)])
             .range(['#af1d34', '#389161']);
 
-        let circles = vis.svg.selectAll('circle').data(vis.sentiment_per_topic); // Bind the filtered data to the circles
-
-        // Remove unneeded circles
+        // enter / update / exit paths
+        let circles = vis.svg.selectAll('circle').data(nodes);
         circles.exit().remove();
-
-        circles.enter().append('circle') // Handle new data points
-            // .merge(circles) // Merge new and existing circles
-            // .transition().duration(1000)
+        circles.enter().append('circle')
+            .merge(circles)
+            .transition().duration(1000)
+            .attr('r', d => d.r)
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
-            .attr('r', d => d.r);
-
-        // Update existing circles
-        circles.transition().duration(1000)
-            .style('fill', function(d) {
-                if ((selectedTopic === 'All Topics') || (selectedTopic === d.Topic)) {
-                    return sentimentScale(d.Sentiment);
+            .attr('fill', function(d, i) {
+                if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
+                    return sentimentScale(d.data.Sentiment);
                 } else {
                     return 'lightgray';
                 }
@@ -159,33 +152,28 @@ class Vis2BubbleChart {
     displayStanceAllYears(selectedTopic) {
         let vis = this;
 
+        // Update the pie layout with the filtered data
+        let pack = d3.pack().size([vis.width, vis.height]).padding(1.5);
+        let root = d3.hierarchy({ children: vis.stance_per_topic}).sum(d => d.Count);
+        let nodes = pack(root).leaves();
 
         // Define a scale for stance to color mapping
         let stanceColorScale = d3.scaleOrdinal()
             .domain(['believer', 'neutral', 'denier'])
-            .range(['#2d9c2d', '#d7af49', '#a02c3d']); // Example colors: blue for believer, orange for neutral, green for denier
+            .range(['#2d9c2d', '#d7af49', '#a02c3d']); // blue for believer, orange for neutral, green for denier
 
-
-
-        // Remove unneeded circles
-        // circles.exit().remove();
-
-        let circles = vis.svg.selectAll('circle').data(vis.stance_per_topic); // Bind the filtered data to the circles
-
-        // // Remove unneeded circles
+        // enter / update / exit paths
+        let circles = vis.svg.selectAll('circle').data(nodes);
         circles.exit().remove();
-
-        console.log("circles data", circles);
-        circles.enter().append('circle') // Handle new data points
+        circles.enter().append('circle')
+            .merge(circles)
+            .transition().duration(1000)
+            .attr('r', d => d.r)
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
-            .attr('r', d => d.r);
-
-        // Update existing circles
-        circles.transition().duration(1000)
-            .style('fill', function(d) {
-                if ((selectedTopic === 'All Topics') || (selectedTopic === d.Topic)) {
-                    return stanceColorScale(d.most_popular_stance);
+            .attr('fill', function(d, i) {
+                if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
+                    return stanceColorScale(d.data.most_popular_stance);
                 } else {
                     return 'lightgray';
                 }
@@ -198,124 +186,88 @@ class Vis2BubbleChart {
     displayDefaultSubjectAllYears(selectedTopic) {
         let vis = this;
 
-        //recreate pie data from the original dataset
-        let circles = vis.svg.selectAll('circle').data(vis.tweets_per_topic);
+        // Update the pie layout with the filtered data
+        let pack = d3.pack().size([vis.width, vis.height]).padding(1.5);
+        let root = d3.hierarchy({ children: vis.tweets_per_topic}).sum(d => d.Count);
+        let nodes = pack(root).leaves();
 
-        console.log("vis tweets", vis.tweets_per_topic);
-
+        // enter / update / exit paths
+        let circles = vis.svg.selectAll('circle').data(nodes);
         circles.exit().remove();
-
         circles.enter().append('circle')
-            .attr('cx', d => {console.log(d);
-            return d.x})
+            .merge(circles)
+            .transition().duration(1000)
+            .attr('r', d => d.r)
+            .attr('cx', d => d.x)
             .attr('cy', d => d.y)
-            .attr('r', d => d.r);
-            console.log("d to x", d => d.x);
-
-        // Update existing circles
-        circles.transition().duration(1000)
-            // .merge(paths)
-            // .transition().duration(1000)
-            // .attr('d', vis.arc)
-            .style('fill', function(d, i) {
-                console.log(d);
-                console.log(i);
-                if ((selectedTopic === 'All Topics') || (selectedTopic === d.Topic)) {
-                    console.log("HELLO1");
+            .attr('fill', function(d, i) {
+                if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
                     return vis.getColor(i);
                 } else {
-                    console.log("HELLO2");
                     return 'lightgray';
                 }
             });
-
     }
-
-
-
 
 
 
 
     displayAggressivenessSingleYear(selectedYear, selectedTopic) {
         let vis = this;
-        // console.log("NOT IMPLEMENTED!")
-        // Log to check if the function is called
-        console.log("displaySentimentSingleYear called with year: " + selectedYear + " and topic: " + selectedTopic);
 
-        // Check the entire dataset
-        console.log("Full dataset: ", vis.aggressiveness_per_topic_per_year);
-
+        // Update the pie layout with the filtered data
         let filteredData = vis.aggressiveness_per_topic_per_year.filter(d => d.Year === selectedYear);
-        console.log("Filtered data for year " + selectedYear + ": ", filteredData);
+        let pack = d3.pack().size([vis.width, vis.height]).padding(1.5);
+        let root = d3.hierarchy({ children: filteredData}).sum(d => d.Count);
+        let nodes = pack(root).leaves();
 
         let aggressivenessScale = d3.scaleLinear()
             .domain([d3.min(filteredData, d => d.Aggressiveness), d3.max(filteredData, d => d.Aggressiveness)])
             .range(['#FFB6C1', '#880469']);
 
-        console.log("Sentiment scale domain: ", aggressivenessScale.domain());
-
-        let circles = vis.svg.selectAll('circle').data(filteredData); // Bind the filtered data to the circles
-
-        circles.exit().remove(); // Remove unneeded circles
-
-        // circles = vis.svg.selectAll('circle').data(filteredData); // Reselect to include new elements
-
-        circles.enter().append('circle') // Handle new data points
-            // .merge(circles) // Merge new and existing circles
-            // .transition().duration(1000)
+        // enter / update / exit paths
+        let circles = vis.svg.selectAll('circle').data(nodes);
+        circles.exit().remove();
+        circles.enter().append('circle')
+            .merge(circles)
+            .transition().duration(1000)
+            .attr('r', d => d.r)
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
-            .attr('r', d => d.r);
-
-        // Update existing circles
-        circles.transition().duration(1000)
-            .style('fill', function(d) {
-                if ((selectedTopic === 'All Topics') || (selectedTopic === d.Topic)) {
-                    return aggressivenessScale(d.Aggressiveness);
+            .attr('fill', function(d, i) {
+                if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
+                    return aggressivenessScale(d.data.Aggressiveness);
                 } else {
                     return 'lightgray';
                 }
             });
-
     }
 
     displaySentimentSingleYear(selectedYear, selectedTopic) {
         let vis = this;
-        // console.log("NOT IMPLEMENTED!")
-        // Log to check if the function is called
-        console.log("displaySentimentSingleYear called with year: " + selectedYear + " and topic: " + selectedTopic);
 
-        // Check the entire dataset
-        console.log("Full dataset: ", vis.sentiment_per_topic_per_year);
-
+        // Update the pie layout with the filtered data
         let filteredData = vis.sentiment_per_topic_per_year.filter(d => d.Year === +selectedYear);
-        console.log("Filtered data for year " + selectedYear + ": ", filteredData);
+        let pack = d3.pack().size([vis.width, vis.height]).padding(1.5);
+        let root = d3.hierarchy({ children: filteredData}).sum(d => d.Count);
+        let nodes = pack(root).leaves();
 
         let sentimentScale = d3.scaleLinear()
             .domain([d3.min(filteredData, d => d.Sentiment), d3.max(filteredData, d => d.Sentiment)])
             .range(['#af1d34', '#389161']);
 
-        console.log("Sentiment scale domain: ", sentimentScale.domain());
-
-        let circles = vis.svg.selectAll('circle').data(filteredData); // Bind the filtered data to the circles
-
-        circles.exit().remove(); // Remove unneeded circles
-
-        // circles = vis.svg.selectAll('circle').data(filteredData); // Reselect to include new elements
-
-        circles.enter().append('circle') // Handle new data points
-            // .merge(circles) // Merge new and existing circles
-            // .transition().duration(1000)
+        // enter / update / exit paths
+        let circles = vis.svg.selectAll('circle').data(nodes);
+        circles.exit().remove();
+        circles.enter().append('circle')
+            .merge(circles)
+            .transition().duration(1000)
+            .attr('r', d => d.r)
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
-            .attr('r', d => d.r);
-
-        // Update existing circles
-        circles.transition().duration(1000)
-            .style('fill', function(d) {
-                if ((selectedTopic === 'All Topics') || (selectedTopic === d.Topic)) {
-                    return sentimentScale(d.Sentiment);
+            .attr('fill', function(d, i) {
+                if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
+                    return sentimentScale(d.data.Sentiment);
                 } else {
                     return 'lightgray';
                 }
@@ -324,40 +276,29 @@ class Vis2BubbleChart {
 
     displayStanceSingleYear(selectedYear, selectedTopic) {
         let vis = this;
-        // console.log("NOT IMPLEMENTED!")
-        // Log to check if the function is called
-        console.log("displaystanceperyear called with year: " + selectedYear + " and topic: " + selectedTopic);
 
-        // Check the entire dataset
-        console.log("Full dataset: ", vis.stance_per_topic_per_year);
-
+        // Update the pie layout with the filtered data
         let filteredData = vis.stance_per_topic_per_year.filter(d => d.Year === +selectedYear);
-        console.log("Filtered data for year " + selectedYear + ": ", filteredData);
+        let pack = d3.pack().size([vis.width, vis.height]).padding(1.5);
+        let root = d3.hierarchy({ children: filteredData}).sum(d => d.Count);
+        let nodes = pack(root).leaves();
 
         let stanceColorScale = d3.scaleOrdinal()
             .domain(['believer', 'neutral', 'denier'])
             .range(['#2d9c2d', '#d7af49', '#a02c3d']);
 
-        console.log("Stance scale domain: ", stanceColorScale.domain());
-
-        let circles = vis.svg.selectAll('circle').data(filteredData); // Bind the filtered data to the circles
-
-        circles.exit().remove(); // Remove unneeded circles
-
-        // circles = vis.svg.selectAll('circle').data(filteredData); // Reselect to include new elements
-
-        circles.enter().append('circle') // Handle new data points
-            // .merge(circles) // Merge new and existing circles
-            // .transition().duration(1000)
+        // enter / update / exit paths
+        let circles = vis.svg.selectAll('circle').data(nodes);
+        circles.exit().remove();
+        circles.enter().append('circle')
+            .merge(circles)
+            .transition().duration(1000)
+            .attr('r', d => d.r)
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
-            .attr('r', d => d.r);
-
-        // Update existing circles
-        circles.transition().duration(1000)
-            .style('fill', function(d) {
-                if ((selectedTopic === 'All Topics') || (selectedTopic === d.Topic)) {
-                    return stanceColorScale(d.most_popular_stance);
+            .attr('fill', function(d, i) {
+                if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
+                    return stanceColorScale(d.data.most_popular_stance);
                 } else {
                     return 'lightgray';
                 }
@@ -369,26 +310,20 @@ class Vis2BubbleChart {
 
         // Update the pie layout with the filtered data
         let filteredData = vis.tweets_per_topic_per_year.filter(d => d.Year === +selectedYear);
+        let pack = d3.pack().size([vis.width, vis.height]).padding(1.5);
+        let root = d3.hierarchy({ children: filteredData}).sum(d => d.Count);
+        let nodes = pack(root).leaves();
 
         // enter / update / exit paths
-        let circles = vis.svg.selectAll('circle').data(filteredData);
-        console.log(filteredData);
-
-
-        circles.exit().remove(); // Remove unneeded circles
-
+        let circles = vis.svg.selectAll('circle').data(nodes);
+        circles.exit().remove();
         circles.enter().append('circle')
-            // .merge(circles);
-            .attr('cx', d => d.x)
-            .attr('cy', d => d.y)
-            .attr('r', d => d.r);
-
-        // Update existing circles
-        circles.transition().duration(1000)
-            .attr('cx', d => d.x)
-            .attr('cy', d => d.y)
+            .merge(circles)
+            .transition().duration(1000)
             .attr('r', d => d.r)
-            .style('fill', function(d, i) {
+            .attr('cx', d => d.x)
+            .attr('cy', d => d.y)
+            .attr('fill', function(d, i) {
                 if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
                     return vis.getColor(i);
                 } else {
@@ -418,7 +353,7 @@ class Vis2BubbleChart {
             .attr('r', d => d.r)
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
-            .style('fill', (d, i) => vis.getColor(i))
+            .attr('fill', (d, i) => vis.getColor(i))
             .on('mouseover', function(event, d) {
                 vis.tooltip.transition()
                     .duration(200)
