@@ -137,6 +137,7 @@ body{
     text-align: center;
 }
 
+
 /* Email Sidebar with Year Buttons */
 .vis1-email-sidebar {
     padding: 5px;
@@ -180,6 +181,8 @@ body{
     font-size: 20px;
     font-weight: bold;
 }
+
+
 /* Email Header */
 .vis1-email-header {
     text-align: center;
@@ -192,12 +195,16 @@ body{
     font-weight: bold;
 }
 
+
+
 /* Email Message */
 .vis1-email-message {
     font-size: 16px;
     line-height: 1.5;
     margin-bottom: 20px;
 }
+
+
 
 /* Visualization Mockup */
 .vis1-visualization {
@@ -213,6 +220,8 @@ body{
     margin-left: 20px;
 }
 
+
+
 /* Email Footer */
 .vis1-email-footer {
     text-align: center;
@@ -225,22 +234,36 @@ body{
     margin: 0;
 }
 
+/* Show tooltip on hover */
+.tooltip-container:hover .tooltip {
+    visibility: visible;
+}
+
+/* Change tooltip color on hover */
+.tooltip-container:hover .tooltip {
+    background-color: #6a86a1; /* New background color */
+}
 
 /* Jess's CSS*/
-/*For the visualizations */
+/*For the 2nd visualization */
+.tooltip{
+    opacity: 1;
+}
+
 #doughnutChartContainer, #bubbleChartContainer {
     position: absolute;
-    object-position: center;
+    object-position: left;
     top: 50%;
-    left: 50%;
+    left: 25%;
     transform: translate(-50%, -50%);
-    margin-top: 50px;
+    margin-top: 62px;
     /*overflow: visible;*/
 }
 
 /*area of the container holding the visualizations */
 .vis2-card-area{
-    height: 1100px;
+    height: 900px;
+    width: 1600px;
     background-color: white;
 }
 
@@ -250,7 +273,24 @@ body{
     align-items: center;
     padding: 1rem;
     background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 30px solid #ffffff;
+}
+
+/*#vis2-back-button,*/
+/*#vis2-next-button{*/
+/*    font-size: 32px;*/
+/*}*/
+
+#vis2-back-button,
+#vis2-next-button{
+    /*width: 100px;       !* Adjust the width *!*/
+    /*height: 50px;       !* Adjust the height *!*/
+    padding: 10px;      /* Increase padding */
+    margin: 10px;       /* Adjust external spacing */
+    position: relative; /* Control positioning */
+    z-index: 10;        /* Ensure it's above other elements */
+    cursor: pointer;
+    font-size: 32px;/* Change cursor to indicate clickability */
 }
 
 .visualization-content {
@@ -259,6 +299,53 @@ body{
     background: #fff;
 }
 
+#year-selector{
+    margin-left: 800px;
+}
+
+#topic-selector{
+    margin-left: 380px;
+
+}
+#year-selector,
+#topic-selector{
+    width: 50%;       /* Width of the dropdown */
+    height: 50%;       /* Height of the dropdown */
+    font-size: 16px;    /* Font size of the dropdown text */
+    padding: 5px 10px;  /* Padding inside the dropdown */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 24px;
+}
+
+#year-selector {
+    position: relative;
+    z-index: 1000; /* High enough to be above the SVG */
+}
+
+/*svg {*/
+/*    pointer-events: none;*/
+/*}*/
+
+/*.tooltip {*/
+/*    position: fixed;*/
+/*    opacity: 1;*/
+/*    top: 200px;  !* Adjust as needed for vertical positioning *!*/
+/*    right: 600px; !* Adjust as needed for horizontal positioning *!*/
+/*    !* Other styling properties *!*/
+/*
+ */
+
+#p1{
+    margin-top: 50px;
+}
+
+#my-text {
+    padding: 40px;
+    margin-top: 10px;
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
 
 /*VIS 4 Race Bar Chart */
 #vis4-year-display{
@@ -278,6 +365,9 @@ body{
     background-color: darkgrey;
     border-color: #666666;
 }
+
+
+
 
 /* Vis 3 */
 #mapContainer{

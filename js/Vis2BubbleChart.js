@@ -28,14 +28,34 @@ class Vis2BubbleChart {
         let vis = this;
 
         vis.margin = { top: 40, right: 40, bottom: 40, left: 40 };
-        vis.width = 520 - vis.margin.left - vis.margin.right;
-        vis.height = 520 - vis.margin.top - vis.margin.bottom;
+        vis.width = 380 - vis.margin.left - vis.margin.right;
+        vis.height = 380 - vis.margin.top - vis.margin.bottom;
 
         vis.svg = d3.select('#' + vis.containerId).append('svg')
             .attr('width', vis.width + vis.margin.left + vis.margin.right)
             .attr('height', vis.height + vis.margin.top + vis.margin.bottom)
             .append('g')
-            .attr('transform', `translate(${vis.margin.left},${vis.margin.top})`);
+            .style('stroke', 'gray') // Set the stroke color
+            .style('stroke-width', '0.5px') // Set the stroke width
+            .attr('transform', `translate(${vis.margin.left},${vis.margin.top})`)
+
+
+
+            .on('mouseover', function(event, d) {
+                vis.tooltip.transition()
+                    .duration(200)
+                    .style('opacity', 0.9);
+                vis.tooltip.html(`Topic: ${d.data.Topic}<br/>Count: ${d.data.Count}`)
+                    .style('left', (event.pageX + 10) + 'px')
+                    .style('top', (event.pageY - 10) + 'px');
+            })
+            .on('mouseout', function(d) {
+                vis.tooltip.transition()
+                    .duration(500)
+                    .style('opacity', 0);
+            })
+
+
 
         vis.tooltip = d3.select('body').append('div')
             .attr('class', 'tooltip')
@@ -370,14 +390,12 @@ class Vis2BubbleChart {
     }
 
     getColor(index) {
-        // const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
-        // return colors[index % colors.length];
 
         // Define an array of 10 distinct colors
         const colors = [
             '#f01703', '#d3830c', '#574739', '#750a47',
             '#033f46', '#be82bf', '#859a59', '#16ea08',
-            '#f4f4a1', '#1d739e'
+            '#e1e10f', '#1d739e'
         ];
         // Return the color corresponding to the given index
         return colors[index % colors.length];

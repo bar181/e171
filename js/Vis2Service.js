@@ -1,6 +1,6 @@
 
-const topicDropown = document.getElementById('topic-dropdown')
-const yearDropown =document.getElementById('year-dropdown')
+const topicDropdown = document.getElementById('topic-dropdown')
+const yearDropdown =document.getElementById('year-dropdown')
 const nextButton =document.getElementById("vis2-next-button")
 const backButton =document.getElementById("vis2-back-button")
 
@@ -11,18 +11,24 @@ let currentSubject = "None"
 let currentYear = "All Years"
 let currentTopic = "All Topics"
 
-topicDropown.addEventListener('change', function() {
-    currentTopic = topicDropown.value
+topicDropdown.addEventListener('change', function() {
+    currentTopic = topicDropdown.value
 
     //console.log("NEW TOPIC SELECTED:", currentTopic);
     vis2BubbleChart.updateSelection(currentSubject, currentYear, currentTopic)
     vis2DoughnutChart.updateSelection(currentSubject, currentYear, currentTopic)
 });
 
-yearDropown.addEventListener('change', function() {
-    currentYear = yearDropown.value
 
-    //console.log("NEW YEAR SELECTED:", currentYear);
+// Basic test event listener
+yearDropdown.addEventListener('change', function() {
+    console.log("Year dropdown changed");
+});
+
+yearDropdown.addEventListener('change', function() {
+    currentYear = yearDropdown.value
+
+    console.log("NEW YEAR SELECTED:", currentYear);
     vis2BubbleChart.updateSelection(currentSubject, currentYear, currentTopic)
     vis2DoughnutChart.updateSelection(currentSubject, currentYear, currentTopic)
 });

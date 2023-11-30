@@ -14,72 +14,93 @@
 <body>
 
 <div class="section">
-    <div class="container">
-        <div class="card vis2-card-area shadow">
+    <div class="container-fluid">
+        <div class="card mx-auto vis2-card-area shadow">
             <!-- Top Bar with Back and Next Buttons -->
-            <div class="top-bar">
+            <div class="d-flex justify-content-around top-bar">
                 <button id="vis2-back-button" class="btn btn-outline-primary btn-sm">Back</button>
                 <span class="top-bar-title"></span>
                 <button id="vis2-next-button" class="btn btn-outline-primary btn-sm">Next</button>
             </div>
 
             <!-- Visualization Content -->
-            <div class="visualization-content">
-                <div class="row" id="vis2-row">
-                    <div class="col-md-6">
-                        <div id="year-selector">
-                            <label for="year-dropdown">Select Year:</label>
-                            <select id="year-dropdown" class="form-select">
-                                <option value="All Years">All Years</option>
-                                <option value="2006">2006</option>
-                                <option value="2007">2007</option>
-                                <option value="2008">2008</option>
-                                <option value="2009">2009</option>
-                                <option value="2010">2010</option>
-                                <option value="2011">2011</option>
-                                <option value="2012">2012</option>
-                                <option value="2013">2013</option>
-                                <option value="2014">2014</option>
-                                <option value="2015">2015</option>
-                                <option value="2016">2016</option>
-                                <option value="2017">2017</option>
-                                <option value="2018">2018</option>
-                                <option value="2019">2019</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div id="topic-selector">
-                            <label for="topic-dropdown">Select Topic:</label>
-                            <select id="topic-dropdown" class="form-select">
-                                <option value="All Topics">All Topics</option>
-                                <option value="Global stance">Global stance</option>
-                                <option value="Importance of Human Intervention">Importance of Human Intervention</option>
-                                <option value="Politics">Politics</option>
-                                <option value="Undefined / One Word Hashtags">Undefined / One Word Hashtags</option>
-                                <option value="Donald Trump versus Science">Donald Trump versus Science</option>
-                                <option value="Seriousness of Gas Emissions">Seriousness of Gas Emissions</option>
-                                <option value="Ideological Positions on Global Warming">Ideological Positions on Global Warming</option>
-                                <option value="Impact of Resource Overconsumption">Impact of Resource Overconsumption</option>
-                                <option value="Significance of Pollution Awareness Events">Significance of Pollution Awareness Events</option>
-                            </select>
-                        </div>
+            <!-- Row for Dropdowns -->
+            <div class="row" id="vis2-row">
+                <!-- Year Selector -->
+                <div class="col-md-6">
+                    <div id="year-selector">
+                        <label for="year-dropdown">Select Year:</label>
+                        <select id="year-dropdown" class="form-select">
+                            <!-- Year Dropdown Options -->
+                            <option value="All Years">All Years</option>
+                            <option value="2006">2006</option>
+                            <option value="2007">2007</option>
+                            <option value="2008">2008</option>
+                            <option value="2009">2009</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                        </select>
                     </div>
                 </div>
 
-                <!-- Canvas for Other Charts -->
-                <div id="doughnutChartContainer"></div>
+                <!-- Topic Selector -->
+                <div class="col-md-6">
+                    <div id="topic-selector">
+                        <label for="topic-dropdown">Select Topic:</label>
+                        <select id="topic-dropdown" class="form-select">
+                            <!-- Topic Dropdown Options -->
+                            <option value="All Topics">All Topics</option>
+                            <option value="Global stance">Global stance</option>
+                            <option value="Importance of Human Intervention">Importance of Human Intervention</option>
+                            <option value="Politics">Politics</option>
+                            <option value="Undefined / One Word Hashtags">Undefined / One Word Hashtags</option>
+                            <option value="Donald Trump versus Science">Donald Trump versus Science</option>
+                            <option value="Seriousness of Gas Emissions">Seriousness of Gas Emissions</option>
+                            <option value="Ideological Positions on Global Warming">Ideological Positions on Global Warming</option>
+                            <option value="Impact of Resource Overconsumption">Impact of Resource Overconsumption</option>
+                            <option value="Significance of Pollution Awareness Events">Significance of Pollution Awareness Events</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
-                <!-- D3 Bubble Chart Container -->
-                <div id="bubbleChartContainer"></div>
+            <!-- Row for Charts and Text -->
+            <div class="row">
+                <!-- Left Column for Charts -->
+                <div class="col-md-6">
+                    <!-- Doughnut Chart Container -->
+                    <div id="doughnutChartContainer">
+                        <!-- Doughnut Chart will be inserted here -->
+                    </div>
+                    <!-- Bubble Chart Container -->
+                    <div id="bubbleChartContainer">
+                        <!-- Bubble Chart will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Right Column for Text -->
+                <div class="col-md-6" id="my-text">
+                    <!-- Text Content -->
+<!--                    <div class="tooltip-container">-->
+<!--                        Hover over me!-->
+<!--                        <div class="tooltip">This is a tooltip</div>-->
+<!--                    </div>-->
+<!--                    <p class="text-info">Notes<br>Page: vis2_main</p>-->
+                    <p>Twitter Data accumulated over 15 years...</p>
+                    <p id="p1">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <!-- Additional text content... -->
+                </div>
             </div>
         </div>
-
-        <!-- Notes -->
-        <p class="text-info">Notes<br>Page: vis2_main</p>
-        <p>Twitter Data accumulated over 15 years</p>
-        <p>First: Tweets over 15 years colored by topic one can filter by topic and hover for tooltip information such as count. Second: Most popular stance (believer-green, neutralist-yellow, denier-red) per topic same filtering methods apply. Third: Sentiment (divergent color scheme negative more red while positive is more green) same filtering schemes apply. Fourth: Aggressiveness (light pink least aggressive while dark pink is most aggressive) same filtering logic applies. </p>
-        <p> </p>
     </div>
 </div>
 

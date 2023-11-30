@@ -37,15 +37,35 @@ class Vis2DoughnutChart {
             .attr('width', vis.width)
             .attr('height', vis.height)
             .append('g')
-            .attr('transform', 'translate(' + vis.width / 2 + ',' + vis.height / 2 + ')');
+            .style('stroke', 'white') // Set the stroke color
+            .style('stroke-width', '3.5px') // Set the stroke width
+            .attr('transform', 'translate(' + vis.width / 2 + ',' + vis.height / 2 + ')')
+
+
+            .on('mouseover', function(event, d) {
+                vis.tooltip.transition()
+                    .duration(200)
+                    .style('opacity', 0.9);
+                vis.tooltip.html(`Topic: ${d.data.Topic}<br/>Count: ${d.data.Count}`)
+                    .style('left', (event.pageX + 10) + 'px')
+                    .style('top', (event.pageY - 10) + 'px');
+            })
+            .on('mouseout', function(d) {
+                vis.tooltip.transition()
+                    .duration(500)
+                    .style('opacity', 0);
+            })
+
+
+
 
         // Create the pie layout function
         vis.pie = d3.pie()
             .sort(null) // Do not sort group by size
             .value(d => d.Count);
 
-        vis.outerRadius = 390; // This controls the overall size of the doughnut chart
-        vis.innerRadius = 375; // This controls the size of the hole, thus creating the "cutout"
+        vis.outerRadius = 290; // This controls the overall size of the doughnut chart
+        vis.innerRadius = 275; // This controls the size of the hole, thus creating the "cutout"
 
         // Define the arc generator
         vis.arc = d3.arc()
@@ -68,7 +88,6 @@ class Vis2DoughnutChart {
 
         vis.createChart();
     }
-
 
     updateSelection(selectedSubject, selectedYear, selectedTopic) {
         let vis = this;
@@ -101,6 +120,7 @@ class Vis2DoughnutChart {
         } else if (selectedSubject === 'None' && selectedYear != 'All Years') {
             vis.displayDefaultSubjectSingleyear(selectedYear, selectedTopic)
         }
+
     }
 
     displayAggressivenessAllYears(selectedTopic) {
@@ -332,7 +352,7 @@ class Vis2DoughnutChart {
             .on('mouseover', function(event, d){
                 vis.tooltip.transition()
                     .duration(200)
-                    .style('opacity', 0.9);
+                    .style('opacity', 1);
                 vis.tooltip.html(`Topic: ${d.data.Topic}<br/>Count: ${d.data.Count}`)
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY - 10) + 'px');
@@ -349,15 +369,11 @@ class Vis2DoughnutChart {
         // This function should probably take in the name of a topic and return a color for that topic.
         // This way the same topics always have the same color.
 
-
-        // const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
-        // return colors[index % colors.length];
-
         // Define an array of 10 distinct colors
         const colors = [
             '#f01703', '#d3830c', '#574739', '#750a47',
             '#033f46', '#be82bf', '#859a59', '#16ea08',
-            '#f4f4a1', '#1d739e'
+            '#e1e10f', '#1d739e'
         ];
         // Return the color corresponding to the given index
         return colors[index % colors.length];
