@@ -6,3 +6,5 @@ startAgainButton.addEventListener("click", () => {
     vis4Race.startAnimation();
 });
 
+// const vis4PeakedSpan = document.getElementById("vis4-peaked-span");
+

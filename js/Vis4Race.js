@@ -5,12 +5,21 @@ class Vis4Race  {
         this.parentElement = _parentElement;
         this.data = vis1Data;
         this.userAge = userAge;
+        this.userTopic = userTopic;
+            //let userTopicOptions = ['Human Impact', 'Gas Emissions', 'Global Warming', 'Pollution and Nature'];
         this.year = 2004;
         this.itemsToShow = 12;
         this.animationDuration = 800;
 
         this.barsHeight = 50;
         this.barsPadding = 4;
+
+        this.whatPeaked = "";
+        this.topicHuman = ['Activist', 'Global warming', 'Climate action', 'Climate change', 'Climate crisis', 'Greta Thunberg'];
+        this.topicEmissions = ['Carbon emissions', 'Greenhouse gases', 'Sustainability', 'Green ai'];
+        this.topicWarming = ['Environment', 'Global warming', 'Renewable energy', 'Ecosystem'];
+        this.topicPollution= ['Habitats', 'Ice caps', 'Ocean', 'Sea ice', 'Wildfires'];
+
         this.initVis();
     }
 
@@ -49,6 +58,14 @@ class Vis4Race  {
         vis.svg.append("g")
             .attr("class", "y-axis");
 
+        // Append a label to the x-axis
+        vis.svg.append("text")
+            .attr("class", "x-axis-label label-small")
+            .attr("x", vis.width / 2) // Position the label in the center of the x-axis
+            .attr("y", vis.height + vis.margin.bottom - 10) // Adjust the y position as needed
+            .style("text-anchor", "middle") // Center the text horizontally
+            .text("Year over Year relative searches on Google from 2004-2023");
+
         vis.wrangleData();
 
     }
@@ -59,6 +76,8 @@ class Vis4Race  {
 
         // Filter the data for the selected year (vis.year)
         vis.yearData = vis.data.filter(d => d[vis.year]);
+
+        vis.human = ['']
 
         // Sort the filtered data by the values for the selected year in descending order
         vis.yearData.sort((a, b) => b[vis.year] - a[vis.year]);
@@ -76,6 +95,43 @@ class Vis4Race  {
         vis.data = vis.topTopics;
         // console.log("topTopics", vis.topTopics)
         // Update the visualization
+
+console.log("vis.userTopic", vis.userTopic)
+        // Filter the topics with a value of 100 for the selected year
+        let topicsWithValue100;
+        if (vis.userTopic === 'Human Impact') {
+            topicsWithValue100 = vis.topTopics
+                .filter(d => d.value === 100 && vis.topicHuman.includes(d.topic));
+        }
+        if (vis.userTopic === 'Gas Emissions') {
+            topicsWithValue100 = vis.topTopics
+                .filter(d => d.value === 100 && vis.topicEmissions.includes(d.topic));
+        }
+        if (vis.userTopic === 'Global Warming') {
+            topicsWithValue100 = vis.topTopics
+                .filter(d => d.value === 100 && vis.topicWarming.includes(d.topic));
+        }
+        if (vis.userTopic === 'Pollution and Nature') {
+            topicsWithValue100 = vis.topTopics
+                .filter(d => d.value === 100 && vis.topicPollution.includes(d.topic));
+        }
+
+        // Map the topics to include the year in the text
+        const topicText = topicsWithValue100
+            .map(d => `${d.topic} in ${vis.year}  `)
+            .join(', ');
+
+        vis.whatPeaked = vis.whatPeaked + " " + topicText;
+
+        // Select the span element and add the text
+
+        const spanElement = d3.select('#vis4-peaked-span')
+            .html(''); // Clear the existing content
+        spanElement
+            .append('span')
+            .attr('id', 'peakTopicText')
+            .text(`${vis.whatPeaked}`);
+
 
         // Update the yScale domain with the new topics
         vis.yScale.domain(vis.data.map(d => d.topic));
@@ -190,7 +246,7 @@ class Vis4Race  {
             .attr("x", d => 60)
             .attr("y", d => vis.yScale(d.topic) + vis.yScale.bandwidth() / 2 + 2)
             .text(d => d.topic)
-            .style("font-size", "12px")
+            .style("font-size", "20px")
             .style("fill", "white")
             .style("opacity", 0) // Start with opacity 0
             .merge(barLabels)
@@ -205,6 +261,8 @@ class Vis4Race  {
 
     }
 
+
+
     // Add a method to update the chart for a specific year
     updateChartForYear(year) {
         this.year = year;
@@ -215,6 +273,7 @@ class Vis4Race  {
     startAnimation(currentYear = 2004) {
         const vis = this;
         // let currentYear = 2004;
+        vis.whatPeaked = "";
 
         // Disable the "Start Again" button
         startAgainButton.disabled = true;
