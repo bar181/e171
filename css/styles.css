@@ -259,25 +259,30 @@ body{
     top: 50%;
     left: 25%;
     transform: translate(-50%, -50%);
-    margin-top: 62px;
+    /*margin-top: 10px;*/
     /*overflow: visible;*/
 }
 
 /*area of the container holding the visualizations */
 .vis2-card-area{
-    height: 900px;
+    height: 700px;
     width: 1600px;
     background-color: white;
 }
 
-.top-bar {
+#card-back-next{
+    width: 1600px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: #f8f9fa;
-    border-bottom: 30px solid #ffffff;
 }
+
+/*.top-bar {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    padding: 1rem;*/
+/*    background-color: #f8f9fa;*/
+/*    border-bottom: 30px solid #ffffff;*/
+/*}*/
 
 /*#vis2-back-button,*/
 /*#vis2-next-button{*/
