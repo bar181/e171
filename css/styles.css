@@ -270,6 +270,7 @@ body{
 #card-back-next{
     width: 1600px;
     display: flex;
+    /*padding: 10px;*/
 }
 
 /*.top-bar {*/
