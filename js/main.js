@@ -59,7 +59,9 @@ const scriptNames = [
 const pageNames = [
 
     'p1_title',
-    'p2_ask_age',
+    // 'p2_ask_age',
+    'p2_ask_topic',
+    'p3_intro',
 
     // brad - vis4 Race Bar Chart fits better here for the story
     'vis4_header',
@@ -67,18 +69,19 @@ const pageNames = [
     // 'vis4_text',
 
     // brad - Year by Year Google Trends and News Topics
-    'vis1_header',
+    // 'vis1_header',
     'vis1_main',
-    // 'vis1_text',
+    'vis1_text',
 
     // brad - vis4 line chart with descriptions
     'vis5_header',
     'vis5_main',
+    'vis1_text',
 
     // jess
     'vis2_header',
     'vis2_main',
-    // 'vis2_text',
+    'vis2_text',
 
     // filip
     'vis3_header',
