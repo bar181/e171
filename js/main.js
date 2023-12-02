@@ -78,7 +78,7 @@ const pageNames = [
     // jess
     'vis2_header',
     'vis2_main',
-    // 'vis2_text',
+    'vis2_text',
 
     // filip
     'vis3_header',
