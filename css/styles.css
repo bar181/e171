@@ -2,6 +2,26 @@ body{
     background-color: #666;
     font-size: 16px;
 }
+.times-new-roman-title {
+    font-family: 'Times New Roman', Times, serif;
+}
+.emoji_big{
+    height:200px;
+    width: 200px;
+    border: 1px solid #666666;
+    border-radius: 15px;
+    box-shadow: 0 0 5px #dddddd;
+}
+.emoji_big_selected {
+    border: 6px solid green;
+    box-shadow: 0 0 25px #999;
+}
+
+.emoji_small{
+    height:40px;
+    width: 40px;
+}
+
 .font_massive{
     font-size: 8rem;
 }
@@ -270,6 +290,7 @@ body{
 #card-back-next{
     width: 1600px;
     display: flex;
+    /*padding: 10px;*/
 }
 
 /*.top-bar {*/
@@ -362,7 +383,7 @@ body{
 }
 
 #vis1-redo-button{
-    background-color: steelblue;
+    /*background-color: steelblue;*/
     border-color: #666666;
 }
 
