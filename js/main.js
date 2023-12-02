@@ -20,6 +20,9 @@
 // Common variables used by all Visualizations
 let userAge = 30; // default age
 
+let userTopic = 'Human Impact'; // default Human Impact
+let userTopicOptions = ['Human Impact', 'Gas Emissions', 'Global Warming', 'Pollution and Nature'];
+
 
 // Visualization Level Variables
 let vis1Data = null;
