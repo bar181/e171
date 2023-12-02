@@ -49,6 +49,14 @@ class Vis4Race  {
         vis.svg.append("g")
             .attr("class", "y-axis");
 
+        // Append a label to the x-axis
+        vis.svg.append("text")
+            .attr("class", "x-axis-label label-small")
+            .attr("x", vis.width / 2) // Position the label in the center of the x-axis
+            .attr("y", vis.height + vis.margin.bottom - 10) // Adjust the y position as needed
+            .style("text-anchor", "middle") // Center the text horizontally
+            .text("Year over Year relative searches on Google from 2004-2023");
+
         vis.wrangleData();
 
     }
