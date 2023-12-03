@@ -32,31 +32,24 @@ class Vis2DoughnutChart {
         vis.height = 900 - vis.margin.top - vis.margin.bottom;
         vis.radius = Math.min(vis.width, vis.height) / 2;
 
+
         // Create the SVG container
         vis.svg = d3.select('#' + vis.containerId).append('svg')
             .attr('width', vis.width)
             .attr('height', vis.height)
-            .append('g')
+
+        vis.createStanceLegend();
+        vis.createSentimentLegend();
+        vis.createAggressivenssLegend();
+
+        vis.stanceLegend.style('opacity', 0);
+        vis.sentimentLegend.style('opacity', 0);
+        vis.agressivenessLegend.style('opacity', 0);
+
+        vis.svg = vis.svg.append('g')
             .style('stroke', 'white') // Set the stroke color
             .style('stroke-width', '3.5px') // Set the stroke width
             .attr('transform', 'translate(' + vis.width / 2 + ',' + vis.height / 2 + ')')
-
-
-            .on('mouseover', function(event, d) {
-                vis.tooltip.transition()
-                    .duration(200)
-                    .style('opacity', 0.9);
-                vis.tooltip.html(`Topic: ${d.data.Topic}<br/>Count: ${d.data.Count}`)
-                    .style('left', (event.pageX + 10) + 'px')
-                    .style('top', (event.pageY - 10) + 'px');
-            })
-            .on('mouseout', function(d) {
-                vis.tooltip.transition()
-                    .duration(500)
-                    .style('opacity', 0);
-            })
-
-
 
 
         // Create the pie layout function
@@ -89,37 +82,250 @@ class Vis2DoughnutChart {
         vis.createChart();
     }
 
+    createAggressivenssLegend() {
+        let vis = this;
+
+        // Calculate the position for the legend (lower right corner)
+        const legendX = 620; // Adjust width for legend width and padding
+        const legendY = 700; // Adjust height for legend height and padding
+
+        // Define a scale for sentiment to color mapping
+        let aggressivenessScale = d3.scaleLinear()
+            .domain([d3.min(vis.aggressiveness_per_topic, d => d.Aggressiveness), d3.max(vis.aggressiveness_per_topic, d => d.Aggressiveness)])
+            .range(['#FFB6C1', '#880469']);
+
+        // Assuming you have an SVG element with id 'legend-svg'
+        vis.agressivenessLegend = vis.svg.append('g')
+            .attr('class', 'legend')
+            .attr('transform', `translate(${legendX}, ${legendY})`);
+
+        // Create a gradient for the legend
+        let agressivenessGradient = vis.agressivenessLegend.append('defs')
+            .append('linearGradient')
+            .attr('id', 'agressivenessGradient')
+            .selectAll('stop')
+            .data(aggressivenessScale.range())
+            .enter().append('stop')
+            .attr('stop-color', d => d)
+            .attr('offset', (d, i) => i);
+
+        // Draw the color bar
+        vis.agressivenessLegend.append('rect')
+            .attr('width', 200) // Adjust the width as needed
+            .attr('height', 10) // Adjust the height as needed
+            .style('fill', 'url(#agressivenessGradient)');
+
+        // Define the scale for the legend axis
+        let axisScale = d3.scaleLinear()
+            .domain([d3.min(vis.aggressiveness_per_topic, d => d.Aggressiveness), d3.max(vis.aggressiveness_per_topic, d => d.Aggressiveness)])
+            .range([0, 200]); // Width of the legend bar
+
+        let legendDomain = axisScale.domain();
+        let tickValues = [legendDomain[0], legendDomain[1]];
+
+        // Define the axis
+        let legendAxis = d3.axisBottom(axisScale)
+            .tickValues(tickValues)
+
+        // Append the axis to the legend
+        vis.agressivenessLegend.append('g')
+            .attr('class', 'legend-axis')
+            .attr('transform', `translate(0, 20)`) // Position below the rectangle
+            .call(legendAxis);
+
+        // Add title
+        vis.agressivenessLegend.append('text')
+            .attr('x', 100) // Center the title
+            .attr('y', -10) // Adjust vertical position as needed
+            .style('text-anchor', 'middle')
+            .text('Aggressiveness Scale');
+    }
+
+    createSentimentLegend() {
+        let vis = this;
+
+        // Calculate the position for the legend (lower right corner)
+        const legendX = 620; // Adjust width for legend width and padding
+        const legendY = 700; // Adjust height for legend height and padding
+
+
+        // Define a scale for sentiment to color mapping
+        let sentimentScale = d3.scaleLinear()
+            .domain([d3.min(vis.sentiment_per_topic, d => d.Sentiment), d3.max(vis.sentiment_per_topic, d => d.Sentiment)])
+            .range(['#af1d34', '#389161']);
+
+        // Assuming you have an SVG element with id 'legend-svg'
+        vis.sentimentLegend = vis.svg.append('g')
+            .attr('class', 'legend')
+            .attr('transform', `translate(${legendX}, ${legendY})`);
+
+        // Create a gradient for the legend
+        let sentimentGradient = vis.sentimentLegend.append('defs')
+            .append('linearGradient')
+            .attr('id', 'sentimentGradient')
+            .selectAll('stop')
+            .data(sentimentScale.range())
+            .enter().append('stop')
+            .attr('stop-color', d => d)
+            .attr('offset', (d, i) => i);
+
+        // Draw the color bar
+        vis.sentimentLegend.append('rect')
+            .attr('width', 200) // Adjust the width as needed
+            .attr('height', 10) // Adjust the height as needed
+            .style('fill', 'url(#sentimentGradient)');
+
+        // Define the scale for the legend axis
+        let axisScale = d3.scaleLinear()
+            .domain([d3.min(vis.sentiment_per_topic, d => d.Sentiment), d3.max(vis.sentiment_per_topic, d => d.Sentiment)])
+            .range([0, 200]); // Width of the legend bar
+
+        let legendDomain = axisScale.domain();
+        let tickValues = [legendDomain[0], legendDomain[1]];
+
+        // Define the axis
+        let legendAxis = d3.axisBottom(axisScale)
+            //.ticks(2) // Two ticks: min and max
+            //.tickSize(2); // Adjust the size of the ticks
+            .tickValues(tickValues)
+
+        // Append the axis to the legend
+        vis.sentimentLegend.append('g')
+            .attr('class', 'legend-axis')
+            .attr('transform', `translate(0, 20)`) // Position below the rectangle
+            .call(legendAxis);
+
+        // Add title
+        vis.sentimentLegend.append('text')
+            .attr('x', 100) // Center the title
+            .attr('y', -10) // Adjust vertical position as needed
+            .style('text-anchor', 'middle')
+            .text('Sentiment Scale');
+    }
+
+
+    createStanceLegend() {
+        let vis = this;
+
+        // Legend data
+        const legendData = [
+            { stance: 'believer', color: '#2d9c2d' },
+            { stance: 'neutral', color: '#d7af49' },
+            { stance: 'denier', color: '#a02c3d' }
+        ];
+
+        // Calculate the position for the legend (lower right corner)
+        const legendX = 680; // Adjust width for legend width and padding
+        const legendY = 630; // Adjust height for legend height and padding
+
+        // Create legend group, positioned in the top left corner
+        vis.stanceLegend = vis.svg.append('g')
+            .attr('class', 'legend')
+            .attr('transform', `translate(${legendX}, ${legendY})`);
+
+        // Add legend title
+        vis.stanceLegend.append('text')
+            .attr('x', 0)
+            .attr('y', 0)
+            .text('Most Popular Stance:')
+            .style('font-weight', 'bold');
+
+        // Add legend items
+        const itemHeight = 25; // height of each legend item
+        const titleOffset = 20; // space for the title
+
+        vis.stanceLegend.selectAll('.legend-item')
+            .data(legendData)
+            .enter().append('g')
+            .attr('class', 'legend-item')
+            .attr('transform', (d, i) => `translate(0, ${titleOffset + i * itemHeight})`)
+            .each(function(d) {
+                const g = d3.select(this);
+
+                // Add colored rectangle
+                g.append('rect')
+                    .attr('x', 0)
+                    .attr('y', 0)
+                    .attr('width', 20)
+                    .attr('height', 20)
+                    .style('fill', d.color);
+
+                // Add text label with debugging styles
+                g.append('text')
+                    .attr('x', 30) // Adjust text position if needed
+                    .attr('y', 15) // Align text with the box
+                    .text(d.stance)
+                    .style('font-size', '16px') // Larger font size for debugging
+                    .style('fill', 'black'); // Contrasting color for debugging
+
+
+            });
+    }
+
     updateSelection(selectedSubject, selectedYear, selectedTopic) {
         let vis = this;
-        // console.log("SELECTION UPDATED:   SUBJECT=\"" + selectedSubject + "\"   YEAR=\"" + selectedYear + "\"   TOPIC=\"" + selectedTopic + "\"");
-
-
         // update pie / bubble chart data (size / tooltips) to show data only for currently selected year, or for all years.
-
-        if (selectedSubject === 'Aggressiveness' && selectedYear === 'All Years') {
-            vis.displayAggressivenessAllYears(selectedTopic)
-
-        } else if (selectedSubject === 'Sentiment' && selectedYear === 'All Years') {
-            vis.displaySentimentAllYears(selectedTopic)
-
-        } else if (selectedSubject === 'Stance' && selectedYear === 'All Years') {
-            vis.displayStanceAllYears(selectedTopic)
-
-        } else if (selectedSubject === 'None' && selectedYear === 'All Years') {
-            vis.displayDefaultSubjectAllYears(selectedTopic)
-
-        } else if (selectedSubject === 'Aggressiveness' && selectedYear != 'All Years') {
-            vis.displayAggressivenessSingleYear(selectedYear, selectedTopic)
-
-        } else if (selectedSubject === 'Sentiment' && selectedYear != 'All Years') {
-            vis.displaySentimentSingleYear(selectedYear, selectedTopic)
-
-        } else if (selectedSubject === 'Stance' && selectedYear != 'All Years') {
-            vis.displayStanceSingleYear(selectedYear, selectedTopic)
-
-        } else if (selectedSubject === 'None' && selectedYear != 'All Years') {
-            vis.displayDefaultSubjectSingleyear(selectedYear, selectedTopic)
+        if (selectedSubject === 'Aggressiveness') {
+            vis.stanceLegend.style('opacity', 0);
+            vis.sentimentLegend.style('opacity', 0);
+            vis.agressivenessLegend.style('opacity', 1);
+            vis.additionalTooltipContent = (data) => `<b>Mean Aggressiveness: ${Math.round(data.Aggressiveness * 100) / 100}</b>`;
+            if (selectedYear === 'All Years') {
+                vis.displayAggressivenessAllYears(selectedTopic)
+            } else {
+                vis.displayAggressivenessSingleYear(selectedYear, selectedTopic)
+            }
+        } else if (selectedSubject === 'Sentiment') {
+            vis.stanceLegend.style('opacity', 0);
+            vis.sentimentLegend.style('opacity', 1);
+            vis.agressivenessLegend.style('opacity', 0);
+            vis.additionalTooltipContent = (data) => `<b>Mean Sentiment: ${Math.round(data.Sentiment * 100) / 100}</b>`;
+            if (selectedYear === 'All Years') {
+                vis.displaySentimentAllYears(selectedTopic)
+            } else {
+                vis.displaySentimentSingleYear(selectedYear, selectedTopic)
+            }
+        } else if (selectedSubject === 'Stance') {
+            vis.stanceLegend.style('opacity', 1);
+            vis.sentimentLegend.style('opacity', 0);
+            vis.agressivenessLegend.style('opacity', 0);
+            vis.additionalTooltipContent = (data) => `<b>Most Popular Stance: ${data.most_popular_stance}</b>`;
+            if (selectedYear === 'All Years') {
+                vis.displayStanceAllYears(selectedTopic)
+            } else {
+                vis.displayStanceSingleYear(selectedYear, selectedTopic)
+            }
         }
+        else if (selectedSubject === 'None') {
+            vis.stanceLegend.style('opacity', 0);
+            vis.sentimentLegend.style('opacity', 0);
+            vis.agressivenessLegend.style('opacity', 0);
+            vis.additionalTooltipContent = (data) => ``;
+            if (selectedYear === 'All Years') {
+                vis.displayDefaultSubjectAllYears(selectedTopic)
+            } else {
+                vis.displayDefaultSubjectSingleyear(selectedYear, selectedTopic)
+            }
+        }
+
+        // add tooltips back to all paths
+        vis.svg.selectAll('path')
+            .on('mouseover', function(event, d){
+                vis.tooltip.transition()
+                    .duration(200)
+                    .style('opacity', 1);
+                let tooltipContent = `Topic: ${d.data.Topic}<br/>Number of Tweets: ${d.data.Count}<br/>`
+                tooltipContent = tooltipContent + vis.additionalTooltipContent(d.data);
+                vis.tooltip.html(tooltipContent);
+                vis.tooltip
+                    .style('left', (event.pageX + 10) + 'px')
+                    .style('top', (event.pageY - 10) + 'px');
+            })
+            .on('mouseout', function(d) {
+                vis.tooltip.transition()
+                    .duration(500)
+                    .style('opacity', 0);
+            });
 
     }
 
@@ -338,9 +544,6 @@ class Vis2DoughnutChart {
         // Create the arc generator for the doughnut chart
         vis.arc = d3.arc().innerRadius(vis.innerRadius).outerRadius(vis.outerRadius);
 
-        // Create the pie layout generator
-        const pie = d3.pie().value(d => d.Count);
-
         // Bind the data to the arcs and append each arc path
         vis.svg.selectAll('path')
             .data(vis.pieData)
@@ -353,7 +556,7 @@ class Vis2DoughnutChart {
                 vis.tooltip.transition()
                     .duration(200)
                     .style('opacity', 1);
-                vis.tooltip.html(`Topic: ${d.data.Topic}<br/>Count: ${d.data.Count}`)
+                vis.tooltip.html(`Topic: ${d.data.Topic}<br/><b>Number of Tweets: ${d.data.Count}</b>`)
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY - 10) + 'px');
             })

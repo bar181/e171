@@ -39,24 +39,6 @@ class Vis2BubbleChart {
             .style('stroke-width', '0.5px') // Set the stroke width
             .attr('transform', `translate(${vis.margin.left},${vis.margin.top})`)
 
-
-
-            .on('mouseover', function(event, d) {
-                vis.tooltip.transition()
-                    .duration(200)
-                    .style('opacity', 0.9);
-                vis.tooltip.html(`Topic: ${d.data.Topic}<br/>Count: ${d.data.Count}`)
-                    .style('left', (event.pageX + 10) + 'px')
-                    .style('top', (event.pageY - 10) + 'px');
-            })
-            .on('mouseout', function(d) {
-                vis.tooltip.transition()
-                    .duration(500)
-                    .style('opacity', 0);
-            })
-
-
-
         vis.tooltip = d3.select('body').append('div')
             .attr('class', 'tooltip')
             .style('opacity', 0)
@@ -76,35 +58,56 @@ class Vis2BubbleChart {
 
     updateSelection(selectedSubject, selectedYear, selectedTopic) {
         let vis = this;
-        console.log("SELECTION UPDATED:   SUBJECT=\"" + selectedSubject + "\"   YEAR=\"" + selectedYear + "\"   TOPIC=\"" + selectedTopic + "\"");
-
         // update pie / bubble chart data (size / tooltips) to show data only for currently selected year, or for all years.
-        if (selectedSubject === 'Aggressiveness' && selectedYear === 'All Years') {
-            vis.displayAggressivenessAllYears(selectedTopic)
-
-        } else if (selectedSubject === 'Sentiment' && selectedYear === 'All Years') {
-            vis.displaySentimentAllYears(selectedTopic)
-
-        } else if (selectedSubject === 'Stance' && selectedYear === 'All Years') {
-            vis.displayStanceAllYears(selectedTopic)
-
-        } else if (selectedSubject === 'None' && selectedYear === 'All Years') {
-            vis.displayDefaultSubjectAllYears(selectedTopic)
-
-
-        } else if (selectedSubject === 'Aggressiveness' && selectedYear != 'All Years') {
-            vis.displayAggressivenessSingleYear(selectedYear, selectedTopic)
-
-        } else if (selectedSubject === 'Sentiment' && selectedYear != 'All Years') {
-            vis.displaySentimentSingleYear(selectedYear, selectedTopic)
-
-        } else if (selectedSubject === 'Stance' && selectedYear != 'All Years') {
-            vis.displayStanceSingleYear(selectedYear, selectedTopic)
-
-        } else if (selectedSubject === 'None' && selectedYear != 'All Years') {
-            vis.displayDefaultSubjectSingleyear(selectedYear, selectedTopic)
-
+        if (selectedSubject === 'Aggressiveness') {
+            vis.additionalTooltipContent = (data) => `<b>Mean Aggressiveness: ${Math.round(data.Aggressiveness * 100) / 100}</b>`;
+            if (selectedYear === 'All Years') {
+                vis.displayAggressivenessAllYears(selectedTopic)
+            } else {
+                vis.displayAggressivenessSingleYear(selectedYear, selectedTopic)
+            }
+        } else if (selectedSubject === 'Sentiment') {
+            vis.additionalTooltipContent = (data) => `<b>Mean Sentiment: ${Math.round(data.Sentiment * 100) / 100}</b>`;
+            if (selectedYear === 'All Years') {
+                vis.displaySentimentAllYears(selectedTopic)
+            } else {
+                vis.displaySentimentSingleYear(selectedYear, selectedTopic)
+            }
+        } else if (selectedSubject === 'Stance') {
+            vis.additionalTooltipContent = (data) => `<b>Most Popular Stance: ${data.most_popular_stance}</b>`;
+            if (selectedYear === 'All Years') {
+                vis.displayStanceAllYears(selectedTopic)
+            } else {
+                vis.displayStanceSingleYear(selectedYear, selectedTopic)
+            }
         }
+        else if (selectedSubject === 'None') {
+            vis.additionalTooltipContent = (data) => ``;
+            if (selectedYear === 'All Years') {
+                vis.displayDefaultSubjectAllYears(selectedTopic)
+            } else {
+                vis.displayDefaultSubjectSingleyear(selectedYear, selectedTopic)
+            }
+        }
+
+        // add tooltips back to all paths
+        vis.svg.selectAll('circle')
+            .on('mouseover', function(event, d){
+                vis.tooltip.transition()
+                    .duration(200)
+                    .style('opacity', 1);
+                let tooltipContent = `Topic: ${d.data.Topic}<br/>Number of Tweets: ${d.data.Count}<br/>`
+                vis.tooltip.html(tooltipContent + vis.additionalTooltipContent(d.data));
+                vis.tooltip
+                    .style('left', (event.pageX + 10) + 'px')
+                    .style('top', (event.pageY - 10) + 'px');
+            })
+            .on('mouseout', function(d) {
+                vis.tooltip.transition()
+                    .duration(500)
+                    .style('opacity', 0);
+            });
+
     }
 
     displayAggressivenessAllYears(selectedTopic) {
@@ -201,8 +204,6 @@ class Vis2BubbleChart {
     }
 
 
-
-
     displayDefaultSubjectAllYears(selectedTopic) {
         let vis = this;
 
@@ -228,8 +229,6 @@ class Vis2BubbleChart {
                 }
             });
     }
-
-
 
 
     displayAggressivenessSingleYear(selectedYear, selectedTopic) {
@@ -378,7 +377,7 @@ class Vis2BubbleChart {
                 vis.tooltip.transition()
                     .duration(200)
                     .style('opacity', 0.9);
-                vis.tooltip.html(`Topic: ${d.data.Topic}<br/>Count: ${d.data.Count}`)
+                vis.tooltip.html(`Topic: ${d.data.Topic}<br/><b>Number of Tweets: ${d.data.Count}</b>`)
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY - 10) + 'px');
             })

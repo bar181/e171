@@ -37,6 +37,12 @@ nextButton.onclick = function() {
     subjectIndex = Math.min(subjects.length -1, subjectIndex + 1);
     currentSubject = subjects[subjectIndex]
 
+    if (currentSubject === "None") {
+        document.querySelector('.top-bar-title').textContent = "No Subject Selected";
+    } else {
+        document.querySelector('.top-bar-title').textContent = "Current Subject: " + currentSubject;
+    }
+
     //console.log("NEW SUBJECT SELECTED:", currentSubject);
     vis2BubbleChart.updateSelection(currentSubject, currentYear, currentTopic)
     vis2DoughnutChart.updateSelection(currentSubject, currentYear, currentTopic)
@@ -45,6 +51,12 @@ nextButton.onclick = function() {
 backButton.onclick = function() {
     subjectIndex = Math.max(0, subjectIndex -1);
     currentSubject = subjects[subjectIndex]
+
+    if (currentSubject === "None") {
+        document.querySelector('.top-bar-title').textContent = "No Subject Selected";
+    } else {
+        document.querySelector('.top-bar-title').textContent = "Current Subject: " + currentSubject;
+    }
 
     //console.log("NEW SUBJECT SELECTED:", currentSubject);
     vis2BubbleChart.updateSelection(currentSubject, currentYear, currentTopic)
