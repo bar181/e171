@@ -312,18 +312,15 @@ class Vis2DoughnutChart {
         vis.svg.selectAll('path')
             .style('pointer-events', 'all')
             .on('mouseover', function(event, d){
+                vis.lastMouseoverPathFillColor = window.getComputedStyle(event.target).getPropertyValue('fill');
                 d3.select(this).attr('fill', 'gray');
                 vis.tooltip.style('opacity', 1);
-                let tooltipContent = `Topic: ${d.data.Topic}<br/>Number of Tweets: ${d.data.Count}<br/>`
-                tooltipContent = tooltipContent + vis.additionalTooltipContent(d.data);
-                vis.tooltip.html(tooltipContent);
-                vis.tooltip
+                vis.tooltip.html(`Topic: ${d.data.Topic}<br/><b>Number of Tweets: ${d.data.Count}</b>`)
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY - 10) + 'px');
             })
             .on('mouseout', function(d) {
-                // d3.select(this).attr('fill', (d, i) => vis.getColor(i)); // Reset color on mouseout
-                d3.select(this).attr('fill', vis.getColor(d.data.Topic)); // Reset color based on the topic
+                d3.select(this).attr('fill', vis.lastMouseoverPathFillColor);
                 vis.tooltip.style('opacity', 0);
             });
 
@@ -422,7 +419,7 @@ class Vis2DoughnutChart {
             .attr('d', vis.arc)
             .attr('fill', function(d, i) {
                 if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
-                    return vis.getColor(i);
+                    return vis.getColor(d.data.Topic);
                 } else {
                     return 'lightgray';
                 }
@@ -530,7 +527,7 @@ class Vis2DoughnutChart {
             .attr('d', vis.arc)
             .attr('fill', function(d, i) {
                 if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
-                    return vis.getColor(i);
+                    return vis.getColor(d.data.Topic);
                 } else {
                     return 'lightgray';
                 }
@@ -550,29 +547,24 @@ class Vis2DoughnutChart {
             .enter()
             .append('path')
             .attr('d', vis.arc)
-            // .attr('fill', (d, i) => vis.getColor(i))
             .attr('fill', d => vis.getColor(d.data.Topic)) // Use the topic name to get the color
             .style('opacity', 1)
             .style('pointer-events', 'all')
             .on('mouseover', function(event, d){
+                vis.lastMouseoverPathFillColor = window.getComputedStyle(event.target).getPropertyValue('fill');
                 d3.select(this).attr('fill', 'gray');
                 vis.tooltip.style('opacity', 1);
                 vis.tooltip.html(`Topic: ${d.data.Topic}<br/><b>Number of Tweets: ${d.data.Count}</b>`)
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY - 10) + 'px');
             })
-            .on('mouseout', function(d) {
-                // d3.select(this).attr('fill', (d, i) => vis.getColor(i)); // Reset color on mouseout
-                d3.select(this).attr('fill', vis.getColor(d.data.Topic)); // Reset color based on the topic
+            .on('mouseout', function(event, d) {
+                d3.select(this).attr('fill', vis.lastMouseoverPathFillColor); // Reset color based on the topic
                 vis.tooltip.style('opacity', 0);
             });
     }
 
     getColor(topicName) {
-
-        // This function should probably take in the name of a topic and return a color for that topic.
-        // This way the same topics always have the same color.
-
         const colorMap ={
             'Global stance': '#d3830c',
             'Importance of Human Intervention': '#574739',
@@ -585,19 +577,7 @@ class Vis2DoughnutChart {
             'Impact of Resource Overconsumption': '#e1e10f',
             'Significance of Pollution Awareness Events': '#16ea08'
         }
-
-
-        // // Define an array of 10 distinct colors
-        // const colors = [
-        //     '#f01703', '#d3830c', '#574739', '#750a47',
-        //     '#033f46', '#be82bf', '#859a59', '#16ea08',
-        //     '#e1e10f', '#1d739e'
-        // ];
-        // Return the color corresponding to the given index
-        // return colors[index % colors.length];
-
-
-        return colorMap[topicName] || '#7e7d7d';
+        return colorMap[topicName];
     }
 }
 

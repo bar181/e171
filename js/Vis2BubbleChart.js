@@ -94,17 +94,16 @@ class Vis2BubbleChart {
         vis.svg.selectAll('circle')
             .style('pointer-events', 'all')
             .on('mouseover', function(event, d){
+                vis.lastMouseoverPathFillColor = window.getComputedStyle(event.target).getPropertyValue('fill');
+                d3.select(this).attr('fill', 'gray');
                 vis.tooltip.style('opacity', 1);
-                let tooltipContent = `Topic: ${d.data.Topic}<br/>Number of Tweets: ${d.data.Count}<br/>`
-                vis.tooltip.html(tooltipContent + vis.additionalTooltipContent(d.data));
-                vis.tooltip
+                vis.tooltip.html(`Topic: ${d.data.Topic}<br/><b>Number of Tweets: ${d.data.Count}</b>`)
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY - 10) + 'px');
             })
             .on('mouseout', function(d) {
-                vis.tooltip
-                    // .transition().duration(500)
-                    .style('opacity', 0);
+                d3.select(this).attr('fill', vis.lastMouseoverPathFillColor); // Reset color based on the topic
+                vis.tooltip.style('opacity', 0);
             });
 
     }
@@ -222,7 +221,7 @@ class Vis2BubbleChart {
             .attr('cy', d => d.y)
             .attr('fill', function(d, i) {
                 if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
-                    return vis.getColor(i);
+                    return vis.getColor(d.data.Topic);
                 } else {
                     return 'lightgray';
                 }
@@ -343,7 +342,7 @@ class Vis2BubbleChart {
             .attr('cy', d => d.y)
             .attr('fill', function(d, i) {
                 if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
-                    return vis.getColor(i);
+                    return vis.getColor(d.data.Topic);
                 } else {
                     return 'lightgray';
                 }
@@ -371,31 +370,36 @@ class Vis2BubbleChart {
             .attr('r', d => d.r)
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
-            .attr('fill', (d, i) => vis.getColor(i))
+            .attr('fill', (d, i) => vis.getColor(d.data.Topic))
             .style('pointer-events', 'all')
             .on('mouseover', function(event, d) {
+                vis.lastMouseoverPathFillColor = window.getComputedStyle(event.target).getPropertyValue('fill');
+                d3.select(this).attr('fill', 'gray');
                 vis.tooltip.style('opacity', 1);
                 vis.tooltip.html(`Topic: ${d.data.Topic}<br/><b>Number of Tweets: ${d.data.Count}</b>`)
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY - 10) + 'px');
             })
             .on('mouseout', function(d) {
-                vis.tooltip
-                    // .transition().duration(500)
-                    .style('opacity', 0);
+                d3.select(this).attr('fill', vis.lastMouseoverPathFillColor); // Reset color based on the topic
+                vis.tooltip.style('opacity', 0);
             });
     }
 
-    getColor(index) {
-
-        // Define an array of 10 distinct colors
-        const colors = [
-            '#f01703', '#d3830c', '#574739', '#750a47',
-            '#033f46', '#be82bf', '#859a59', '#16ea08',
-            '#e1e10f', '#1d739e'
-        ];
-        // Return the color corresponding to the given index
-        return colors[index % colors.length];
+    getColor(topicName) {
+        const colorMap ={
+            'Global stance': '#d3830c',
+            'Importance of Human Intervention': '#574739',
+            'Politics': '#be82bf',
+            'Undefined / One Word Hashtags': '#750a47',
+            'Donald Trump versus Science': '#f01703',
+            'Seriousness of Gas Emissions': '#033f46',
+            'Ideological Positions on Global Warming': '#859a59',
+            'Weather Extremes': '#1d739e',
+            'Impact of Resource Overconsumption': '#e1e10f',
+            'Significance of Pollution Awareness Events': '#16ea08'
+        }
+        return colorMap[topicName];
     }
 
 }
