@@ -319,7 +319,7 @@ class Vis1Google  {
 
             // Add the image as the card content
             const cardImage = document.createElement("img");
-            cardImage.classList.add("card-img-top");
+            cardImage.classList.add("vis1-card-image-top");
             cardImage.src = topicData.image;
             cardImage.alt = topicData.topic; // You can set an alt attribute for accessibility
 
