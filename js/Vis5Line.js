@@ -226,7 +226,7 @@ class Vis5Line  {
                 .style("width", "100%");
         } else {
             // Handle cases where the image is not found
-            d3.select("#vis5-image").html("No image available for " + selectedTopic);
+            d3.select("#vis5-image").html("Select a Topic");
         }
 
         // this.topicWithMaxYear
@@ -234,14 +234,14 @@ class Vis5Line  {
         const selectedEntry = vis.topicWithMaxYear.find(entry => entry.topic === selectedTopic);
 
         // Update the HTML <span> element with the year
-        const spanElement = document.getElementById("vis5-topicUserAge");
-        if (spanElement && selectedEntry) {
-            let peakYear = selectedEntry.year;
-            let peakPhrase = "Peaked when you were " + (peakYear - 2023 + vis.userAge ) + " years old";
-            spanElement.textContent = peakPhrase;
-        } else {
-            spanElement.textContent = "";
-        }
+        // const spanElement = document.getElementById("vis5-topicUserAge");
+        // if (spanElement && selectedEntry) {
+        //     let peakYear = selectedEntry.year;
+        //     let peakPhrase = "Peaked when you were " + (peakYear - 2023 + vis.userAge ) + " years old";
+        //     spanElement.textContent = peakPhrase;
+        // } else {
+        //     spanElement.textContent = "";
+        // }
         // console.log("selectedTopicData", selectedTopicData);
 
     }

@@ -8,6 +8,13 @@ class Vis1Google  {
         this.itemsToShow = 15;
         this.news = vis1News;
 
+        this.whatPeaked = "";
+        this.topicHuman = ['Activist', 'Global warming', 'Climate action', 'Climate change', 'Climate crisis', 'Greta Thunberg'];
+        this.topicEmissions = ['Carbon emissions', 'Greenhouse gases', 'Sustainability', 'Green ai'];
+        this.topicWarming = ['Environment', 'Global warming', 'Renewable energy', 'Ecosystem'];
+        this.topicPollution= ['Habitats', 'Ice caps', 'Ocean', 'Sea ice', 'Wildfires'];
+        this.topicSelected = this.topicHuman;
+
         this.initVis();
     }
 
@@ -18,7 +25,7 @@ class Vis1Google  {
         const yHeight = vis.itemsToShow * 29; // Adjust the multiplier as needed for spacing
 
         // Define margins and dimensions
-        vis.margin = { top: 20, right: 60, bottom: 40, left: 160 };
+        vis.margin = { top: 30, right: 80, bottom: 40, left: 140 };
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = yHeight - vis.margin.top - vis.margin.bottom; // Use the calculated yHeight
 
@@ -48,13 +55,38 @@ class Vis1Google  {
         vis.svg.append("g")
             .attr("class", "y-axis");
 
+        vis.svg.append("text")
+            .attr("class", "title")
+            .attr("x", vis.width / 2 - 50) // Position the title in the center horizontally
+            .attr("y", -10) // Adjust the y position for the title
+            .style("text-anchor", "middle") // Center the text horizontally
+            .text("Year over Year relative searches on Google from 2004-2023");
+
         // Append a label to the x-axis
         vis.svg.append("text")
             .attr("class", "x-axis-label label-small")
-            .attr("x", 15)// Position the label in the center of the x-axis
+            .attr("x", 80)// Position the label in the center of the x-axis
             .attr("y", vis.height + vis.margin.bottom - 10) // Adjust the y position as needed
             .style("text-anchor", "middle") // Center the text horizontally
-            .text("Year over Year relative searches on Google from 2004-2023");
+            .text("Relative search popularity peaks at 100 for each search term");
+
+        // Create a line on the right with the text "Peak"
+        vis.svg.append("line")
+            .attr("x1", vis.width - 2)
+            .attr("y1", 0)
+            .attr("x2", vis.width - 2)
+            .attr("y2", vis.height)
+            .attr("stroke", "black");
+
+        // vis.svg.append("text")
+        //     .attr("x", vis.width - 80) // Adjust the x position as needed
+        //     .attr("y", vis.height / 2)  // Adjust the y position as needed
+        //     .attr("dy", "0.35em") // Adjust vertical alignment
+        //     .style("text-anchor", "start")
+        //     .style("font-size", "20px")
+        //     .attr("transform", "rotate(270, " + (vis.width + 65) + ", " + (vis.height / 2 + 20) + ")") // Rotate 90
+        //     // degrees
+        //     .text("Search Terms Peak at 100");
 
         vis.wrangleData();
 
@@ -66,6 +98,21 @@ class Vis1Google  {
         vis.data = vis1Data;
         // Filter the data for the selected year (vis.year)
         vis.yearData = vis.data.filter(d => d[vis.year]);
+
+        vis.userTopic = userTopic;
+
+        if (vis.userTopic === 'Human Impact') {
+            vis.topicSelected = vis.topicHuman;
+        }
+        if (vis.userTopic === 'Gas Emissions') {
+            vis.topicSelected = vis.topicEmissions;
+        }
+        if (vis.userTopic === 'Global Warming') {
+            vis.topicSelected = vis.topicWarming;
+        }
+        if (vis.userTopic === 'Pollution and Nature') {
+            vis.topicSelected = vis.topicPollution;
+        }
 
         // Sort the filtered data by the values for the selected year in descending order
         vis.yearData.sort((a, b) => b[vis.year] - a[vis.year]);
@@ -83,6 +130,34 @@ class Vis1Google  {
         vis.data = vis.topTopics;
         // console.log("topTopics", vis.topTopics)
         // Update the visualization
+
+
+        // Filter the topics with a value of 100 for the selected year
+        let topicsWithValue100 = vis.topTopics
+            .filter(d => d.value === 100 && vis.topicSelected.includes(d.topic));
+
+        // Map the topics to include the year in the text
+        const topicText = topicsWithValue100
+            .map(d => `${d.topic} •  `)
+            .join(' ');
+
+        vis.whatPeaked = topicText;
+        if(!vis.whatPeaked){
+            vis.whatPeaked = "No topics this year";
+        }
+
+        // Select the span element and add the text
+
+        const spanElement = d3.select('#vis1-peaked-span')
+            .html(''); // Clear the existing content
+        spanElement
+            .append('span')
+            .attr('id', 'peakTopicText')
+            .text(`${vis.whatPeaked}`);
+
+
+
+
         vis.updateVis();
 
     }
@@ -120,7 +195,14 @@ class Vis1Google  {
             .attr("y", (d, i) => i * 25) // Vertical position for each bar
             .attr("width", 0) // Starting width for animation
             .attr("height", 20) // Height of the bars
-            .style("fill", "steelblue");
+            .style("fill", d => {
+                // Check if the topic is in the topicsArray
+                if (vis.topicSelected.includes(d.topic)) {
+                    return "red"; // Set fill color based on topic
+                } else {
+                    return "steelblue"; // Default color for topics not in the array
+                }
+            });
 
         // UPDATE phase: Update properties of existing bars (including animations)
         bars.merge(enterBars)
@@ -130,7 +212,14 @@ class Vis1Google  {
             .attr("y", (d, i) => i * 25) // Vertical position for each bar
             .attr("width", d => vis.xScale(d.value)) // Bar width based on value
             .attr("height", 20) // Height of the bars
-            .style("fill", "steelblue");
+            .style("fill", d => {
+                // Check if the topic is in the topicsArray
+                if (vis.topicSelected.includes(d.topic)) {
+                    return "red"; // Set fill color based on topic
+                } else {
+                    return "steelblue"; // Default color for topics not in the array
+                }
+            });
 
         // Add value labels to the right of the bars
         const valueLabels = vis.svg.selectAll(".value-label")
@@ -278,22 +367,22 @@ class Vis1Google  {
         }
 
         if (filteredNews.Lead.length > 2) {
-            createRowWithTransition(".vis1-news-lead", filteredNews.Lead, "vis1-news-lead");
+            createRowWithTransition(".vis1-news-item3", filteredNews.Lead, "vis1-news-item3");
         }
         if (filteredNews.Second.length > 2) {
-            createRowWithTransition(".vis1-news-second", filteredNews.Second, "vis1-news-second");
+            createRowWithTransition(".vis1-news-item3", filteredNews.Second, "vis1-news-item3");
         }
         if (filteredNews.Social.length > 2) {
-            createRowWithTransition(".vis1-news-social", filteredNews.Social, "vis1-news-social");
+            createRowWithTransition(".vis1-news-item3", filteredNews.Social, "vis1-news-item3");
         }
         if (filteredNews.Item3.length > 2) {
             createRowWithTransition(".vis1-news-item3", filteredNews.Item3, "vis1-news-item3");
         }
         if (filteredNews.Item4.length > 2) {
-            createRowWithTransition(".vis1-news-item4", filteredNews.Item4, "vis1-news-item4");
+            createRowWithTransition(".vis1-news-item3", filteredNews.Item4, "vis1-news-item3");
         }
         if (filteredNews.Item5.length > 2) {
-            createRowWithTransition(".vis1-news-item5", filteredNews.Item5, "vis1-news-item5");
+            createRowWithTransition(".vis1-news-item3", filteredNews.Item5, "vis1-news-item3");
         }
     }
 
@@ -301,10 +390,28 @@ class Vis1Google  {
     vis1NextButton(){
         let vis = this;
         vis.onYearChange(vis.year + 1)
+        currentYearLabel.textContent = (vis.year + 1);
+
+        // Change slider
+        const slider = document.getElementById("vis1-slider");
+        slider.value = vis.year;
+
+        // Create an "input" event (simulating a user input) to update the slider visually
+        const inputEvent = new Event('input', { bubbles: true });
+        slider.dispatchEvent(inputEvent);
     }
     vis1BackButton(){
         let vis = this;
         vis.onYearChange(vis.year - 1)
+        currentYearLabel.textContent = (vis.year - 1);
+
+        // Change slider
+        const slider = document.getElementById("vis1-slider");
+        slider.value = vis.year;
+
+        // Create an "input" event (simulating a user input) to update the slider visually
+        const inputEvent = new Event('input', { bubbles: true });
+        slider.dispatchEvent(inputEvent);
     }
 
     hideOrShow(){

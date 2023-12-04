@@ -18,8 +18,8 @@ body{
 }
 
 .emoji_small{
-    height:40px;
-    width: 40px;
+    height:50px;
+    width: 50px;
 }
 
 .font_massive{
@@ -124,8 +124,11 @@ body{
 .vis1-news-item3{
     font-size: 1.2em;
     letter-spacing: 5px;
-    text-align: right;
-    padding-bottom: 4px;
+    text-align: left;
+    margin-bottom: 10px;
+    padding:5px;
+    font-family: 'Times New Roman', Times, serif;
+    border: 1px solid #eeeeee;
 }
 .vis1-news-item4{
     font-size: 1.4em;
@@ -232,7 +235,7 @@ body{
     border: 1px solid #ddd;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 
 .vis1-list-item {
@@ -350,7 +353,7 @@ body{
     text-align: end;
     position: absolute;
     color: #666;
-    right: 0;
+    right: 30px;
     bottom: 20px;
 }
 
