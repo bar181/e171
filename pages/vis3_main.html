@@ -2,21 +2,32 @@
     <div class="container">
         <div class="card card-area shadow">
 
-            <div class="card-body card-center-body">
-                <h5 class="card-text">Climate Action Around the World</h5>
+            <div class="card-body">
+                <h1 class="card-title card-center-body">Climate Action Around the World</h1>
             </div>
+
+
 
             <div class="row">
-                <div class="row justify-content-center" style="height: 100%">
-                    <select id='mapSelector' class="custom-select align-self-center" style="width: 40%" onchange="vis3CategoryChange()">
-                        <option value="Signed">Signed 2015 Paris Agreement</option>
-                        <option value="net_2050_law">Net Zero law</option>
-                        <option value="have_reduced">Has cut emissions</option>
-                    </select>
+                <div class="col-md-8">
+                    <div class="row justify-content-center">
+                        <select id='mapSelector' class="custom-select align-self-center" style="width: 40%" onchange="vis3CategoryChange()">
+                            <option value="Signed">Signed 2015 Paris Agreement</option>
+                            <option value="net_2050_law">Net Zero law</option>
+                            <option value="have_reduced">Has cut emissions</option>
+                        </select>
+                    </div>
+                    <div>
+                        <div id="mapContainer"></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Key Climate Action wins:</h3>
+                    <p>1. In 2015, the world came together to Sign the Paris Agreement.</p>
+                    <p>2. Since 2015, Most of the world's largest emitters of greenhouse gases have signed Net Zero by 2050 laws.</p>
+                    <p>3. Since 2018, Many countries have already started to reduce emissions from their peak.</p>
                 </div>
             </div>
-
-            <div id="mapContainer"></div>
 
             <!-- Notes - end enter stuff -->
             <p class="text-info">Notes<br>

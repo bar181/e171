@@ -11,7 +11,7 @@ class Vis4Race  {
         this.itemsToShow = 12;
         this.animationDuration = 800;
 
-        this.barsHeight = 50;
+        this.barsHeight = 42;
         this.barsPadding = 4;
 
         this.whatPeaked = "";
@@ -19,6 +19,7 @@ class Vis4Race  {
         this.topicEmissions = ['Carbon emissions', 'Greenhouse gases', 'Sustainability', 'Green ai'];
         this.topicWarming = ['Environment', 'Global warming', 'Renewable energy', 'Ecosystem'];
         this.topicPollution= ['Habitats', 'Ice caps', 'Ocean', 'Sea ice', 'Wildfires'];
+        this.topicSelected = this.topicHuman;
 
         this.initVis();
     }
@@ -77,7 +78,18 @@ class Vis4Race  {
         // Filter the data for the selected year (vis.year)
         vis.yearData = vis.data.filter(d => d[vis.year]);
 
-        vis.human = ['']
+        if (vis.userTopic === 'Human Impact') {
+            vis.topicSelected = vis.topicHuman;
+        }
+        if (vis.userTopic === 'Gas Emissions') {
+            vis.topicSelected = vis.topicEmissions;
+        }
+        if (vis.userTopic === 'Global Warming') {
+            vis.topicSelected = vis.topicWarming;
+        }
+        if (vis.userTopic === 'Pollution and Nature') {
+            vis.topicSelected = vis.topicPollution;
+        }
 
         // Sort the filtered data by the values for the selected year in descending order
         vis.yearData.sort((a, b) => b[vis.year] - a[vis.year]);
@@ -96,30 +108,15 @@ class Vis4Race  {
         // console.log("topTopics", vis.topTopics)
         // Update the visualization
 
-console.log("vis.userTopic", vis.userTopic)
+// console.log("vis.userTopic", vis.userTopic)
         // Filter the topics with a value of 100 for the selected year
-        let topicsWithValue100;
-        if (vis.userTopic === 'Human Impact') {
-            topicsWithValue100 = vis.topTopics
-                .filter(d => d.value === 100 && vis.topicHuman.includes(d.topic));
-        }
-        if (vis.userTopic === 'Gas Emissions') {
-            topicsWithValue100 = vis.topTopics
-                .filter(d => d.value === 100 && vis.topicEmissions.includes(d.topic));
-        }
-        if (vis.userTopic === 'Global Warming') {
-            topicsWithValue100 = vis.topTopics
-                .filter(d => d.value === 100 && vis.topicWarming.includes(d.topic));
-        }
-        if (vis.userTopic === 'Pollution and Nature') {
-            topicsWithValue100 = vis.topTopics
-                .filter(d => d.value === 100 && vis.topicPollution.includes(d.topic));
-        }
+        let topicsWithValue100 = vis.topTopics
+            .filter(d => d.value === 100 && vis.topicSelected.includes(d.topic));
 
         // Map the topics to include the year in the text
         const topicText = topicsWithValue100
-            .map(d => `${d.topic} in ${vis.year}  `)
-            .join(', ');
+            .map(d => `${d.topic} in ${vis.year} •  `)
+            .join(' ');
 
         vis.whatPeaked = vis.whatPeaked + " " + topicText;
 
@@ -168,7 +165,15 @@ console.log("vis.userTopic", vis.userTopic)
             .attr("width", 0) // Starting width for animation
             // .attr("height", vis.yScale.bandwidth()) // Height of the bars
             .attr("height", vis.barsHeight) // Height of the bars
-            .style("fill", "steelblue");
+            .style("fill", d => {
+                // Check if the topic is in the topicsArray
+                if (vis.topicSelected.includes(d.topic)) {
+                    return "red"; // Set fill color based on topic
+                } else {
+                    return "steelblue"; // Default color for topics not in the array
+                }
+            });
+
 
         bars.merge(enterBars)
             .transition()
@@ -177,11 +182,21 @@ console.log("vis.userTopic", vis.userTopic)
             .attr("y", d => vis.yScale(d.topic))
             .attr("width", d => vis.xScale(d.value))
             .attr("height", vis.barsHeight)
-            .style("fill", "steelblue")
+            // .style("fill", "steelblue")
+            .style("fill", d => {
+                // Check if the topic is in the topicsArray
+                if (vis.topicSelected.includes(d.topic)) {
+                    return "red"; // Set fill color based on topic
+                } else {
+                    return "steelblue"; // Default color for topics not in the array
+                }
+            })
             .on("start", (d, i) => {
                 // Start the image transition at the same time as the bar transition
                 updateAxisLabel(d, i);
             });
+
+
 
 
         function updateAxisLabel(data, index) {
@@ -200,7 +215,7 @@ console.log("vis.userTopic", vis.userTopic)
                     .attr("x", 0)
                     .attr("y", vis.yScale(data.topic) - (vis.barsHeight / 2))
                     .attr("width", 50)
-                    .attr("height", 50)
+                    .attr("height", vis.barsHeight)
                     .attr("preserveAspectRatio", "xMidYMid meet")
                     .style("opacity", 0); // Start with opacity 0
             }
@@ -285,7 +300,7 @@ console.log("vis.userTopic", vis.userTopic)
                 setTimeout(() => {
                     d3.select("#vis4-year-display").text(currentYear - 1);
                     setTimeout(animate, vis.animationDuration); // Additional pause after year change
-                }, 500); // Pause after year changes
+                }, 800); // Pause after year changes
             } else {
                 // Enable the "Start Again" button when the animation is complete
                 startAgainButton.disabled = false;

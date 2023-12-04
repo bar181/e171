@@ -364,7 +364,11 @@ body{
     border-color: #666666;
 }
 
-
+.vis4-topPeakedSpan{
+    color: red;
+    /*font-size: 1.5em;*/
+    /*font-weight: bold;*/
+}
 
 
 /* Vis 3 */
