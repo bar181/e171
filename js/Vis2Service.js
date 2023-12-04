@@ -19,16 +19,10 @@ topicDropdown.addEventListener('change', function() {
     vis2DoughnutChart.updateSelection(currentSubject, currentYear, currentTopic)
 });
 
-
-// Basic test event listener
-yearDropdown.addEventListener('change', function() {
-    console.log("Year dropdown changed");
-});
-
 yearDropdown.addEventListener('change', function() {
     currentYear = yearDropdown.value
 
-    console.log("NEW YEAR SELECTED:", currentYear);
+    // console.log("NEW YEAR SELECTED:", currentYear);
     vis2BubbleChart.updateSelection(currentSubject, currentYear, currentTopic)
     vis2DoughnutChart.updateSelection(currentSubject, currentYear, currentTopic)
 });
