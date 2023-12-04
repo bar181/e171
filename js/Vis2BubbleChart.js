@@ -41,13 +41,13 @@ class Vis2BubbleChart {
 
         vis.tooltip = d3.select('body').append('div')
             .attr('class', 'tooltip')
-            .style('opacity', 0)
+            .style('opacity', 1)
             .style('position', 'absolute')
-            .style('text-align', 'center')
-            .style('width', '120px')
+            .style('text-align', 'left')
+            .style('width', '320px')
             .style('height', 'auto')
-            .style('padding', '2px')
-            .style('font', '12px sans-serif')
+            .style('padding', '5px')
+            .style('font', '20px sans-serif')
             .style('background', 'lightsteelblue')
             .style('border', '0px')
             .style('border-radius', '8px')
@@ -92,10 +92,9 @@ class Vis2BubbleChart {
 
         // add tooltips back to all paths
         vis.svg.selectAll('circle')
+            .style('pointer-events', 'all')
             .on('mouseover', function(event, d){
-                vis.tooltip.transition()
-                    .duration(200)
-                    .style('opacity', 1);
+                vis.tooltip.style('opacity', 1);
                 let tooltipContent = `Topic: ${d.data.Topic}<br/>Number of Tweets: ${d.data.Count}<br/>`
                 vis.tooltip.html(tooltipContent + vis.additionalTooltipContent(d.data));
                 vis.tooltip
@@ -103,8 +102,8 @@ class Vis2BubbleChart {
                     .style('top', (event.pageY - 10) + 'px');
             })
             .on('mouseout', function(d) {
-                vis.tooltip.transition()
-                    .duration(500)
+                vis.tooltip
+                    // .transition().duration(500)
                     .style('opacity', 0);
             });
 
@@ -373,17 +372,16 @@ class Vis2BubbleChart {
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
             .attr('fill', (d, i) => vis.getColor(i))
+            .style('pointer-events', 'all')
             .on('mouseover', function(event, d) {
-                vis.tooltip.transition()
-                    .duration(200)
-                    .style('opacity', 0.9);
+                vis.tooltip.style('opacity', 1);
                 vis.tooltip.html(`Topic: ${d.data.Topic}<br/><b>Number of Tweets: ${d.data.Count}</b>`)
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY - 10) + 'px');
             })
             .on('mouseout', function(d) {
-                vis.tooltip.transition()
-                    .duration(500)
+                vis.tooltip
+                    // .transition().duration(500)
                     .style('opacity', 0);
             });
     }
