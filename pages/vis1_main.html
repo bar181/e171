@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-8">
                     <h2  class="text-center card-text-small" style="color:steelblue">
-                        Select a Year to Explore
+                        <img src="images/emojis/emmett.png" class="user-topic-image emoji_small " alt="Icon"  />Select a Year to Explore
                     </h2>
 <!--                    <h4 id="vis1-title" class="text-center card-text-small">-->
 <!--                        A Look at Online Popularity-->
@@ -25,7 +25,7 @@
                                 id="vis1-slider"
                                 class="vis1-year-range vis1-slider"
                         />
-                        <span id="current-year">2004</span>
+                        <span id="vis1-current-year">2004</span>
                     </div>
                 </div>
                 <div>
@@ -42,12 +42,28 @@
 
 
                     <div class="col-md-6">
-                        <div class="w-100 text-center card-title-small">
-                            <h1 class=" font_massive"
-                                style="color:steelblue"><span class="vis1-year"></span></h1>
-                            <div class=" ">Top News Stories</div>
-                            <div class="vis1-yearLessUserAge"></div>
-                            <hr class="mt-5">
+                        <div class="w-100  ">
+                            <h3 class="text-center font_massive"
+                                style="color:steelblue"><span class="vis1-year"></span></h3>
+                        </div>
+
+                        <div class="w-100 d-flex align-items-left  ">
+                            <img src="images/emojis/emmett.png" class="user-topic-image emoji_small " alt="Icon"  />
+                            <div>
+                                <h5 class="mx-2  mb-0" style="min-height: 60px">
+                                    <span class="globalTopic vis4-topPeakedSpan">Human Impact</span>
+                                    Searches that peaked in their popularity:
+                                    <span id="vis1-peaked-span" class="vis1-topPeakedSpan"> </span>
+                                </h5>
+
+<!--                                <p class="mx-2  mb-0" >-->
+<!--                                   Topics highlighted in red on the chart-->
+<!--                                </p>-->
+                            </div>
+                        </div>
+                        <hr class="mt-1">
+                        <div class="w-100  ">
+                            <h5 class="text-left ">Do you remember these other news stories?</h5>
                         </div>
                         <div class="w-100 text-left pt-2" style="color: #777777">
                             <div id="vis1-news"></div>
@@ -56,19 +72,14 @@
                     </div>
                     <div class="col-md-6  py-3" style="background-color:steelblue">
                         <div>
-                            <h3 class="text-center pb-3" style="color:white">CLIMATE TOPICS THAT PEAKED IN POPULARITY
-                                IN <span class="vis1-year"></span>?</h3>
+                            <h3 class="text-center pb-3" style="color:white">PEAKING TOPICS ON GOOGLE</h3>
                         </div>
                         <div style="min-height: 165px">
                             <div id="vis1-images"></div>
                         </div>
-                        <div class="text-center pt-3">
-                            <div id="vis1Google" class="vis1-visualization pt-2"></div>
+                        <div class="text-center ">
+                            <div id="vis1Google" class="vis1-visualization "></div>
                         </div>
-
-
-                        <div class="text-center px-2 " style="color:white">Relative searches on Google compared to
-                            searches in other years for the same topic(2004-2023)</div>
                     </div>
                 </div>
             </div>

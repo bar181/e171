@@ -10,6 +10,8 @@ class Vis4Race  {
         this.year = 2004;
         this.itemsToShow = 12;
         this.animationDuration = 800;
+        this.animationPause = 800;
+        this.topicImage = topicImage;
 
         this.barsHeight = 42;
         this.barsPadding = 4;
@@ -63,9 +65,27 @@ class Vis4Race  {
         vis.svg.append("text")
             .attr("class", "x-axis-label label-small")
             .attr("x", vis.width / 2) // Position the label in the center of the x-axis
-            .attr("y", vis.height + vis.margin.bottom - 10) // Adjust the y position as needed
+            .attr("y", vis.height + vis.margin.bottom - 5) // Adjust the y position as needed
             .style("text-anchor", "middle") // Center the text horizontally
+            .style("font-size", "20px")
             .text("Year over Year relative searches on Google from 2004-2023");
+
+        // Create a line on the right with the text "Peak"
+        vis.svg.append("line")
+            .attr("x1", vis.width + (vis.barsHeight + vis.barsPadding *2))
+            .attr("y1", 0)
+            .attr("x2", vis.width + (vis.barsHeight + vis.barsPadding *2))
+            .attr("y2", vis.height)
+            .attr("stroke", "black");
+
+        vis.svg.append("text")
+            .attr("x", vis.width + 50) // Adjust the x position as needed
+            .attr("y", vis.height / 2)  // Adjust the y position as needed
+            .attr("dy", "0.35em") // Adjust vertical alignment
+            .style("text-anchor", "start")
+            .style("font-size", "20px")
+            .attr("transform", "rotate(270, " + (vis.width + 60) + ", " + (vis.height / 2) + ")") // Rotate 90 degrees
+            .text("Search Terms Peak Here");
 
         vis.wrangleData();
 
@@ -74,6 +94,7 @@ class Vis4Race  {
         let vis = this;
 
         vis.data = vis4Data;
+        vis.userTopic = userTopic;
 
         // Filter the data for the selected year (vis.year)
         vis.yearData = vis.data.filter(d => d[vis.year]);
@@ -90,6 +111,7 @@ class Vis4Race  {
         if (vis.userTopic === 'Pollution and Nature') {
             vis.topicSelected = vis.topicPollution;
         }
+
 
         // Sort the filtered data by the values for the selected year in descending order
         vis.yearData.sort((a, b) => b[vis.year] - a[vis.year]);
@@ -108,7 +130,6 @@ class Vis4Race  {
         // console.log("topTopics", vis.topTopics)
         // Update the visualization
 
-// console.log("vis.userTopic", vis.userTopic)
         // Filter the topics with a value of 100 for the selected year
         let topicsWithValue100 = vis.topTopics
             .filter(d => d.value === 100 && vis.topicSelected.includes(d.topic));
@@ -156,6 +177,8 @@ class Vis4Race  {
             .attr("width", 0)
             .remove();
 
+
+        console.log("vis.topicSelected", vis.topicSelected)
         // ENTER phase: Add new bars for incoming data
         const enterBars = bars.enter()
             .append("rect")
@@ -300,7 +323,7 @@ class Vis4Race  {
                 setTimeout(() => {
                     d3.select("#vis4-year-display").text(currentYear - 1);
                     setTimeout(animate, vis.animationDuration); // Additional pause after year change
-                }, 800); // Pause after year changes
+                }, vis.animationPause); // Pause after year changes
             } else {
                 // Enable the "Start Again" button when the animation is complete
                 startAgainButton.disabled = false;

@@ -22,7 +22,7 @@ let userAge = 30; // default age
 
 let userTopic = 'Human Impact'; // default Human Impact
 let userTopicOptions = ['Human Impact', 'Gas Emissions', 'Global Warming', 'Pollution and Nature'];
-
+let topicImage = 'images/emojis/emmett.png'; // default Human Impact
 
 // Visualization Level Variables
 let vis1Data = null;
@@ -46,6 +46,7 @@ const userAgeInput = document.getElementById("userAgeInput");
 
 // Array of script names in the desired order
 const scriptNames = [
+    'UserTopicService',
     'Vis1Service',
     'Vis1Google',
     'Vis2Service',
