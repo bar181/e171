@@ -130,7 +130,6 @@ class Vis4Race  {
         // console.log("topTopics", vis.topTopics)
         // Update the visualization
 
-
         // Filter the topics with a value of 100 for the selected year
         let topicsWithValue100 = vis.topTopics
             .filter(d => d.value === 100 && vis.topicSelected.includes(d.topic));

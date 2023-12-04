@@ -215,6 +215,7 @@ class Vis5Line  {
             .attr("stroke", "steelblue")
             .attr("stroke-width", 8);
 
+
         let selectedTopicData = vis.data.find(d => d.Topic === selectedTopic);
         if (selectedTopicData && selectedTopicData.Image) {
             // Update the div to show the image
