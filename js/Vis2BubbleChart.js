@@ -28,8 +28,8 @@ class Vis2BubbleChart {
         let vis = this;
 
         vis.margin = { top: 40, right: 40, bottom: 40, left: 40 };
-        vis.width = 380 - vis.margin.left - vis.margin.right;
-        vis.height = 380 - vis.margin.top - vis.margin.bottom;
+        vis.width = 500 - vis.margin.left - vis.margin.right;
+        vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
         vis.svg = d3.select('#' + vis.containerId).append('svg')
             .attr('width', vis.width + vis.margin.left + vis.margin.right)

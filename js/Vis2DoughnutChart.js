@@ -28,8 +28,8 @@ class Vis2DoughnutChart {
 
         // Define the dimensions and margins for the chart
         vis.margin = { top: 20, right: 20, bottom: 20, left: 20 };
-        vis.width = 900 - vis.margin.left - vis.margin.right;
-        vis.height = 900 - vis.margin.top - vis.margin.bottom;
+        vis.width = 1000 - vis.margin.left - vis.margin.right;
+        vis.height = 1000 - vis.margin.top - vis.margin.bottom;
         vis.radius = Math.min(vis.width, vis.height) / 2;
 
 
@@ -57,8 +57,8 @@ class Vis2DoughnutChart {
             .sort(null) // Do not sort group by size
             .value(d => d.Count);
 
-        vis.outerRadius = 290; // This controls the overall size of the doughnut chart
-        vis.innerRadius = 275; // This controls the size of the hole, thus creating the "cutout"
+        vis.outerRadius = 390; // This controls the overall size of the doughnut chart
+        vis.innerRadius = 375; // This controls the size of the hole, thus creating the "cutout"
 
         // Define the arc generator
         vis.arc = d3.arc()
@@ -86,8 +86,8 @@ class Vis2DoughnutChart {
         let vis = this;
 
         // Calculate the position for the legend (lower right corner)
-        const legendX = 620; // Adjust width for legend width and padding
-        const legendY = 700; // Adjust height for legend height and padding
+        const legendX = 730; // Adjust width for legend width and padding
+        const legendY = 870; // Adjust height for legend height and padding
 
         // Define a scale for sentiment to color mapping
         let aggressivenessScale = d3.scaleLinear()
@@ -112,7 +112,7 @@ class Vis2DoughnutChart {
         // Draw the color bar
         vis.agressivenessLegend.append('rect')
             .attr('width', 200) // Adjust the width as needed
-            .attr('height', 10) // Adjust the height as needed
+            .attr('height', 15) // Adjust the height as needed
             .style('fill', 'url(#agressivenessGradient)');
 
         // Define the scale for the legend axis
@@ -145,8 +145,8 @@ class Vis2DoughnutChart {
         let vis = this;
 
         // Calculate the position for the legend (lower right corner)
-        const legendX = 620; // Adjust width for legend width and padding
-        const legendY = 700; // Adjust height for legend height and padding
+        const legendX = 730; // Adjust width for legend width and padding
+        const legendY = 870; // Adjust height for legend height and padding
 
 
         // Define a scale for sentiment to color mapping
@@ -172,7 +172,7 @@ class Vis2DoughnutChart {
         // Draw the color bar
         vis.sentimentLegend.append('rect')
             .attr('width', 200) // Adjust the width as needed
-            .attr('height', 10) // Adjust the height as needed
+            .attr('height', 15) // Adjust the height as needed
             .style('fill', 'url(#sentimentGradient)');
 
         // Define the scale for the legend axis
@@ -215,8 +215,8 @@ class Vis2DoughnutChart {
         ];
 
         // Calculate the position for the legend (lower right corner)
-        const legendX = 680; // Adjust width for legend width and padding
-        const legendY = 630; // Adjust height for legend height and padding
+        const legendX = 760; // Adjust width for legend width and padding
+        const legendY = 820; // Adjust height for legend height and padding
 
         // Create legend group, positioned in the top left corner
         vis.stanceLegend = vis.svg.append('g')

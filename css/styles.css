@@ -1,5 +1,5 @@
 body{
-    background-color: #666;
+    background-color: rgb(72, 71, 71);
     font-size: 16px;
 }
 .times-new-roman-title {
@@ -276,9 +276,7 @@ body{
 }
 
 /* Jess's CSS*/
-/*For the 2nd visualization */
-
-
+/*For the 2nd visualization -------------------------------------------------------------------------------------*/
 .tooltip{
     opacity: 1;
 }
@@ -294,13 +292,13 @@ body{
 
 /*area of the container holding the visualizations */
 .vis2-card-area{
-    height: 700px;
-    width: 1600px;
-    background-color: white;
+    height: 1000px;
+    width: 2000px;
+    background-color: #ffffff;
 }
 
 #card-back-next{
-    width: 1600px;
+    width: 2000px;
     display: flex;
 }
 
@@ -312,31 +310,26 @@ body{
     position: relative; /* Control positioning */
     z-index: 10;        /* Ensure it's above other elements */
     cursor: pointer;
-    font-size: 32px;/* Change cursor to indicate clickability */
-}
-
-.visualization-content {
-    margin-top: 1rem;
-    padding: 1rem;
-    background: #fff;
+    font-size: 42px;/* Change cursor to indicate clickability */
 }
 
 #year-selector{
-    margin-left: 800px;
+    margin-left: 1005px;
 }
 
 #topic-selector{
-    margin-left: 380px;
+    margin-left: 580px;
 
 }
 #year-selector,
 #topic-selector{
-    width: 50%;       /* Width of the dropdown */
+    width: 35%;       /* Width of the dropdown */
     height: 50%;       /* Height of the dropdown */
-    font-size: 16px;    /* Font size of the dropdown text */
+    font-weight: bold;/* Font size of the dropdown text */
     padding: 5px 10px;  /* Padding inside the dropdown */
     border-radius: 5px; /* Rounded corners */
-    font-size: 24px;
+    font-size: 25px;
+    margin-top: 25px;
 }
 
 #year-selector {
@@ -349,8 +342,16 @@ body{
 }
 
 #my-text {
-    padding: 40px;
+    padding-top: 30px;
+    padding-right: 55px;
     margin-top: 10px;
+    font-size: 25px;
+}
+
+.top-bar-title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 50px;
 }
 
 
