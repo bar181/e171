@@ -18,25 +18,25 @@
     GLOBAL VARIABLES
 */
 // Common variables used by all Visualizations
-let userAge = 30; // default age
-
-let userTopic = 'Human Impact'; // default Human Impact
-let userTopicOptions = ['Human Impact', 'Gas Emissions', 'Global Warming', 'Pollution and Nature'];
-let topicImage = 'images/emojis/emmett.png'; // default Human Impact
-
-// Visualization Level Variables
-let vis1Data = null;
-let vis1Google = null;
-let vis1News = null;
-
-let vis2BubbleChart = null;
-let vis2DoughnutChart = null;
-
-let vis3Data = null;
-let vis4Data = null;
-let vis5Data = null;
-
-let vis3map = null;
+// let userAge = 30; // default age
+//
+// let userTopic = 'Human Impact'; // default Human Impact
+// let userTopicOptions = ['Human Impact', 'Gas Emissions', 'Global Warming', 'Pollution and Nature'];
+// let topicImage = 'images/emojis/emmett.png'; // default Human Impact
+//
+// // Visualization Level Variables
+// let vis1Data = null;
+// let vis1Google = null;
+// let vis1News = null;
+//
+// let vis2BubbleChart = null;
+// let vis2DoughnutChart = null;
+//
+// let vis3Data = null;
+// let vis4Data = null;
+// let vis5Data = null;
+//
+// let vis3map = null;
 
 const userAgeInput = document.getElementById("userAgeInput");
 
@@ -46,6 +46,7 @@ const userAgeInput = document.getElementById("userAgeInput");
 
 // Array of script names in the desired order
 const scriptNames = [
+    'variables',
     'UserTopicService',
     'Vis1Service',
     'Vis1Google',
@@ -56,7 +57,7 @@ const scriptNames = [
     'Vis2BubbleChart',
     'Vis2DoughnutChart',
     'Vis3map',
-    ];
+];
 
 
 // Array of page names in the desired order
@@ -169,7 +170,7 @@ function initializeVis1Main() {
 
 function initializeVis2() {
     // Load all CSV files concurrently using Promise.all
-    Promise.all([
+    let promises =[
         d3.csv("data/tweets_per_topic.csv"),
         d3.csv("data/tweets_per_topic_per_year.csv"),
         d3.csv("data/aggressiveness_per_topic.csv"),
@@ -178,89 +179,175 @@ function initializeVis2() {
         d3.csv("data/sentiment_per_topic_per_year.csv"),
         d3.csv("data/stance_per_topic.csv"),
         d3.csv("data/stance_per_topic_per_year.csv")
-    ]).then(function([
-            tweets_per_topic,
-            tweets_per_topic_per_year,
-            aggressiveness_per_topic,
-            aggressiveness_per_topic_per_year,
-            sentiment_per_topic,
-            sentiment_per_topic_per_year,
-            stance_per_topic,
-            stance_per_topic_per_year
-        ]) {
+    ];
 
-        // For all datasets containing numerical columns (integers or floats)
-        // loop through each row and convert strings to int/floats
-        tweets_per_topic.forEach(function(d) {
-            d.Topic = d.Topic;
-            d.Count = +d.Count; // Convert Count from string to number
-        });
-        tweets_per_topic_per_year.forEach(function(d) {
-            d.Topic = d.Topic;
-            d.Year = +d.Year; //convert year to number
-            d.Count = +d.Count; //convert count from string to number
-        });
-        aggressiveness_per_topic.forEach(function(d){
-            d.Topic = d.Topic;
-            d.Year = +d.Year;
-            d.Aggressiveness = +d.Aggressiveness;
-            d.Count = +d.Count;
+    Promise.all(promises).then(([
+                                    tweets_per_topic,
+                                    tweets_per_topic_per_year,
+                                    aggressiveness_per_topic,
+                                    aggressiveness_per_topic_per_year,
+                                    sentiment_per_topic,
+                                    sentiment_per_topic_per_year,
+                                    stance_per_topic,
+                                    stance_per_topic_per_year
+                                ]) => {
 
-        });
-        aggressiveness_per_topic_per_year.forEach(function(d){
-            d.Topic = d.Topic;
-            d.Aggressiveness = +d.Aggressiveness;
-            d.Count = +d.Count;
-        });
-        sentiment_per_topic.forEach(function(d){
-            d.Topic = d.Topic;
-            d.Sentiment = +d.Sentiment;
-            d.Count = +d.Count;
-        });
-        sentiment_per_topic_per_year.forEach(function(d){
-            d.Topic = d.Topic;
-            d.Year = +d.Year;
-            d.Sentiment = +d.Sentiment;
-            d.Count = +d.Count;
-        });
-        stance_per_topic.forEach(function(d){
-            d.Topic = d.Topic;
-            d.most_popular_stance = d.most_popular_stance;
-            d.Count = +d.Count;
-        });
-        stance_per_topic_per_year.forEach(function(d){
-            d.Topic = d.Topic;
-            d.Year = +d.Year;
-            d.most_popular_stance = d.most_popular_stance;
-            d.Count = +d.Count;
-        });
-        // No need to do this ^^ for stance_per_topic and stance_per_topic_per_year
-        // because there are no numerical columns in these csv files.
+            // For all datasets containing numerical columns (integers or floats)
+            // loop through each row and convert strings to int/floats
+            tweets_per_topic.forEach(function(d) {
+                d.Topic = d.Topic;
+                d.Count = +d.Count; // Convert Count from string to number
+            });
+            tweets_per_topic_per_year.forEach(function(d) {
+                d.Topic = d.Topic;
+                d.Year = +d.Year; //convert year to number
+                d.Count = +d.Count; //convert count from string to number
+            });
+            aggressiveness_per_topic.forEach(function(d){
+                d.Topic = d.Topic;
+                d.Year = +d.Year;
+                d.Aggressiveness = +d.Aggressiveness;
+                d.Count = +d.Count;
 
-        // Initialize your charts with the processed data
-        vis2BubbleChart = new Vis2BubbleChart(
-            'bubbleChartContainer',
-            tweets_per_topic,
-            tweets_per_topic_per_year,
-            aggressiveness_per_topic,
-            aggressiveness_per_topic_per_year,
-            sentiment_per_topic,
-            sentiment_per_topic_per_year,
-            stance_per_topic,
-            stance_per_topic_per_year
-        );
-        vis2DoughnutChart = new Vis2DoughnutChart(
-            'doughnutChartContainer',
-            tweets_per_topic,
-            tweets_per_topic_per_year,
-            aggressiveness_per_topic,
-            aggressiveness_per_topic_per_year,
-            sentiment_per_topic,
-            sentiment_per_topic_per_year,
-            stance_per_topic,
-            stance_per_topic_per_year
-        );
-    });
+            });
+            aggressiveness_per_topic_per_year.forEach(function(d){
+                d.Topic = d.Topic;
+                d.Aggressiveness = +d.Aggressiveness;
+                d.Count = +d.Count;
+            });
+            sentiment_per_topic.forEach(function(d){
+                d.Topic = d.Topic;
+                d.Sentiment = +d.Sentiment;
+                d.Count = +d.Count;
+            });
+            sentiment_per_topic_per_year.forEach(function(d){
+                d.Topic = d.Topic;
+                d.Year = +d.Year;
+                d.Sentiment = +d.Sentiment;
+                d.Count = +d.Count;
+            });
+            stance_per_topic.forEach(function(d){
+                d.Topic = d.Topic;
+                d.most_popular_stance = d.most_popular_stance;
+                d.Count = +d.Count;
+            });
+            stance_per_topic_per_year.forEach(function(d){
+                d.Topic = d.Topic;
+                d.Year = +d.Year;
+                d.most_popular_stance = d.most_popular_stance;
+                d.Count = +d.Count;
+            });
+            // No need to do this ^^ for stance_per_topic and stance_per_topic_per_year
+            // because there are no numerical columns in these csv files.
+
+            // Initialize your charts with the processed data
+            vis2BubbleChart = new Vis2BubbleChart(
+                'bubbleChartContainer',
+                tweets_per_topic,
+                tweets_per_topic_per_year,
+                aggressiveness_per_topic,
+                aggressiveness_per_topic_per_year,
+                sentiment_per_topic,
+                sentiment_per_topic_per_year,
+                stance_per_topic,
+                stance_per_topic_per_year
+            );
+            vis2DoughnutChart = new Vis2DoughnutChart(
+                'doughnutChartContainer',
+                tweets_per_topic,
+                tweets_per_topic_per_year,
+                aggressiveness_per_topic,
+                aggressiveness_per_topic_per_year,
+                sentiment_per_topic,
+                sentiment_per_topic_per_year,
+                stance_per_topic,
+                stance_per_topic_per_year
+            );
+        }
+    );
+//     Promise.all(promises).then(function([
+//                                             tweets_per_topic,
+//                                             tweets_per_topic_per_year,
+//                                             aggressiveness_per_topic,
+//                                             aggressiveness_per_topic_per_year,
+//                                             sentiment_per_topic,
+//                                             sentiment_per_topic_per_year,
+//                                             stance_per_topic,
+//                                             stance_per_topic_per_year
+//                                         ]) {
+//
+//         // For all datasets containing numerical columns (integers or floats)
+//         // loop through each row and convert strings to int/floats
+//         tweets_per_topic.forEach(function(d) {
+//             d.Topic = d.Topic;
+//             d.Count = +d.Count; // Convert Count from string to number
+//         });
+//         tweets_per_topic_per_year.forEach(function(d) {
+//             d.Topic = d.Topic;
+//             d.Year = +d.Year; //convert year to number
+//             d.Count = +d.Count; //convert count from string to number
+//         });
+//         aggressiveness_per_topic.forEach(function(d){
+//             d.Topic = d.Topic;
+//             d.Year = +d.Year;
+//             d.Aggressiveness = +d.Aggressiveness;
+//             d.Count = +d.Count;
+//
+//         });
+//         aggressiveness_per_topic_per_year.forEach(function(d){
+//             d.Topic = d.Topic;
+//             d.Aggressiveness = +d.Aggressiveness;
+//             d.Count = +d.Count;
+//         });
+//         sentiment_per_topic.forEach(function(d){
+//             d.Topic = d.Topic;
+//             d.Sentiment = +d.Sentiment;
+//             d.Count = +d.Count;
+//         });
+//         sentiment_per_topic_per_year.forEach(function(d){
+//             d.Topic = d.Topic;
+//             d.Year = +d.Year;
+//             d.Sentiment = +d.Sentiment;
+//             d.Count = +d.Count;
+//         });
+//         stance_per_topic.forEach(function(d){
+//             d.Topic = d.Topic;
+//             d.most_popular_stance = d.most_popular_stance;
+//             d.Count = +d.Count;
+//         });
+//         stance_per_topic_per_year.forEach(function(d){
+//             d.Topic = d.Topic;
+//             d.Year = +d.Year;
+//             d.most_popular_stance = d.most_popular_stance;
+//             d.Count = +d.Count;
+//         });
+//         // No need to do this ^^ for stance_per_topic and stance_per_topic_per_year
+//         // because there are no numerical columns in these csv files.
+//
+//         // Initialize your charts with the processed data
+//         vis2BubbleChart = new Vis2BubbleChart(
+//             'bubbleChartContainer',
+//             tweets_per_topic,
+//             tweets_per_topic_per_year,
+//             aggressiveness_per_topic,
+//             aggressiveness_per_topic_per_year,
+//             sentiment_per_topic,
+//             sentiment_per_topic_per_year,
+//             stance_per_topic,
+//             stance_per_topic_per_year
+//         );
+//         vis2DoughnutChart = new Vis2DoughnutChart(
+//             'doughnutChartContainer',
+//             tweets_per_topic,
+//             tweets_per_topic_per_year,
+//             aggressiveness_per_topic,
+//             aggressiveness_per_topic_per_year,
+//             sentiment_per_topic,
+//             sentiment_per_topic_per_year,
+//             stance_per_topic,
+//             stance_per_topic_per_year
+//         );
+//     });
 }
 
 function initializeVis3() {
@@ -269,7 +356,7 @@ function initializeVis3() {
         d3.csv("data/vis3/vis3_net_zero_targets.csv"),
         d3.csv("data/vis3/vis3-total-ghg-emissions-final.csv"),
         d3.csv("data/vis3/vis3-Ratified-Paris-Agreement-final.csv")
-        ])
+    ])
         .then(function([world, targets, reduced, paris]) {
             vis3map = new Vis3Map('mapContainer', world, targets, reduced, paris);
         })
@@ -286,6 +373,7 @@ window.addEventListener('load', () => {
         .then(() => {
 
             new fullpage('#fullpage', {
+                licenseKey: 'gplv3-license',
                 anchors: pageNames,
                 navigationTooltips: pageNames,
                 css3: true,
