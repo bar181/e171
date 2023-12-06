@@ -170,6 +170,7 @@ function initializeVis1Main() {
 }
 
 function initializeVis2() {
+    // Load all CSV files concurrently using Promise.all
     let promises = [
         d3.csv("data/tweets_per_topic.csv"),
         d3.csv("data/tweets_per_topic_per_year.csv"),
@@ -191,61 +192,56 @@ function initializeVis2() {
                                     stance_per_topic,
                                     stance_per_topic_per_year
                                 ]) => {
-        // For all datasets containing numerical columns (integers or floats)
-        // loop through each row and convert strings to int/floats
-        tweets_per_topic.forEach(function (d) {
-            d.Topic = d.Topic;
-            d.Count = +d.Count; // Convert Count from string to number
-        });
-        tweets_per_topic_per_year.forEach(function (d) {
-            d.Topic = d.Topic;
-            d.Year = +d.Year; //convert year to number
-            d.Count = +d.Count; //convert count from string to number
-        });
-        aggressiveness_per_topic.forEach(function (d) {
-            d.Topic = d.Topic;
-            d.Year = +d.Year;
-            d.Aggressiveness = +d.Aggressiveness;
-            d.Count = +d.Count;
 
-        });
-        aggressiveness_per_topic_per_year.forEach(function (d) {
-            d.Topic = d.Topic;
-            d.Aggressiveness = +d.Aggressiveness;
-            d.Count = +d.Count;
-        });
-        sentiment_per_topic.forEach(function (d) {
-            d.Topic = d.Topic;
-            d.Sentiment = +d.Sentiment;
-            d.Count = +d.Count;
-        });
-        sentiment_per_topic_per_year.forEach(function (d) {
-            d.Topic = d.Topic;
-            d.Year = +d.Year;
-            d.Sentiment = +d.Sentiment;
-            d.Count = +d.Count;
-        });
-        stance_per_topic.forEach(function (d) {
-            d.Topic = d.Topic;
-            d.most_popular_stance = d.most_popular_stance;
-            d.Count = +d.Count;
-        });
-        stance_per_topic_per_year.forEach(function (d) {
-            d.Topic = d.Topic;
-            d.Year = +d.Year;
-            d.most_popular_stance = d.most_popular_stance;
-            d.Count = +d.Count;
-        });
+            // For all datasets containing numerical columns (integers or floats)
+            // loop through each row and convert strings to int/floats
+            tweets_per_topic.forEach(function (d) {
+                d.Topic = d.Topic;
+                d.Count = +d.Count; // Convert Count from string to number
+            });
+            tweets_per_topic_per_year.forEach(function (d) {
+                d.Topic = d.Topic;
+                d.Year = +d.Year; //convert year to number
+                d.Count = +d.Count; //convert count from string to number
+            });
+            aggressiveness_per_topic.forEach(function (d) {
+                d.Topic = d.Topic;
+                d.Year = +d.Year;
+                d.Aggressiveness = +d.Aggressiveness;
+                d.Count = +d.Count;
 
-        // $(scriptNames).each(function(i, value){
-        //     $.holdReady(true)
-        //     $.getScript (value).done(function ( script, status){
-        //         console.log("Loaded " + i  + " : " + value + " " + status)
-        //         $.holdReady(false);
-        //     })
-        // })
+            });
+            aggressiveness_per_topic_per_year.forEach(function (d) {
+                d.Topic = d.Topic;
+                d.Aggressiveness = +d.Aggressiveness;
+                d.Count = +d.Count;
+            });
+            sentiment_per_topic.forEach(function (d) {
+                d.Topic = d.Topic;
+                d.Sentiment = +d.Sentiment;
+                d.Count = +d.Count;
+            });
+            sentiment_per_topic_per_year.forEach(function (d) {
+                d.Topic = d.Topic;
+                d.Year = +d.Year;
+                d.Sentiment = +d.Sentiment;
+                d.Count = +d.Count;
+            });
+            stance_per_topic.forEach(function (d) {
+                d.Topic = d.Topic;
+                d.most_popular_stance = d.most_popular_stance;
+                d.Count = +d.Count;
+            });
+            stance_per_topic_per_year.forEach(function (d) {
+                d.Topic = d.Topic;
+                d.Year = +d.Year;
+                d.most_popular_stance = d.most_popular_stance;
+                d.Count = +d.Count;
+            });
+            // No need to do this ^^ for stance_per_topic and stance_per_topic_per_year
+            // because there are no numerical columns in these csv files.
 
-        try {
+            // Initialize your charts with the processed data
             vis2BubbleChart = new Vis2BubbleChart(
                 'bubbleChartContainer',
                 tweets_per_topic,
@@ -257,13 +253,6 @@ function initializeVis2() {
                 stance_per_topic,
                 stance_per_topic_per_year
             );
-        }
-        catch (error){
-            if (error.name = "ReferenceError")
-                console.log(error.message)
-            console.log("Error Occured While Loading Bubble Chart \n ++++++++++++ " + error)
-        }
-        try {
             vis2DoughnutChart = new Vis2DoughnutChart(
                 'doughnutChartContainer',
                 tweets_per_topic,
@@ -275,16 +264,93 @@ function initializeVis2() {
                 stance_per_topic,
                 stance_per_topic_per_year
             );
-        }catch (error){
-            if (error.name = "ReferenceError")
-                console.log(error.message)
-            console.log("Error Occured While Loading Doughnut Chart \n ++++++++++++ " + error)
         }
-
-    }).catch((error)=>{
-        console.log("Error Occured While Loading Data for Bubble and Doughnut Chart \n ++++++++++++ " + error)
-    })
+    );
 }
+    //     Promise.all(promises).then(function([
+//                                             tweets_per_topic,
+//                                             tweets_per_topic_per_year,
+//                                             aggressiveness_per_topic,
+//                                             aggressiveness_per_topic_per_year,
+//                                             sentiment_per_topic,
+//                                             sentiment_per_topic_per_year,
+//                                             stance_per_topic,
+//                                             stance_per_topic_per_year
+//                                         ]) {
+//
+//         // For all datasets containing numerical columns (integers or floats)
+//         // loop through each row and convert strings to int/floats
+//         tweets_per_topic.forEach(function(d) {
+//             d.Topic = d.Topic;
+//             d.Count = +d.Count; // Convert Count from string to number
+//         });
+//         tweets_per_topic_per_year.forEach(function(d) {
+//             d.Topic = d.Topic;
+//             d.Year = +d.Year; //convert year to number
+//             d.Count = +d.Count; //convert count from string to number
+//         });
+//         aggressiveness_per_topic.forEach(function(d){
+//             d.Topic = d.Topic;
+//             d.Year = +d.Year;
+//             d.Aggressiveness = +d.Aggressiveness;
+//             d.Count = +d.Count;
+//
+//         });
+//         aggressiveness_per_topic_per_year.forEach(function(d){
+//             d.Topic = d.Topic;
+//             d.Aggressiveness = +d.Aggressiveness;
+//             d.Count = +d.Count;
+//         });
+//         sentiment_per_topic.forEach(function(d){
+//             d.Topic = d.Topic;
+//             d.Sentiment = +d.Sentiment;
+//             d.Count = +d.Count;
+//         });
+//         sentiment_per_topic_per_year.forEach(function(d){
+//             d.Topic = d.Topic;
+//             d.Year = +d.Year;
+//             d.Sentiment = +d.Sentiment;
+//             d.Count = +d.Count;
+//         });
+//         stance_per_topic.forEach(function(d){
+//             d.Topic = d.Topic;
+//             d.most_popular_stance = d.most_popular_stance;
+//             d.Count = +d.Count;
+//         });
+//         stance_per_topic_per_year.forEach(function(d){
+//             d.Topic = d.Topic;
+//             d.Year = +d.Year;
+//             d.most_popular_stance = d.most_popular_stance;
+//             d.Count = +d.Count;
+//         });
+//         // No need to do this ^^ for stance_per_topic and stance_per_topic_per_year
+//         // because there are no numerical columns in these csv files.
+//
+//         // Initialize your charts with the processed data
+//         vis2BubbleChart = new Vis2BubbleChart(
+//             'bubbleChartContainer',
+//             tweets_per_topic,
+//             tweets_per_topic_per_year,
+//             aggressiveness_per_topic,
+//             aggressiveness_per_topic_per_year,
+//             sentiment_per_topic,
+//             sentiment_per_topic_per_year,
+//             stance_per_topic,
+//             stance_per_topic_per_year
+//         );
+//         vis2DoughnutChart = new Vis2DoughnutChart(
+//             'doughnutChartContainer',
+//             tweets_per_topic,
+//             tweets_per_topic_per_year,
+//             aggressiveness_per_topic,
+//             aggressiveness_per_topic_per_year,
+//             sentiment_per_topic,
+//             sentiment_per_topic_per_year,
+//             stance_per_topic,
+//             stance_per_topic_per_year
+//         );
+//     });
+
 
 function initializeVis3() {
     Promise.all([

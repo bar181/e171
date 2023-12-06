@@ -28,8 +28,8 @@ class Vis2BubbleChart {
         let vis = this;
 
         vis.margin = { top: 40, right: 40, bottom: 40, left: 40 };
-        vis.width = 500 - vis.margin.left - vis.margin.right;
-        vis.height = 500 - vis.margin.top - vis.margin.bottom;
+        vis.width = 400 - vis.margin.left - vis.margin.right;
+        vis.height = 400 - vis.margin.top - vis.margin.bottom;
 
         vis.svg = d3.select('#' + vis.containerId).append('svg')
             .attr('width', vis.width + vis.margin.left + vis.margin.right)
@@ -97,7 +97,9 @@ class Vis2BubbleChart {
                 vis.lastMouseoverPathFillColor = window.getComputedStyle(event.target).getPropertyValue('fill');
                 d3.select(this).attr('fill', 'gray');
                 vis.tooltip.style('opacity', 1);
-                vis.tooltip.html(`Topic: ${d.data.Topic}<br/><b>Number of Tweets: ${d.data.Count}</b>`)
+                let tooltip_content = `Topic: ${d.data.Topic}<br/>Number of Tweets: ${d.data.Count}<br/>`
+                tooltip_content = tooltip_content + vis.additionalTooltipContent(d.data)
+                vis.tooltip.html(tooltip_content)
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY - 10) + 'px');
             })

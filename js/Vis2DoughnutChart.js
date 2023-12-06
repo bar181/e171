@@ -57,8 +57,10 @@ class Vis2DoughnutChart {
             .sort(null) // Do not sort group by size
             .value(d => d.Count);
 
-        vis.outerRadius = 390; // This controls the overall size of the doughnut chart
-        vis.innerRadius = 375; // This controls the size of the hole, thus creating the "cutout"
+        // vis.outerRadius = 290; // This controls the overall size of the doughnut chart
+        // vis.innerRadius = 275; // This controls the size of the hole, thus creating the "cutout"
+        vis.outerRadius = 290; // This controls the overall size of the doughnut chart
+        vis.innerRadius = 275; // This controls the size of the hole, thus creating the "cutout"
 
         // Define the arc generator
         vis.arc = d3.arc()
@@ -86,8 +88,8 @@ class Vis2DoughnutChart {
         let vis = this;
 
         // Calculate the position for the legend (lower right corner)
-        const legendX = 730; // Adjust width for legend width and padding
-        const legendY = 870; // Adjust height for legend height and padding
+        const legendX = 660; // Adjust width for legend width and padding
+        const legendY = 730; // Adjust height for legend height and padding
 
         // Define a scale for sentiment to color mapping
         let aggressivenessScale = d3.scaleLinear()
@@ -145,8 +147,8 @@ class Vis2DoughnutChart {
         let vis = this;
 
         // Calculate the position for the legend (lower right corner)
-        const legendX = 730; // Adjust width for legend width and padding
-        const legendY = 870; // Adjust height for legend height and padding
+        const legendX = 660; // Adjust width for legend width and padding
+        const legendY = 730; // Adjust height for legend height and padding
 
 
         // Define a scale for sentiment to color mapping
@@ -215,8 +217,8 @@ class Vis2DoughnutChart {
         ];
 
         // Calculate the position for the legend (lower right corner)
-        const legendX = 760; // Adjust width for legend width and padding
-        const legendY = 820; // Adjust height for legend height and padding
+        const legendX = 710; // Adjust width for legend width and padding
+        const legendY = 680; // Adjust height for legend height and padding
 
         // Create legend group, positioned in the top left corner
         vis.stanceLegend = vis.svg.append('g')
@@ -315,7 +317,9 @@ class Vis2DoughnutChart {
                 vis.lastMouseoverPathFillColor = window.getComputedStyle(event.target).getPropertyValue('fill');
                 d3.select(this).attr('fill', 'gray');
                 vis.tooltip.style('opacity', 1);
-                vis.tooltip.html(`Topic: ${d.data.Topic}<br/><b>Number of Tweets: ${d.data.Count}</b>`)
+                let tooltip_content = `Topic: ${d.data.Topic}<br/>Number of Tweets: ${d.data.Count}<br/>`
+                tooltip_content = tooltip_content + vis.additionalTooltipContent(d.data)
+                vis.tooltip.html(tooltip_content)
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY - 10) + 'px');
             })
