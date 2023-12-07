@@ -11,6 +11,18 @@ body{
 .palette-green{
     color: #596a48;
 }
+
+.palette-bright_green{
+    color: #037c36;
+}
+.palette-yellow_green{
+    color: #687019;
+}
+
+.palette-light_green{
+    color: #bad095;
+}
+
 .palette-black{
     color: #212528;
 }
@@ -18,19 +30,26 @@ body{
     color: #999788;
 }
 .palette-lightgray{
-    color: #c9c1b6;
+    background-color: lightgray;
 }
+
+
+.palette-beige{
+    color:#c9c1b6
+}
+
+
 .palette-darkgray{
     color: #403b35;
 }
 .palette-salmon{
-    color: #ff9750;
+    color: #d94628;
 }
 .palette-yellow{
-    color: #ffb605;
+    color: #cf9023;
 }
 .palette-pink{
-    color: #bd4343;
+    color: #ae6f6d;
 }
 
 #fp-nav ul li a span,
