@@ -29,7 +29,7 @@ class Vis2DoughnutChart {
         // Define the dimensions and margins for the chart
         vis.margin = { top: 20, right: 20, bottom: 20, left: 20 };
         vis.width = 1000 - vis.margin.left - vis.margin.right;
-        vis.height = 1000 - vis.margin.top - vis.margin.bottom;
+        vis.height = 600 - vis.margin.top - vis.margin.bottom;
         vis.radius = Math.min(vis.width, vis.height) / 2;
 
 
@@ -59,8 +59,8 @@ class Vis2DoughnutChart {
 
         // vis.outerRadius = 290; // This controls the overall size of the doughnut chart
         // vis.innerRadius = 275; // This controls the size of the hole, thus creating the "cutout"
-        vis.outerRadius = 290; // This controls the overall size of the doughnut chart
-        vis.innerRadius = 275; // This controls the size of the hole, thus creating the "cutout"
+        vis.outerRadius = 270; // This controls the overall size of the doughnut chart
+        vis.innerRadius = 255; // This controls the size of the hole, thus creating the "cutout"
 
         // Define the arc generator
         vis.arc = d3.arc()
