@@ -283,7 +283,6 @@ body{
 
 #doughnutChartContainer, #bubbleChartContainer {
     position: absolute;
-    /*object-position: left;*/
     top: 50%;
     left: 22%;
     transform: translate(-50%, -50%);
@@ -294,12 +293,13 @@ body{
 .vis2-card-area{
     height: 40rem;
     width: 100rem;
-    background-color: #ffffff;
+    background-color: #e8dfd3;
 }
 
 #card-back-next{
     width: 100rem;
     display: flex;
+    background-color: #e8dfd3;
 }
 
 
@@ -311,29 +311,85 @@ body{
     z-index: 10;        /* Ensure it's above other elements */
     cursor: pointer;
     font-size: 2.2rem;/* Change cursor to indicate clickability */
+    background-color: 	#596a48;
+    border: 2px solid #403b35;
 }
 
+#vis2-back-button:hover,
+#vis2-next-button:hover{
+    background-color: #313a27;
+}
+
+/*size related*/
 #year-selector,
 #topic-selector{
     width: 85%;       /* Width of the dropdown */
     height: 50%;       /* Height of the dropdown */
     font-weight: bold;/* Font size of the dropdown text */
     /*padding: 1rem 1rem;  !* Padding inside the dropdown *!*/
-    border-radius: 1rem; /* Rounded corners */
     font-size: 2.2rem;
     margin-top: 1rem;
 }
 
+/* Add this to your CSS file */
+#year-dropdown,
+#topic-dropdown {
+    background-color: 	#999788; /* Change to the desired background color */
+    color: #FFFFFF; /* Change to the desired text color */
+    border: 1px solid #212528; /* Add border styles if needed */
+    padding: 5px; /* Add padding for better appearance */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    font-size: 18px;
+}
 
-#p1{
-    margin-top: 2.2rem;
+
+/* Modified style for the dropdown arrow */
+/* Style the dropdown arrow NOT WORKING*/
+/*#year-selector::after,*/
+/*#topic-selector::after {*/
+/*    !*content: '\25B2'; !* Unicode arrow character *!*!*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    right: 5px;*/
+/*    transform: translateY(-50%);*/
+/*    pointer-events: none;*/
+/*    color: #212528; !* Change arrow color as needed *!*/
+/*    opacity: 1;*/
+/*    transition: transform 0.3s; !* Smooth transition for rotation *!*/
+/*}*/
+
+
+
+/*!* Modified style for the dropdown arrow *!*/
+/*.arrow {*/
+/*    display: inline-block;*/
+/*    transition: transform 0.3s; !* Smooth transition for rotation *!*/
+/*}*/
+
+/*!* Style for rotated arrow *!*/
+/*.rotate-down {*/
+/*    transform: rotate(180deg); !* Rotate arrow *!*/
+/*}*/
+
+
+/* Change color on hover (optional) */
+#year-dropdown:hover,
+#topic-dropdown:hover {
+    background-color: #596a48; /* Change to the desired hover background color */
+}
+
+
+#p_main{
+    margin-bottom: 2.2rem;
 }
 
 #my-text {
     padding-top: 2rem;
     padding-right: 55px;
     margin-top: 10px;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    text-decoration: #212528;
+    /*font-weight: bold;*/
 }
 
 .top-bar-title{

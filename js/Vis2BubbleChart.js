@@ -48,8 +48,8 @@ class Vis2BubbleChart {
             .style('height', 'auto')
             .style('padding', '5px')
             .style('font', '20px sans-serif')
-            .style('background', 'lightsteelblue')
-            .style('border', '0px')
+            .style('background', '#c9c1b6')
+            .style('border', '1px solid #403b35')
             .style('border-radius', '8px')
             .style('pointer-events', 'none');
 
@@ -390,16 +390,16 @@ class Vis2BubbleChart {
 
     getColor(topicName) {
         const colorMap ={
-            'Global stance': '#d3830c',
+            'Global stance': '#b25e18',
             'Importance of Human Intervention': '#574739',
-            'Politics': '#be82bf',
-            'Undefined / One Word Hashtags': '#750a47',
-            'Donald Trump versus Science': '#f01703',
-            'Seriousness of Gas Emissions': '#033f46',
-            'Ideological Positions on Global Warming': '#859a59',
-            'Weather Extremes': '#1d739e',
-            'Impact of Resource Overconsumption': '#e1e10f',
-            'Significance of Pollution Awareness Events': '#16ea08'
+            'Politics': '#8473a1',
+            'Undefined / One Word Hashtags': '#942d45',
+            'Donald Trump versus Science': '#e7866e',
+            'Seriousness of Gas Emissions': '#b59c59',
+            'Ideological Positions on Global Warming': '#99b489',
+            'Weather Extremes': '#048685',
+            'Impact of Resource Overconsumption': '#ffc84a',
+            'Significance of Pollution Awareness Events': '#21724e'
         }
         return colorMap[topicName];
     }
