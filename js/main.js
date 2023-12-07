@@ -97,7 +97,7 @@ const pageNames = [
     // 'next_steps_header',
     'next_steps',
 
-    // wrap up  - to be updated with a game
+    'greta',
     'closing',
 
     'authors',
