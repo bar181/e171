@@ -191,9 +191,9 @@ class Vis4Race  {
             .style("fill", d => {
                 // Check if the topic is in the topicsArray
                 if (vis.topicSelected.includes(d.topic)) {
-                    return "red"; // Set fill color based on topic
+                    return "#596a48"; // Set fill color based on topic
                 } else {
-                    return "steelblue"; // Default color for topics not in the array
+                    return "#c9c1b6"; // Default color for topics not in the array
                 }
             });
 
@@ -209,9 +209,9 @@ class Vis4Race  {
             .style("fill", d => {
                 // Check if the topic is in the topicsArray
                 if (vis.topicSelected.includes(d.topic)) {
-                    return "red"; // Set fill color based on topic
+                    return "#596a48"; // Set fill color based on topic
                 } else {
-                    return "steelblue"; // Default color for topics not in the array
+                    return "#c9c1b6"; // Default color for topics not in the array
                 }
             })
             .on("start", (d, i) => {

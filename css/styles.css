@@ -3,9 +3,44 @@ body{
     font-size: 16px;
     font-family: 'Times New Roman', Times, serif;
 }
+
 .times-new-roman-title {
     font-family: 'Times New Roman', Times, serif;
 }
+
+.palette-green{
+    color: #596a48;
+}
+.palette-black{
+    color: #212528;
+}
+.palette-gray{
+    color: #999788;
+}
+.palette-lightgray{
+    color: #c9c1b6;
+}
+.palette-darkgray{
+    color: #403b35;
+}
+.palette-salmon{
+    color: #ff9750;
+}
+.palette-yellow{
+    color: #ffb605;
+}
+.palette-pink{
+    color: #bd4343;
+}
+
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+    background: #fff;
+    font-size: 24px;
+    border: 1px solid #888;
+
+}
+
 .emoji_big{
     height:200px;
     width: 200px;
@@ -365,7 +400,7 @@ body{
 }
 
 .vis4-topPeakedSpan{
-    color: red;
+    /*color: red;*/
     /*font-size: 1.5em;*/
     /*font-weight: bold;*/
 }
