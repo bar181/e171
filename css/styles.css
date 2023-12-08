@@ -13,7 +13,7 @@ body{
 }
 
 .palette-bright_green{
-    color: #037c36;
+    color: #248c24;
 }
 .palette-yellow_green{
     color: #687019;
@@ -33,9 +33,8 @@ body{
     background-color: lightgray;
 }
 
-
 .palette-beige{
-    color:#c9c1b6
+    color:#c9c1b6;
 }
 
 
@@ -66,7 +65,7 @@ body{
 
 .lyrics {
     width: 100%;
-    height: 530px;
+    height: 720px;
     overflow-y: scroll;
     border: 1px solid #ccc;
     color: #fff;
@@ -74,7 +73,7 @@ body{
     white-space: pre-line;
 }
 .lyrics p {
-    margin: 2px 0;
+    margin: 2px;
 }
 
 .emoji_big{
