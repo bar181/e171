@@ -64,17 +64,13 @@ const scriptNames = [
 const pageNames = [
 
     'p1_title',
-    // 'p2_ask_age',
     'p2_ask_topic',
     'p3_intro',
 
     // brad - vis4 Race Bar Chart fits better here for the story
     'vis4_header',
     'vis4_main',
-    // 'vis4_text',
-
     // brad - Year by Year Google Trends and News Topics
-    // 'vis1_header',
     'vis1_main',
     'vis1_text',
 

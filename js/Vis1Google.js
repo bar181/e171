@@ -9,7 +9,7 @@ class Vis1Google  {
         this.news = vis1News;
 
         this.whatPeaked = "";
-        this.topicHuman = ['Activist', 'Global warming', 'Climate action', 'Climate change', 'Climate crisis', 'Greta Thunberg'];
+        this.topicHuman = ['Activist', 'Global warming', 'Genetically modified', 'EPA', 'Greta Thunberg'];
         this.topicEmissions = ['Carbon emissions', 'Greenhouse gases', 'Sustainability', 'Green ai'];
         this.topicWarming = ['Environment', 'Global warming', 'Renewable energy', 'Ecosystem'];
         this.topicPollution= ['Habitats', 'Ice caps', 'Ocean', 'Sea ice', 'Wildfires'];

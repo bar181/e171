@@ -8,6 +8,14 @@ body{
     font-family: 'Times New Roman', Times, serif;
 }
 
+.arial {
+    font-family: 'Arial', sans-serif;
+}
+
+.bold{
+    font-weight: bold;
+    letter-spacing: 1px;
+}
 .palette-green{
     color: #596a48;
 }
@@ -94,6 +102,11 @@ body{
     width: 50px;
 }
 
+.emoji_mid{
+    height: 70px;
+    width: 70px;
+}
+
 .font_massive{
     font-size: 8rem;
 }
@@ -115,6 +128,7 @@ body{
 
 .vis1-card-image-top{
     position: relative;
+    border-radius: 5px;
 }
 
 .vis1-image-title{
@@ -202,11 +216,12 @@ body{
 }
 
 .vis1-news-item3{
-    font-size: 1.2em;
-    letter-spacing: 5px;
+    font-size: 1.1em;
+    letter-spacing: 3px;
     text-align: left;
-    margin-bottom: 10px;
-    padding:5px;
+    margin-bottom: 8px;
+    padding-left:5px;
+    padding-right:5px;
     font-family: 'Times New Roman', Times, serif;
     border: 1px solid #eeeeee;
 }
@@ -478,7 +493,7 @@ body{
     position: absolute;
     color: #666;
     right: 30px;
-    bottom: 20px;
+    bottom: -20px;
 }
 
 #vis1-redo-button{
