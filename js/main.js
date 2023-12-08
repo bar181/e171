@@ -84,19 +84,19 @@ const pageNames = [
     'vis2_main',
     'vis2_text',
     //
-    // // filip
-    // 'vis3_header',
-    // 'vis3_main',
-    // 'vis3_text',
-    //
-    // // brad - next steps reader can take
-    // // 'next_steps_header',
-    // 'next_steps',
-    //
-    // 'greta',
-    // 'closing',
-    //
-    // 'authors',
+    // filip
+    'vis3_header',
+    'vis3_main',
+    'vis3_text',
+
+    // brad - next steps reader can take
+    // 'next_steps_header',
+    'next_steps',
+
+    'greta',
+    'closing',
+
+    'authors',
 
     // Add more page names here
     // make sure your page includes the id for your visualization !
