@@ -73,8 +73,8 @@ const pageNames = [
     // brad - Year by Year Google Trends and News Topics
     'vis1_main',
     'vis1_text',
-
-    // brad - vis4 line chart with descriptions
+    //
+    // // brad - vis4 line chart with descriptions
     'vis5_header',
     'vis5_main',
     'vis1_text',
@@ -83,20 +83,20 @@ const pageNames = [
     'vis2_header',
     'vis2_main',
     'vis2_text',
-
-    // filip
-    'vis3_header',
-    'vis3_main',
-    'vis3_text',
-
-    // brad - next steps reader can take
-    // 'next_steps_header',
-    'next_steps',
-
-    'greta',
-    'closing',
-
-    'authors',
+    //
+    // // filip
+    // 'vis3_header',
+    // 'vis3_main',
+    // 'vis3_text',
+    //
+    // // brad - next steps reader can take
+    // // 'next_steps_header',
+    // 'next_steps',
+    //
+    // 'greta',
+    // 'closing',
+    //
+    // 'authors',
 
     // Add more page names here
     // make sure your page includes the id for your visualization !

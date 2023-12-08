@@ -206,13 +206,13 @@ class Vis5Line  {
 
         // Reset all lines to default style
         vis.linesGroup.selectAll(".vis-data-line")
-            .attr("stroke", "lightgray")
+            .attr("stroke", "#999788")
             .attr("stroke-width", 1);
 
         // Highlight the line for the selected topic
         vis.linesGroup.selectAll(".vis-data-line")
             .filter(function(d) { return d3.select(this).attr("data-topic") === selectedTopic; })
-            .attr("stroke", "steelblue")
+            .attr("stroke", "#596a48")
             .attr("stroke-width", 8);
 
 

@@ -21,18 +21,22 @@ topicOptions.forEach(option => {
         switch (optionId) {
             case 'option1':
                 userTopic = 'Human Impact';
+                emojiName = 'Emmett';
                 topicImage = "images/emojis/emmett.png";
                 break;
             case 'option2':
                 userTopic = 'Gas Emissions';
+                emojiName = 'Herbie';
                 topicImage = "images/emojis/herbie.png";
                 break;
             case 'option3':
                 userTopic = 'Global Warming';
+                emojiName = 'Sunny';
                 topicImage = "images/emojis/sunny.png";
                 break;
             case 'option4':
                 userTopic = 'Pollution and Nature';
+                emojiName = 'Oscar';
                 topicImage = "images/emojis/oscar.png";
                 break;
             default:
@@ -62,12 +66,43 @@ function globalTopicChanges() {
     vis4SpanElements.forEach(spanElement => {
         spanElement.textContent = userTopic;
     });
+
+    const emojiNameElements = document.querySelectorAll('.emojiName');
+    emojiNameElements.forEach(spanElement => {
+        spanElement.textContent = emojiName;
+    });
+
+    toggleParagraphVisibility();
 }
 
 function vis4TopicChanges() {
     console.log("vis4TopicChanges clicked", userTopic)
     vis4Race.wrangleData();
 
+}
+
+function toggleParagraphVisibility() {
+    var topicEmmett = document.getElementById('topic-emmett');
+    var topicHerbie = document.getElementById('topic-herbie');
+    var topicSunny = document.getElementById('topic-sunny');
+    var topicOscar = document.getElementById('topic-oscar');
+
+    // Hide all paragraphs initially
+    topicEmmett.classList.add('d-none');
+    topicHerbie.classList.add('d-none');
+    topicSunny.classList.add('d-none');
+    topicOscar.classList.add('d-none');
+
+    // Show the appropriate paragraph based on emojiName
+    if (emojiName === 'Emmett') {
+        topicEmmett.classList.remove('d-none');
+    } else if (emojiName === 'Herbie') {
+        topicHerbie.classList.remove('d-none');
+    } else if (emojiName === 'Sunny') {
+        topicSunny.classList.remove('d-none');
+    } else if (emojiName === 'Oscar') {
+        topicOscar.classList.remove('d-none');
+    }
 }
 
 
