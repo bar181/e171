@@ -4,6 +4,10 @@
 
 let vis3SelectedCategory = "Signed";
 
+
+// Initialize slider
+vis3MapSlider = document.getElementById('mapSlider');
+
 class Vis3Map {
 
     constructor(parentElement, geoData, governmentData, emissionsData, parisData) {
@@ -213,7 +217,21 @@ class Vis3Map {
                     d3.selectAll(".country").attr("d", vis.path)
                     d3.selectAll(".graticule").attr("d", vis.path);
                 })
-        )
+        );
+
+        // Create the slider
+        noUiSlider.create(vis3MapSlider, {
+            start: [4000],
+            range: {
+                'min': [2000],
+                '30%': [4000],
+                '70%': [8000],
+                'max': [10000]
+            }
+        });
+
+        console.log(vis3MapSlider)
+
 
         vis.wrangleData()
 
