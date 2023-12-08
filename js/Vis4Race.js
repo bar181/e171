@@ -17,7 +17,7 @@ class Vis4Race  {
         this.barsPadding = 4;
 
         this.whatPeaked = "";
-        this.topicHuman = ['Activist', 'Global warming', 'Climate action', 'Climate change', 'Climate crisis', 'Greta Thunberg'];
+        this.topicHuman = ['Activist', 'Global warming', 'Genetically modified', 'EPA', 'Greta Thunberg', 'Climate action'];
         this.topicEmissions = ['Carbon emissions', 'Greenhouse gases', 'Sustainability', 'Green ai'];
         this.topicWarming = ['Environment', 'Global warming', 'Renewable energy', 'Ecosystem'];
         this.topicPollution= ['Habitats', 'Ice caps', 'Ocean', 'Sea ice', 'Wildfires'];
@@ -30,7 +30,7 @@ class Vis4Race  {
         let vis = this;
 
         // Define margins and dimensions
-        vis.margin = { top: 20, right: 80, bottom: 10, left: 20 };
+        vis.margin = { top: 0, right: 80, bottom: 10, left: 20 };
         const yHeight = vis.itemsToShow * ( vis.barsHeight + vis.barsPadding) +vis.barsHeight; //
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = yHeight - vis.margin.top - vis.margin.bottom; // Use the calculated yHeight
@@ -193,7 +193,7 @@ class Vis4Race  {
                 if (vis.topicSelected.includes(d.topic)) {
                     return "#596a48"; // Set fill color based on topic
                 } else {
-                    return "#c9c1b6"; // Default color for topics not in the array
+                    return "#999788"; // Default color for topics not in the array
                 }
             });
 
@@ -211,7 +211,7 @@ class Vis4Race  {
                 if (vis.topicSelected.includes(d.topic)) {
                     return "#596a48"; // Set fill color based on topic
                 } else {
-                    return "#c9c1b6"; // Default color for topics not in the array
+                    return "#999788"; // Default color for topics not in the array
                 }
             })
             .on("start", (d, i) => {

@@ -4,14 +4,15 @@
 
     <!-- Container for the rest of the content -->
     <div class="container" style="position: relative; z-index: 1;">
-        <div class="card mb-2 py-3">
+        <div class="card mb-2 py-2 bg-palette-beige">
             <div class="d-flex justify-content-around">
                 <div>
-                    <button id="vis1-back-button" class="btn btn-primary ">Back</button>
+                    <button id="vis1-back-button" class="btn btn-primary back-button">Back</button>
                 </div>
                 <div class="col-md-8">
-                    <h2 class="text-center card-text-small palette-green" >
-                        <img src="images/emojis/emmett.png" class="user-topic-image emoji_small" alt="Icon" />Select a Year to Explore
+                    <h2 class="text-center card-text-small palette-green bold" >
+                        <img src="images/emojis/emmett.png" class="user-topic-image emoji_small " alt="Icon"
+                        />Select a Year to Explore
                     </h2>
                     <div id="slider-container" class="w-100">
                         <input type="range" min="2004" max="2023" step="1" value="2004" id="vis1-slider" class="vis1-year-range vis1-slider" />
@@ -19,47 +20,50 @@
                     </div>
                 </div>
                 <div>
-                    <button id="vis1-next-button" class="btn btn-primary">Next</button>
+                    <button id="vis1-next-button" class="btn btn-primary back-button">Next</button>
                 </div>
             </div>
         </div>
 
-        <div class="card card-area shadow">
+
+        <div class="card card-area shadow mt-2 bg-palette-beige">
             <div class="card-body card-center-body p-0">
                 <div class="row w-100">
                     <div class="col-md-6">
                         <div class="w-100">
-                            <h3 class="text-center font_massive palette-green" ><span
-                                    class="vis1-year"></span></h3>
+                            <h5 class="text-center font_massive palette-green m-0" ><span
+                                    class="vis1-year"></span></h5>
                         </div>
 
                         <div class="w-100 d-flex align-items-left">
-                            <img src="images/emojis/emmett.png" class="user-topic-image emoji_small" alt="Icon" />
+                            <img src="images/emojis/emmett.png" class="user-topic-image emoji_mid" alt="Icon" />
                             <div>
                                 <h5 class="mx-2 mb-0" style="min-height: 60px">
-                                    <span class="globalTopic vis4-topPeakedSpan palette-green">Human Impact</span>
+                                    <span class="globalTopic vis4-topPeakedSpan palette-bright-green bold arial">Human
+                                        Impact</span>
                                     Searches that peaked in their popularity:
-                                    <span id="vis1-peaked-span" class="vis1-topPeakedSpan palette-green"></span>
+                                    <span id="vis1-peaked-span"
+                                          class="vis1-topPeakedSpan palette-bright-green bold arial"></span>
                                 </h5>
                             </div>
                         </div>
                         <hr class="mt-1">
                         <div class="w-100">
-                            <h5 class="text-left">Do you remember these other news stories?</h5>
+                            <h5 class="text-left palette-green">Do you remember these other news stories?</h5>
                         </div>
-                        <div class="w-100 text-left pt-2" style="color: #777777">
+                        <div class="w-100 text-left pt-2 font-monospace" style="color: #777777">
                             <div id="vis1-news"></div>
                         </div>
                     </div>
-                    <div class="col-md-6 py-3" style="background-color:#403b35">
+                    <div class="col-md-6 py-3 rounded" style="background-color:#403b35">
                         <div>
-                            <h3 class="text-center pb-3" style="color:white">PEAKING TOPICS ON GOOGLE</h3>
+                            <h3 class="text-center " style="color:white">PEAKING TOPICS ON GOOGLE</h3>
                         </div>
-                        <div style="min-height: 165px;">
+                        <div style="min-height: 100px;">
                             <div id="vis1-images" style="position: relative"></div>
                         </div>
                         <div class="text-center">
-                            <div id="vis1Google" class="vis1-visualization"></div>
+                            <div id="vis1Google" class="vis1-visualization "></div>
                         </div>
                     </div>
                 </div>

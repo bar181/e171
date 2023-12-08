@@ -9,7 +9,8 @@ class Vis1Google  {
         this.news = vis1News;
 
         this.whatPeaked = "";
-        this.topicHuman = ['Activist', 'Global warming', 'Climate action', 'Climate change', 'Climate crisis', 'Greta Thunberg'];
+        this.topicHuman = ['Activist', 'Global warming', 'Genetically modified', 'EPA', 'Greta Thunberg', 'Climate' +
+        ' action'];
         this.topicEmissions = ['Carbon emissions', 'Greenhouse gases', 'Sustainability', 'Green ai'];
         this.topicWarming = ['Environment', 'Global warming', 'Renewable energy', 'Ecosystem'];
         this.topicPollution= ['Habitats', 'Ice caps', 'Ocean', 'Sea ice', 'Wildfires'];
@@ -199,7 +200,7 @@ class Vis1Google  {
                 if (vis.topicSelected.includes(d.topic)) {
                     return "#596a48"; // Set fill color based on topic
                 } else {
-                    return "#c9c1b6"; // Default color for topics not in the array
+                    return "#999788"; // Default color for topics not in the array
                 }
             });
 
@@ -216,7 +217,7 @@ class Vis1Google  {
                 if (vis.topicSelected.includes(d.topic)) {
                     return "#596a48"; // Set fill color based on topic
                 } else {
-                    return "#c9c1b6"; // Default color for topics not in the array
+                    return "#999788"; // Default color for topics not in the array
                 }
             });
 

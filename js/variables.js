@@ -15,6 +15,7 @@ let vis3map = null;
 
 let userAge = 30; // default age
 let userTopic = 'Human Impact'; // default Human Impact
+let emojiName = 'Emmett';
 let userTopicOptions = ['Human Impact', 'Gas Emissions', 'Global Warming', 'Pollution and Nature'];
 let topicImage = 'images/emojis/emmett.png'; // default Human Impact
 

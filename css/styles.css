@@ -8,18 +8,26 @@ body{
     font-family: 'Times New Roman', Times, serif;
 }
 
+.arial {
+    font-family: 'Arial', sans-serif;
+}
+
+.bold{
+    font-weight: bold;
+    letter-spacing: 1px;
+}
 .palette-green{
     color: #596a48;
 }
 
-.palette-bright_green{
+.palette-bright-green{
     color: #248c24;
 }
-.palette-yellow_green{
+.palette-yellow-green{
     color: #687019;
 }
 
-.palette-light_green{
+.palette-light-green{
     color: #bad095;
 }
 
@@ -34,7 +42,11 @@ body{
 }
 
 .palette-beige{
-    color:#c9c1b6;
+    color:#e8dfd3;
+}
+
+.bg-palette-beige{
+    background-color:#e8dfd3;
 }
 
 .palette-darkgray{
@@ -76,8 +88,8 @@ body{
 }
 
 .emoji_big{
-    height:200px;
-    width: 200px;
+    height:90%;
+    width: 90%;
     border: 1px solid #666666;
     border-radius: 15px;
     box-shadow: 0 0 5px #dddddd;
@@ -90,6 +102,11 @@ body{
 .emoji_small{
     height:50px;
     width: 50px;
+}
+
+.emoji_mid{
+    height: 70px;
+    width: 70px;
 }
 
 .font_massive{
@@ -113,6 +130,7 @@ body{
 
 .vis1-card-image-top{
     position: relative;
+    border-radius: 5px;
 }
 
 .vis1-image-title{
@@ -128,7 +146,7 @@ body{
 
 .card-area{
     min-height: 400px;
-    background-color: white;
+    /*background-color: white;*/
 }
 .card-area-transparent{
     min-height: 400px;
@@ -160,12 +178,21 @@ body{
     width: 90%;
 }
 
+/*.vis1-slider::-webkit-slider-runnable-track {*/
+/*    background-color: #248c24; !* Change this to your desired color *!*/
+/*}*/
+
+/*!* Customize the range input thumb (handle) *!*/
+/*.vis1-slider::-webkit-slider-thumb {*/
+/*    background-color: #248c24; !* Change this to your desired color *!*/
+/*}*/
+
 /* Increase the size of the thumb (slider handle) to 20px */
 .vis1-slider::-webkit-slider-thumb {
     width: 20px;
     height: 20px;
-    background-color: #007bff; /* You can change the color if desired */
-    border: 2px solid #007bff; /* Add a border to the thumb */
+    background-color: #248c24; /* You can change the color if desired */
+    border: 2px solid #248c24; /* Add a border to the thumb */
     border-radius: 50%; /* Make it a circle */
     cursor: pointer;
 }
@@ -173,8 +200,8 @@ body{
 .vis1-slider::-moz-range-thumb {
     width: 20px;
     height: 20px;
-    background-color: #007bff;
-    border: 2px solid #007bff;
+    background-color: #248c24;
+    border: 2px solid #248c24;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -200,11 +227,12 @@ body{
 }
 
 .vis1-news-item3{
-    font-size: 1.2em;
-    letter-spacing: 5px;
+    font-size: 1.1em;
+    letter-spacing: 3px;
     text-align: left;
-    margin-bottom: 10px;
-    padding:5px;
+    margin-bottom: 8px;
+    padding-left:5px;
+    padding-right:5px;
     font-family: 'Times New Roman', Times, serif;
     border: 1px solid #eeeeee;
 }
@@ -309,7 +337,7 @@ body{
 
 /* Visualization Mockup */
 .vis1-visualization {
-    background-color: #fff;
+    background-color: #fffdf7;
     border: 1px solid #ddd;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -372,6 +400,21 @@ body{
     background-color: #e8dfd3;
 }
 
+.back-button{
+    padding: 1rem;      /* Increase padding */
+    /*margin: 1rem;       !* Adjust external spacing *!*/
+    position: relative; /* Control positioning */
+    z-index: 10;        /* Ensure it's above other elements */
+    cursor: pointer;
+    font-size: 2.2rem;/* Change cursor to indicate clickability */
+    background-color: 	#596a48;
+    border: 2px solid #403b35;
+}
+
+.back-button:hover{
+    background-color: #313a27;
+}
+
 
 #vis2-back-button,
 #vis2-next-button{
@@ -403,7 +446,8 @@ body{
 
 /* Add this to your CSS file */
 #year-dropdown,
-#topic-dropdown {
+#topic-dropdown,
+#vis5-menu{
     background-color: 	#999788; /* Change to the desired background color */
     color: #FFFFFF; /* Change to the desired text color */
     border: 1px solid #212528; /* Add border styles if needed */
@@ -444,7 +488,8 @@ body{
 
 /* Change color on hover (optional) */
 #year-dropdown:hover,
-#topic-dropdown:hover {
+#topic-dropdown:hover,
+#vis5-menu:hover{
     background-color: #596a48; /* Change to the desired hover background color */
 }
 
@@ -476,7 +521,7 @@ body{
     position: absolute;
     color: #666;
     right: 30px;
-    bottom: 20px;
+    bottom: -20px;
 }
 
 #vis1-redo-button{
