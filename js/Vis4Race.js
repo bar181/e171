@@ -30,7 +30,7 @@ class Vis4Race  {
         let vis = this;
 
         // Define margins and dimensions
-        vis.margin = { top: 0, right: 80, bottom: 10, left: 20 };
+        vis.margin = { top: 0, right: 80, bottom: 10, left: 40 };
         const yHeight = vis.itemsToShow * ( vis.barsHeight + vis.barsPadding) +vis.barsHeight; //
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = yHeight - vis.margin.top - vis.margin.bottom; // Use the calculated yHeight
@@ -70,6 +70,7 @@ class Vis4Race  {
             .style("font-size", "20px")
             .text("Year over Year relative searches on Google from 2004-2023");
 
+
         // Create a line on the right with the text "Peak"
         vis.svg.append("line")
             .attr("x1", vis.width + (vis.barsHeight + vis.barsPadding *2))
@@ -77,6 +78,16 @@ class Vis4Race  {
             .attr("x2", vis.width + (vis.barsHeight + vis.barsPadding *2))
             .attr("y2", vis.height)
             .attr("stroke", "black");
+
+
+        vis.svg.append("text")
+            .attr("x", -30) // Adjust the x position as needed
+            .attr("y", vis.height / 2)  // Adjust the y position as needed
+            .attr("dy", "0.35em") // Adjust vertical alignment
+            .style("text-anchor", "start")
+            .style("font-size", "12px")
+            .attr("transform", "rotate(270, " + (-20) + ", " + (vis.height / 2) + ")") // Rotate 90 degrees
+            .text("Relative Search Popularity");
 
         vis.svg.append("text")
             .attr("x", vis.width + 50) // Adjust the x position as needed

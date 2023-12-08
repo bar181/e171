@@ -75,7 +75,7 @@ class Vis5Line  {
         });
 
         // Define margins and dimensions
-        vis.margin = { top: 20, right: 80, bottom: 60, left: 40 };
+        vis.margin = { top: 20, right: 50, bottom: 60, left: 40 };
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
@@ -187,6 +187,15 @@ class Vis5Line  {
 
 
         });
+
+        vis.svg.append("text")
+            .attr("x", -40) // Adjust the x position as needed
+            .attr("y", vis.height / 2)  // Adjust the y position as needed
+            .attr("dy", "0.35em") // Adjust vertical alignment
+            .style("text-anchor", "end")
+            .style("font-size", "12px")
+            .attr("transform", "rotate(270, " + (-30) + ", " + (vis.height / 2 ) + ")") // Rotate 90 degrees
+            .text("Relative Search Popularity (each topic peaks at 100)");
 
         vis.wrangleData();
     }

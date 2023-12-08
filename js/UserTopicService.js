@@ -16,6 +16,7 @@ topicOptions.forEach(option => {
         // Add the 'emoji_big_selected' class to the clicked option
         option.querySelector('img').classList.add('emoji_big_selected');
 
+
         // Update the userTopic variable based on the clicked option
         const optionId = option.getAttribute('id');
         switch (optionId) {
@@ -23,21 +24,25 @@ topicOptions.forEach(option => {
                 userTopic = 'Human Impact';
                 emojiName = 'Emmett';
                 topicImage = "images/emojis/emmett.png";
+                userTopicOptions = "Activist, Global warming, Genetically modified, EPA, Greta Thunberg, Climate action";
                 break;
             case 'option2':
                 userTopic = 'Gas Emissions';
                 emojiName = 'Herbie';
                 topicImage = "images/emojis/herbie.png";
+                userTopicOptions = "Carbon emissions, Greenhouse gases, Sustainability, Green AI";
                 break;
             case 'option3':
                 userTopic = 'Global Warming';
                 emojiName = 'Sunny';
                 topicImage = "images/emojis/sunny.png";
+                userTopicOptions = "Environment, Global warming, Renewable energy, Ecosystem";
                 break;
             case 'option4':
                 userTopic = 'Pollution and Nature';
                 emojiName = 'Oscar';
                 topicImage = "images/emojis/oscar.png";
+                userTopicOptions = "Habitats, Ice caps, Ocean, Sea ice, Wildfires";
                 break;
             default:
                 userTopic = 'Human Impact'; // Default to 'Human Impact' if none matched
@@ -70,6 +75,12 @@ function globalTopicChanges() {
     const emojiNameElements = document.querySelectorAll('.emojiName');
     emojiNameElements.forEach(spanElement => {
         spanElement.textContent = emojiName;
+    });
+
+
+    const globalTopicListElements = document.querySelectorAll('.globalTopicList');
+    globalTopicListElements.forEach(spanElement => {
+        spanElement.textContent = userTopicOptions;
     });
 
     toggleParagraphVisibility();

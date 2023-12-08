@@ -522,7 +522,7 @@ body{
     position: absolute;
     color: #666;
     right: 30px;
-    bottom: -20px;
+    bottom: 0;
 }
 
 #vis1-redo-button{

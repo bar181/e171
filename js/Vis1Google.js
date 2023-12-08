@@ -26,7 +26,7 @@ class Vis1Google  {
         const yHeight = vis.itemsToShow * 29; // Adjust the multiplier as needed for spacing
 
         // Define margins and dimensions
-        vis.margin = { top: 30, right: 80, bottom: 40, left: 140 };
+        vis.margin = { top: 30, right: 50, bottom: 40, left: 110 };
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = yHeight - vis.margin.top - vis.margin.bottom; // Use the calculated yHeight
 
@@ -66,16 +66,16 @@ class Vis1Google  {
         // Append a label to the x-axis
         vis.svg.append("text")
             .attr("class", "x-axis-label label-small")
-            .attr("x", 80)// Position the label in the center of the x-axis
+            .attr("x", 85)// Position the label in the center of the x-axis
             .attr("y", vis.height + vis.margin.bottom - 10) // Adjust the y position as needed
             .style("text-anchor", "middle") // Center the text horizontally
             .text("Relative search popularity peaks at 100 for each search term");
 
         // Create a line on the right with the text "Peak"
         vis.svg.append("line")
-            .attr("x1", vis.width - 2)
+            .attr("x1", vis.width +2 )
             .attr("y1", 0)
-            .attr("x2", vis.width - 2)
+            .attr("x2", vis.width +2)
             .attr("y2", vis.height)
             .attr("stroke", "black");
 
@@ -191,7 +191,7 @@ class Vis1Google  {
         const enterBars = bars.enter()
             .append("rect")
             .attr("class", "bar")
-            .attr("x", 0) // Starting position for animation
+            .attr("x", 1) // Starting position for animation
             .attr("y", (d, i) => i * 25) // Vertical position for each bar
             .attr("width", 0) // Starting width for animation
             .attr("height", 20) // Height of the bars
@@ -208,7 +208,7 @@ class Vis1Google  {
         bars.merge(enterBars)
             .transition()
             .duration(transitionDuration)
-            .attr("x", 0) // Starting position for animation
+            .attr("x", 1) // Starting position for animation
             .attr("y", (d, i) => i * 25) // Vertical position for each bar
             .attr("width", d => vis.xScale(d.value)) // Bar width based on value
             .attr("height", 20) // Height of the bars
