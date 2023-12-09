@@ -18,25 +18,25 @@
     GLOBAL VARIABLES
 */
 // Common variables used by all Visualizations
-let userAge = 30; // default age
-
-let userTopic = 'Human Impact'; // default Human Impact
-let userTopicOptions = ['Human Impact', 'Gas Emissions', 'Global Warming', 'Pollution and Nature'];
-
-
-// Visualization Level Variables
-let vis1Data = null;
-let vis1Google = null;
-let vis1News = null;
-
-let vis2BubbleChart = null;
-let vis2DoughnutChart = null;
-
-let vis3Data = null;
-let vis4Data = null;
-let vis5Data = null;
-
-let vis3map = null;
+// let userAge = 30; // default age
+//
+// let userTopic = 'Human Impact'; // default Human Impact
+// let userTopicOptions = ['Human Impact', 'Gas Emissions', 'Global Warming', 'Pollution and Nature'];
+// let topicImage = 'images/emojis/emmett.png'; // default Human Impact
+//
+// // Visualization Level Variables
+// let vis1Data = null;
+// let vis1Google = null;
+// let vis1News = null;
+//
+// let vis2BubbleChart = null;
+// let vis2DoughnutChart = null;
+//
+// let vis3Data = null;
+// let vis4Data = null;
+// let vis5Data = null;
+//
+// let vis3map = null;
 
 const userAgeInput = document.getElementById("userAgeInput");
 
@@ -46,6 +46,8 @@ const userAgeInput = document.getElementById("userAgeInput");
 
 // Array of script names in the desired order
 const scriptNames = [
+    'variables',
+    'UserTopicService',
     'Vis1Service',
     'Vis1Google',
     'Vis2Service',
@@ -55,37 +57,32 @@ const scriptNames = [
     'Vis2BubbleChart',
     'Vis2DoughnutChart',
     'Vis3map',
-    ];
+];
 
 
 // Array of page names in the desired order
 const pageNames = [
 
     'p1_title',
-    // 'p2_ask_age',
     'p2_ask_topic',
     'p3_intro',
 
-    // brad - vis4 Race Bar Chart fits better here for the story
+    // brad - vis4 and via 1 combined vi4: Race Bar Chart, vis1: Year-by-Year
     'vis4_header',
     'vis4_main',
-    // 'vis4_text',
-
-    // brad - Year by Year Google Trends and News Topics
-    // 'vis1_header',
     'vis1_main',
     'vis1_text',
-
-    // brad - vis4 line chart with descriptions
+    //
+    // // brad - vis5 line chart with descriptions
     'vis5_header',
     'vis5_main',
-    'vis1_text',
+    'vis5_text',
 
     // jess
     'vis2_header',
     'vis2_main',
     'vis2_text',
-
+    //
     // filip
     'vis3_header',
     'vis3_main',
@@ -95,7 +92,7 @@ const pageNames = [
     // 'next_steps_header',
     'next_steps',
 
-    // wrap up  - to be updated with a game
+    'greta',
     'closing',
 
     'authors',
@@ -109,8 +106,9 @@ const pageNames = [
 // Add the name of the initialize function for each visualization here
 function loadData() {
 
-    initializeVis2();
+
     initializeVis1();
+    initializeVis2();
     initializeVis3();
 }
 
@@ -167,8 +165,7 @@ function initializeVis1Main() {
 }
 
 function initializeVis2() {
-    // Load all CSV files concurrently using Promise.all
-    Promise.all([
+    let promises = [
         d3.csv("data/tweets_per_topic.csv"),
         d3.csv("data/tweets_per_topic_per_year.csv"),
         d3.csv("data/aggressiveness_per_topic.csv"),
@@ -177,89 +174,111 @@ function initializeVis2() {
         d3.csv("data/sentiment_per_topic_per_year.csv"),
         d3.csv("data/stance_per_topic.csv"),
         d3.csv("data/stance_per_topic_per_year.csv")
-    ]).then(function([
-            tweets_per_topic,
-            tweets_per_topic_per_year,
-            aggressiveness_per_topic,
-            aggressiveness_per_topic_per_year,
-            sentiment_per_topic,
-            sentiment_per_topic_per_year,
-            stance_per_topic,
-            stance_per_topic_per_year
-        ]) {
+    ];
 
+    Promise.all(promises).then(([
+                                    tweets_per_topic,
+                                    tweets_per_topic_per_year,
+                                    aggressiveness_per_topic,
+                                    aggressiveness_per_topic_per_year,
+                                    sentiment_per_topic,
+                                    sentiment_per_topic_per_year,
+                                    stance_per_topic,
+                                    stance_per_topic_per_year
+                                ]) => {
         // For all datasets containing numerical columns (integers or floats)
         // loop through each row and convert strings to int/floats
-        tweets_per_topic.forEach(function(d) {
+        tweets_per_topic.forEach(function (d) {
             d.Topic = d.Topic;
             d.Count = +d.Count; // Convert Count from string to number
         });
-        tweets_per_topic_per_year.forEach(function(d) {
+        tweets_per_topic_per_year.forEach(function (d) {
             d.Topic = d.Topic;
             d.Year = +d.Year; //convert year to number
             d.Count = +d.Count; //convert count from string to number
         });
-        aggressiveness_per_topic.forEach(function(d){
+        aggressiveness_per_topic.forEach(function (d) {
             d.Topic = d.Topic;
             d.Year = +d.Year;
             d.Aggressiveness = +d.Aggressiveness;
             d.Count = +d.Count;
 
         });
-        aggressiveness_per_topic_per_year.forEach(function(d){
+        aggressiveness_per_topic_per_year.forEach(function (d) {
             d.Topic = d.Topic;
             d.Aggressiveness = +d.Aggressiveness;
             d.Count = +d.Count;
         });
-        sentiment_per_topic.forEach(function(d){
+        sentiment_per_topic.forEach(function (d) {
             d.Topic = d.Topic;
             d.Sentiment = +d.Sentiment;
             d.Count = +d.Count;
         });
-        sentiment_per_topic_per_year.forEach(function(d){
+        sentiment_per_topic_per_year.forEach(function (d) {
             d.Topic = d.Topic;
             d.Year = +d.Year;
             d.Sentiment = +d.Sentiment;
             d.Count = +d.Count;
         });
-        stance_per_topic.forEach(function(d){
+        stance_per_topic.forEach(function (d) {
             d.Topic = d.Topic;
             d.most_popular_stance = d.most_popular_stance;
             d.Count = +d.Count;
         });
-        stance_per_topic_per_year.forEach(function(d){
+        stance_per_topic_per_year.forEach(function (d) {
             d.Topic = d.Topic;
             d.Year = +d.Year;
             d.most_popular_stance = d.most_popular_stance;
             d.Count = +d.Count;
         });
-        // No need to do this ^^ for stance_per_topic and stance_per_topic_per_year
-        // because there are no numerical columns in these csv files.
 
-        // Initialize your charts with the processed data
-        vis2BubbleChart = new Vis2BubbleChart(
-            'bubbleChartContainer',
-            tweets_per_topic,
-            tweets_per_topic_per_year,
-            aggressiveness_per_topic,
-            aggressiveness_per_topic_per_year,
-            sentiment_per_topic,
-            sentiment_per_topic_per_year,
-            stance_per_topic,
-            stance_per_topic_per_year
-        );
-        vis2DoughnutChart = new Vis2DoughnutChart(
-            'doughnutChartContainer',
-            tweets_per_topic,
-            tweets_per_topic_per_year,
-            aggressiveness_per_topic,
-            aggressiveness_per_topic_per_year,
-            sentiment_per_topic,
-            sentiment_per_topic_per_year,
-            stance_per_topic,
-            stance_per_topic_per_year
-        );
-    });
+        // $(scriptNames).each(function(i, value){
+        //     $.holdReady(true)
+        //     $.getScript (value).done(function ( script, status){
+        //         console.log("Loaded " + i  + " : " + value + " " + status)
+        //         $.holdReady(false);
+        //     })
+        // })
+
+        try {
+            vis2BubbleChart = new Vis2BubbleChart(
+                'bubbleChartContainer',
+                tweets_per_topic,
+                tweets_per_topic_per_year,
+                aggressiveness_per_topic,
+                aggressiveness_per_topic_per_year,
+                sentiment_per_topic,
+                sentiment_per_topic_per_year,
+                stance_per_topic,
+                stance_per_topic_per_year
+            );
+        }
+        catch (error){
+            if (error.name = "ReferenceError")
+                console.log(error.message)
+            console.log("Error Occured While Loading Bubble Chart \n ++++++++++++ " + error)
+        }
+        try {
+            vis2DoughnutChart = new Vis2DoughnutChart(
+                'doughnutChartContainer',
+                tweets_per_topic,
+                tweets_per_topic_per_year,
+                aggressiveness_per_topic,
+                aggressiveness_per_topic_per_year,
+                sentiment_per_topic,
+                sentiment_per_topic_per_year,
+                stance_per_topic,
+                stance_per_topic_per_year
+            );
+        }catch (error){
+            if (error.name = "ReferenceError")
+                console.log(error.message)
+            console.log("Error Occured While Loading Doughnut Chart \n ++++++++++++ " + error)
+        }
+
+    }).catch((error)=>{
+        console.log("Error Occured While Loading Data for Bubble and Doughnut Chart \n ++++++++++++ " + error)
+    })
 }
 
 function initializeVis3() {
@@ -285,6 +304,7 @@ window.addEventListener('load', () => {
         .then(() => {
 
             new fullpage('#fullpage', {
+                licenseKey: 'gplv3-license',
                 anchors: pageNames,
                 navigationTooltips: pageNames,
                 css3: true,

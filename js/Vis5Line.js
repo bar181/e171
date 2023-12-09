@@ -14,6 +14,8 @@ class Vis5Line  {
         });
         this.topicList = Array.from(topicsSet);
 
+        console.log("topicList", this.topicList);
+
         // default topic
         this.selectedTopic = this.topicList[0];
 
@@ -75,7 +77,7 @@ class Vis5Line  {
         });
 
         // Define margins and dimensions
-        vis.margin = { top: 20, right: 80, bottom: 60, left: 40 };
+        vis.margin = { top: 20, right: 50, bottom: 60, left: 40 };
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
@@ -188,6 +190,15 @@ class Vis5Line  {
 
         });
 
+        vis.svg.append("text")
+            .attr("x", -40) // Adjust the x position as needed
+            .attr("y", vis.height / 2)  // Adjust the y position as needed
+            .attr("dy", "0.35em") // Adjust vertical alignment
+            .style("text-anchor", "end")
+            .style("font-size", "12px")
+            .attr("transform", "rotate(270, " + (-30) + ", " + (vis.height / 2 ) + ")") // Rotate 90 degrees
+            .text("Relative Search Popularity (each topic peaks at 100)");
+
         vis.wrangleData();
     }
 
@@ -206,14 +217,15 @@ class Vis5Line  {
 
         // Reset all lines to default style
         vis.linesGroup.selectAll(".vis-data-line")
-            .attr("stroke", "lightgray")
+            .attr("stroke", "#999788")
             .attr("stroke-width", 1);
 
         // Highlight the line for the selected topic
         vis.linesGroup.selectAll(".vis-data-line")
             .filter(function(d) { return d3.select(this).attr("data-topic") === selectedTopic; })
-            .attr("stroke", "steelblue")
+            .attr("stroke", "#596a48")
             .attr("stroke-width", 8);
+
 
         let selectedTopicData = vis.data.find(d => d.Topic === selectedTopic);
         if (selectedTopicData && selectedTopicData.Image) {
@@ -226,7 +238,7 @@ class Vis5Line  {
                 .style("width", "100%");
         } else {
             // Handle cases where the image is not found
-            d3.select("#vis5-image").html("No image available for " + selectedTopic);
+            d3.select("#vis5-image").html("Select a Topic");
         }
 
         // this.topicWithMaxYear
@@ -234,14 +246,14 @@ class Vis5Line  {
         const selectedEntry = vis.topicWithMaxYear.find(entry => entry.topic === selectedTopic);
 
         // Update the HTML <span> element with the year
-        const spanElement = document.getElementById("vis5-topicUserAge");
-        if (spanElement && selectedEntry) {
-            let peakYear = selectedEntry.year;
-            let peakPhrase = "Peaked when you were " + (peakYear - 2023 + vis.userAge ) + " years old";
-            spanElement.textContent = peakPhrase;
-        } else {
-            spanElement.textContent = "";
-        }
+        // const spanElement = document.getElementById("vis5-topicUserAge");
+        // if (spanElement && selectedEntry) {
+        //     let peakYear = selectedEntry.year;
+        //     let peakPhrase = "Peaked when you were " + (peakYear - 2023 + vis.userAge ) + " years old";
+        //     spanElement.textContent = peakPhrase;
+        // } else {
+        //     spanElement.textContent = "";
+        // }
         // console.log("selectedTopicData", selectedTopicData);
 
     }

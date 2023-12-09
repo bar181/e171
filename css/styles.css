@@ -1,13 +1,97 @@
 body{
-    background-color: #666;
+    background-color: rgb(72, 71, 71);
     font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
 }
+
 .times-new-roman-title {
     font-family: 'Times New Roman', Times, serif;
 }
+
+.arial {
+    font-family: 'Arial', sans-serif;
+}
+
+.bold{
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.palette-green{
+    color: #596a48;
+}
+
+.palette-bright-green{
+    color: #248c24;
+}
+.palette-yellow-green{
+    color: #687019;
+}
+
+.palette-light-green{
+    color: #bad095;
+}
+
+.palette-black{
+    color: #212528;
+}
+.palette-gray{
+    color: #999788;
+}
+.palette-lightgray{
+    background-color: lightgray;
+}
+
+.palette-beige{
+    color:#e8dfd3;
+}
+
+.bg-palette-beige{
+    background-color:#e8dfd3;
+}
+
+
+.palette-darkgray{
+    color: #403b35;
+}
+.palette-salmon{
+    color: #d94628;
+}
+.palette-yellow{
+    color: #cf9023;
+}
+.palette-pink{
+    color: #ae6f6d;
+}
+.palette-white{
+    color: #FFF;
+}
+
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+    background: #fff;
+    font-size: 24px;
+    border: 1px solid #888;
+
+}
+
+
+.lyrics {
+    width: 100%;
+    height: 720px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    color: #fff;
+    padding: 10px;
+    white-space: pre-line;
+    background: black;
+}
+.lyrics p {
+    margin: 2px;
+}
+
 .emoji_big{
-    height:200px;
-    width: 200px;
+    height:90%;
+    width: 90%;
     border: 1px solid #666666;
     border-radius: 15px;
     box-shadow: 0 0 5px #dddddd;
@@ -18,8 +102,13 @@ body{
 }
 
 .emoji_small{
-    height:40px;
-    width: 40px;
+    height:50px;
+    width: 50px;
+}
+
+.emoji_mid{
+    height: 70px;
+    width: 70px;
 }
 
 .font_massive{
@@ -40,17 +129,26 @@ body{
     font-weight: bold;
 }
 
+
+.vis1-card-image-top{
+    position: relative;
+    border-radius: 5px;
+}
+
 .vis1-image-title{
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: bold;
-    text-align: center;
-    padding-bottom: 4px;
-    min-height: 55px
+    text-align: left;
+    padding: 4px;
+    min-height: 55px;
+    position: absolute;
+    color: white;
+    background: rgba(128, 128, 128, 0.2);
 }
 
 .card-area{
     min-height: 400px;
-    background-color: white;
+    /*background-color: white;*/
 }
 .card-area-transparent{
     min-height: 400px;
@@ -82,12 +180,21 @@ body{
     width: 90%;
 }
 
+/*.vis1-slider::-webkit-slider-runnable-track {*/
+/*    background-color: #248c24; !* Change this to your desired color *!*/
+/*}*/
+
+/*!* Customize the range input thumb (handle) *!*/
+/*.vis1-slider::-webkit-slider-thumb {*/
+/*    background-color: #248c24; !* Change this to your desired color *!*/
+/*}*/
+
 /* Increase the size of the thumb (slider handle) to 20px */
 .vis1-slider::-webkit-slider-thumb {
     width: 20px;
     height: 20px;
-    background-color: #007bff; /* You can change the color if desired */
-    border: 2px solid #007bff; /* Add a border to the thumb */
+    background-color: #248c24; /* You can change the color if desired */
+    border: 2px solid #248c24; /* Add a border to the thumb */
     border-radius: 50%; /* Make it a circle */
     cursor: pointer;
 }
@@ -95,8 +202,8 @@ body{
 .vis1-slider::-moz-range-thumb {
     width: 20px;
     height: 20px;
-    background-color: #007bff;
-    border: 2px solid #007bff;
+    background-color: #248c24;
+    border: 2px solid #248c24;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -122,10 +229,14 @@ body{
 }
 
 .vis1-news-item3{
-    font-size: 1.2em;
-    letter-spacing: 5px;
-    text-align: right;
-    padding-bottom: 4px;
+    font-size: 1.1em;
+    letter-spacing: 3px;
+    text-align: left;
+    margin-bottom: 8px;
+    padding-left:5px;
+    padding-right:5px;
+    font-family: 'Times New Roman', Times, serif;
+    border: 1px solid #eeeeee;
 }
 .vis1-news-item4{
     font-size: 1.4em;
@@ -228,11 +339,11 @@ body{
 
 /* Visualization Mockup */
 .vis1-visualization {
-    background-color: #fff;
+    background-color: #fffdf7;
     border: 1px solid #ddd;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 
 .vis1-list-item {
@@ -265,83 +376,144 @@ body{
 }
 
 /* Jess's CSS*/
-/*For the 2nd visualization */
-
-
+/*For the 2nd visualization -------------------------------------------------------------------------------------*/
 .tooltip{
     opacity: 1;
 }
 
 #doughnutChartContainer, #bubbleChartContainer {
     position: absolute;
-    object-position: left;
     top: 50%;
-    left: 25%;
+    left: 22%;
     transform: translate(-50%, -50%);
 
 }
 
 /*area of the container holding the visualizations */
 .vis2-card-area{
-    height: 700px;
-    width: 1600px;
-    background-color: white;
+    height: 40rem;
+    width: 100rem;
+    background-color: #e8dfd3;
 }
 
 #card-back-next{
-    width: 1600px;
+    width: 100rem;
     display: flex;
+    background-color: #e8dfd3;
+}
+
+.back-button{
+    padding: 1rem;      /* Increase padding */
+    /*margin: 1rem;       !* Adjust external spacing *!*/
+    position: relative; /* Control positioning */
+    z-index: 10;        /* Ensure it's above other elements */
+    cursor: pointer;
+    font-size: 2.2rem;/* Change cursor to indicate clickability */
+    background-color: 	#596a48;
+    border: 2px solid #403b35;
+}
+
+.back-button:hover{
+    background-color: #313a27;
 }
 
 
 #vis2-back-button,
 #vis2-next-button{
-    padding: 10px;      /* Increase padding */
-    margin: 10px;       /* Adjust external spacing */
+    padding: 1rem;      /* Increase padding */
+    margin: 1rem;       /* Adjust external spacing */
     position: relative; /* Control positioning */
     z-index: 10;        /* Ensure it's above other elements */
     cursor: pointer;
-    font-size: 32px;/* Change cursor to indicate clickability */
+    font-size: 2.2rem;/* Change cursor to indicate clickability */
+    background-color: 	#596a48;
+    border: 2px solid #403b35;
 }
 
-.visualization-content {
-    margin-top: 1rem;
-    padding: 1rem;
-    background: #fff;
+#vis2-back-button:hover,
+#vis2-next-button:hover{
+    background-color: #313a27;
 }
 
-#year-selector{
-    margin-left: 800px;
-}
-
-#topic-selector{
-    margin-left: 380px;
-
-}
+/*size related*/
 #year-selector,
 #topic-selector{
-    width: 50%;       /* Width of the dropdown */
+    width: 85%;       /* Width of the dropdown */
     height: 50%;       /* Height of the dropdown */
-    font-size: 16px;    /* Font size of the dropdown text */
-    padding: 5px 10px;  /* Padding inside the dropdown */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 24px;
+    font-weight: bold;/* Font size of the dropdown text */
+    /*padding: 1rem 1rem;  !* Padding inside the dropdown *!*/
+    font-size: 2.2rem;
+    margin-top: 1rem;
 }
 
-#year-selector {
-    position: relative;
-    z-index: 1000; /* High enough to be above the SVG */
+/* Add this to your CSS file */
+#year-dropdown,
+#topic-dropdown,
+#vis5-menu{
+    background-color: 	#999788; /* Change to the desired background color */
+    color: #FFFFFF; /* Change to the desired text color */
+    border: 1px solid #212528; /* Add border styles if needed */
+    padding: 5px; /* Add padding for better appearance */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    font-size: 18px;
 }
 
-#p1{
-    margin-top: 50px;
+
+/* Modified style for the dropdown arrow */
+/* Style the dropdown arrow NOT WORKING*/
+/*#year-selector::after,*/
+/*#topic-selector::after {*/
+/*    !*content: '\25B2'; !* Unicode arrow character *!*!*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    right: 5px;*/
+/*    transform: translateY(-50%);*/
+/*    pointer-events: none;*/
+/*    color: #212528; !* Change arrow color as needed *!*/
+/*    opacity: 1;*/
+/*    transition: transform 0.3s; !* Smooth transition for rotation *!*/
+/*}*/
+
+
+
+/*!* Modified style for the dropdown arrow *!*/
+/*.arrow {*/
+/*    display: inline-block;*/
+/*    transition: transform 0.3s; !* Smooth transition for rotation *!*/
+/*}*/
+
+/*!* Style for rotated arrow *!*/
+/*.rotate-down {*/
+/*    transform: rotate(180deg); !* Rotate arrow *!*/
+/*}*/
+
+
+/* Change color on hover (optional) */
+#year-dropdown:hover,
+#topic-dropdown:hover,
+#vis5-menu:hover{
+    background-color: #596a48; /* Change to the desired hover background color */
+}
+
+
+#p_main{
+    margin-bottom: 2.2rem;
 }
 
 #my-text {
-    padding: 40px;
+    padding-top: 2rem;
+    padding-right: 55px;
     margin-top: 10px;
+    font-size: 1.2rem;
+    text-decoration: #212528;
+    /*font-weight: bold;*/
 }
 
+.top-bar-title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 3.5rem;
+}
 
 /*----------------------------------------------------------------------------------------------------------------------
 
@@ -350,8 +522,8 @@ body{
     text-align: end;
     position: absolute;
     color: #666;
-    right: 0;
-    bottom: 20px;
+    right: 30px;
+    bottom: 0;
 }
 
 #vis1-redo-button{
@@ -365,7 +537,7 @@ body{
 }
 
 .vis4-topPeakedSpan{
-    color: red;
+    /*color: red;*/
     /*font-size: 1.5em;*/
     /*font-weight: bold;*/
 }

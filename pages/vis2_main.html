@@ -1,18 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>Visualization Page</title>-->
-<!--    &lt;!&ndash; Load Bootstrap CSS &ndash;&gt;-->
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"-->
-<!--          integrity="sha384-+koKJlOkPKOj7E4lLD5eNGF3pGp8PZjLkM0GhRj3l5u6DPgqfv9hPf7jF2CK/THJ"-->
-<!--          crossorigin="anonymous">-->
-<!--    &lt;!&ndash; Link to your custom CSS file &ndash;&gt;-->
-<!--    <link href="styles.css" rel="stylesheet">-->
-<!--</head>-->
-<!--<body>-->
-
 <div class="section">
     <div class="card mx-auto mb-2 py-3" id="card-back-next">
         <div class="d-flex justify-content-around">
@@ -30,96 +15,76 @@
 
     <div class="container-fluid" id="vis2_container">
         <div class="card mx-auto vis2-card-area shadow">
-
-            <!-- Visualization Content -->
-            <!-- Row for Dropdowns -->
-            <div class="row" id="vis2-row">
-                <!-- Year Selector -->
-                <div class="col-md-6">
-                    <div id="year-selector">
-                        <label for="year-dropdown">Select Year:</label>
-                        <select id="year-dropdown" class="form-select">
-                            <!-- Year Dropdown Options -->
-                            <option value="All Years">All Years</option>
-                            <option value="2006">2006</option>
-                            <option value="2007">2007</option>
-                            <option value="2008">2008</option>
-                            <option value="2009">2009</option>
-                            <option value="2010">2010</option>
-                            <option value="2011">2011</option>
-                            <option value="2012">2012</option>
-                            <option value="2013">2013</option>
-                            <option value="2014">2014</option>
-                            <option value="2015">2015</option>
-                            <option value="2016">2016</option>
-                            <option value="2017">2017</option>
-                            <option value="2018">2018</option>
-                            <option value="2019">2019</option>
-                        </select>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Doughnut Chart Container -->
+                        <div id="doughnutChartContainer">
+                            <!-- Doughnut Chart will be inserted here -->
+                        </div>
+                        <!-- Bubble Chart Container -->
+                        <div id="bubbleChartContainer">
+                            <!-- Bubble Chart will be inserted here -->
+                        </div>
                     </div>
-                </div>
-
-                <!-- Topic Selector -->
-                <div class="col-md-6">
-                    <div id="topic-selector">
-                        <label for="topic-dropdown">Select Topic:</label>
-                        <select id="topic-dropdown" class="form-select">
-                            <!-- Topic Dropdown Options -->
-                            <option value="All Topics">All Topics</option>
-                            <option value="Global stance">Global stance</option>
-                            <option value="Importance of Human Intervention">Importance of Human Intervention</option>
-                            <option value="Politics">Politics</option>
-                            <option value="Undefined / One Word Hashtags">Undefined / One Word Hashtags</option>
-                            <option value="Donald Trump versus Science">Donald Trump versus Science</option>
-                            <option value="Seriousness of Gas Emissions">Seriousness of Gas Emissions</option>
-                            <option value="Ideological Positions on Global Warming">Ideological Positions on Global Warming</option>
-                            <option value="Impact of Resource Overconsumption">Impact of Resource Overconsumption</option>
-                            <option value="Significance of Pollution Awareness Events">Significance of Pollution Awareness Events</option>
-                        </select>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div id="year-selector">
+                                    <label for="year-dropdown">Select Year:</label>
+                                    <select id="year-dropdown" class="form-select">
+                                        <option value="All Years">All Years</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div id="topic-selector">
+                                    <label for="topic-dropdown">Select Topic:</label>
+                                    <select id="topic-dropdown" class="form-select">
+                                        <option value="All Topics">All Topics</option>
+                                        <option value="Global stance">Global stance</option>
+                                        <option value="Importance of Human Intervention">Importance of Human Intervention</option>
+                                        <option value="Politics">Politics</option>
+                                        <option value="Undefined / One Word Hashtags">Undefined / One Word Hashtags</option>
+                                        <option value="Donald Trump versus Science">Donald Trump versus Science</option>
+                                        <option value="Seriousness of Gas Emissions">Seriousness of Gas Emissions</option>
+                                        <option value="Weather Extremes">Weather Extremes</option>
+                                        <option value="Ideological Positions on Global Warming">Ideological Positions on Global Warming</option>
+                                        <option value="Impact of Resource Overconsumption">Impact of Resource Overconsumption</option>
+                                        <option value="Significance of Pollution Awareness Events">Significance of Pollution Awareness Events</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm" id="my-text">
+                                <span id="p_main" style="display: block">The Climate Change Twitter Dataset is the most comprehensive dataset to date on climate change and human opinions on Twitter, featuring over 15 million tweets from a 13-year span. It includes detailed information such as topic categorization, stance and sentiment on climate change, and aggressiveness.</span>
+                                <span id="p1" style="display: block">Topic Categorization: The dataset categorizes tweets into specific topics related to climate change, enabling a focused analysis of public discourse on various aspects of the issue.</span>
+                                <span id="p_stance" style="display: none">Stance on Climate Change: It identifies the most popular stance on climate change for each topic and year, revealing public opinion trends over time.</span>
+                                <span id="p_sentiment" style="display: none">Sentiment Analysis: The dataset provides the average sentiment of tweets per topic and year, reflecting the general tone and mood of public discussions on climate change.</span>
+                                <span id="p_aggressiveness" style="display: none">Aggressiveness of Tweets: It measures the level of aggressiveness in tweets, offering insights into the intensity and nature of climate change debates on social media.</span>
+<!--                                <p>REMINDER TO CITE: If you use the dataset, cite the papers: https://doi.org/10.1016/j.eswa.2022.117541 and https://doi.org/10.1371/journal.pone.0274213</p>-->
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Row for Charts and Text -->
-            <div class="row">
-                <!-- Left Column for Charts -->
-                <div class="col-md-6">
-                    <!-- Doughnut Chart Container -->
-                    <div id="doughnutChartContainer">
-                        <!-- Doughnut Chart will be inserted here -->
-                    </div>
-                    <!-- Bubble Chart Container -->
-                    <div id="bubbleChartContainer">
-                        <!-- Bubble Chart will be inserted here -->
-                    </div>
-                </div>
-
-                <!-- Right Column for Text -->
-                <div class="col-md-6" id="my-text">
-                    <!-- Text Content -->
-                    <p>The Climate Change Twitter Dataset is the most comprehensive dataset to date on climate change and human opinions on Twitter, featuring over 15 million tweets from a 13-year span. It includes detailed information such as topic categorization, stance and sentiment on climate change, and aggressiveness.</p>
-                    <p id="p1">Topic Categorization: The dataset categorizes tweets into specific topics related to climate change, enabling a focused analysis of public discourse on various aspects of the issue.</p>
-                    <p>Stance on Climate Change: It identifies the most popular stance on climate change for each topic and year, revealing public opinion trends over time.</p>
-                    <p>Sentiment Analysis: The dataset provides the average sentiment of tweets per topic and year, reflecting the general tone and mood of public discussions on climate change.</p>
-                    <p>Aggressiveness of Tweets: It measures the level of aggressiveness in tweets, offering insights into the intensity and nature of climate change debates on social media.</p>
-                    <p>REMINDER TO CITE: If you use the dataset, cite the papers: https://doi.org/10.1016/j.eswa.2022.117541 and https://doi.org/10.1371/journal.pone.0274213</p>
-                    <!-- Additional text content... -->
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
-<!--&lt;!&ndash; Load Bootstrap JS library &ndash;&gt;-->
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"-->
-<!--        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--&lt;!&ndash; Load D3.js and Chart.js libraries &ndash;&gt;-->
-<!--<script src="https://d3js.org/d3.v7.min.js"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>-->
-<!--&lt;!&ndash; Load your chart scripts &ndash;&gt;-->
-<!--<script src="js/Vis2doughnutchart.js"></script>-->
-<!--<script src="js/Vis2bubblechart.js"></script>-->
-<!--<script src="js/Vis2Service.js"></script>-->
-<!--</body>-->
-<!--</html>-->

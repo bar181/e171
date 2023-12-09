@@ -15,9 +15,10 @@ function vis1YearChange(year) {
     vis1Google.onYearChange(year);
 }
 
+
 // Get references to the slider and current-year elements
 const slider = document.getElementById("vis1-slider");
-const currentYearLabel = document.getElementById("current-year");
+const currentYearLabel = document.getElementById("vis1-current-year");
 
 // Add an event listener to the slider
 slider.addEventListener("input", function () {

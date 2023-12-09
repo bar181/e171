@@ -29,7 +29,7 @@ class Vis2DoughnutChart {
         // Define the dimensions and margins for the chart
         vis.margin = { top: 20, right: 20, bottom: 20, left: 20 };
         vis.width = 900 - vis.margin.left - vis.margin.right;
-        vis.height = 900 - vis.margin.top - vis.margin.bottom;
+        vis.height = 680 - vis.margin.top - vis.margin.bottom;
         vis.radius = Math.min(vis.width, vis.height) / 2;
 
 
@@ -47,7 +47,7 @@ class Vis2DoughnutChart {
         vis.agressivenessLegend.style('opacity', 0);
 
         vis.svg = vis.svg.append('g')
-            .style('stroke', 'white') // Set the stroke color
+            .style('stroke', '#f6ece0') // Set the stroke color
             .style('stroke-width', '3.5px') // Set the stroke width
             .attr('transform', 'translate(' + vis.width / 2 + ',' + vis.height / 2 + ')')
 
@@ -57,8 +57,10 @@ class Vis2DoughnutChart {
             .sort(null) // Do not sort group by size
             .value(d => d.Count);
 
-        vis.outerRadius = 290; // This controls the overall size of the doughnut chart
-        vis.innerRadius = 275; // This controls the size of the hole, thus creating the "cutout"
+        // vis.outerRadius = 290; // This controls the overall size of the doughnut chart
+        // vis.innerRadius = 275; // This controls the size of the hole, thus creating the "cutout"
+        vis.outerRadius = 260; // This controls the overall size of the doughnut chart
+        vis.innerRadius = 245; // This controls the size of the hole, thus creating the "cutout"
 
         // Define the arc generator
         vis.arc = d3.arc()
@@ -67,15 +69,15 @@ class Vis2DoughnutChart {
 
         vis.tooltip = d3.select('body').append('div')
             .attr('class', 'tooltip')
-            .style('opacity', 0)
+            .style('opacity', 1)
             .style('position', 'absolute')
-            .style('text-align', 'center')
-            .style('width', '120px')
+            .style('text-align', 'left')
+            .style('width', '320px')
             .style('height', 'auto')
-            .style('padding', '2px')
-            .style('font', '12px sans-serif')
-            .style('background', 'lightsteelblue')
-            .style('border', '0px')
+            .style('padding', '5px')
+            .style('font', '20px sans-serif')
+            .style('background', '#c9c1b6')
+            .style('border', '1px solid #403b35')
             .style('border-radius', '8px')
             .style('pointer-events', 'none');
 
@@ -86,8 +88,8 @@ class Vis2DoughnutChart {
         let vis = this;
 
         // Calculate the position for the legend (lower right corner)
-        const legendX = 620; // Adjust width for legend width and padding
-        const legendY = 700; // Adjust height for legend height and padding
+        const legendX = 630; // Adjust width for legend width and padding
+        const legendY = 550; // Adjust height for legend height and padding
 
         // Define a scale for sentiment to color mapping
         let aggressivenessScale = d3.scaleLinear()
@@ -112,7 +114,7 @@ class Vis2DoughnutChart {
         // Draw the color bar
         vis.agressivenessLegend.append('rect')
             .attr('width', 200) // Adjust the width as needed
-            .attr('height', 10) // Adjust the height as needed
+            .attr('height', 15) // Adjust the height as needed
             .style('fill', 'url(#agressivenessGradient)');
 
         // Define the scale for the legend axis
@@ -145,8 +147,8 @@ class Vis2DoughnutChart {
         let vis = this;
 
         // Calculate the position for the legend (lower right corner)
-        const legendX = 620; // Adjust width for legend width and padding
-        const legendY = 700; // Adjust height for legend height and padding
+        const legendX = 630; // Adjust width for legend width and padding
+        const legendY = 550; // Adjust height for legend height and padding
 
 
         // Define a scale for sentiment to color mapping
@@ -172,7 +174,7 @@ class Vis2DoughnutChart {
         // Draw the color bar
         vis.sentimentLegend.append('rect')
             .attr('width', 200) // Adjust the width as needed
-            .attr('height', 10) // Adjust the height as needed
+            .attr('height', 15) // Adjust the height as needed
             .style('fill', 'url(#sentimentGradient)');
 
         // Define the scale for the legend axis
@@ -215,8 +217,8 @@ class Vis2DoughnutChart {
         ];
 
         // Calculate the position for the legend (lower right corner)
-        const legendX = 680; // Adjust width for legend width and padding
-        const legendY = 630; // Adjust height for legend height and padding
+        const legendX = 690; // Adjust width for legend width and padding
+        const legendY = 480; // Adjust height for legend height and padding
 
         // Create legend group, positioned in the top left corner
         vis.stanceLegend = vis.svg.append('g')
@@ -310,21 +312,20 @@ class Vis2DoughnutChart {
 
         // add tooltips back to all paths
         vis.svg.selectAll('path')
+            .style('pointer-events', 'all')
             .on('mouseover', function(event, d){
-                vis.tooltip.transition()
-                    .duration(200)
-                    .style('opacity', 1);
-                let tooltipContent = `Topic: ${d.data.Topic}<br/>Number of Tweets: ${d.data.Count}<br/>`
-                tooltipContent = tooltipContent + vis.additionalTooltipContent(d.data);
-                vis.tooltip.html(tooltipContent);
-                vis.tooltip
+                vis.lastMouseoverPathFillColor = window.getComputedStyle(event.target).getPropertyValue('fill');
+                d3.select(this).attr('fill', 'gray');
+                vis.tooltip.style('opacity', 1);
+                let tooltip_content = `Topic: ${d.data.Topic}<br/>Number of Tweets: ${d.data.Count}<br/>`
+                tooltip_content = tooltip_content + vis.additionalTooltipContent(d.data)
+                vis.tooltip.html(tooltip_content)
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY - 10) + 'px');
             })
             .on('mouseout', function(d) {
-                vis.tooltip.transition()
-                    .duration(500)
-                    .style('opacity', 0);
+                d3.select(this).attr('fill', vis.lastMouseoverPathFillColor);
+                vis.tooltip.style('opacity', 0);
             });
 
     }
@@ -422,7 +423,7 @@ class Vis2DoughnutChart {
             .attr('d', vis.arc)
             .attr('fill', function(d, i) {
                 if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
-                    return vis.getColor(i);
+                    return vis.getColor(d.data.Topic);
                 } else {
                     return 'lightgray';
                 }
@@ -530,7 +531,7 @@ class Vis2DoughnutChart {
             .attr('d', vis.arc)
             .attr('fill', function(d, i) {
                 if ((selectedTopic === 'All Topics') || (selectedTopic === d.data.Topic)) {
-                    return vis.getColor(i);
+                    return vis.getColor(d.data.Topic);
                 } else {
                     return 'lightgray';
                 }
@@ -550,36 +551,37 @@ class Vis2DoughnutChart {
             .enter()
             .append('path')
             .attr('d', vis.arc)
-            .attr('fill', (d, i) => vis.getColor(i))
+            .attr('fill', d => vis.getColor(d.data.Topic)) // Use the topic name to get the color
             .style('opacity', 1)
+            .style('pointer-events', 'all')
             .on('mouseover', function(event, d){
-                vis.tooltip.transition()
-                    .duration(200)
-                    .style('opacity', 1);
+                vis.lastMouseoverPathFillColor = window.getComputedStyle(event.target).getPropertyValue('fill');
+                d3.select(this).attr('fill', 'gray');
+                vis.tooltip.style('opacity', 1);
                 vis.tooltip.html(`Topic: ${d.data.Topic}<br/><b>Number of Tweets: ${d.data.Count}</b>`)
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY - 10) + 'px');
             })
-            .on('mouseout', function(d) {
-                vis.tooltip.transition()
-                    .duration(500)
-                    .style('opacity', 0);
+            .on('mouseout', function(event, d) {
+                d3.select(this).attr('fill', vis.lastMouseoverPathFillColor); // Reset color based on the topic
+                vis.tooltip.style('opacity', 0);
             });
     }
 
-    getColor(index) {
-
-        // This function should probably take in the name of a topic and return a color for that topic.
-        // This way the same topics always have the same color.
-
-        // Define an array of 10 distinct colors
-        const colors = [
-            '#f01703', '#d3830c', '#574739', '#750a47',
-            '#033f46', '#be82bf', '#859a59', '#16ea08',
-            '#e1e10f', '#1d739e'
-        ];
-        // Return the color corresponding to the given index
-        return colors[index % colors.length];
+    getColor(topicName) {
+        const colorMap ={
+            'Global stance': '#b25e18',
+            'Importance of Human Intervention': '#574739',
+            'Politics': '#8473a1',
+            'Undefined / One Word Hashtags': '#942d45',
+            'Donald Trump versus Science': '#e7866e',
+            'Seriousness of Gas Emissions': '#b59c59',
+            'Ideological Positions on Global Warming': '#99b489',
+            'Weather Extremes': '#048685',
+            'Impact of Resource Overconsumption': '#ffc84a',
+            'Significance of Pollution Awareness Events': '#21724e'
+        }
+        return colorMap[topicName];
     }
 }
 
