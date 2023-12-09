@@ -61,7 +61,7 @@ function globalTopicChanges() {
 
     console.log("imgSpanElements clicked", imgSpanElements)
 
-// All text with class "globalTopic" changes to new topic name
+    // All text with class "globalTopic" changes to new topic name
     const vis4SpanElements = document.querySelectorAll('.globalTopic');
     vis4SpanElements.forEach(spanElement => {
         spanElement.textContent = userTopic;
@@ -72,41 +72,26 @@ function globalTopicChanges() {
         spanElement.textContent = emojiName;
     });
 
-    toggleParagraphVisibility();
+    hideAllEmojiSpecificParagraphs()
+    showEmojiSpecificParagraphs(emojiName)
 }
 
 function vis4TopicChanges() {
     console.log("vis4TopicChanges clicked", userTopic)
     vis4Race.wrangleData();
-
 }
 
-function toggleParagraphVisibility() {
-    var topicEmmett = document.getElementById('topic-emmett');
-    var topicHerbie = document.getElementById('topic-herbie');
-    var topicSunny = document.getElementById('topic-sunny');
-    var topicOscar = document.getElementById('topic-oscar');
-
-    // Hide all paragraphs initially
-    topicEmmett.classList.add('d-none');
-    topicHerbie.classList.add('d-none');
-    topicSunny.classList.add('d-none');
-    topicOscar.classList.add('d-none');
-
-    // Show the appropriate paragraph based on emojiName
-    if (emojiName === 'Emmett') {
-        topicEmmett.classList.remove('d-none');
-    } else if (emojiName === 'Herbie') {
-        topicHerbie.classList.remove('d-none');
-    } else if (emojiName === 'Sunny') {
-        topicSunny.classList.remove('d-none');
-    } else if (emojiName === 'Oscar') {
-        topicOscar.classList.remove('d-none');
-    }
+function hideAllEmojiSpecificParagraphs() {
+    const emojiParagraphElements = document.querySelectorAll('.topic-emmett, .topic-herbie, .topic-sunny, .topic-oscar');
+    emojiParagraphElements.forEach(paragraphElement => {
+        paragraphElement.style.display = 'none';
+    });
 }
 
-
-
-
-
-
+function showEmojiSpecificParagraphs(emojiName) {
+    const selector = '.topic-' + emojiName.toLowerCase()
+    const topicParagraphElements = document.querySelectorAll(selector);
+    topicParagraphElements.forEach(paragraphElement => {
+        paragraphElement.style.display = 'block';
+    });
+}

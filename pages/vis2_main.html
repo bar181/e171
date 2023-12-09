@@ -1,17 +1,18 @@
 <div class="section">
-    <div class="card mx-auto mb-2 py-3" id="card-back-next">
-        <div class="d-flex justify-content-around">
-            <div>
-                <button id="vis2-back-button" class="btn btn-primary ">Back</button>
-            </div>
-            <div class="col-md-8 text-center">
-                <span class="top-bar-title">No Subject Selected</span>
-            </div>
-            <div>
-                <button id="vis2-next-button" class="btn btn-primary">Next</button>
+        <!--MAKES TITLE CARD AREA WITH BACK AND NEXT BUTTON-->
+        <div class="card mx-auto mb-2 py-3" id="card-back-next">
+            <div class="row">
+                <div class="col-md-3">
+                    <button id="vis2-back-button" class="btn btn-primary">View Previous Subject</button>
+                </div>
+                <div class="col-md-6 text-center">
+                    <span class="top-bar-title palette-green">No Subject Selected</span>
+                </div>
+                <div class="col-md-3">
+                    <button id="vis2-next-button" class="btn btn-primary">View Next Subject</button>
+                </div>
             </div>
         </div>
-    </div>
 
     <div class="container-fluid" id="vis2_container">
         <div class="card mx-auto vis2-card-area shadow">
@@ -79,6 +80,15 @@
                                 <span id="p_aggressiveness" style="display: none">Aggressiveness of Tweets: It measures the level of aggressiveness in tweets, offering insights into the intensity and nature of climate change debates on social media.</span>
 <!--                                <p>REMINDER TO CITE: If you use the dataset, cite the papers: https://doi.org/10.1016/j.eswa.2022.117541 and https://doi.org/10.1371/journal.pone.0274213</p>-->
                             </div>
+                        </div>
+                        <div class="row">
+                            <p class="topic-emmett"> emmet </p>
+                            <p class="topic-herbie"> herbie </p>
+                            <p class="topic-sunny"> sunny </p>
+                            <p class="topic-oscar"> oscar </p>
+                            <img src="images/emojis/emmett.png" class="user-topic-image" id="vis2-image" height="100%" width="100%"/>
+<!--                            <p>Hi, I'm <span class="emojiName bold">Emmett</span> your tour guide today!</p>-->
+
                         </div>
                     </div>
                 </div>
