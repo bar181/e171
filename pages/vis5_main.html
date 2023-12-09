@@ -1,67 +1,52 @@
 
-<!--<div class="section" style="background-image: url('images/vis1top/ocean.png'); background-size:-->
-<!--             cover; opacity: 1;">-->
-<!--    <div class="container">-->
-
-<!--        <div class=" shadow card card-area shadow" style="min-height:70vh; position: relative;">-->
-<!--            <h2  class="text-center card-title pt-3" style="color:steelblue">-->
-<!--                Climate Change Search Topic<br>-->
-<!--            </h2>-->
-<!--            <div class="d-flex justify-content-between p-2">-->
-<!--                <div class="p-2 " >-->
-<!--                    <div class="card-title-small">Popularity Over Time: <span class="vis5-topicName" ></span><br></div>-->
-
-<!--&lt;!&ndash;                    <span class="p-2 " id="vis5-topicUserAge" style="font-size: 1.2em" ></span>&ndash;&gt;-->
-<!--                </div>-->
-<!--                <div class="pt-2 pe-2 " style="min-width:270px">-->
-<!--                    <div id="vis5-topics" class="" ></div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="row pt-5">-->
-<!--                <div class="col-9">-->
-<!--                    <div id="vis5Line"></div>-->
-<!--                </div>-->
-<!--                <div class="col-3">-->
-<!--                    <div class="p-2 " style="font-size: 1.2rem" >-->
-<!--                        <span class="vis5-topicName card-title-small" ></span>-->
-<!--                        <div id="vis5-image" class="" ></div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 
 <div class="section" style="position: relative; width: 100%; height: 100%;">
     <!-- Separate div for background image with desired opacity -->
-    <div style="background-image: url('images/vis1top/ocean.png'); background-size: cover; opacity: 0.4; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
+    <div style="background-image: url('images/covers/ocean2.webp'); background-size: cover; opacity: 0.4; position:
+    absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
 
     <!-- Container for the rest of the content -->
     <div class="container" style="position: relative; z-index: 1;">
-        <div class="shadow card card-area shadow " style="min-height:70vh; position: relative;
-        background-color: #fffdf7">
-            <h2 class="text-center card-title pt-3" style="color:steelblue">
-                Climate Change Search Topic<br>
-            </h2>
-            <div class="d-flex justify-content-between p-2">
+
+        <div class="card mb-2 py-2 bg-palette-beige" >
+            <div class="d-flex justify-content-between px-2">
                 <div class="p-2">
-                    <div class="card-title-small">Popularity Over Time: <span class="vis5-topicName"></span><br></div>
+                    <div class="card-title-small">Popularity Over Time:
+                        <span class="vis5-topicName palette-bright-green">Activism</span><br></div>
                 </div>
-                <div class="pt-2 pe-2" style="min-width:270px">
+                <div class="pt-0 pe-2 text-center" style="min-width:270px">
+                    <span class="card-title-small">Select a Topic</span><br>
                     <div id="vis5-topics" class=""></div>
                 </div>
             </div>
+        </div>
 
-            <div class="row pt-5">
-                <div class="col-9">
-                    <div id="vis5Line"></div>
+        <div class="shadow card card-area shadow bg-palette-beige" style="min-height:50vh; position: relative;
+        background-color: #fffdf7">
+
+            <div class="row m-0 bg-palette-beige">
+                <div class="col-8 px-0 " >
+                    <div id="vis5Line" class="rounded" style="background-color: #fffdf7"></div>
                 </div>
-                <div class="col-3">
-                    <div class="p-2" style="font-size: 1.2rem">
-                        <span class="vis5-topicName card-title-small"></span>
-                        <div id="vis5-image" class=""></div>
+                <div class="col-4 p-2 bg-palette-beige">
+
+
+                    <div class="text-center" style="font-size: 1rem">
+
+                        <div id="vis5-image" class="" style="position: relative;"></div>
+                        <span class="vis5-topicName card-title-small bold"
+                              style="position: absolute; top: 20px"Activist></span>
+                    </div>
+
+                    <div class="text-center pt-5">
+                        <img src="images/emojis/emmett.png" class="user-topic-image" height="50%" width="50%"/>
+
+                        <p >To see when
+                            <span class="globalTopic bold palette-bright-green">Human Impact</span>
+                            topics peaked, I recommend selecting:
+                            <span class="bold palette-bright-green line-emmett globalTopicList">
+                                Activist, Global warming, Genetically modified, EPA, Greta Thunberg, Climate action</span>
+                        </p>
                     </div>
                 </div>
             </div>

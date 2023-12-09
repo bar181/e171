@@ -77,7 +77,7 @@ const pageNames = [
     // // brad - vis4 line chart with descriptions
     'vis5_header',
     'vis5_main',
-    'vis1_text',
+    'vis5_text',
 
     // jess
     'vis2_header',

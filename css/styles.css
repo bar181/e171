@@ -82,6 +82,7 @@ body{
     color: #fff;
     padding: 10px;
     white-space: pre-line;
+    background: black;
 }
 .lyrics p {
     margin: 2px;
@@ -521,7 +522,7 @@ body{
     position: absolute;
     color: #666;
     right: 30px;
-    bottom: -20px;
+    bottom: 0;
 }
 
 #vis1-redo-button{
