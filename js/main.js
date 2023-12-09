@@ -62,7 +62,6 @@ const scriptNames = [
 
 // Array of page names in the desired order
 const pageNames = [
-
     'p1_title',
     'p2_ask_topic',
     'p3_intro',
@@ -110,6 +109,22 @@ function loadData() {
     initializeVis1();
     initializeVis2();
     initializeVis3();
+    <!-- twitter -->
+    // Create a script element for the Twitter widget script
+    var twitterScript = document.createElement("script");
+    twitterScript.src = "https://platform.twitter.com/widgets.js";
+    twitterScript.async = true;
+    twitterScript.charset = "utf-8";
+
+    // Add an event listener to check when the Twitter script has loaded
+    twitterScript.onload = function() {
+        // The Twitter script has loaded, you can now use the Twitter widget
+        // For example, you can create embedded tweets here
+        // This is where you can use Twitter widgets functionality
+    };
+
+    // Append the Twitter script to the document's head
+    document.head.appendChild(twitterScript);
 }
 
 // add any functions that need to be called when the user changes their age
