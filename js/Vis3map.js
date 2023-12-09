@@ -2,18 +2,18 @@
 *          MapVis          *
 * * * * * * * * * * * * * */
 
-let vis3SelectedCategory = "Signed";
+let vis3SelectedCategory = "ratifiedParisDate";
 
 
 // Initialize slider
 vis3MapSlider = document.getElementById('map-slider');
 vis3MapDate = document.getElementById('map-date');
 
-var sliderDate2010 = moment('2010-01-01', "YYYY-DD-MM").valueOf();
-var sliderDate2015 = moment('2015-01-01', "YYYY-DD-MM").valueOf();
-var sliderDate2017 = moment('2017-01-01', "YYYY-DD-MM").valueOf();
-var sliderDate2018 = moment('2018-01-01', "YYYY-DD-MM").valueOf();
-var sliderDate2023 = moment('2023-12-01', "YYYY-DD-MM").valueOf();
+var sliderDate2010 = moment('2010-01-01', "YYYY-MM-DD").valueOf();
+var sliderDate2016 = moment('2016-04-01', "YYYY-MM-DD").valueOf();
+// var sliderDate2017 = moment('2017-01-01', "YYYY-MM-DD").valueOf();
+var sliderDate2018 = moment('2018-01-01', "YYYY-MM-DD").valueOf();
+var sliderDate2023 = moment('2023-12-01', "YYYY-MM-DD").valueOf();
 
 
 // Create a new date from a string, return as a timestamp.
@@ -41,6 +41,9 @@ class Vis3Map {
 
         // console.log("Vis 3 init vis")
 
+        // Initiliaze map date
+        vis3MapDate.innerText = moment(sliderDate2023);
+
 
         // convert TopoJSON to GeoJSON
         vis.geoDataJson = topojson.feature(vis.geoData, vis.geoData.objects.countries).features
@@ -66,13 +69,13 @@ class Vis3Map {
             d.properties["have_reduced"] = have_reduced;
 
             let parisData = vis.parisData.find(e => e.Entity === d.properties.name);
-            let signed = "No data";
+            let ratifiedParisDate = "No data";
             try {
-                signed = parisData["ratified_bool"];
+                ratifiedParisDate = parisData["legal_date"];
             } catch {
                 // console.log("no data for", d.properties.name)
             }
-            d.properties["Signed"] = signed;
+            d.properties["ratifiedParisDate"] = ratifiedParisDate;
         });
 
 
@@ -134,7 +137,7 @@ class Vis3Map {
                     .style("top", event.pageY + "px")
                     .html(`<div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
                         <h3>${d.properties.name}</h3>
-                        <h4>Signed 2015 Paris Agreement: ${d.properties.Signed}</h4>
+                        <h4>Signed 2015 Paris Agreement: ${d.properties.ratifiedParisDate}</h4>
                         <h4>Net Zero Law: ${d.properties.net_2050_law}</h4>
                         <h4>Have Reduced Emissions (2015-2021): ${d.properties.have_reduced}</h4>
                      </div>`);
@@ -144,10 +147,10 @@ class Vis3Map {
                 d3.select(this)
                     .attr('stroke-width', '0px')
                     .attr('fill', d => {
-                        if (d.properties[vis3SelectedCategory] === "TRUE") {
-                            return "green"
-                        } if (d.properties[vis3SelectedCategory] === "No data") {
+                        if (d.properties[vis3SelectedCategory] === "No data") {
                             return "gray"
+                        } if (moment(d.properties[vis3SelectedCategory], "YYYY-MM-DD").isBefore(moment(vis3MapDate.innerText))) {
+                            return "green"
                         } else {
                             return "red"
                         }
@@ -234,19 +237,20 @@ class Vis3Map {
 
         // Create the slider
         noUiSlider.create(vis3MapSlider, {
-            start: [sliderDate2018],
+            start: [sliderDate2023],
             range: {
                 'min': [sliderDate2010],
-                '15%': [sliderDate2015],
-                '80%': [sliderDate2017],
+                '15%': [sliderDate2016],
+                '80%': [sliderDate2018],
                 'max': [sliderDate2023]
             }
         });
 
         vis3MapSlider.noUiSlider.on('update', function (values) {
             let thisDate = moment.unix(values[0]/1000);
-            console.log('Selected Date Range: ' + thisDate.format('YYYY-MM-DD'));
+            // console.log('Selected Date Range: ' + thisDate.format('YYYY-MM-DD'));
             vis3MapDate.innerText = thisDate.format('MMM YYYY');
+            vis.wrangleData();
         });
 
         console.log(vis3MapSlider)
@@ -267,10 +271,11 @@ class Vis3Map {
 
         // Update country fill
         vis.countries.attr('fill', d => {
-            if (d.properties[vis3SelectedCategory] === "TRUE") {
-                return "green"
-            } if (d.properties[vis3SelectedCategory] === "No data") {
+
+            if (d.properties[vis3SelectedCategory] === "No data") {
                 return "gray"
+            } if (moment(d.properties[vis3SelectedCategory], "YYYY-MM-DD").isBefore(moment(vis3MapDate.innerText))) {
+                return "green"
             } else {
                 return "red"
             }
