@@ -83,6 +83,7 @@ body{
     color: #fff;
     padding: 10px;
     white-space: pre-line;
+    background: black;
 }
 .lyrics p {
     margin: 2px;
