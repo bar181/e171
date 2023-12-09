@@ -10,13 +10,16 @@
                 <div class="col-md-8">
                     <div class="row justify-content-center m-2">
                         <select id='mapSelector' class="custom-select align-self-center" style="width: 40%" onchange="vis3CategoryChange()">
-                            <option value="Signed">Signed 2015 Paris Agreement</option>
+                            <option value="ratifiedParisDate">Signed 2015 Paris Agreement</option>
                             <option value="net_2050_law">Net Zero law</option>
                             <option value="have_reduced">Has cut emissions</option>
                         </select>
                     </div>
                     <div class="row justify-content-center m-4">
-                        <div id="mapSlider"></div>
+                        <div id="map-slider"></div>
+                    </div>
+                    <div class="row justify-content-center m-2">
+                        <h3 id="map-date" class="align-items-center justify-content-center"></h3>
                     </div>
                     <div class="row justify-content-center">
                         <div id="mapContainer"></div>
