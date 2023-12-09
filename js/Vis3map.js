@@ -6,7 +6,18 @@ let vis3SelectedCategory = "Signed";
 
 
 // Initialize slider
-vis3MapSlider = document.getElementById('mapSlider');
+vis3MapSlider = document.getElementById('map-slider');
+vis3MapDate = document.getElementById('map-date');
+
+var sliderDate2015 = moment('2015-01-01', "YYYY-DD-MM").valueOf();
+var sliderDate2018 = moment('2018-01-01', "YYYY-DD-MM").valueOf();
+var sliderDate2023 = moment('2023-12-01', "YYYY-DD-MM").valueOf();
+
+
+// Create a new date from a string, return as a timestamp.
+function timestamp(str) {
+    return new Date(str).getTime();
+}
 
 class Vis3Map {
 
@@ -221,13 +232,19 @@ class Vis3Map {
 
         // Create the slider
         noUiSlider.create(vis3MapSlider, {
-            start: [4000],
+            start: [sliderDate2018],
             range: {
-                'min': [2000],
-                '30%': [4000],
-                '70%': [8000],
-                'max': [10000]
+                'min': [sliderDate2015],
+                // '30%': [4000],
+                // '70%': [8000],
+                'max': [sliderDate2023]
             }
+        });
+
+        vis3MapSlider.noUiSlider.on('update', function (values) {
+            let thisDate = moment.unix(values[0]/1000);
+            console.log('Selected Date Range: ' + thisDate.format('YYYY-MM-DD'));
+            vis3MapDate.innerText = thisDate.format('MMM YYYY');
         });
 
         console.log(vis3MapSlider)
@@ -260,6 +277,8 @@ class Vis3Map {
 
     }
 }
+
+
 
 function vis3CategoryChange() {
     vis3SelectedCategory = document.getElementById('mapSelector').value;
