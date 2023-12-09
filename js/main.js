@@ -67,13 +67,13 @@ const pageNames = [
     'p2_ask_topic',
     'p3_intro',
 
-    // brad - vis4 and via 1 combined vi4: Race Bar Chart, vis1: Year-by-Year
+    //brad - vis4 and via 1 combined vi4: Race Bar Chart, vis1: Year-by-Year
     'vis4_header',
     'vis4_main',
     'vis1_main',
     'vis1_text',
-    //
-    // // brad - vis5 line chart with descriptions
+
+    // brad - vis5 line chart with descriptions
     'vis5_header',
     'vis5_main',
     'vis5_text',
@@ -82,7 +82,7 @@ const pageNames = [
     'vis2_header',
     'vis2_main',
     'vis2_text',
-    //
+
     // filip
     'vis3_header',
     'vis3_main',
