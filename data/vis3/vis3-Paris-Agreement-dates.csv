@@ -20,7 +20,7 @@ Belize,TRUE,2016-04-22,2016-04-22,Belize
 Benin,TRUE,2016-04-22,2016-10-31,Benin
 Bhutan,TRUE,2016-04-22,2017-09-19,Bhutan
 Bolivia,TRUE,2016-04-22,2016-10-05,Bolivia (Plurinational State of)
-Bosnia and Herzegovina,TRUE,2016-04-22,2017-03-16,Bosnia and Herzegovina
+Bosnia and Herz.,TRUE,2016-04-22,2017-03-16,Bosnia and Herzegovina
 Botswana,TRUE,2016-04-22,2016-11-11,Botswana
 Brazil,TRUE,2016-04-22,2016-09-21,Brazil
 Brunei,TRUE,2016-04-22,2016-09-21,Brunei Darussalam
@@ -31,7 +31,7 @@ Cambodia,TRUE,2016-04-22,2017-09-21,Cabo Verde
 Cameroon,TRUE,2016-04-22,2017-02-06,Cambodia
 Canada,TRUE,2016-04-22,2016-07-29,Cameroon
 Cape Verde,TRUE,2016-04-22,2016-10-05,Canada
-Central African Republic,TRUE,2016-04-22,2016-10-11,Central African Republic
+Central African Rep.,TRUE,2016-04-22,2016-10-11,Central African Republic
 Chad,TRUE,2016-04-22,2017-01-12,Chad
 Chile,TRUE,2016-09-20,2017-02-10,Chile
 China,TRUE,2016-04-22,2016-09-03,China
@@ -40,12 +40,12 @@ Comoros,TRUE,2016-04-22,2016-11-23,Comoros
 Congo,TRUE,2016-04-22,2017-04-21,Congo
 Cook Islands,TRUE,2016-06-24,2016-09-01,Cook Islands
 Costa Rica,TRUE,2016-04-22,2016-10-13,Costa Rica
-Cote d'Ivoire,TRUE,2016-04-22,2016-10-25,Côte d'Ivoire
+Côte d'Ivoire,TRUE,2016-04-22,2016-10-25,Côte d'Ivoire
 Croatia,TRUE,2016-04-22,2017-05-24,Croatia
 Cuba,TRUE,2016-04-22,2016-12-28,Cuba
 Cyprus,TRUE,2016-04-22,2017-01-04,Cyprus
 Czechia,TRUE,2016-04-22,2017-10-05,Czech Republic
-Democratic Republic of Congo,TRUE,2016-04-22,2017-12-13,Democratic Republic of the Congo
+Dem. Rep. Congo,TRUE,2016-04-22,2017-12-13,Democratic Republic of the Congo
 Denmark,TRUE,2016-04-22,2016-11-01,Denmark 1
 Djibouti,TRUE,2016-04-22,2016-11-11,Djibouti
 Dominica,TRUE,2016-04-22,2016-09-21,Dominica
@@ -159,7 +159,7 @@ Solomon Islands,TRUE,2016-04-22,2016-09-21,Solomon Islands
 Somalia,TRUE,2016-04-22,2016-04-22,Somalia
 South Africa,TRUE,2016-04-22,2016-11-01,South Africa
 South Korea,TRUE,2016-04-22,2016-11-03,Republic of Korea
-South Sudan,TRUE,2016-04-22,2021-02-23,South Sudan
+S. Sudan,TRUE,2016-04-22,2021-02-23,South Sudan
 Spain,TRUE,2016-04-22,2017-01-12,Spain
 Sri Lanka,TRUE,2016-04-22,2016-09-21,Sri Lanka
 Sudan,TRUE,2016-04-22,2017-08-02,Sudan
@@ -182,7 +182,7 @@ Uganda,TRUE,2016-04-22,2016-09-21,Uganda
 Ukraine,TRUE,2016-04-22,2016-09-19,Ukraine
 United Arab Emirates,TRUE,2016-04-22,2016-09-21,United Arab Emirates
 United Kingdom,TRUE,2016-04-22,2016-11-18,"United Kingdom of Great Britain and Northern Ireland 4, 5"
-United States,TRUE,2016-04-22,2021-01-20,United States of America 6
+United States of America,TRUE,2016-04-22,2021-01-20,United States of America 6
 Uruguay,TRUE,2016-04-22,2016-10-19,Uruguay
 Uzbekistan,TRUE,2017-04-19,2018-11-09,Uzbekistan
 Vanuatu,TRUE,2016-04-22,2016-09-21,Vanuatu

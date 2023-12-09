@@ -68,7 +68,7 @@ class Vis3Map {
             let parisData = vis.parisData.find(e => e.Entity === d.properties.name);
             let signed = "No data";
             try {
-                signed = parisData["Signed"];
+                signed = parisData["ratified_bool"];
             } catch {
                 // console.log("no data for", d.properties.name)
             }
