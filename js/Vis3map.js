@@ -9,7 +9,9 @@ let vis3SelectedCategory = "Signed";
 vis3MapSlider = document.getElementById('map-slider');
 vis3MapDate = document.getElementById('map-date');
 
+var sliderDate2010 = moment('2010-01-01', "YYYY-DD-MM").valueOf();
 var sliderDate2015 = moment('2015-01-01', "YYYY-DD-MM").valueOf();
+var sliderDate2017 = moment('2017-01-01', "YYYY-DD-MM").valueOf();
 var sliderDate2018 = moment('2018-01-01', "YYYY-DD-MM").valueOf();
 var sliderDate2023 = moment('2023-12-01', "YYYY-DD-MM").valueOf();
 
@@ -234,9 +236,9 @@ class Vis3Map {
         noUiSlider.create(vis3MapSlider, {
             start: [sliderDate2018],
             range: {
-                'min': [sliderDate2015],
-                // '30%': [4000],
-                // '70%': [8000],
+                'min': [sliderDate2010],
+                '15%': [sliderDate2015],
+                '80%': [sliderDate2017],
                 'max': [sliderDate2023]
             }
         });
