@@ -14,6 +14,8 @@ class Vis5Line  {
         });
         this.topicList = Array.from(topicsSet);
 
+        console.log("topicList", this.topicList);
+
         // default topic
         this.selectedTopic = this.topicList[0];
 

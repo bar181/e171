@@ -67,14 +67,13 @@ const pageNames = [
     'p2_ask_topic',
     'p3_intro',
 
-    // brad - vis4 Race Bar Chart fits better here for the story
+    // brad - vis4 and via 1 combined vi4: Race Bar Chart, vis1: Year-by-Year
     'vis4_header',
     'vis4_main',
-    // brad - Year by Year Google Trends and News Topics
     'vis1_main',
     'vis1_text',
     //
-    // // brad - vis4 line chart with descriptions
+    // // brad - vis5 line chart with descriptions
     'vis5_header',
     'vis5_main',
     'vis5_text',

@@ -9,10 +9,10 @@ class Vis1Google  {
         this.news = vis1News;
 
         this.whatPeaked = "";
-        this.topicHuman = ['Activist', 'Global warming', 'Genetically modified', 'EPA', 'Greta Thunberg', 'Climate' +
-        ' action'];
-        this.topicEmissions = ['Carbon emissions', 'Greenhouse gases', 'Sustainability', 'Green ai'];
-        this.topicWarming = ['Environment', 'Global warming', 'Renewable energy', 'Ecosystem'];
+        this.topicHuman = ['Activist', 'Global Warming', 'Genetically Modified', 'EPA', 'Greta Thunberg', 'Climate' +
+        ' Action'];
+        this.topicEmissions = ['Carbon Emissions', 'Greenhouse Gases', 'Sustainability', 'Green AI'];
+        this.topicWarming = ['Environment', 'Global Warming', 'Climate Change', 'Renewable Energy', 'Ecosystem'];
         this.topicPollution= ['Habitats', 'Ice caps', 'Ocean', 'Sea ice', 'Wildfires'];
         this.topicSelected = this.topicHuman;
 
