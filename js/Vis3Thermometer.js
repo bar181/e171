@@ -22,7 +22,7 @@ class Vis3Thermometer {
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 20, right: 20, bottom: 40, left: 40};
+        vis.margin = {top: 5, right: 20, bottom: 40, left: 40};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -30,7 +30,7 @@ class Vis3Thermometer {
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
             .attr("height", vis.height)
-            .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
+            .attr('transform', `translate (5, ${vis.margin.top})`);
 
         // Format the data
         vis.warmingData.forEach(d => {
