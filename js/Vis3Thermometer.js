@@ -1,6 +1,6 @@
 // Vis 3 Thermometer Viz
 
-let barWidth = 25;
+
 
 class Vis3Thermometer {
 
@@ -9,6 +9,9 @@ class Vis3Thermometer {
         this.warmingData = warmingData;
         this.date = moment(vis3MapDate.innerText, "MMM YYYY").format("YYYY-MM-DD"); // Dependent on MapVis Slider Date
         this.warmingRow = null;
+
+        this.barWidth = 25;
+        this.barShift = 15;
 
         // define colors
         this.colors = ['#fddbc7', '#f4a582', '#d6604d', '#b2182b']
@@ -57,21 +60,26 @@ class Vis3Thermometer {
             .domain([0, 3.5])
             .range([vis.height - vis.margin.bottom, vis.margin.top]);
 
+
         // Bar - Current warming
-        vis.currentBar = vis.svg.append("rect")
+        vis.barGroup = vis.svg.append("g")
+            .attr("class", "warming-bar")
+            .attr("transform", "translate(" + (vis.margin.left + vis.barShift) + ", 0)");
+
+        vis.currentBar = vis.barGroup.append("rect")
             .attr("class", "currentBar")
-            .attr("x", vis.margin.left + 15)
+            .attr("x", 0)
             .attr("y", vis.y(vis.warmingRow.actual_warming))
-            .attr("width", barWidth)
+            .attr("width", vis.barWidth)
             .attr("height", vis.y(0) - vis.y(vis.warmingRow.actual_warming))
             .attr("fill", vis.colors[2]);
 
         // Bar - Projected warming
-        vis.projectedBar =vis.svg.append("rect")
+        vis.projectedBar = vis.barGroup.append("rect")
             .attr("class", "projectedBar")
-            .attr("x", vis.margin.left + 15)
+            .attr("x", 0)
             .attr("y", vis.y(vis.warmingRow.projected_warming))
-            .attr("width", barWidth)
+            .attr("width", vis.barWidth)
             .attr("height", vis.y(vis.warmingRow.actual_warming) - vis.y(vis.warmingRow.projected_warming))
             .attr("fill", vis.colors[3]);
 
@@ -85,25 +93,76 @@ class Vis3Thermometer {
             .call(yAxis)
             .attr("transform", "translate(" + vis.margin.left + ", 0)");
 
-        // Current warming label
+        //  LINES
+
+        // Current warming line
+        vis.currentLine = vis.barGroup.append("line")
+            .attr("class", "currentLine")
+            .attr("x1", -vis.barShift)
+            .attr("y1", vis.y(vis.warmingRow.actual_warming))
+            .attr("x2", 40)
+            .attr("y2", vis.y(vis.warmingRow.actual_warming))
+            .attr("stroke-width", 2)
+            .attr("stroke", vis.colors[2]);
 
 
-        // Projected Warming Label
+        // Projected Warming line
+        vis.projectedLine = vis.barGroup.append("line")
+            .attr("class", "projectedLine")
+            .style("stroke-dasharray", ("4, 3"))  // Set the stroke to a dotted line
+            .attr("x1", -vis.barShift)
+            .attr("y1", vis.y(vis.warmingRow.projected_warming))
+            .attr("x2", 40)
+            .attr("y2", vis.y(vis.warmingRow.projected_warming))
+            .attr("stroke-width", 2)
+            .attr("stroke", vis.colors[3]);
 
+        // Paris Agreement line
+        vis.parisLine = vis.barGroup.append("line")
+            .attr("class", "parisLine")
+            .attr("x1", -vis.barShift)
+            .attr("y1", vis.y(1.5))
+            .attr("x2", 40)  // Adjust the length of the line as needed
+            .attr("y2", vis.y(1.5))
+            .attr("stroke-width", 2)
+            .attr("stroke", "green");
 
+        // CIRCLE
+
+        // Append circle
+        vis.barGroup.append("circle")
+            .attr("cx", vis.barWidth/2)
+            .attr("cy", vis.height - vis.margin.bottom + vis.barShift)
+            .attr("r", 22)
+            .attr("fill", vis.colors[2]);
+
+        // TEXT Labels
+
+        vis.projectedLabel = vis.barGroup.append("text")
+            .text("Projected for 2100")
+            .attr("id", "projected-warming-label")
+            .attr("class", "h6")
+            .attr("x", (2*vis.barShift) + vis.barWidth)
+            .attr("y", vis.y(vis.warmingRow.projected_warming));
+
+        vis.currentLabel = vis.barGroup.append("text")
+            .text(moment(vis.warmingRow.date, "YYYY-MM-DD").format("YYYY") + " Warming")
+            .attr("class", "h6")
+            .attr("id", "current-warming-label")
+            .attr("x", (2*vis.barShift) + vis.barWidth)
+            .attr("y", vis.y(vis.warmingRow.actual_warming));
+
+        vis.parisLabel = vis.barGroup.append("text")
+            .text("Paris Agreement")
+            .attr("id", "paris-agreement-temperature-label")
+            .attr("class", "h6")
+            .attr("x", (2*vis.barShift) + vis.barWidth)
+            .attr("y", vis.y(1.5));
 
         // Define additional listener on the Map SLider
         vis3MapSlider.noUiSlider.on('update', function (values) {
             vis.wrangleData();
         });
-
-        // Append circle
-        vis.svg.append("circle")
-            .attr("cx", vis.margin.left + 15 + barWidth/2)
-            .attr("cy", vis.height - vis.margin.bottom + 15)
-            .attr("r", 20)
-            .attr("fill", vis.colors[2]);
-
 
         vis.wrangleData()
 
@@ -128,6 +187,27 @@ class Vis3Thermometer {
         vis.svg.selectAll("rect.projectedBar")
             .attr("y", vis.y(vis.warmingRow.projected_warming))
             .attr("height", vis.y(vis.warmingRow.actual_warming) - vis.y(vis.warmingRow.projected_warming));
+
+        // Line - Current warming
+        vis.currentLine
+            .attr("y1", vis.y(vis.warmingRow.actual_warming))
+            .attr("y2", vis.y(vis.warmingRow.actual_warming));
+
+        // Line - Projected warming
+        vis.projectedLine
+            .attr("y1", vis.y(vis.warmingRow.projected_warming))
+            .attr("y2", vis.y(vis.warmingRow.projected_warming));
+
+        // Text - Current warming
+        vis.currentLabel
+            .text(moment(vis.warmingRow.date, "YYYY-MM-DD").format("YYYY") + " Warming")
+            .attr("y", vis.y(vis.warmingRow.actual_warming));
+
+        // Text - Projected warming
+        vis.projectedLabel
+            .attr("y", vis.y(vis.warmingRow.projected_warming));
+
+
         vis.updateVis()
     }
 
