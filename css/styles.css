@@ -93,7 +93,6 @@ body{
     /* Other styling properties as needed */
 }
 
-
 .lyrics {
     width: 100%;
     height: 720px;
@@ -107,7 +106,6 @@ body{
 .lyrics p {
     margin: 2px;
 }
-
 
 .emoji_big{
     height:90%;
