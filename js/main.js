@@ -62,19 +62,17 @@ const scriptNames = [
 
 // Array of page names in the desired order
 const pageNames = [
-
     'p1_title',
     'p2_ask_topic',
     'p3_intro',
 
-    // brad - vis4 Race Bar Chart fits better here for the story
+    //brad - vis4 and via 1 combined vi4: Race Bar Chart, vis1: Year-by-Year
     'vis4_header',
     'vis4_main',
-    // brad - Year by Year Google Trends and News Topics
     'vis1_main',
     'vis1_text',
-    //
-    // // brad - vis4 line chart with descriptions
+
+    // brad - vis5 line chart with descriptions
     'vis5_header',
     'vis5_main',
     'vis5_text',
@@ -83,7 +81,7 @@ const pageNames = [
     'vis2_header',
     'vis2_main',
     'vis2_text',
-    //
+
     // filip
     'vis3_header',
     'vis3_main',
@@ -111,6 +109,22 @@ function loadData() {
     initializeVis1();
     initializeVis2();
     initializeVis3();
+    <!-- twitter -->
+    // Create a script element for the Twitter widget script
+    var twitterScript = document.createElement("script");
+    twitterScript.src = "https://platform.twitter.com/widgets.js";
+    twitterScript.async = true;
+    twitterScript.charset = "utf-8";
+
+    // Add an event listener to check when the Twitter script has loaded
+    twitterScript.onload = function() {
+        // The Twitter script has loaded, you can now use the Twitter widget
+        // For example, you can create embedded tweets here
+        // This is where you can use Twitter widgets functionality
+    };
+
+    // Append the Twitter script to the document's head
+    document.head.appendChild(twitterScript);
 }
 
 // add any functions that need to be called when the user changes their age
@@ -287,8 +301,8 @@ function initializeVis3() {
         d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json"),
         d3.csv("data/vis3/vis3_net_zero_targets.csv"),
         d3.csv("data/vis3/vis3-total-ghg-emissions-final.csv"),
-        d3.csv("data/vis3/vis3-Ratified-Paris-Agreement-final.csv")
-    ])
+        d3.csv("data/vis3/vis3-Paris-Agreement-dates.csv")
+        ])
         .then(function([world, targets, reduced, paris]) {
             vis3map = new Vis3Map('mapContainer', world, targets, reduced, paris);
         })

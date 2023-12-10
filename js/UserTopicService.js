@@ -24,25 +24,26 @@ topicOptions.forEach(option => {
                 userTopic = 'Human Impact';
                 emojiName = 'Emmett';
                 topicImage = "images/emojis/emmett.png";
-                userTopicOptions = "Activist, Global warming, Genetically modified, EPA, Greta Thunberg, Climate action";
+                userTopicOptions = "Activist, Global Warming, Genetically Modified, EPA, Greta Thunberg, Climate" +
+                    " Action";
                 break;
             case 'option2':
                 userTopic = 'Gas Emissions';
                 emojiName = 'Herbie';
                 topicImage = "images/emojis/herbie.png";
-                userTopicOptions = "Carbon emissions, Greenhouse gases, Sustainability, Green AI";
+                userTopicOptions = "Carbon Emissions, Greenhouse Gases, Sustainability, Green AI";
                 break;
             case 'option3':
                 userTopic = 'Global Warming';
                 emojiName = 'Sunny';
                 topicImage = "images/emojis/sunny.png";
-                userTopicOptions = "Environment, Global warming, Renewable energy, Ecosystem";
+                userTopicOptions = "Environment, Global Warming, Climate Change, Renewable Energy, Ecosystem";
                 break;
             case 'option4':
                 userTopic = 'Pollution and Nature';
                 emojiName = 'Oscar';
                 topicImage = "images/emojis/oscar.png";
-                userTopicOptions = "Habitats, Ice caps, Ocean, Sea ice, Wildfires";
+                userTopicOptions = "Habitats, Ice Caps, Ocean, Sea Ice, Wildfires, Ecosystem";
                 break;
             default:
                 userTopic = 'Human Impact'; // Default to 'Human Impact' if none matched
