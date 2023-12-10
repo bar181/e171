@@ -1,6 +1,6 @@
 // Vis 3 Thermometer Viz
 
-let barWidth = 35;
+let barWidth = 25;
 
 class Vis3Thermometer {
 
@@ -19,7 +19,7 @@ class Vis3Thermometer {
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 20, right: 20, bottom: 20, left: 40};
+        vis.margin = {top: 20, right: 20, bottom: 40, left: 40};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -60,7 +60,7 @@ class Vis3Thermometer {
         // Bar - Current warming
         vis.currentBar = vis.svg.append("rect")
             .attr("class", "currentBar")
-            .attr("x", vis.margin.left + 10)
+            .attr("x", vis.margin.left + 15)
             .attr("y", vis.y(vis.warmingRow.actual_warming))
             .attr("width", barWidth)
             .attr("height", vis.y(0) - vis.y(vis.warmingRow.actual_warming))
@@ -69,7 +69,7 @@ class Vis3Thermometer {
         // Bar - Projected warming
         vis.projectedBar =vis.svg.append("rect")
             .attr("class", "projectedBar")
-            .attr("x", vis.margin.left + 10)
+            .attr("x", vis.margin.left + 15)
             .attr("y", vis.y(vis.warmingRow.projected_warming))
             .attr("width", barWidth)
             .attr("height", vis.y(vis.warmingRow.actual_warming) - vis.y(vis.warmingRow.projected_warming))
@@ -84,7 +84,7 @@ class Vis3Thermometer {
             .attr("class", "axis y-axis")
             .call(yAxis)
             .attr("transform", "translate(" + vis.margin.left + ", 0)");
-        
+
         // Current warming label
 
 
@@ -96,6 +96,14 @@ class Vis3Thermometer {
         vis3MapSlider.noUiSlider.on('update', function (values) {
             vis.wrangleData();
         });
+
+        // Append circle
+        vis.svg.append("circle")
+            .attr("cx", vis.margin.left + 15 + barWidth/2)
+            .attr("cy", vis.height - vis.margin.bottom + 15)
+            .attr("r", 20)
+            .attr("fill", vis.colors[2]);
+
 
         vis.wrangleData()
 
