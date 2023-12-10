@@ -467,6 +467,10 @@ body{
     margin-top: 1rem;
 }
 
+#dropdown-option option:hover {
+    background-color: #d94628; /* Replace #yourColor with the color you want */
+}
+
 /* Add this to your CSS file */
 #year-dropdown,
 #topic-dropdown,
