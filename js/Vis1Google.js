@@ -42,7 +42,7 @@ class Vis1Google  {
             .range([0, vis.width]);
 
         vis.yScale = d3.scaleBand()
-            .range([0, vis.height])
+            .range([0, vis.height+3])
             .padding(0.1);
 
         vis.xAxis = d3.axisBottom(vis.xScale);
@@ -69,6 +69,7 @@ class Vis1Google  {
             .attr("x", 85)// Position the label in the center of the x-axis
             .attr("y", vis.height + vis.margin.bottom - 10) // Adjust the y position as needed
             .style("text-anchor", "middle") // Center the text horizontally
+            .style("font-weight", "bold")
             .text("Relative search popularity peaks at 100 for each search term");
 
         // Create a line on the right with the text "Peak"
@@ -76,7 +77,7 @@ class Vis1Google  {
             .attr("x1", vis.width +2 )
             .attr("y1", 0)
             .attr("x2", vis.width +2)
-            .attr("y2", vis.height)
+            .attr("y2", vis.height + 5)
             .attr("stroke", "black");
 
         // vis.svg.append("text")

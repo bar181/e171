@@ -66,9 +66,10 @@ class Vis4Race  {
         vis.svg.append("text")
             .attr("class", "x-axis-label label-small")
             .attr("x", vis.width / 2) // Position the label in the center of the x-axis
-            .attr("y", vis.height + vis.margin.bottom - 5) // Adjust the y position as needed
+            .attr("y", vis.height + vis.margin.bottom - 15) // Adjust the y position as needed
             .style("text-anchor", "middle") // Center the text horizontally
             .style("font-size", "20px")
+            .style("font-weight", "bold")
             .text("Year over Year relative searches on Google from 2004-2023");
 
 
@@ -77,7 +78,7 @@ class Vis4Race  {
             .attr("x1", vis.width + (vis.barsHeight + vis.barsPadding *2))
             .attr("y1", 0)
             .attr("x2", vis.width + (vis.barsHeight + vis.barsPadding *2))
-            .attr("y2", vis.height)
+            .attr("y2", vis.height-20)
             .attr("stroke", "black");
 
 
@@ -85,8 +86,9 @@ class Vis4Race  {
             .attr("x", -30) // Adjust the x position as needed
             .attr("y", vis.height / 2)  // Adjust the y position as needed
             .attr("dy", "0.35em") // Adjust vertical alignment
-            .style("text-anchor", "start")
+            .style("text-anchor", "middle")
             .style("font-size", "12px")
+            .style("font-weight", "bold")
             .attr("transform", "rotate(270, " + (-20) + ", " + (vis.height / 2) + ")") // Rotate 90 degrees
             .text("Relative Search Popularity");
 
@@ -94,7 +96,8 @@ class Vis4Race  {
             .attr("x", vis.width + 50) // Adjust the x position as needed
             .attr("y", vis.height / 2)  // Adjust the y position as needed
             .attr("dy", "0.35em") // Adjust vertical alignment
-            .style("text-anchor", "start")
+            .style("text-anchor", "middle")
+            .style("font-weight", "bold")
             .style("font-size", "20px")
             .attr("transform", "rotate(270, " + (vis.width + 60) + ", " + (vis.height / 2) + ")") // Rotate 90 degrees
             .text("Search Terms Peak Here");

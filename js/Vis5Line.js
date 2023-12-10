@@ -194,7 +194,7 @@ class Vis5Line  {
             .attr("x", -40) // Adjust the x position as needed
             .attr("y", vis.height / 2)  // Adjust the y position as needed
             .attr("dy", "0.35em") // Adjust vertical alignment
-            .style("text-anchor", "end")
+            .style("text-anchor", "middle")
             .style("font-size", "12px")
             .attr("transform", "rotate(270, " + (-30) + ", " + (vis.height / 2 ) + ")") // Rotate 90 degrees
             .text("Relative Search Popularity (each topic peaks at 100)");
