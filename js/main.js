@@ -57,6 +57,7 @@ const scriptNames = [
     'Vis2BubbleChart',
     'Vis2DoughnutChart',
     'Vis3map',
+    'Vis3Thermometer'
 ];
 
 
@@ -308,10 +309,12 @@ function initializeVis3() {
         d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json"),
         d3.csv("data/vis3/vis3_net_zero_targets.csv"),
         d3.csv("data/vis3/vis3-total-ghg-emissions-final.csv"),
-        d3.csv("data/vis3/vis3-Paris-Agreement-dates.csv")
+        d3.csv("data/vis3/vis3-Paris-Agreement-dates.csv"),
+        d3.csv("data/vis3/vis3-warming-export.csv")
         ])
-        .then(function([world, targets, reduced, paris]) {
+        .then(function([world, targets, reduced, paris, warming]) {
             vis3map = new Vis3Map('mapContainer', world, targets, reduced, paris);
+            vis3thermometer = new Vis3Thermometer('thermometer-container', warming);
         })
         .catch(function(err) {
             console.log(err)
