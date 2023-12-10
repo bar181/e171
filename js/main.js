@@ -109,6 +109,13 @@ function loadData() {
     initializeVis1();
     initializeVis2();
     initializeVis3();
+
+    //<script src="https://unpkg.com/rabbit-lyrics" type="text/javascript"></script>
+    var rabbitScript = document.createElement("script");
+    rabbitScript.src = "https://unpkg.com/rabbit-lyrics";
+    rabbitScript.async = true;
+    rabbitScript.charset = "utf-8";
+
     <!-- twitter -->
     // Create a script element for the Twitter widget script
     var twitterScript = document.createElement("script");

@@ -94,25 +94,19 @@ body{
 }
 
 
-
-
-
-
-
-/*.greta-lyrics {*/
-/*    width: 100%;*/
-/*    height: 720px;*/
-/*    overflow-y: scroll;*/
-/*    border: 1px solid #ccc;*/
-/*    color: rgba(0, 0, 0, 0.99);*/
-/*    padding: 10px;*/
-/*    white-space: pre-line;*/
-/*}*/
-/*.greta-lyrics {*/
-/*    margin: 2px;*/
-/*}*/
-
-
+.lyrics {
+    width: 100%;
+    height: 720px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    color: #fff;
+    padding: 10px;
+    white-space: pre-line;
+    background: black;
+}
+.lyrics p {
+    margin: 2px;
+}
 
 
 .emoji_big{

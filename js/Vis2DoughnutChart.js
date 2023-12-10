@@ -88,7 +88,7 @@ class Vis2DoughnutChart {
         let vis = this;
 
         // Calculate the position for the legend (lower right corner)
-        const legendX = 630; // Adjust width for legend width and padding
+        const legendX = 615; // Adjust width for legend width and padding
         const legendY = 550; // Adjust height for legend height and padding
 
         // Define a scale for sentiment to color mapping
@@ -122,12 +122,18 @@ class Vis2DoughnutChart {
             .domain([d3.min(vis.aggressiveness_per_topic, d => d.Aggressiveness), d3.max(vis.aggressiveness_per_topic, d => d.Aggressiveness)])
             .range([0, 200]); // Width of the legend bar
 
-        let legendDomain = axisScale.domain();
-        let tickValues = [legendDomain[0], legendDomain[1]];
+        let minAggressiveness = d3.min(vis.aggressiveness_per_topic, d => d.Aggressiveness);
+        let maxAggressiveness = d3.max(vis.aggressiveness_per_topic, d => d.Aggressiveness);
+        let tickValues = [minAggressiveness, maxAggressiveness];
 
-        // Define the axis
+        // Define the axis with custom tick format
         let legendAxis = d3.axisBottom(axisScale)
             .tickValues(tickValues)
+            .tickFormat(d => {
+                if (d === minAggressiveness) return "Least aggressive"; // Replace "Low" with your desired string
+                if (d === maxAggressiveness) return "Most aggressive"; // Replace "High" with your desired string
+                return d;
+            });
 
         // Append the axis to the legend
         vis.agressivenessLegend.append('g')
@@ -147,7 +153,7 @@ class Vis2DoughnutChart {
         let vis = this;
 
         // Calculate the position for the legend (lower right corner)
-        const legendX = 630; // Adjust width for legend width and padding
+        const legendX = 615; // Adjust width for legend width and padding
         const legendY = 550; // Adjust height for legend height and padding
 
 
@@ -182,14 +188,18 @@ class Vis2DoughnutChart {
             .domain([d3.min(vis.sentiment_per_topic, d => d.Sentiment), d3.max(vis.sentiment_per_topic, d => d.Sentiment)])
             .range([0, 200]); // Width of the legend bar
 
-        let legendDomain = axisScale.domain();
-        let tickValues = [legendDomain[0], legendDomain[1]];
+        let minSentiment = d3.min(vis.sentiment_per_topic, d => d.Sentiment);
+        let maxSentiment = d3.max(vis.sentiment_per_topic, d => d.Sentiment);
+        let tickValues = [minSentiment, maxSentiment];
 
-        // Define the axis
+        // Define the axis with custom tick format
         let legendAxis = d3.axisBottom(axisScale)
-            //.ticks(2) // Two ticks: min and max
-            //.tickSize(2); // Adjust the size of the ticks
             .tickValues(tickValues)
+            .tickFormat(d => {
+                if (d === minSentiment) return "Negative Sentiment"; // Replace "Low" with your desired string
+                if (d === maxSentiment) return "Positive Sentiment"; // Replace "High" with your desired string
+                return d;
+            });
 
         // Append the axis to the legend
         vis.sentimentLegend.append('g')
