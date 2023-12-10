@@ -53,6 +53,10 @@ yearDropdown.addEventListener('change', function() {
 //     toggleDropdown('topic-selector'); // Call this function when topic-selector is clicked
 // });
 
+//Initial conditions:
+// Initial hide of the "Next" and "Back" buttons
+nextButton.style.display = "block";
+backButton.style.display = "none";
 
 nextButton.onclick = function() {
     subjectIndex = Math.min(subjects.length -1, subjectIndex + 1);
@@ -63,7 +67,7 @@ nextButton.onclick = function() {
     document.querySelector('#p_main').style.display = "block";
     document.querySelector('#p1').style.display = "block";
 
-    // Hide other paragraphs initially
+    // Hide other paragraphs initially and then switch out dependent on current subject presented
     document.querySelector('#p_stance').style.display = "none";
     document.querySelector('#p_sentiment').style.display = "none";
     document.querySelector('#p_aggressiveness').style.display = "none";
@@ -88,11 +92,26 @@ nextButton.onclick = function() {
     }
 
 
-
+    //changes title text so that readers comprehend what subject they are on
     if (currentSubject === "None") {
         document.querySelector('.top-bar-title').textContent = "No Subject Selected";
     } else {
         document.querySelector('.top-bar-title').textContent = "Current Subject: " + currentSubject;
+    }
+
+
+    // Check if the current subject is "Aggressiveness" and hide the button
+    if (currentSubject === "Aggressiveness") {
+        nextButton.style.display = "none";
+    } else {
+        nextButton.style.display = "block"; // Make sure it's visible for other subjects
+    }
+
+    // Check if the current subject is "None" and hide the "Back" button
+    if (currentSubject === "None") {
+        backButton.style.display = "none";
+    } else {
+        backButton.style.display = "block"; // Make sure it's visible for other subjects
     }
 
     //console.log("NEW SUBJECT SELECTED:", currentSubject);
@@ -132,14 +151,25 @@ backButton.onclick = function() {
         document.querySelector('#p1').style.display = "none";
     }
 
-
-
-
-
     if (currentSubject === "None") {
         document.querySelector('.top-bar-title').textContent = "No Subject Selected";
     } else {
         document.querySelector('.top-bar-title').textContent = "Current Subject: " + currentSubject;
+    }
+
+
+    // Check if the current subject is "Aggressiveness" and hide the button
+    if (currentSubject === "Aggressiveness") {
+        nextButton.style.display = "none";
+    } else {
+        nextButton.style.display = "block"; // Make sure it's visible for other subjects
+    }
+
+    // Check if the current subject is "None" and hide the "Back" button
+    if (currentSubject === "None") {
+        backButton.style.display = "none";
+    } else {
+        backButton.style.display = "block"; // Make sure it's visible for other subjects
     }
 
     //console.log("NEW SUBJECT SELECTED:", currentSubject);

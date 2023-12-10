@@ -1,17 +1,18 @@
 <div class="section">
-    <div class="card mx-auto mb-2 py-3" id="card-back-next">
-        <div class="d-flex justify-content-around">
-            <div>
-                <button id="vis2-back-button" class="btn btn-primary ">Back</button>
-            </div>
-            <div class="col-md-8 text-center">
-                <span class="top-bar-title">No Subject Selected</span>
-            </div>
-            <div>
-                <button id="vis2-next-button" class="btn btn-primary">Next</button>
+        <!--MAKES TITLE CARD AREA WITH BACK AND NEXT BUTTON-->
+        <div class="card mx-auto mb-2 py-3" id="card-back-next">
+            <div class="row">
+                <div class="col-md-3">
+                    <button id="vis2-back-button" class="btn btn-primary">View Previous Subject</button>
+                </div>
+                <div class="col-md-6 text-center">
+                    <span class="top-bar-title palette-green">No Subject Selected</span>
+                </div>
+                <div class="col-md-3">
+                    <button id="vis2-next-button" class="btn btn-primary">View Next Subject</button>
+                </div>
             </div>
         </div>
-    </div>
 
     <div class="container-fluid" id="vis2_container">
         <div class="card mx-auto vis2-card-area shadow">
@@ -73,11 +74,28 @@
                         <div class="row">
                             <div class="col-sm" id="my-text">
                                 <span id="p_main" style="display: block">The Climate Change Twitter Dataset is the most comprehensive dataset to date on climate change and human opinions on Twitter, featuring over 15 million tweets from a 13-year span. It includes detailed information such as topic categorization, stance and sentiment on climate change, and aggressiveness.</span>
-                                <span id="p1" style="display: block">Topic Categorization: The dataset categorizes tweets into specific topics related to climate change, enabling a focused analysis of public discourse on various aspects of the issue.</span>
-                                <span id="p_stance" style="display: none">Stance on Climate Change: It identifies the most popular stance on climate change for each topic and year, revealing public opinion trends over time.</span>
-                                <span id="p_sentiment" style="display: none">Sentiment Analysis: The dataset provides the average sentiment of tweets per topic and year, reflecting the general tone and mood of public discussions on climate change.</span>
-                                <span id="p_aggressiveness" style="display: none">Aggressiveness of Tweets: It measures the level of aggressiveness in tweets, offering insights into the intensity and nature of climate change debates on social media.</span>
+                                <span id="p1" style="display: block"><span class="bold palette-darkgray">Topic Categorization:</span> The dataset categorizes tweets into specific topics related to climate change, enabling a focused analysis of public discourse on various aspects of the issue.</span>
+                                <span id="p_stance" style="display: none"><span class="bold palette-darkgray">Stance on Climate Change:</span> Identifies the most popular stance on climate change for each topic and year, revealing public opinion trends over time.</span>
+                                <span id="p_sentiment" style="display: none"><span class="bold palette-darkgray">Sentiment Analysis: </span> The dataset provides the average sentiment of tweets per topic and year, reflecting the general tone and mood of public discussions on climate change.</span>
+                                <span id="p_aggressiveness" style="display: none"><span class="bold palette-darkgray">Aggressiveness of Tweets: </span> It measures the level of aggressiveness in tweets, offering insights into the intensity and nature of climate change debates on social media.</span>
 <!--                                <p>REMINDER TO CITE: If you use the dataset, cite the papers: https://doi.org/10.1016/j.eswa.2022.117541 and https://doi.org/10.1371/journal.pone.0274213</p>-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 vis2-image-container">
+                                <img src="images/emojis/emmett.png" class="user-topic-image">
+                            </div>
+                            <div class="col-sm-9 vis2-text-container">
+                                <p class="topic-text topic-emmett">Now, let's delve into Twitter trends on climate! Please select <span class="bold palette-bright-green">"Importance of Human Intervention"</span> from the <span class="bold palette-green">"Select Topic"</span> dropdown. This will enable you to explore changes over the years through the <span class="bold palette-green">"Select Year"</span> dropdown, and examine various aspects like the most prevalent stance, overall sentiment, and the level of aggressiveness in the discussions.</p>
+                                <p class="topic-text topic-herbie d-none"> Now, let's explore the evolving conversation around gas emissions on Twitter! Please choose <span class="bold palette-bright-green">"Seriousness of Gas Emissions"</span> from the <span class="bold palette-green">"Select Topic"</span> dropdown section. This will allow you to track the progression of this topic over time through the <span class="bold palette-green">"Select Year"</span> dropdown, analyze key viewpoints, gauge the general sentiment, and assess the intensity of the debates surrounding it.</p>
+                                <p class="topic-text topic-sunny d-none">Now, let's investigate Twitter discussions related to global warming! Please select <span class="bold palette-bright-green">"Ideological Positions on Global Warming"</span> from the <span class="bold palette-green">"Select Topic"</span> dropdown section. This will provide insights into how the dialogue has evolved over the years through the <span class="bold palette-green">"Select Year"</span> dropdown, allowing you to examine elements such as the dominant opinions, overall sentiment, and the intensity of the debates on this critical issue.</p>
+                                <p class="topic-text topic-oscar d-none"> Now, let's explore Twitter discussions on weather and pollution! Please choose <span class="bold palette-bright-green">"Weather Extremes"</span> and <span class="bold palette-bright-green">"Significance of Pollution Awareness Events"</span> from the <span class="bold palette-green">"Select Topic"</span> dropdown section. This will allow you to track how conversations have evolved over time through the <span class="bold palette-green">"Select Year"</span> dropdown, and analyze key elements such as dominant opinions, overall sentiment, and the intensity of debates on these critical issues.
+
+
+
+
+
+                                </p>
                             </div>
                         </div>
                     </div>
