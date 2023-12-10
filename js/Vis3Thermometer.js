@@ -1,5 +1,7 @@
 // Vis 3 Thermometer Viz
 
+let barWidth = 35;
+
 class Vis3Thermometer {
 
     constructor(parentElement, warmingData) {
@@ -17,7 +19,7 @@ class Vis3Thermometer {
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        vis.margin = {top: 20, right: 20, bottom: 20, left: 40};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -50,6 +52,46 @@ class Vis3Thermometer {
         //     .attr('text-anchor', 'middle');
 
 
+        // Scales
+        vis.y = d3.scaleLinear()
+            .domain([0, 3.5])
+            .range([vis.height - vis.margin.bottom, vis.margin.top]);
+
+        // Bar - Current warming
+        vis.currentBar = vis.svg.append("rect")
+            .attr("class", "currentBar")
+            .attr("x", vis.margin.left + 10)
+            .attr("y", vis.y(vis.warmingRow.actual_warming))
+            .attr("width", barWidth)
+            .attr("height", vis.y(0) - vis.y(vis.warmingRow.actual_warming))
+            .attr("fill", vis.colors[2]);
+
+        // Bar - Projected warming
+        vis.projectedBar =vis.svg.append("rect")
+            .attr("class", "projectedBar")
+            .attr("x", vis.margin.left + 10)
+            .attr("y", vis.y(vis.warmingRow.projected_warming))
+            .attr("width", barWidth)
+            .attr("height", vis.y(vis.warmingRow.actual_warming) - vis.y(vis.warmingRow.projected_warming))
+            .attr("fill", vis.colors[3]);
+
+        // Add y-axis
+        let yAxis = d3.axisLeft()
+            .scale(vis.y)
+            .tickFormat(d => "+" + d + "°C");
+
+        vis.svg.append("g")
+            .attr("class", "axis y-axis")
+            .call(yAxis)
+            .attr("transform", "translate(" + vis.margin.left + ", 0)");
+        
+        // Current warming label
+
+
+        // Projected Warming Label
+
+
+
         // Define additional listener on the Map SLider
         vis3MapSlider.noUiSlider.on('update', function (values) {
             vis.wrangleData();
@@ -69,6 +111,15 @@ class Vis3Thermometer {
         vis.warmingRow = vis.warmingData.filter(d => d.date === vis.date)[0];
         console.log("New row:", vis.warmingRow)
 
+        // Bar - Current warming
+        vis.svg.selectAll("rect.currentBar")
+            .attr("y", vis.y(vis.warmingRow.actual_warming))
+            .attr("height", vis.y(0) - vis.y(vis.warmingRow.actual_warming));
+
+        // Bar - Projected warming
+        vis.svg.selectAll("rect.projectedBar")
+            .attr("y", vis.y(vis.warmingRow.projected_warming))
+            .attr("height", vis.y(vis.warmingRow.actual_warming) - vis.y(vis.warmingRow.projected_warming));
         vis.updateVis()
     }
 
