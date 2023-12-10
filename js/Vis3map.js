@@ -149,7 +149,7 @@ class Vis3Map {
                     .attr('fill', d => {
                         if (d.properties[vis3SelectedCategory] === "No data") {
                             return "gray"
-                        } if (moment(d.properties[vis3SelectedCategory], "YYYY-MM-DD").isBefore(moment(vis3MapDate.innerText))) {
+                        } if ((moment(d.properties[vis3SelectedCategory], "YYYY-MM-DD").isBefore(moment(vis3MapDate.innerText))) || (d.properties[vis3SelectedCategory] === "TRUE")) {
                             return "green"
                         } else {
                             return "red"
@@ -274,7 +274,7 @@ class Vis3Map {
 
             if (d.properties[vis3SelectedCategory] === "No data") {
                 return "gray"
-            } if (moment(d.properties[vis3SelectedCategory], "YYYY-MM-DD").isBefore(moment(vis3MapDate.innerText))) {
+            } if ((moment(d.properties[vis3SelectedCategory], "YYYY-MM-DD").isBefore(moment(vis3MapDate.innerText))) || (d.properties[vis3SelectedCategory] === "TRUE")) {
                 return "green"
             } else {
                 return "red"
