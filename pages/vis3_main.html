@@ -31,44 +31,43 @@
 
 
                 <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="row justify-content-center mb-4 m-2">
-                            <div class="row d-flex align-items-center">
-                                <span class="card-title-small">Select a Year:</span>
-                            </div>
-                            <div class="row ml-3">
-                                <div id="map-slider"></div>
-                            </div>
-                        </div>
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <h3 id="map-date" class="palette-green bold  d-flex align-items-center justify-content-center"></h3>
+                    <div class="row justify-content-center m-2">
+                        <div class="row d-flex align-items-center">
+                            <p><span class="card-title-small">Select a Year:  </span><span id="map-date" class="card-title-small palette-green bold"></span></p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="row justify-content-center">
-                                <div id="mapContainer"></div>
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="offset-md-1 col-md-10 mb-5">
+                        <div id="map-slider"></div>
+                    </div>
+                    <div class="col-md-1">
+                        <button id="playPauseButton" onclick="togglePlayPauseVis3()" class="btn btn-success">Play</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row justify-content-center mt-3">
+                            <div id="mapContainer" style="height:500px"></div>
                         </div>
-                        <div class="col-md-4">
-                            <div class = "row justify-content-center mt-3">
-                                <h4 class = "palette-green bold">Progress on Paris Goals</h4>
-                                <p>Limiting Warming to 1.5°C</p>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div id="thermometer-container" style="height:300px"></div>
-                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class = "row justify-content-center mt-3">
+                            <h4 class = "palette-green bold">Progress on Paris Goals</h4>
+                            <p>Limiting Warming to 1.5°C</p>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div id="thermometer-container" style="height:300px"></div>
+                        </div>
 <!--                            <div class="row mt-3">-->
 <!--                                <h3>Key Climate Action wins:</h3>-->
 <!--                                <p>1. In 2015, the world came together to Sign the Paris Agreement.</p>-->
 <!--                                <p>2. Since 2015, Most of the world's largest emitters of greenhouse gases have signed Net Zero by 2050 laws.</p>-->
 <!--                                <p>3. Since 2018, Many countries have already started to reduce emissions from their peak.</p>-->
 <!--                            </div>-->
-                        </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
