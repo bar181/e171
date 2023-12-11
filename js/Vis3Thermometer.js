@@ -30,7 +30,7 @@ class Vis3Thermometer {
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
             .attr("height", vis.height)
-            .attr('transform', `translate (5, ${vis.margin.top})`);
+            .attr('transform', `translate (30, ${vis.margin.top})`);
 
         // Format the data
         vis.warmingData.forEach(d => {
@@ -139,14 +139,14 @@ class Vis3Thermometer {
         // TEXT Labels
 
         vis.projectedLabel = vis.barGroup.append("text")
-            .text("Projected for 2100")
+            .text("Projected by 2100")
             .attr("id", "projected-warming-label")
             .attr("class", "h6")
             .attr("x", (2*vis.barShift) + vis.barWidth)
             .attr("y", vis.y(vis.warmingRow.projected_warming));
 
         vis.currentLabel = vis.barGroup.append("text")
-            .text(moment(vis.warmingRow.date, "YYYY-MM-DD").format("YYYY") + " Warming")
+            .text("Warming as of " + moment(vis.warmingRow.date, "YYYY-MM-DD").format("YYYY"))
             .attr("class", "h6")
             .attr("id", "current-warming-label")
             .attr("x", (2*vis.barShift) + vis.barWidth)
@@ -200,7 +200,7 @@ class Vis3Thermometer {
 
         // Text - Current warming
         vis.currentLabel
-            .text(moment(vis.warmingRow.date, "YYYY-MM-DD").format("YYYY") + " Warming")
+            .text("Warming as of " + moment(vis.warmingRow.date, "YYYY-MM-DD").format("YYYY"))
             .attr("y", vis.y(vis.warmingRow.actual_warming));
 
         // Text - Projected warming
