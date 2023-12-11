@@ -119,6 +119,7 @@ class Vis5Line  {
             .attr("text-anchor", "middle")
             .attr("x", vis.width / 2)
             .attr("y", vis.height + vis.margin.bottom - 10) // Adjust this as needed
+            .style("font-weight", "bold")
             .text("Year");
 
         // Add a gray line to represent the data (you will update this in the updateVis method)
@@ -197,6 +198,7 @@ class Vis5Line  {
             .style("text-anchor", "middle")
             .style("font-size", "12px")
             .attr("transform", "rotate(270, " + (-30) + ", " + (vis.height / 2 ) + ")") // Rotate 90 degrees
+            .style("font-weight", "bold")
             .text("Relative Search Popularity (each topic peaks at 100)");
 
         vis.wrangleData();
