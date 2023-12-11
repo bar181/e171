@@ -40,10 +40,6 @@ class Vis3Thermometer {
 
         // Get the initial row
         vis.warmingRow = vis.warmingData.filter(d => d.date === vis.date)[0];
-        console.log(vis.warmingRow)
-
-        // Get data
-        console.log("vis3MapDate:", vis.date);
 
         // // add title
         // vis.svg.append('g')
@@ -176,7 +172,6 @@ class Vis3Thermometer {
 
         // Get the new row
         vis.warmingRow = vis.warmingData.filter(d => d.date === vis.date)[0];
-        console.log("New row:", vis.warmingRow)
 
         // Bar - Current warming
         vis.svg.selectAll("rect.currentBar")

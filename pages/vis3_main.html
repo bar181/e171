@@ -10,20 +10,27 @@
                 <h5 class="row m-3">The year 2015 marks a Milestone in Global Climate Action. 195 countries sign the Paris Agreement, agreeing to reduce Greenhouse Gas emissions. The goal is to limit warming to 1.5 degrees Celcius (2.7F). Every degree of warming matters.</h5>
 
 
+                <div class="row m-2">
+                    <div class="col-md-2 d-flex justify-content-center">
+                        <button id="playPauseButton" onclick="togglePlayPauseVis3()">Play</button>
+                    </div>
+                    <div class="col-md-8 d-flex justify-content-center">
+                        <select id='mapSelector' class="custom-select align-self-center" style="width: 80%" onchange="vis3CategoryChange()">
+                            <option value="ratifiedParisDate">Signed 2015 Paris Agreement</option>
+                            <option value="net_2050_law">Net Zero law</option>
+                            <option value="have_reduced">Has cut emissions</option>
+                        </select>
+                    </div>
+                </div>
+
+
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row justify-content-center m-2">
-                            <select id='mapSelector' class="custom-select align-self-center" style="width: 40%" onchange="vis3CategoryChange()">
-                                <option value="ratifiedParisDate">Signed 2015 Paris Agreement</option>
-                                <option value="net_2050_law">Net Zero law</option>
-                                <option value="have_reduced">Has cut emissions</option>
-                            </select>
-                        </div>
                         <div class="row justify-content-center m-4">
                             <div id="map-slider"></div>
                         </div>
-                        <div class="row justify-content-center m-2">
-                            <h3 id="map-date" class="align-items-center justify-content-center"></h3>
+                        <div class="row m-2">
+                            <h3 id="map-date" class="d-flex align-items-center justify-content-center"></h3>
                         </div>
                     </div>
                     <div class="row">

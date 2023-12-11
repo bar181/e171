@@ -10,16 +10,14 @@ vis3MapSlider = document.getElementById('map-slider');
 vis3MapDate = document.getElementById('map-date');
 
 var sliderDate2010 = moment('2010-01-01', "YYYY-MM-DD").valueOf();
-var sliderDate2016 = moment('2016-04-01', "YYYY-MM-DD").valueOf();
+var sliderDate2016 = moment('2016-01-01', "YYYY-MM-DD").valueOf();
 // var sliderDate2017 = moment('2017-01-01', "YYYY-MM-DD").valueOf();
 var sliderDate2018 = moment('2018-01-01', "YYYY-MM-DD").valueOf();
 var sliderDate2023 = moment('2023-12-01', "YYYY-MM-DD").valueOf();
 
 
-// Create a new date from a string, return as a timestamp.
-function timestamp(str) {
-    return new Date(str).getTime();
-}
+let isVis3Playing = false;
+let animationIntervalVis3;
 
 class Vis3Map {
 
@@ -38,8 +36,6 @@ class Vis3Map {
 
     initVis() {
         let vis = this;
-
-        // console.log("Vis 3 init vis")
 
         // Initiliaze map date
         vis3MapDate.innerText = moment(sliderDate2023);
@@ -253,11 +249,7 @@ class Vis3Map {
             vis.wrangleData();
         });
 
-        console.log(vis3MapSlider)
-
-
         vis.wrangleData()
-
     }
 
     wrangleData() {
@@ -285,10 +277,70 @@ class Vis3Map {
     }
 }
 
-
-
 function vis3CategoryChange() {
     vis3SelectedCategory = document.getElementById('mapSelector').value;
-    console.log(vis3SelectedCategory)
     vis3map.wrangleData();
+}
+
+function togglePlayPauseVis3() {
+    isVis3Playing = !isVis3Playing;
+
+    // Get the current slider value
+    let currentValue = vis3MapSlider.noUiSlider.get();
+    let currentDate = moment.unix(currentValue / 1000);
+
+    // Reset the animation if the slider is at the end
+    if (isVis3Playing && (currentDate.isSame(sliderDate2023))) {
+        vis3MapSlider.noUiSlider.set(sliderDate2010);
+    }
+
+    // Start or stop the animation
+    if (isVis3Playing) {
+        document.getElementById('playPauseButton').innerText = 'Pause';
+        startAnimationVis3();
+    } else {
+        document.getElementById('playPauseButton').innerText = 'Play';
+        clearInterval(animationIntervalVis3);
+    }
+}
+
+function startAnimationVis3() {
+    animationIntervalVis3 = setInterval(function () {
+
+        // Get the current slider value
+        let currentValue = vis3MapSlider.noUiSlider.get()
+        let currentDate = moment.unix(currentValue / 1000).startOf('month');
+
+        if (!isVis3Playing) {
+            // Stop the animation if paused
+            clearInterval(animationIntervalVis3);
+            return;
+        }
+
+        // Increment the date by one month
+        if (currentDate.isSameOrBefore(moment(sliderDate2016).add(-11, 'months'))) {
+            currentDate.add(1, 'years');
+        } else if (currentDate.isBefore(sliderDate2018)) {
+            currentDate.add(1, 'months');
+        } else if (currentDate.isSameOrBefore(moment(sliderDate2023).add(-1, 'years'))) {
+            currentDate.add(1, 'years');
+        } else {
+            // Handle the case when less than a year is left
+            currentDate = moment(sliderDate2023);
+            togglePlayPauseVis3();
+        }
+
+        console.log(currentDate.format("YYYY-MM-DD"));
+
+        // Check if the new date is within the allowed range
+        if (currentDate.isSameOrBefore(moment(sliderDate2023).add(30, 'days'))) {
+            // Update the slider value
+            vis3MapSlider.noUiSlider.set(currentDate.valueOf());
+
+            // Update the map
+            vis3map.wrangleData();
+        } else {
+            togglePlayPauseVis3();
+        }
+    }, 350);
 }
