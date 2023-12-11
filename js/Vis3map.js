@@ -9,17 +9,19 @@ let vis3SelectedCategory = "ratifiedParisDate";
 vis3MapSlider = document.getElementById('map-slider');
 vis3MapDate = document.getElementById('map-date');
 
-var sliderDate2010 = moment('2010-01-01', "YYYY-MM-DD").valueOf();
-var sliderDate2016 = moment('2016-04-01', "YYYY-MM-DD").valueOf();
-// var sliderDate2017 = moment('2017-01-01', "YYYY-MM-DD").valueOf();
-var sliderDate2018 = moment('2018-01-01', "YYYY-MM-DD").valueOf();
-var sliderDate2023 = moment('2023-12-01', "YYYY-MM-DD").valueOf();
+let sliderDate2010 = moment('2010-01-01', "YYYY-MM-DD").valueOf();
+let sliderDate2016 = moment('2016-01-01', "YYYY-MM-DD").valueOf();
+let sliderDate2017 = moment('2017-01-01', "YYYY-MM-DD").valueOf();
+let sliderDate2018 = moment('2018-01-01', "YYYY-MM-DD").valueOf();
+let sliderDate2023 = moment('2023-12-01', "YYYY-MM-DD").valueOf();
 
 
-// Create a new date from a string, return as a timestamp.
-function timestamp(str) {
-    return new Date(str).getTime();
-}
+let isVis3Playing = false;
+let animationIntervalVis3;
+
+let mapGray = "#8d918c";
+let mapGreen = "green";
+let mapNoInfo = "#5a5e5a";
 
 class Vis3Map {
 
@@ -157,11 +159,11 @@ class Vis3Map {
                     .attr('stroke-width', '0px')
                     .attr('fill', d => {
                         if (d.properties[vis3SelectedCategory] === "No data") {
-                            return "gray"
+                            return mapNoInfo
                         } if ((moment(d.properties[vis3SelectedCategory], "YYYY-MM-DD").isBefore(moment(vis3MapDate.innerText))) || (d.properties[vis3SelectedCategory] === "TRUE")) {
-                            return "green"
+                            return mapGreen
                         } else {
-                            return "red"
+                            return mapGray
                         }
                     })
 
@@ -177,73 +179,6 @@ class Vis3Map {
             .attr("class", "tooltip")
             .attr("id", "mapTooltip");
 
-        /* * * * * * * * * * * * * *
-        *         LEGEND           *
-        * * * * * * * * * * * * * */
-        // const legendSquareSize = 20; // Set the size of legend squares
-        // const legendSpacing = 0; // Set the spacing between legend items
-        //
-        // vis.legend = vis.svg.append("g")
-        //     .attr('class', 'legend')
-        //     .attr('transform', `translate(${vis.width * 2.8 / 4}, ${vis.height - 40})`);
-        //
-        // vis.legend.selectAll("rect")
-        //     .data(vis.colors)
-        //     .enter()
-        //     .append('rect')
-        //     .attr('x', (d, i) => i * (legendSquareSize + legendSpacing)) // Adjust the x-coordinate to position the legend squares
-        //     .attr('y', 0) // Position each legend square vertically
-        //     .attr('width', legendSquareSize)
-        //     .attr('height', legendSquareSize)
-        //     .style('fill', d => d);
-        //
-        //
-        // // Add legend scale
-        // // Create an ordinal scale for the legend categories
-        // vis.x = d3.scaleLinear()
-        //     .domain([0,100]) // Provide an array of category labels
-        //     .range([0, 4 * (legendSquareSize + legendSpacing)]);
-        //
-        // vis.legendAxis = d3.axisBottom()
-        //     .scale(vis.x)
-        //     .tickValues([0, 25, 50, 75, 100]);
-        //
-        // // Create a group element for the legend axis
-        // vis.legendAxisGroup = vis.legend.append("g")
-        //     .attr("class", "legend-axis")
-        //     .call(vis.legendAxis);
-        //
-        // // Adjust the legend axis position
-        // vis.legendAxisGroup.attr("transform", `translate(0, ${legendSquareSize})`);
-
-        /* * * * * * * * * * * * * *
-        *    Make map draggable    *
-        * * * * * * * * * * * * * */
-        let m0,
-            o0;
-
-        vis.svg.call(
-            d3.drag()
-                .on("start", function (event) {
-
-                    let lastRotationParams = vis.projection.rotate();
-                    m0 = [event.x, event.y];
-                    o0 = [-lastRotationParams[0], -lastRotationParams[1]];
-                })
-                .on("drag", function (event) {
-                    if (m0) {
-                        let m1 = [event.x, event.y],
-                            o1 = [o0[0] + (m0[0] - m1[0]) / 4, o0[1] + (m1[1] - m0[1]) / 4];
-                        vis.projection.rotate([-o1[0], -o1[1]]);
-                    }
-
-                    // Update the map
-                    vis.path = d3.geoPath().projection(vis.projection);
-                    d3.selectAll(".country").attr("d", vis.path)
-                    d3.selectAll(".graticule").attr("d", vis.path);
-                })
-        );
-
         // Create the slider
         noUiSlider.create(vis3MapSlider, {
             start: [sliderDate2023],
@@ -252,6 +187,18 @@ class Vis3Map {
                 '15%': [sliderDate2016],
                 '80%': [sliderDate2018],
                 'max': [sliderDate2023]
+            },
+            pips: {
+                mode: 'values',
+                values: [sliderDate2010, sliderDate2016, sliderDate2018, sliderDate2023],
+                format: {
+                    to: function (value) {
+                        return moment.unix(value / 1000).format('YYYY');
+                    },
+                    from: function (value) {
+                        return moment(value, 'YYYY-MM-DD').unix() * 1000;
+                    }
+                }
             }
         });
 
@@ -262,11 +209,7 @@ class Vis3Map {
             vis.wrangleData();
         });
 
-        console.log(vis3MapSlider)
-
-
         vis.wrangleData()
-
     }
 
     wrangleData() {
@@ -282,11 +225,11 @@ class Vis3Map {
         vis.countries.attr('fill', d => {
 
             if (d.properties[vis3SelectedCategory] === "No data") {
-                return "gray"
+                return mapNoInfo
             } if ((moment(d.properties[vis3SelectedCategory], "YYYY-MM-DD").isBefore(moment(vis3MapDate.innerText))) || (d.properties[vis3SelectedCategory] === "TRUE")) {
-                return "green"
+                return mapGreen
             } else {
-                return "red"
+                return mapGray
             }
         });
 
@@ -294,10 +237,70 @@ class Vis3Map {
     }
 }
 
-
-
 function vis3CategoryChange() {
     vis3SelectedCategory = document.getElementById('mapSelector').value;
-    console.log(vis3SelectedCategory)
     vis3map.wrangleData();
+}
+
+function togglePlayPauseVis3() {
+    isVis3Playing = !isVis3Playing;
+
+    // Get the current slider value
+    let currentValue = vis3MapSlider.noUiSlider.get();
+    let currentDate = moment.unix(currentValue / 1000);
+
+    // Reset the animation if the slider is at the end
+    if (isVis3Playing && (currentDate.isSame(sliderDate2023))) {
+        vis3MapSlider.noUiSlider.set(sliderDate2010);
+    }
+
+    // Start or stop the animation
+    if (isVis3Playing) {
+        document.getElementById('playPauseButton').innerText = 'Pause';
+        startAnimationVis3();
+    } else {
+        document.getElementById('playPauseButton').innerText = 'Play';
+        clearInterval(animationIntervalVis3);
+    }
+}
+
+function startAnimationVis3() {
+    animationIntervalVis3 = setInterval(function () {
+
+        // Get the current slider value
+        let currentValue = vis3MapSlider.noUiSlider.get()
+        let currentDate = moment.unix(currentValue / 1000).startOf('month');
+
+        if (!isVis3Playing) {
+            // Stop the animation if paused
+            clearInterval(animationIntervalVis3);
+            return;
+        }
+
+        // Increment the date by one month
+        if (currentDate.isSameOrBefore(moment(sliderDate2016).add(-11, 'months'))) {
+            currentDate.add(1, 'years');
+        } else if (currentDate.isBefore(sliderDate2018)) {
+            currentDate.add(1, 'months');
+        } else if (currentDate.isSameOrBefore(moment(sliderDate2023).add(-1, 'years'))) {
+            currentDate.add(1, 'years');
+        } else {
+            // Handle the case when less than a year is left
+            currentDate = moment(sliderDate2023);
+            togglePlayPauseVis3();
+        }
+
+        console.log(currentDate.format("YYYY-MM-DD"));
+
+        // Check if the new date is within the allowed range
+        if (currentDate.isSameOrBefore(moment(sliderDate2023).add(30, 'days'))) {
+            // Update the slider value
+            vis3MapSlider.noUiSlider.set(currentDate.valueOf());
+
+            // Update the map
+            vis3map.wrangleData();
+        } else {
+            togglePlayPauseVis3();
+        }
+    }, 350);
 }
