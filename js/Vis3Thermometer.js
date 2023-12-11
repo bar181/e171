@@ -14,7 +14,7 @@ class Vis3Thermometer {
         this.barShift = 15;
 
         // define colors
-        this.colors = ['#fddbc7', '#f4a582', '#d6604d', '#b2182b']
+        this.colors = ['#b2182b', "#67001f"]
 
         this.initVis()
     }
@@ -68,7 +68,7 @@ class Vis3Thermometer {
             .attr("y", vis.y(vis.warmingRow.actual_warming))
             .attr("width", vis.barWidth)
             .attr("height", vis.y(0) - vis.y(vis.warmingRow.actual_warming))
-            .attr("fill", vis.colors[2]);
+            .attr("fill", vis.colors[0]);
 
         // Bar - Projected warming
         vis.projectedBar = vis.barGroup.append("rect")
@@ -77,7 +77,7 @@ class Vis3Thermometer {
             .attr("y", vis.y(vis.warmingRow.projected_warming))
             .attr("width", vis.barWidth)
             .attr("height", vis.y(vis.warmingRow.actual_warming) - vis.y(vis.warmingRow.projected_warming))
-            .attr("fill", vis.colors[3]);
+            .attr("fill", vis.colors[1]);
 
         // Add y-axis
         let yAxis = d3.axisLeft()
@@ -99,7 +99,7 @@ class Vis3Thermometer {
             .attr("x2", 40)
             .attr("y2", vis.y(vis.warmingRow.actual_warming))
             .attr("stroke-width", 2)
-            .attr("stroke", vis.colors[2]);
+            .attr("stroke", vis.colors[0]);
 
 
         // Projected Warming line
@@ -111,7 +111,7 @@ class Vis3Thermometer {
             .attr("x2", 40)
             .attr("y2", vis.y(vis.warmingRow.projected_warming))
             .attr("stroke-width", 2)
-            .attr("stroke", vis.colors[3]);
+            .attr("stroke", vis.colors[1]);
 
         // Paris Agreement line
         vis.parisLine = vis.barGroup.append("line")
@@ -130,7 +130,7 @@ class Vis3Thermometer {
             .attr("cx", vis.barWidth/2)
             .attr("cy", vis.height - vis.margin.bottom + vis.barShift)
             .attr("r", 22)
-            .attr("fill", vis.colors[2]);
+            .attr("fill", vis.colors[0]);
 
         // TEXT Labels
 

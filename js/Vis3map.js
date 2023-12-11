@@ -9,15 +9,19 @@ let vis3SelectedCategory = "ratifiedParisDate";
 vis3MapSlider = document.getElementById('map-slider');
 vis3MapDate = document.getElementById('map-date');
 
-var sliderDate2010 = moment('2010-01-01', "YYYY-MM-DD").valueOf();
-var sliderDate2016 = moment('2016-01-01', "YYYY-MM-DD").valueOf();
-var sliderDate2017 = moment('2017-01-01', "YYYY-MM-DD").valueOf();
-var sliderDate2018 = moment('2018-01-01', "YYYY-MM-DD").valueOf();
-var sliderDate2023 = moment('2023-12-01', "YYYY-MM-DD").valueOf();
+let sliderDate2010 = moment('2010-01-01', "YYYY-MM-DD").valueOf();
+let sliderDate2016 = moment('2016-01-01', "YYYY-MM-DD").valueOf();
+let sliderDate2017 = moment('2017-01-01', "YYYY-MM-DD").valueOf();
+let sliderDate2018 = moment('2018-01-01', "YYYY-MM-DD").valueOf();
+let sliderDate2023 = moment('2023-12-01', "YYYY-MM-DD").valueOf();
 
 
 let isVis3Playing = false;
 let animationIntervalVis3;
+
+let mapGray = "#8d918c";
+let mapGreen = "green";
+let mapNoInfo = "#5a5e5a";
 
 class Vis3Map {
 
@@ -144,11 +148,11 @@ class Vis3Map {
                     .attr('stroke-width', '0px')
                     .attr('fill', d => {
                         if (d.properties[vis3SelectedCategory] === "No data") {
-                            return "gray"
+                            return mapNoInfo
                         } if ((moment(d.properties[vis3SelectedCategory], "YYYY-MM-DD").isBefore(moment(vis3MapDate.innerText))) || (d.properties[vis3SelectedCategory] === "TRUE")) {
-                            return "green"
+                            return mapGreen
                         } else {
-                            return "red"
+                            return mapGray
                         }
                     })
 
@@ -277,11 +281,11 @@ class Vis3Map {
         vis.countries.attr('fill', d => {
 
             if (d.properties[vis3SelectedCategory] === "No data") {
-                return "gray"
+                return mapNoInfo
             } if ((moment(d.properties[vis3SelectedCategory], "YYYY-MM-DD").isBefore(moment(vis3MapDate.innerText))) || (d.properties[vis3SelectedCategory] === "TRUE")) {
-                return "green"
+                return mapGreen
             } else {
-                return "red"
+                return mapGray
             }
         });
 
