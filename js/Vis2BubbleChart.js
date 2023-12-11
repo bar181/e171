@@ -24,6 +24,7 @@ class Vis2BubbleChart {
         this.initVis();
     }
 
+    //initiates bubble chart
     initVis() {
         let vis = this;
 
@@ -56,6 +57,7 @@ class Vis2BubbleChart {
         vis.createChart();
     }
 
+    //update selection
     updateSelection(selectedSubject, selectedYear, selectedTopic) {
         let vis = this;
         // update pie / bubble chart data (size / tooltips) to show data only for currently selected year, or for all years.
@@ -388,6 +390,8 @@ class Vis2BubbleChart {
             });
     }
 
+
+    //hard coded the colors
     getColor(topicName) {
         const colorMap ={
             'Global stance': '#b25e18',
