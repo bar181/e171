@@ -61,6 +61,7 @@ class Vis1Google  {
             .attr("x", vis.width / 2 - 50) // Position the title in the center horizontally
             .attr("y", -10) // Adjust the y position for the title
             .style("text-anchor", "middle") // Center the text horizontally
+            .style("font-weight", "bold")
             .text("Year over Year relative searches on Google from 2004-2023");
 
         // Append a label to the x-axis

@@ -199,6 +199,7 @@ class Vis5Line  {
             .style("font-size", "12px")
             .attr("transform", "rotate(270, " + (-30) + ", " + (vis.height / 2 ) + ")") // Rotate 90 degrees
             .style("font-weight", "bold")
+
             .text("Relative Search Popularity (each topic peaks at 100)");
 
         vis.wrangleData();
