@@ -137,9 +137,9 @@ class Vis3Map {
                     .style("top", event.pageY + "px")
                     .html(`<div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
                         <h3>${d.properties.name}</h3>
-                        <h4>Signed 2015 Paris Agreement: ${d.properties.ratifiedParisDate}</h4>
-                        <h4>Net Zero Law: ${d.properties.net_2050_law}</h4>
-                        <h4>Have Reduced Emissions (2015-2021): ${d.properties.have_reduced}</h4>
+                        <h4>Date 2015 Paris Agreement became law: ${d.properties.ratifiedParisDate}</h4>
+                        <h4>Has enacted Net Zero by 2050 Law: ${d.properties.net_2050_law}</h4>
+                        <h4>Has Reduced Emissions (2015-2021): ${d.properties.have_reduced}</h4>
                      </div>`);
 
             })
