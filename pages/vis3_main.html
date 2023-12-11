@@ -3,27 +3,44 @@
     <div style="background-image: url('images/covers/ocean_forest.png'); background-size: cover; background-color:
     rgba(255, 255, 255, 0.6); opacity: 0.4; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
     <div class="container">
-        <div class="card card-area shadow">
+
+        <div class="card mb-2 py-2 bg-palette-beige" >
+            <div class="d-flex justify-content-between px-2">
+                <div class="w-50">
+                    <h2 class="text-left card-text-small palette-green bold m-2">
+                        Climate Action Around the World
+                    </h2>
+                </div>
+                <div class="w-50 justify-content-center text-left pb-3">
+                    <span class="card-title-small">Select a Policy:</span><br>
+                    <select id='mapSelector' class="custom-select align-self-center" style="width: 80%"
+                            onchange="vis3CategoryChange()">
+                        <option value="ratifiedParisDate">Signed 2015 Paris Agreement</option>
+                        <option value="net_2050_law">Net Zero law</option>
+                        <option value="have_reduced">Has cut emissions</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-area shadow bg-palette-beige">
 
             <div class="card-body">
-                <h1 class="card-title card-center-body m-2">Climate Action Around the World</h1>
-                <h5 class="row m-3">The year 2015 marks a Milestone in Global Climate Action. 195 countries sign the Paris Agreement, agreeing to reduce Greenhouse Gas emissions. The goal is to limit warming to 1.5 degrees Celcius (2.7F). Every degree of warming matters.</h5>
+<!--                <h1 class="card-title card-center-body m-2">Climate Action Around the World</h1>-->
+<!--                <h5 class="row m-3">The year 2015 marks a Milestone in Global Climate Action. 195 countries sign the Paris Agreement, agreeing to reduce Greenhouse Gas emissions. The goal is to limit warming to 1.5 degrees Celcius (2.7F). Every degree of warming matters.</h5>-->
 
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row justify-content-center m-2">
-                            <select id='mapSelector' class="custom-select align-self-center" style="width: 40%" onchange="vis3CategoryChange()">
-                                <option value="ratifiedParisDate">Signed 2015 Paris Agreement</option>
-                                <option value="net_2050_law">Net Zero law</option>
-                                <option value="have_reduced">Has cut emissions</option>
-                            </select>
-                        </div>
-                        <div class="row justify-content-center m-4">
+
+                        <div class="justify-content-center m-3">
+                            <div class="d-flex align-items-center">
+                                <span class="card-title-small">Select a Year:</span>
+                            </div>
                             <div id="map-slider"></div>
                         </div>
                         <div class="row justify-content-center m-2">
-                            <h3 id="map-date" class="align-items-center justify-content-center"></h3>
+                            <h3 id="map-date" class="align-items-center justify-content-center palette-green bold"></h3>
                         </div>
                     </div>
                     <div class="row">
@@ -34,18 +51,18 @@
                         </div>
                         <div class="col-md-4">
                             <div class = "row justify-content-center">
-                                <h4>Progress on Paris Goals</h4>
+                                <h4 class = "palette-green bold">Progress on Paris Goals</h4>
                                 <p>Limiting Warming to 1.5°C</p>
                             </div>
                             <div class="row justify-content-center">
                                 <div id="thermometer-container" style="height:300px"></div>
                             </div>
-                            <div class="row mt-3">
-                                <h3>Key Climate Action wins:</h3>
-                                <p>1. In 2015, the world came together to Sign the Paris Agreement.</p>
-                                <p>2. Since 2015, Most of the world's largest emitters of greenhouse gases have signed Net Zero by 2050 laws.</p>
-                                <p>3. Since 2018, Many countries have already started to reduce emissions from their peak.</p>
-                            </div>
+<!--                            <div class="row mt-3">-->
+<!--                                <h3>Key Climate Action wins:</h3>-->
+<!--                                <p>1. In 2015, the world came together to Sign the Paris Agreement.</p>-->
+<!--                                <p>2. Since 2015, Most of the world's largest emitters of greenhouse gases have signed Net Zero by 2050 laws.</p>-->
+<!--                                <p>3. Since 2018, Many countries have already started to reduce emissions from their peak.</p>-->
+<!--                            </div>-->
                         </div>
                     </div>
                 </div>

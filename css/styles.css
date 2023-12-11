@@ -497,6 +497,7 @@ body{
 
 /* Add this to your CSS file */
 #year-dropdown,
+#mapSelector,
 #topic-dropdown,
 #vis5-menu{
     background-color: 	#999788; /* Change to the desired background color */
@@ -539,6 +540,7 @@ body{
 
 /* Change color on hover (optional) */
 #year-dropdown:hover,
+#mapSelector:hover,
 #topic-dropdown:hover,
 #vis5-menu:hover{
     background-color: #596a48; /* Change to the desired hover background color */
@@ -629,7 +631,7 @@ body{
 
 /* Vis 3 */
 #mapContainer{
-    height: 71vh;
+    height: 40vh;
     width: 100%;
 }
 
