@@ -7,52 +7,56 @@
 
             <div class="card-body">
                 <h1 class="card-title card-center-body m-2">Climate Action Around the World</h1>
-                <h5 class="row m-3">The year 2015 marks a Milestone in Global Climate Action. 195 countries sign the Paris Agreement, agreeing to reduce Greenhouse Gas emissions. The goal is to limit warming to 1.5 degrees Celcius (2.7F). Every degree of warming matters.</h5>
+                <h5 class="row m-3 mb-5">The year 2015 marks a Milestone in Global Climate Action. 195 countries sign the Paris Agreement, agreeing to reduce Greenhouse Gas emissions. The goal is to limit warming to 1.5 degrees Celcius (2.7F). Every degree of warming matters.</h5>
 
 
                 <div class="row m-2">
                     <div class="col-md-2 d-flex justify-content-center">
-                        <button id="playPauseButton" onclick="togglePlayPauseVis3()">Play</button>
+                        <div class="row">
+                            <button id="playPauseButton" onclick="togglePlayPauseVis3()">Play</button>
+                        </div>
                     </div>
-                    <div class="col-md-8 d-flex justify-content-center">
-                        <select id='mapSelector' class="custom-select align-self-center" style="width: 80%" onchange="vis3CategoryChange()">
-                            <option value="ratifiedParisDate">Signed 2015 Paris Agreement</option>
-                            <option value="net_2050_law">Net Zero law</option>
-                            <option value="have_reduced">Has cut emissions</option>
-                        </select>
+                    <div class="col-md-8 ">
+                        <div class="row d-flex justify-content-center">
+                            <select id='mapSelector' class="custom-select align-self-center" style="width: 80%" onchange="vis3CategoryChange()">
+                                <option value="ratifiedParisDate">Signed 2015 Paris Agreement</option>
+                                <option value="net_2050_law">Net Zero law</option>
+                                <option value="have_reduced">Has cut emissions</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row justify-content-center m-4">
+                        <div class="row justify-content-center m-3 mb-5">
                             <div id="map-slider"></div>
                         </div>
-                        <div class="row m-2">
+                        <div class="row">
                             <h3 id="map-date" class="d-flex align-items-center justify-content-center"></h3>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="row justify-content-center">
-                                <div id="mapContainer"></div>
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row justify-content-center">
+                            <div id="mapContainer"></div>
                         </div>
-                        <div class="col-md-4">
-                            <div class = "row justify-content-center">
-                                <h4>Progress on Paris Goals</h4>
-                                <p>Limiting Warming to 1.5°C</p>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div id="thermometer-container" style="height:300px"></div>
-                            </div>
-                            <div class="row mt-3">
-                                <h3>Key Climate Action wins:</h3>
-                                <p>1. In 2015, the world came together to Sign the Paris Agreement.</p>
-                                <p>2. Since 2015, Most of the world's largest emitters of greenhouse gases have signed Net Zero by 2050 laws.</p>
-                                <p>3. Since 2018, Many countries have already started to reduce emissions from their peak.</p>
-                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class = "row justify-content-center">
+                            <h4>Progress on Paris Goals</h4>
+                            <p>Limiting Warming to 1.5°C</p>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div id="thermometer-container" style="height:300px"></div>
+                        </div>
+                        <div class="row mt-3">
+                            <h3>Key Climate Action wins:</h3>
+                            <p>1. In 2015, the world came together to Sign the Paris Agreement.</p>
+                            <p>2. Since 2015, Most of the world's largest emitters of greenhouse gases have signed Net Zero by 2050 laws.</p>
+                            <p>3. Since 2018, Many countries have already started to reduce emissions from their peak.</p>
                         </div>
                     </div>
                 </div>

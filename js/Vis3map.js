@@ -11,7 +11,7 @@ vis3MapDate = document.getElementById('map-date');
 
 var sliderDate2010 = moment('2010-01-01', "YYYY-MM-DD").valueOf();
 var sliderDate2016 = moment('2016-01-01', "YYYY-MM-DD").valueOf();
-// var sliderDate2017 = moment('2017-01-01', "YYYY-MM-DD").valueOf();
+var sliderDate2017 = moment('2017-01-01', "YYYY-MM-DD").valueOf();
 var sliderDate2018 = moment('2018-01-01', "YYYY-MM-DD").valueOf();
 var sliderDate2023 = moment('2023-12-01', "YYYY-MM-DD").valueOf();
 
@@ -239,6 +239,18 @@ class Vis3Map {
                 '15%': [sliderDate2016],
                 '80%': [sliderDate2018],
                 'max': [sliderDate2023]
+            },
+            pips: {
+                mode: 'values',
+                values: [sliderDate2010, sliderDate2016, sliderDate2017, sliderDate2018, sliderDate2023],
+                format: {
+                    to: function (value) {
+                        return moment.unix(value / 1000).format('YYYY');
+                    },
+                    from: function (value) {
+                        return moment(value, 'YYYY-MM-DD').unix() * 1000;
+                    }
+                }
             }
         });
 
