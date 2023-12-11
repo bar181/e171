@@ -96,6 +96,7 @@ const pageNames = [
     'closing',
 
     'authors',
+    'sources',
 
     // Add more page names here
     // make sure your page includes the id for your visualization !

@@ -308,11 +308,10 @@ class Vis1Google  {
         topTopics.forEach(topicData => {
             const cardCol = document.createElement("div");
             cardCol.classList.add("col-md-3");
-            cardCol.classList.add("pb-3");
             cardCol.classList.add("col-6");
 
             const card = document.createElement("div");
-            card.classList.add("card");
+            card.classList.add("vis1-image-div");
 
             // Add the topic as the card title
             const cardTitle = document.createElement("div");

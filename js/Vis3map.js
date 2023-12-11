@@ -83,6 +83,8 @@ class Vis3Map {
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
+        // vis.height = vis.height * 0.5;
+
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
@@ -99,9 +101,16 @@ class Vis3Map {
         //     .attr('text-anchor', 'middle');
 
         // Create projection
-        vis.projection = d3.geoOrthographic()
-            .translate([vis.width / 2, vis.height / 2])
-            .scale(230)
+        // vis.projection = d3.geoMercator()
+        //     .translate([vis.width / 2, vis.height / 2])
+        //     .scale(230)
+
+        // Create projection for a flat map
+        vis.projection = d3.geoMercator()
+            .translate([vis.width / 2, vis.height / 2]) // Centers the map in the SVG
+            .scale((vis.width - 3) / (2 * Math.PI)) // Scales the map to fit within the SVG width
+            .center([0, 0]) // Centers the map at the longitude and latitude origin point
+            .rotate([0,0]); // Ensures the map is not rotated
 
         // Define geo generator with above projection
         vis.path = d3.geoPath()
@@ -171,41 +180,41 @@ class Vis3Map {
         /* * * * * * * * * * * * * *
         *         LEGEND           *
         * * * * * * * * * * * * * */
-        const legendSquareSize = 20; // Set the size of legend squares
-        const legendSpacing = 0; // Set the spacing between legend items
-
-        vis.legend = vis.svg.append("g")
-            .attr('class', 'legend')
-            .attr('transform', `translate(${vis.width * 2.8 / 4}, ${vis.height - 40})`);
-
-        vis.legend.selectAll("rect")
-            .data(vis.colors)
-            .enter()
-            .append('rect')
-            .attr('x', (d, i) => i * (legendSquareSize + legendSpacing)) // Adjust the x-coordinate to position the legend squares
-            .attr('y', 0) // Position each legend square vertically
-            .attr('width', legendSquareSize)
-            .attr('height', legendSquareSize)
-            .style('fill', d => d);
-
-
-        // Add legend scale
-        // Create an ordinal scale for the legend categories
-        vis.x = d3.scaleLinear()
-            .domain([0,100]) // Provide an array of category labels
-            .range([0, 4 * (legendSquareSize + legendSpacing)]);
-
-        vis.legendAxis = d3.axisBottom()
-            .scale(vis.x)
-            .tickValues([0, 25, 50, 75, 100]);
-
-        // Create a group element for the legend axis
-        vis.legendAxisGroup = vis.legend.append("g")
-            .attr("class", "legend-axis")
-            .call(vis.legendAxis);
-
-        // Adjust the legend axis position
-        vis.legendAxisGroup.attr("transform", `translate(0, ${legendSquareSize})`);
+        // const legendSquareSize = 20; // Set the size of legend squares
+        // const legendSpacing = 0; // Set the spacing between legend items
+        //
+        // vis.legend = vis.svg.append("g")
+        //     .attr('class', 'legend')
+        //     .attr('transform', `translate(${vis.width * 2.8 / 4}, ${vis.height - 40})`);
+        //
+        // vis.legend.selectAll("rect")
+        //     .data(vis.colors)
+        //     .enter()
+        //     .append('rect')
+        //     .attr('x', (d, i) => i * (legendSquareSize + legendSpacing)) // Adjust the x-coordinate to position the legend squares
+        //     .attr('y', 0) // Position each legend square vertically
+        //     .attr('width', legendSquareSize)
+        //     .attr('height', legendSquareSize)
+        //     .style('fill', d => d);
+        //
+        //
+        // // Add legend scale
+        // // Create an ordinal scale for the legend categories
+        // vis.x = d3.scaleLinear()
+        //     .domain([0,100]) // Provide an array of category labels
+        //     .range([0, 4 * (legendSquareSize + legendSpacing)]);
+        //
+        // vis.legendAxis = d3.axisBottom()
+        //     .scale(vis.x)
+        //     .tickValues([0, 25, 50, 75, 100]);
+        //
+        // // Create a group element for the legend axis
+        // vis.legendAxisGroup = vis.legend.append("g")
+        //     .attr("class", "legend-axis")
+        //     .call(vis.legendAxis);
+        //
+        // // Adjust the legend axis position
+        // vis.legendAxisGroup.attr("transform", `translate(0, ${legendSquareSize})`);
 
         /* * * * * * * * * * * * * *
         *    Make map draggable    *
